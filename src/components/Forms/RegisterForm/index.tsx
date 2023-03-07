@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../../providers/UserContext/index';
 import { StyledForm, StyledDivReturnToLogin } from './style';
+import Link from '../../../routes/routes';
 
 const FormUser = yup.object().shape({
   email: yup.string().email().required(),
@@ -34,12 +35,13 @@ const RegisterForm = () => {
   } = useForm<IRegisterForm>({
     resolver: yupResolver(FormUser),
   });
+  
 
   return (
     <StyledForm onSubmit={handleSubmit(createUser)}>
       <StyledDivReturnToLogin>
         <p>Cadastre-se</p>
-        <button>Voltar para login</button>
+        {/* <Link to="/login">Voltar para login</Link> */}
       </StyledDivReturnToLogin>
       <Input
         placeholder='Digite seu nome'
