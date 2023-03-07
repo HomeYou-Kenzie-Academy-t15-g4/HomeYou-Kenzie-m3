@@ -1,14 +1,38 @@
-import { createContext, useEffect, useState } from 'react';
-import { IUserContext, IUserProviderProps } from './type';
+import { createContext, useState } from 'react';
+import {
+  ILoginFormValue,
+  IUser,
+  IUserContext,
+  IUserProviderProps,
+} from './type';
 import { api } from '../../services/api';
 import { IRegisterForm } from '../../components/Forms/RegisterForm';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
-export const UserContext = createContext<IUserContext>({} as IUserContext);
+export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
-  // const navigate = useNavigate();
+  const [user, setUser] = useState<IUser | null>(null);
+  const navigate = useNavigate();
+
+  const userLoad = async () => {
+    const token = localStorage.getItem('@HomeYou:TOKEN');
+    if (token) {
+      try {
+        const res = await api.get(`/users/${token}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(res.data);
+
+        return navigate('/dashboard');
+      } catch (error) {
+        console.log(error);
+        localStorage.removeItem('@HomeYou:TOKEN');
+        return navigate('/');
+      }
+    }
+  };
 
   const getAge = (dateString: string | number) => {
     const today = new Date();
@@ -22,7 +46,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     return age;
   };
 
-  const createUser = async (data: IRegisterForm): Promise<void> => {
+  const createUser = async (data: IRegisterForm) => {
     const newData = {
       email: data.email,
       name: data.name,
@@ -36,21 +60,37 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       try {
         const res = await api.post('/users', newData);
         console.log('deu certo', newData);
-        // toast.success('Cadastro realizado com sucesso!');
-        // navigate('/');
+        toast.success('Cadastro realizado com sucesso!');
+        navigate('/');
       } catch (error) {
         console.log('deu errado');
-        // toast.error('Ops,algo deu errado!');
+        toast.error('Ops,algo deu errado!');
       }
     }
+  };
+
+  const loginUser = async (formData: ILoginFormValue) => {
+    try {
+      const res = await api.post('/login', formData);
+      localStorage.setItem('@HomeYou:TOKEN', res.data.accessToken);
+      setUser(res.data.user);
+      navigate('/dashboard');
+    } catch (error) {
+      console.log(error);
+      // toast.error(error.response.data)
+    }
+  };
+
+  const logoutUser = () => {
+    setUser(null);
+    localStorage.removeItem('@HomeYou:TOKEN');
+    navigate('/');
   };
 
   return (
     <>
       <UserContext.Provider
-        value={{
-          createUser,
-        }}
+        value={{ user, userLoad, createUser, loginUser, logoutUser }}
       >
         {children}
       </UserContext.Provider>
