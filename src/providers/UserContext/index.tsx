@@ -87,10 +87,21 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     navigate('/');
   };
 
+  const editUser = async (data: IUser, userId: string) => {
+    try {
+      const response = await api.patch(`/users/${userId}`, data);
+      setUser(response.data.user);
+      console.log('ok!');
+      ///toast
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <UserContext.Provider
-        value={{ user, userLoad, createUser, loginUser, logoutUser }}
+        value={{ user, userLoad, createUser, loginUser, logoutUser, editUser }}
       >
         {children}
       </UserContext.Provider>
