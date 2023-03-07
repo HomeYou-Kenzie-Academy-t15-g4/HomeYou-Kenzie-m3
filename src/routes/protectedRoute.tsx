@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Navigate, Outlet } from 'react-router';
+import { UserContext } from '../providers/UserContext';
 
 const ProtectedRoute = () => {
-  return <div></div>;
+  const { user } = useContext(UserContext);
+  return user ? <Outlet /> : <Navigate to='/errorPage' />;
 };
 
 export default ProtectedRoute;
