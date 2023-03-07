@@ -14,7 +14,7 @@ export const HousesContext = createContext<IHousesContext>(
   {} as IHousesContext
 );
 
-export const ProductsProvider = ({ children }: IHousesProviderProps) => {
+export const HousesProvider = ({ children }: IHousesProviderProps) => {
   const [housesList, setHousesList] = useState<IHouse[]>([]);
   const [housesFilterList, setHousesFilterList] = useState<IHouse[]>([]);
   const [selectedHouse, setSelectedHouse] = useState<IHouse[]>([]);
