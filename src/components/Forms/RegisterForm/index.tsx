@@ -3,8 +3,9 @@ import Input from '../Input';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../../providers/UserContext/index';
+import { StyledForm, StyledDivReturnToLogin } from './style';
 
 const FormUser = yup.object().shape({
   email: yup.string().email().required(),
@@ -21,7 +22,23 @@ export interface IRegisterForm {
   confirmPassword: string;
   age: number;
 }
+
+const getAge = (dateString: string) => {
+  const today = new Date();
+  const birthDate = new Date(dateString);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  return age;
+};
+console.log(getAge('1991/05/02')); // 31
+
 const RegisterForm = () => {
+  const [age, setAge] = useState<number>();
   const { createUser } = useContext(UserContext);
 
   const {
@@ -34,7 +51,11 @@ const RegisterForm = () => {
   console.log(createUser);
 
   return (
-    <form onSubmit={handleSubmit(createUser)}>
+    <StyledForm onSubmit={handleSubmit(createUser)}>
+      <StyledDivReturnToLogin>
+        <p>Cadastre-se</p>
+        <button>Voltar para login</button>
+      </StyledDivReturnToLogin>
       <Input
         placeholder='Digite seu nome'
         type='text'
@@ -76,7 +97,7 @@ const RegisterForm = () => {
         label='Data de nascimento'
       />
       <button type='submit'>Criar conta</button>
-    </form>
+    </StyledForm>
   );
 };
 
