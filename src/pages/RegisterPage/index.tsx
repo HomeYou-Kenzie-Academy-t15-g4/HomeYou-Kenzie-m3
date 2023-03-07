@@ -5,8 +5,14 @@ import { StyledDivRegisterPage } from './style';
 const RegisterPage = () => {
   return (
     <StyledDivRegisterPage>
+      <section>
+
       <img src='../../../src/assets/HomeYou.svg' alt='' />
       <RegisterForm />
+      </section>
+      <aside>
+        <img src="../../assets/register-asside-img.svg" alt="" />
+      </aside>
     </StyledDivRegisterPage>
   );
 };

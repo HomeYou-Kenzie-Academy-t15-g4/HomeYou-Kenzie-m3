@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../../providers/UserContext/index';
 import { StyledForm, StyledDivReturnToLogin } from './style';
+import Link from '../../../routes/routes';
 
 const FormUser = yup.object().shape({
   email: yup.string().email().required(),
@@ -20,22 +21,8 @@ export interface IRegisterForm {
   email: string;
   password: string;
   confirmPassword: string;
-  age: number;
+  age: number | string;
 }
-
-const getAge = (dateString: string) => {
-  const today = new Date();
-  const birthDate = new Date(dateString);
-  let age = today.getFullYear() - birthDate.getFullYear();
-  const m = today.getMonth() - birthDate.getMonth();
-
-  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-    age--;
-  }
-
-  return age;
-};
-console.log(getAge('1991/05/02')); // 31
 
 const RegisterForm = () => {
   const [age, setAge] = useState<number>();
@@ -48,13 +35,13 @@ const RegisterForm = () => {
   } = useForm<IRegisterForm>({
     resolver: yupResolver(FormUser),
   });
-  console.log(createUser);
+  
 
   return (
     <StyledForm onSubmit={handleSubmit(createUser)}>
       <StyledDivReturnToLogin>
         <p>Cadastre-se</p>
-        <button>Voltar para login</button>
+        {/* <Link to="/login">Voltar para login</Link> */}
       </StyledDivReturnToLogin>
       <Input
         placeholder='Digite seu nome'
