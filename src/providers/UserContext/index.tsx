@@ -8,12 +8,19 @@ import { ToastContainer, toast } from 'react-toastify';
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const createUser = async (data: IRegisterForm): Promise<void> => {
+    const newData = {
+      email: data.email,
+      name: data.name,
+      age: data.age,
+      password: data.password,
+      img: 'https://canvas.kenzie.com.br/images/messages/avatar-50.png',
+    };
     try {
-      const res = await api.post('/users', data);
-      console.log('deu certo', res);
+      const res = await api.post('/users', newData);
+      console.log('deu certo', newData);
       // toast.success('Cadastro realizado com sucesso!');
       // navigate('/');
     } catch (error) {

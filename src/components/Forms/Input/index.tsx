@@ -5,8 +5,7 @@ import {
   UseFormRegister,
   UseFormRegisterReturn,
 } from 'react-hook-form';
-// import { StyledTextField } from '../../../styles/form';
-// import { StyledParagraph } from '../../../styles/typography';
+// import { StyledInput } from '../../../../src/components/Forms/Input/style';
 import { IRegisterForm } from '../RegisterForm';
 
 interface IInputProps {
@@ -15,6 +14,8 @@ interface IInputProps {
   register: UseFormRegister<IRegisterForm>;
   placeholder: string;
   type: string;
+  value?: number | string;
+  onChange?: (dateString: string) => number;
   name: 'name' | 'email' | 'password' | 'confirmPassword' | 'age';
 }
 
@@ -25,6 +26,7 @@ const Input = ({
   type,
   register,
   placeholder,
+  value,
 }: IInputProps) => (
   <fieldset>
     <input
