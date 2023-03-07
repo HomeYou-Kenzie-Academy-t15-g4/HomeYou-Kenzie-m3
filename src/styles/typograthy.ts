@@ -1,91 +1,80 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import BaseText from './components/BaseText';
 
-const Title1 = styled.h1`
-  font-family: 'Montserrat', sans-serif;
+interface IStyledTitleProps {
+  fontSize: 'one' | 'two' | 'three';
+  textAlign?: 'center' | 'left' | 'right';
+}
 
-  font-weight: 700;
-  font-size: 45px;
-  line-height: 1.33;
+interface IStyledParagraphProps {
+  fontColor?: 'greyBold' | 'grey' | 'red';
+  textAlign?: 'center' | 'left' | 'right';
+}
 
-  @media (min-width: 800px) {
-    font-size: 45px;
-    line-height: 1.49;
-  }
+const StyledTitle = styled(BaseText)<IStyledTitleProps>`
+  width: 100%;
 
-  color: var(${(props) => props.color});
+  font-family: ${({ theme }) => theme.fonts.primary};
+  line-height: 1.6;
+
+  text-align: ${({ textAlign }) => textAlign};
+
+  ${({ fontSize }) => {
+    switch (fontSize) {
+      case 'one':
+        return css`
+          font-size: 28px;
+          font-weight: 700;
+        `;
+      case 'two':
+        return css`
+          font-size: 22px;
+          font-weight: 700;
+        `;
+      case 'three':
+        return css`
+          font-size: 18px;
+          font-weight: 700;
+        `;
+    }
+  }}
 `;
 
-const Title2 = styled.h2`
-  font-family: 'Montserrat', sans-serif;
-
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 1.33;
-
-  @media (min-width: 800px) {
-    font-size: 28px;
-    line-height: 1.49;
-  }
-
-  color: var(${(props) => props.color});
-`;
-
-const Title3 = styled.h3`
-  font-family: 'Montserrat', sans-serif;
-
-  font-weight: 500;
+const styledParagraph = styled.p<IStyledParagraphProps>`
+  font-family: ${({ theme }) => theme.fonts.primary};
   font-size: 16px;
-  line-height: 1.33;
-
-  @media (min-width: 800px) {
-    font-size: 22px;
-    line-height: 1.49;
-  }
-
-  color: var(${(props) => props.color});
-`;
-
-const Headline = styled.p`
-  font-family: 'Montserrat', sans-serif;
-
   font-weight: 400;
-  font-size: 14px;
-  line-height: 1.21;
+  line-height: 1.8;
 
-  @media (min-width: 800px) {
-    font-size: 18px;
-    line-height: 1.33;
-  }
+  text-align: ${({ textAlign }) => textAlign};
 
-  color: var(${(props) => props.color});
+  ${({ fontColor, theme }) => {
+    switch (fontColor) {
+      case 'greyBold':
+        return css`
+          color: ${theme.colors.grey400};
+        `;
+      case 'grey':
+        return css`
+          color: ${theme.colors.grey200};
+        `;
+      case 'red':
+        return css`
+          color: ${theme.colors.feedback.negative};
+        `;
+
+      default:
+        return css`
+          color: ${theme.colors.gray300};
+        `;
+    }
+  }}
 `;
 
-const HeadlineBold = styled.p`
-  font-family: 'Montserrat', sans-serif;
-
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 1.21;
-
-  @media (min-width: 800px) {
-    font-size: 18px;
-    line-height: 1.33;
-  }
-
-  color: var(${(props) => props.color});
+const StyledCaption = styled.span`
+  font-family: ${({ theme }) => theme.fonts.primary};
+  font-size: 0.75rem;
+  font-weight: 400;
 `;
 
-const Body = styled.p`
-  font-family: 'Montserrat', sans-serif;
-
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.19;
-
-  @media (min-width: 800px) {
-    font-size: 14px;
-    line-height: 1.26;
-  }
-
-  color: var(${(props) => props.color});
-`;
+export default { StyledTitle, styledParagraph, StyledCaption };
