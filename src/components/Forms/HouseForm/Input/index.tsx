@@ -1,11 +1,7 @@
-import { forwardRef, InputHTMLAttributes } from 'react';
-// import { TextFieldProps } from '@mui/material';
 import {
   FieldError,
   UseFormRegister,
-  UseFormRegisterReturn,
 } from 'react-hook-form';
-// import { StyledInput } from '../../../../src/components/Forms/Input/style';
 import { IHouseForm } from '../index';
 
 interface IInputProps {

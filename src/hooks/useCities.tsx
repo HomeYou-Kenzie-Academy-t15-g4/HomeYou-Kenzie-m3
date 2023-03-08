@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { FieldError, UseFormRegister } from "react-hook-form";
-import { MultiValue, ActionMeta } from "react-select";
 import { IHouseForm } from "../components/Forms/HouseForm";
 
 export interface ICity {

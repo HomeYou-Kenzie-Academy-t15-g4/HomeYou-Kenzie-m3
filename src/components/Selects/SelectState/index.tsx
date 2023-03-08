@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Select, { ActionMeta, GroupBase, OptionsOrGroups, SingleValue } from "react-select";
+import Select, { ActionMeta, SingleValue } from "react-select";
 import { IuseStatesProps, useStates } from "../../../hooks/useStates";
 
 export interface IStatesInfo {

@@ -3,13 +3,11 @@ import Select, { ActionMeta, MultiValue } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { object, string, number, array } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Input from './Input';
-import { UserContext } from '../../../providers/UserContext/index';
 import { StyledForm } from './style';
-import { IservicesOptions, servicesOptions } from './servicesOptions';
+import { servicesOptions } from './servicesOptions';
 import SelectState from '../../Selects/SelectState';
 import SelectCity from '../../Selects/SelectCity';
 import { HousesContext } from '../../../providers/HousesContext';
@@ -114,22 +112,6 @@ const { createHouse } = useContext(HousesContext)
       <p>{errors.state?.message}</p>
       <SelectCity uf={selectedUf} error={errors.city} setSelectedCity={setSelectedCity} register={register} />
       <p>{errors.city?.message}</p>
-      {/* <Input
-        placeholder='Onde fica'
-        type='text'
-        error={errors.city}
-        register={register}
-        name='city'
-        label='Cidade'
-      />
-      <Input
-        placeholder='Onde fica'
-        type='text'
-        error={errors.city}
-        register={register}
-        name='state'
-        label='Estado'
-      /> */}
       <Input
         placeholder='Valor da Diaria'
         type='number'

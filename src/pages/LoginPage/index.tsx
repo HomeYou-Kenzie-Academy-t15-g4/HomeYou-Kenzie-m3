@@ -5,7 +5,7 @@ const LoginPage = () => {
   return (
     <div>
       <aside>
-        {/* <img src='../../assets/login-asside-img.svg' alt='' /> */}
+        <img src='../../../src/assets/login-asside-img.svg' alt='' />
       </aside>
       <section>
         <img src='../../../src/assets/HomeYou.svg' alt='' />

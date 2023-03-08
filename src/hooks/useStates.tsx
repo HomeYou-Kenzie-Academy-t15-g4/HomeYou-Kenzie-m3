@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { UseFormRegister, FieldError, RegisterOptions, UseFormRegisterReturn } from "react-hook-form";
+import { FieldError, RegisterOptions, UseFormRegisterReturn } from "react-hook-form";
 import { IHouseForm } from "../components/Forms/HouseForm";
 
 export interface Region {

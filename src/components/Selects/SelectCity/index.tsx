@@ -1,6 +1,6 @@
 import { UseFormRegister, FieldError } from "react-hook-form";
 import Select, { ActionMeta, SingleValue } from "react-select";
-import useCities, { IuseCitiesProps } from "../../../hooks/useCities";
+import useCities from "../../../hooks/useCities";
 import { IHouseForm } from "../../Forms/HouseForm";
 
 
@@ -35,7 +35,7 @@ const SelectCity = ({ uf, setSelectedCity }:ISelectCityProps) => {
       options={cityOptions}
       placeholder="Selecione uma cidade"
       onChange={handleStateUpdate}
-      // ADD text-transform:capitalize; ON CSS
+      // need to ADD text-transform:capitalize; ON CSS
     />
   );
 };

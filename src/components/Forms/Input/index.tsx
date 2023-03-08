@@ -2,8 +2,7 @@ import { forwardRef, InputHTMLAttributes } from 'react';
 // import { TextFieldProps } from '@mui/material';
 import {
   FieldError,
-  UseFormRegister,
-  UseFormRegisterReturn,
+  UseFormRegister
 } from 'react-hook-form';
 // import { StyledInput } from '../../../../src/components/Forms/Input/style';
 import { IRegisterForm } from '../RegisterForm';
