@@ -1,42 +1,24 @@
-import { forwardRef, InputHTMLAttributes } from 'react';
-// import { TextFieldProps } from '@mui/material';
-import {
-  FieldError,
-  UseFormRegister,
-  UseFormRegisterReturn,
-} from 'react-hook-form';
-// import { StyledInput } from '../../../../src/components/Forms/Input/style';
-import { IRegisterForm } from '../RegisterForm';
+import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
+import { StyledParagraph } from '../../../styles/typograthy';
+import { CssTextField } from './style';
 
 interface IInputProps {
-  label?: string | undefined;
-  error?: FieldError | undefined;
-  register: UseFormRegister<IRegisterForm>;
-  placeholder: string;
-  type: string;
-  value?: number | string;
-  onChange?: (dateString: string) => number;
-  name: 'name' | 'email' | 'password' | 'confirmPassword' | 'age';
+  label: React.ReactNode;
+  register: UseFormRegisterReturn<string>;
+  type: 'text' | 'email' | 'password';
+  error?: FieldError;
+  fontColor?: string;
 }
 
-const Input = ({
-  label,
-  error,
-  name,
-  type,
-  register,
-  placeholder,
-  value,
-}: IInputProps) => (
-  <fieldset>
-    <input
-      placeholder={placeholder}
-      {...register(name)}
-      //   label={label}
-      type={type}
-    />
-    <p>{error?.message}</p>
-  </fieldset>
-);
+const Input = ({ label, register, type, error }: IInputProps) => {
+  return (
+    <fieldset>
+      <CssTextField label={label} type={type} {...register} />
+      {error ? (
+        <StyledParagraph fontColor='red'>{error.message}</StyledParagraph>
+      ) : null}
+    </fieldset>
+  );
+};
 
 export default Input;

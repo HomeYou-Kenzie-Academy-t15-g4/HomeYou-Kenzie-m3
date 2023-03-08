@@ -1,4 +1,4 @@
-import Input from '../Input';
+// import Input from '../Input';
 
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -35,7 +35,6 @@ const RegisterForm = () => {
   } = useForm<IRegisterForm>({
     resolver: yupResolver(FormUser),
   });
-  
 
   return (
     <StyledForm onSubmit={handleSubmit(createUser)}>
