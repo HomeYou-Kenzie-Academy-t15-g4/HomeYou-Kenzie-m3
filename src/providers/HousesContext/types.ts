@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { IHouseForm } from '../../components/Forms/HouseForm';
 
 export interface IHousesProviderProps {
   children: ReactNode;
@@ -16,6 +17,11 @@ export interface IHouse {
   acommodation: IAcommodation;
 }
 
+export interface IAcommodation {
+  beds: number;
+  doubleBeds: number;
+}
+
 export interface IGuest {
   photo: string;
   name: string;
@@ -27,15 +33,9 @@ export interface IReserve {
   rentPrice: number;
   rentedDays: string[];
   guest: IGuest;
-  house: Pick<IHouse, 'id' | 'name' | 'photos'>
+  house: Pick<IHouse, 'id' | 'name' | 'photos'>;
 }
 
-
-export interface IAcommodation {
-  beds: number;
-  doubleBeds: number;
-}
-  
 export interface IHousesContext {
   housesList: IHouse[];
   setHousesList: React.Dispatch<React.SetStateAction<IHouse[]>>;
@@ -47,7 +47,7 @@ export interface IHousesContext {
   setSelectedRent: React.Dispatch<React.SetStateAction<IHouse[]>>;
   searchText: string;
   setSearchText: React.Dispatch<React.SetStateAction<string>>;
-  createHouse: (newHouse: IHouse) => Promise<void>;
+  createHouse: (newHouse: IHouseForm) => Promise<void>;
   editHouse: (editedHouse: IHouse, id: number) => Promise<void>;
   deleteHouse: (id: number) => Promise<void>;
   createReserve: (newRent: IReserve) => Promise<void>;

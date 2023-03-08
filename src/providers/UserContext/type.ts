@@ -11,6 +11,7 @@ export interface IUserContext {
   loginUser: (formData: ILoginFormValue) => Promise<void>;
   logoutUser: () => void;
   user: IUser | null;
+  editUser: (data: IUser, userId: string) => Promise<void>;
 }
 
 export interface IUser {
