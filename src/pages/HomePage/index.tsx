@@ -9,10 +9,11 @@ const HomePage = () => {
       <HouseCard />
     </div>
   );
-  // import HouseForm from '../../components/Forms/HouseForm';
-
-  // const HomePage = () => {
-  //   return <>HomePage</>;
 };
+// import HouseForm from '../../components/Forms/HouseForm';
+
+// const HomePage = () => {
+//   return <>HomePage</>;
+// };
 
 export default HomePage;
