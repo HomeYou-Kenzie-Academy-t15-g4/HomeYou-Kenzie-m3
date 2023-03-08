@@ -1,11 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import StyledHeader from './style';
 import imgLogo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../providers/UserContext';
 
 const Header = () => {
   const navRef = React.useRef<HTMLElement | null>(null);
+
+  const { user } = useContext(UserContext);
 
   const showNavBar = () => {
     navRef.current?.classList.toggle('responsive_nav');
@@ -23,7 +26,7 @@ const Header = () => {
           <FaTimes />
         </button>
       </nav>
-      <h3>user</h3>
+      {user ? <h2>OK</h2> : <h2>Fail</h2>}
       <button className='nav-btn' onClick={showNavBar}>
         <FaBars />
       </button>
