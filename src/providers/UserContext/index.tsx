@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import {
   ILoginFormValue,
   IUser,
@@ -20,7 +20,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     const token = localStorage.getItem('@HomeYou:TOKEN');
     if (token) {
       try {
-        const res = await api.get(`/users/${token}`, {
+        const res = await api.get(`/users/${user?.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(res.data);
@@ -33,6 +33,33 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       }
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem('@HomeYou:TOKEN');
+    const userAuxString = localStorage.getItem('@HomeYou:user');
+    const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
+    if (token && userAux) {
+      const userAutoLogin = async () => {
+        try {
+          const res = await api.get(`/users/${userAux.id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setUser(res.data.user);
+          if (window.location.pathname != "/dasboard" && window.location.pathname != "/house" && window.location.pathname != "/") {
+            navigate("/");
+          }
+        } catch (error) {
+          window.localStorage.clear();
+          setUser(null);
+          toast.error("Não encontramos uma sessão ativa, por favor faça o login para acessar");
+          if (window.location.pathname != "/register") {
+            navigate("/login");
+          }
+        }
+      };
+      userAutoLogin();
+    }
+  }, []);
 
   const getAge = (dateString: string | number) => {
     const today = new Date();
@@ -73,9 +100,15 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     try {
       const res = await api.post('/login', formData);
       localStorage.setItem('@HomeYou:TOKEN', res.data.accessToken);
+      console.log(res.data.user);
+      
+      localStorage.setItem('@HomeYou:User', JSON.stringify(res.data.user));
       setUser(res.data.user);
       navigate('/dashboard');
+      console.log('logou');
+      
     } catch (error) {
+      console.log('falhou');
       console.log(error);
       // toast.error(error.response.data)
     }

@@ -7,6 +7,10 @@ const HomePage = () => {
       <Header />
     </div>
   );
+import HouseForm from '../../components/Forms/HouseForm';
+
+const HomePage = () => {
+  return <>HomePage</>;
 };
 
 export default HomePage;

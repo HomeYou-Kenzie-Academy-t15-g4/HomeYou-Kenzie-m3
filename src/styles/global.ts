@@ -6,6 +6,8 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
   }
 
   img{
@@ -13,29 +15,12 @@ const GlobalStyle = createGlobalStyle`
   }
   
   ul,li{
-    list-style: none;
   }
   
   button{
     cursor: pointer;
-    border: none;
   }
 
-  :root{
-    --color-primary: #04C35C;  
-    --color-primary-focus: #0DE872;   
-
-    --color-primary-negative: #0C6B38;   
-
-    --grey-4: #121214;
-    --grey-3: #373A3E;
-    --grey-2: #343B41;
-    --grey-1: #D9DBDE;
-    --grey-0: #F9F9F9;
-
-    --white-fixed: #fff;
-    --black-fixed: #000;
-  }
 
 `;
 
