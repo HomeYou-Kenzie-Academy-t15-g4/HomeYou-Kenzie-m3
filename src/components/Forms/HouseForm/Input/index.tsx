@@ -1,21 +1,18 @@
-import { forwardRef, InputHTMLAttributes } from 'react';
-// import { TextFieldProps } from '@mui/material';
 import {
   FieldError,
-  UseFormRegister
+  UseFormRegister,
 } from 'react-hook-form';
-// import { StyledInput } from '../../../../src/components/Forms/Input/style';
-import { IRegisterForm } from '../RegisterForm';
+import { IHouseForm } from '../index';
 
 interface IInputProps {
   label?: string | undefined;
   error?: FieldError | undefined;
-  register: UseFormRegister<IRegisterForm>;
+  register: UseFormRegister<IHouseForm>;
   placeholder: string;
   type: string;
   value?: number | string;
   onChange?: (dateString: string) => number;
-  name: 'name' | 'email' | 'password' | 'confirmPassword' | 'age';
+  name: 'houseName' | 'photos' | 'city' | 'state' | 'dailyPrice' | 'singleBed' | 'doubleBed' | 'services';
 }
 
 const Input = ({

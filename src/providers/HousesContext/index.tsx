@@ -1,14 +1,15 @@
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
-
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import {
   IHouse,
   IHousesContext,
   IHousesProviderProps,
   IReserve,
 } from './types';
+import { IHouseForm } from '../../components/Forms/HouseForm';
 
 export const HousesContext = createContext<IHousesContext>(
   {} as IHousesContext
@@ -54,28 +55,47 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   //   setSelectedHouse(findHouse);
   // };
 
-  const createHouse = async (newHouse: IHouse): Promise<void> => {
-    const authToken = window.localStorage.getItem('@TOKEN');
-    try {
-      const response = await api.post('/houses', newHouse, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
+  const createHouse = async (newHouseInputs: IHouseForm): Promise<void> => {
+    const token = window.localStorage.getItem('@HomeYou:TOKEN');
+    const userAuxString = localStorage.getItem('@HomeYou:User');
+    const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
+
+    if (userAux && token) {
+      const newHouse = {
+        ownerName: userAux.name,
+        userId: userAux.id,
+        photos: newHouseInputs.photos,
+        city: newHouseInputs.city,
+        state: newHouseInputs.state,
+        daylyPrice: newHouseInputs.dailyPrice,
+        accommodation: {
+          beds: newHouseInputs.singleBed,
+          doubleBeds: newHouseInputs.doubleBed,
         },
-      });
-      toast.success('Casa cadastrada com sucesso');
-    } catch (error) {
-      console.error(error);
-      toast.error('Falha ao cadastrar casa');
-      // navigate('/');
+        services: newHouseInputs.services,
+      };
+      try {
+        const response = await api.post('/houses', newHouse, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        toast.success('Casa cadastrada com sucesso');
+      } catch (error) {
+        console.error(error);
+        toast.error('Falha ao cadastrar casa');
+        // navigate('/');
+      }
     }
   };
 
   const editHouse = async (editedHouse: IHouse, id: number): Promise<void> => {
-    const authToken = window.localStorage.getItem('@TOKEN');
+    const token = window.localStorage.getItem('@HomeYou:TOKEN');
     try {
       const response = await api.patch(`/houses/${id}`, editedHouse, {
         headers: {
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       toast.success('Casa atualizada com sucesso');
@@ -87,11 +107,11 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   };
 
   const deleteHouse = async (id: number): Promise<void> => {
-    const authToken = window.localStorage.getItem('@TOKEN');
+    const token = window.localStorage.getItem('@HomeYou:TOKEN');
     try {
       const response = await api.delete(`/houses/${id}`, {
         headers: {
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       toast.success('Casa deletada com sucesso');
@@ -103,18 +123,23 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   };
 
   const createReserve = async (newRent: IReserve): Promise<void> => {
-    const authToken = window.localStorage.getItem('@TOKEN');
-    try {
-      const response = await api.post('/rents', newRent, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
-      toast.success('Casa reservada com sucesso');
-    } catch (error) {
-      console.error(error);
-      toast.error('Falha ao reservar casa');
-      // navigate('/');
+    const token = window.localStorage.getItem('@HomeYou:TOKEN');
+    const userAuxString = localStorage.getItem('@HomeYou:User');
+    const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
+
+    if (userAux) {
+      try {
+        const response = await api.post('/rents', newRent, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        toast.success('Casa reservada com sucesso');
+      } catch (error) {
+        console.error(error);
+        toast.error('Falha ao reservar casa');
+        // navigate('/');
+      }
     }
   };
 
@@ -122,11 +147,11 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     editedReserve: IReserve,
     id: number
   ): Promise<void> => {
-    const authToken = window.localStorage.getItem('@TOKEN');
+    const token = window.localStorage.getItem('@HomeYou:TOKEN');
     try {
       const response = await api.patch(`/rents/${id}`, editedReserve, {
         headers: {
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       toast.success('Reserva atualizada com sucesso');
@@ -138,11 +163,11 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   };
 
   const deleteReserve = async (id: number): Promise<void> => {
-    const authToken = window.localStorage.getItem('@TOKEN');
+    const token = window.localStorage.getItem('@HomeYou:TOKEN');
     try {
       const response = await api.delete(`/rents/${id}`, {
         headers: {
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       toast.success('Casa deletada com sucesso');
