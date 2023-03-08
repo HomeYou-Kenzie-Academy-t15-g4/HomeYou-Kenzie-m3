@@ -33,9 +33,9 @@ export interface IReserve {
   rentPrice: number;
   rentedDays: string[];
   guest: IGuest;
-  house: Pick<IHouse, 'id' | 'name' | 'photos'>
+  house: Pick<IHouse, 'id' | 'name' | 'photos'>;
 }
-  
+
 export interface IHousesContext {
   housesList: IHouse[];
   setHousesList: React.Dispatch<React.SetStateAction<IHouse[]>>;
