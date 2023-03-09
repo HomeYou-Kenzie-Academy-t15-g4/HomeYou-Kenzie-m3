@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FieldError, RegisterOptions, UseFormRegisterReturn } from "react-hook-form";
-import { IHouseForm } from "../components/Forms/HouseForm";
+import { IHouseForm } from "../components/Forms/HouseForm/types";
 
 export interface Region {
   id: number;
@@ -15,8 +15,7 @@ export interface IState {
   regiao: Region;
 }
 
-export interface IuseStatesProps {   
-  defaultValue: number | null;
+export interface IuseStatesProps {
   onChange: React.Dispatch<React.SetStateAction<string>>;
   register: (name: any, options?: RegisterOptions<IHouseForm, any> | undefined) => UseFormRegisterReturn<any>;
   error?: FieldError | undefined;

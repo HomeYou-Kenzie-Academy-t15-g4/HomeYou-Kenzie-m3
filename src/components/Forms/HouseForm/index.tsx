@@ -12,6 +12,8 @@ import SelectState from '../../Selects/SelectState';
 import SelectCity from '../../Selects/SelectCity';
 import { HousesContext } from '../../../providers/HousesContext';
 import { IHouseForm, IHouseFormProps } from './types';
+import { useStates } from '../../../hooks/useStates';
+import { statesDatabase } from '../../Modal/ManageHouseModal/statesDatabase';
 
 export const houseSchema = yup.object().shape({
   houseName: yup.string().required('Campo Obrigatório'),
@@ -60,11 +62,13 @@ const HouseForm = ({
   children,
   defaultHouseFormValues,
 }: IHouseFormProps) => {
-  const {loadValues} = useContext(HousesContext)
+  const { states } = useStates();
+  const { loadValues, setLoadValues } = useContext(HousesContext);
 
   const [selectedUf, setSelectedUf] = useState('');
   const [selectedState, setSelectedState] = useState<string>('');
   const [selectedCity, setSelectedCity] = useState('');
+  // const [selectedCity, setSelectedCity] = useState('');
 
   const {
     register,
@@ -82,9 +86,50 @@ const HouseForm = ({
   ) => {
     let values: string[] = [];
     (newValue ?? []).map((option) => values.push(option?.value || ''));
+    let tempPhotos: { value: string; label: string }[] = [];
+    values.map((value) => tempPhotos.push({ value: value, label: value }));
+    setLoadValues({
+      ...loadValues,
+      photos: tempPhotos,
+    });
+    console.log(values, 'photos padrao');
+
     setValue('photos', values);
     clearErrors('photos');
   };
+
+  useEffect(() => {
+    if (loadValues !== defaultNoValues) {
+      let tempPhotos: string[] = [];
+      if (Array.isArray(loadValues?.photos)) {
+        loadValues.photos.map((option) => tempPhotos.push(option?.value || ''));
+      } else {
+        tempPhotos = [];
+      }
+      setValue('photos', tempPhotos);
+
+      let selectedOptionState = statesDatabase.find(
+        (e) => Number(e.id) === loadValues?.state
+      );
+
+      console.log(selectedOptionState?.sigla, 'estaado2');
+      
+
+      setValue('state', selectedOptionState?.id);
+
+      setValue('city', loadValues?.city?.value);
+
+      let tempServices: string[] = [];
+      if (Array.isArray(loadValues?.services)) {
+        loadValues.services.map((option) =>
+          tempServices.push(option?.value || '')
+        );
+      } else {
+        tempServices = [];
+      }
+      setValue('services', tempServices);
+    }
+  }, [loadValues]);
 
   useEffect(() => {
     setValue('state', selectedState);
@@ -102,6 +147,12 @@ const HouseForm = ({
   ) => {
     let values: string[] = [];
     (newValue ?? []).map((option) => values.push(option?.value || ''));
+    let tempServices: { value: string; label: string }[] = [];
+    values.map((value) => tempServices.push({ value: value, label: value }));
+    setLoadValues({
+      ...loadValues,
+      services: tempServices,
+    });
     setValue('services', values);
     clearErrors('services');
   };
@@ -123,6 +174,7 @@ const HouseForm = ({
         isClearable
         isMulti
         className='photo-link-select'
+        value={loadValues.photos}
         defaultValue={loadValues.photos}
         classNamePrefix='select-photos'
         placeholder='Adicione o link das fotos'
@@ -133,7 +185,6 @@ const HouseForm = ({
       <div className='label temporario'>Local</div>
       <div style={{ display: 'flex' }}>
         <SelectState
-          defaultValue={loadValues.state}
           error={errors.state}
           register={register}
           onChange={setSelectedUf}
@@ -186,6 +237,7 @@ const HouseForm = ({
         options={servicesOptions}
         className='basic-multi-select'
         defaultValue={loadValues.services}
+        value={loadValues.services}
         classNamePrefix='select'
         placeholder='O que o local oferece?'
         onChange={handleChangeServices}
@@ -198,20 +250,11 @@ const HouseForm = ({
 
 export default HouseForm;
 
+// const [defaultValues, setDefaultValues] = useState<IDefaultHouseFormValues>(defaultNoValues);
 
-
-
-
-
-
-
-
-
-  // const [defaultValues, setDefaultValues] = useState<IDefaultHouseFormValues>(defaultNoValues);
-
-  // useEffect(() => {
-  //   if (defaultHouseFormValues) {
-  //     setDefaultValues(defaultHouseFormValues);
-  //     console.log(defaultValues.houseName);
-  //   }
-  // }, [defaultHouseFormValues]);
+// useEffect(() => {
+//   if (defaultHouseFormValues) {
+//     setDefaultValues(defaultHouseFormValues);
+//     console.log(defaultValues.houseName);
+//   }
+// }, [defaultHouseFormValues]);
