@@ -14,7 +14,7 @@ const LoginForm = () => {
   } = useForm<ILoginFormValue>();
 
   const submit: SubmitHandler<ILoginFormValue> = (formData) => {
-    loginUser(formData)
+    loginUser(formData);
     reset();
   };
 

@@ -1,8 +1,22 @@
-import styled from 'styled-components';
+import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
 
-export const StyledFieldset = styled.fieldset`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
+export const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: 'green',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: 'green',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'red',
+    },
+    '&:hover fieldset': {
+      borderColor: 'yellow',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'green',
+    },
+  },
+});

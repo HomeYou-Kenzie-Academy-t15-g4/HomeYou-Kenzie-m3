@@ -13,15 +13,15 @@ const GlobalStyle = createGlobalStyle`
   img{
     max-width: 100%;
   }
-  
-  ul,li{
-  }
-  
+    
   button{
     cursor: pointer;
   }
-
-
+  
+  dialog{
+    display: unset;
+    position: unset;
+  }
 `;
 
 const Container = styled.div`
