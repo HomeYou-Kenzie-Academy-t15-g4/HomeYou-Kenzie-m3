@@ -1,4 +1,3 @@
-import React from 'react';
 import React, { useContext } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 
@@ -41,7 +40,7 @@ const DashboardPage = () => {
             </div>
           </div>
         </StyledSectionProfile>
-        <HouseDashCard /> 
+        <HouseDashCard />
         <section></section>
         <Footer />
       </div>
