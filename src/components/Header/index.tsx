@@ -1,7 +1,7 @@
 import React, { useRef, useContext } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import StyledHeader from './style';
-import imgLogo from '../../assets/logo.png';
+import imgLogo from '../../assets/logo.svg';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../providers/UserContext';
 
@@ -22,12 +22,18 @@ const Header = () => {
         <Link to={'/house'}>Galeria</Link>
         <Link to={'/login'}>Entrar</Link>
         <Link to={'/register'}>Cadastro</Link>
-        <button className='nav-btn nav-close-btn' onClick={showNavBar}>
+        <button
+          type='button'
+          className='nav-btn nav-close-btn'
+          onClick={showNavBar}
+        >
+          pra tirar o bug
           <FaTimes />
         </button>
       </nav>
       {user ? <h2>OK</h2> : <h2>Fail</h2>}
-      <button className='nav-btn' onClick={showNavBar}>
+      <button type='button' className='nav-btn' onClick={showNavBar}>
+        pra tirar o bug
         <FaBars />
       </button>
     </StyledHeader>

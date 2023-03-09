@@ -11,7 +11,7 @@ interface IStyledParagraphProps {
   textAlign?: 'center' | 'left' | 'right';
 }
 
-const StyledTitle = styled(BaseText)<IStyledTitleProps>`
+export const StyledTitle = styled(BaseText)<IStyledTitleProps>`
   width: 100%;
 
   font-family: ${({ theme }) => theme.fonts.primary};
@@ -40,7 +40,7 @@ const StyledTitle = styled(BaseText)<IStyledTitleProps>`
   }}
 `;
 
-const styledParagraph = styled.p<IStyledParagraphProps>`
+export const StyledParagraph = styled.p<IStyledParagraphProps>`
   font-family: ${({ theme }) => theme.fonts.primary};
   font-size: 16px;
   font-weight: 400;
@@ -62,7 +62,6 @@ const styledParagraph = styled.p<IStyledParagraphProps>`
         return css`
           color: ${theme.colors.feedback.negative};
         `;
-
       default:
         return css`
           color: ${theme.colors.gray300};
@@ -71,10 +70,8 @@ const styledParagraph = styled.p<IStyledParagraphProps>`
   }}
 `;
 
-const StyledCaption = styled.span`
+export const StyledCaption = styled.span`
   font-family: ${({ theme }) => theme.fonts.primary};
   font-size: 0.75rem;
   font-weight: 400;
 `;
-
-export default { StyledTitle, styledParagraph, StyledCaption };
