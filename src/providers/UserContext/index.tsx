@@ -94,6 +94,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       try {
         const res = await api.post('/users', newData);
         console.log('deu certo', newData);
+        localStorage.setItem('@IDUSER', res.data.user.id);
         toast.success('Cadastro realizado com sucesso!');
         navigate('/');
       } catch (error) {
@@ -126,9 +127,15 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     navigate('/');
   };
 
-  const editUser = async (data: IUser, userId: string) => {
+  const editUser = async (data: IUser) => {
+    const id = localStorage.getItem('@IDUSER');
+    const token = localStorage.getItem('@HomeYou:TOKEN');
     try {
-      const response = await api.patch(`/users/${userId}`, data);
+      const response = await api.patch(`/users/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setUser(response.data.user);
       console.log('ok!');
       ///toast

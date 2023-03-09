@@ -13,7 +13,7 @@ const StyledModal = styled.div`
   z-index: 1001;
 
   div {
-    animation: ${Animation} 1s;
+    animation: ${Animation} 0.5s;
     width: 100%;
     max-width: 500px;
     background-color: #ffff;

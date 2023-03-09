@@ -11,7 +11,7 @@ export interface IUserContext {
   loginUser: (formData: ILoginFormValue) => Promise<void>;
   logoutUser: () => void;
   user: IUser | null;
-  editUser: (data: IUser, userId: string) => Promise<void>;
+  editUser: (data: IUser) => Promise<void>;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -24,6 +24,7 @@ export interface IUser {
   city?: string;
   state?: string;
   photo?: string;
+  img?: string;
 }
 
 export interface ILoginFormValue {
