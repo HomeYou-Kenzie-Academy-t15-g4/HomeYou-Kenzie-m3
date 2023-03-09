@@ -53,7 +53,7 @@ const StyledHeader = styled.header`
       align-items: center;
       justify-content: center;
       gap: 1.5rem;
-      background-color: var(--mainColor);
+      background-color: #fff;
       transition: 1s ease;
       transform: translateY(-100vh);
     }

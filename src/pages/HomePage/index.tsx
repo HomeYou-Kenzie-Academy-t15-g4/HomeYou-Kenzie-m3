@@ -3,6 +3,7 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
 import { UserContext } from '../../providers/UserContext';
+import StyledSectionHomePage from './style';
 
 const HomePage = () => {
   const { isOpen, setIsOpen } = useContext(UserContext);
@@ -15,9 +16,11 @@ const HomePage = () => {
         </Modal>
       ) : null}
       <Header />
+      <StyledSectionHomePage />
       <button type='button' onClick={() => setIsOpen(true)}>
         Abrir
       </button>
+
       <Footer />
     </div>
   );
