@@ -15,7 +15,8 @@ export interface IState {
   regiao: Region;
 }
 
-export interface IuseStatesProps {
+export interface IuseStatesProps {   
+  defaultValue: number | null;
   onChange: React.Dispatch<React.SetStateAction<string>>;
   register: (name: any, options?: RegisterOptions<IHouseForm, any> | undefined) => UseFormRegisterReturn<any>;
   error?: FieldError | undefined;

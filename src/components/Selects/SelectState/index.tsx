@@ -7,9 +7,9 @@ export interface IStatesInfo {
   label: string;
 }
 
-const SelectState = ({ onChange, setSelectedState }: IuseStatesProps) => {
+const SelectState = ({ onChange, setSelectedState, defaultValue }: IuseStatesProps) => {
   const { states } = useStates();
-  const [selectedStateAux, setSelectedStateAux] = useState<number | null>(null);
+  const [selectedStateAux, setSelectedStateAux] = useState<number | null>(defaultValue);
 
 
   const stateOptions = states.map((state) => ({
