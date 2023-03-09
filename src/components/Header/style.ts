@@ -4,7 +4,9 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  position: fixed;
   height: 80px;
+  width: 98%;
   padding: 0 2rem;
   background-color: #fff;
   color: black;

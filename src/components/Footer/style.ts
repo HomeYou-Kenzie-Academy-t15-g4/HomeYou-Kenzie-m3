@@ -3,9 +3,10 @@ import styled from 'styled-components';
 const StyledDivFooter = styled.footer`
   background-color: #d9dbde;
   height: 164px;
-  position: absolute;
+  position: relative;
   bottom: 0;
-  width: 99.2%;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
