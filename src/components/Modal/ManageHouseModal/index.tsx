@@ -1,10 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
+import { useContext, useEffect } from 'react';
 import { HousesContext } from '../../../providers/HousesContext';
-import HouseForm, {
-  defaultNoValues,
-  IDefaultHouseFormValues,
-} from '../../Forms/HouseForm';
+import HouseForm from '../../Forms/HouseForm';
 
 interface IManageHouseProps {
   id: number;
@@ -18,6 +14,37 @@ const ManageHouseModal = ({ id }: IManageHouseProps) => {
     loadOneHouse(id)      
     
   }, []);
+
+  return (
+    <article>
+      <h3>Cadastrar Casa</h3>
+
+      <HouseForm 
+        submitFunction={editHouse}
+        children={
+          <div>
+            <button type='submit'>Salvar</button>{' '}
+            <button type='button' onClick={() => deleteHouse()}>
+              Excluir
+            </button>
+          </div>
+        }
+      />
+    </article>
+  );
+};
+
+export default ManageHouseModal;
+
+
+
+
+
+
+
+
+
+
   
   // useEffect(() => {
   // if (selectedHouse) {
@@ -44,24 +71,3 @@ const ManageHouseModal = ({ id }: IManageHouseProps) => {
   // }    
   
   // }, [selectedHouse]);
-
-  return (
-    <article>
-      <h3>Cadastrar Casa</h3>
-
-      <HouseForm 
-        submitFunction={editHouse}
-        children={
-          <div>
-            <button type='submit'>Salvar</button>{' '}
-            <button type='button' onClick={() => deleteHouse()}>
-              Excluir
-            </button>
-          </div>
-        }
-      />
-    </article>
-  );
-};
-
-export default ManageHouseModal;

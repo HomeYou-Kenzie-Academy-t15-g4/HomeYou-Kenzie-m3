@@ -1,5 +1,5 @@
-import { ReactNode, useContext, useEffect, useState } from 'react';
-import Select, { ActionMeta, MultiValue, PropsValue } from 'react-select';
+import { useContext, useEffect, useState } from 'react';
+import Select, { ActionMeta, MultiValue } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -11,8 +11,9 @@ import { servicesOptions } from './servicesOptions';
 import SelectState from '../../Selects/SelectState';
 import SelectCity from '../../Selects/SelectCity';
 import { HousesContext } from '../../../providers/HousesContext';
+import { IHouseForm, IHouseFormProps } from './types';
 
-const schema = yup.object().shape({
+export const houseSchema = yup.object().shape({
   houseName: yup.string().required('Campo Obrigatório'),
   city: yup.string().required('Campo Obrigatório'),
   state: yup.string().required('Campo Obrigatório'),
@@ -43,48 +44,6 @@ const schema = yup.object().shape({
     .required('Campo Obrigatório'),
 });
 
-export interface IHouseForm extends yup.InferType<typeof schema> {
-  id?: number;
-  houseName: string;
-  photos: string[];
-  city: string;
-  state: string;
-  dailyPrice: number;
-  singleBed: number;
-  doubleBed: number;
-  services: string[];
-}
-
-export interface IDefaultHouseFormValues {
-  houseName: undefined | string;
-  photos:
-    | PropsValue<{
-        value: string;
-        label: string;
-      } | null>
-    | undefined;
-  state: null | number;
-  city:
-    | PropsValue<{
-        value: string;
-        label: string;
-      } | null>
-    | undefined;
-  dailyPrice: undefined | number;
-  singleBed: undefined | number;
-  doubleBed: undefined | number;
-  services: null | PropsValue<{
-    value: string;
-    label: string;
-  } | null>;
-}
-
-interface IHouseFormProps {
-  children: ReactNode;
-  submitFunction: (dataHouse: IHouseForm) => Promise<void>;
-  defaultHouseFormValues?: IDefaultHouseFormValues;
-}
-
 export const defaultNoValues = {
   houseName: undefined,
   photos: null,
@@ -106,14 +65,6 @@ const HouseForm = ({
   const [selectedUf, setSelectedUf] = useState('');
   const [selectedState, setSelectedState] = useState<string>('');
   const [selectedCity, setSelectedCity] = useState('');
-  // const [defaultValues, setDefaultValues] = useState<IDefaultHouseFormValues>(defaultNoValues);
-
-  // useEffect(() => {
-  //   if (defaultHouseFormValues) {
-  //     setDefaultValues(defaultHouseFormValues);
-  //     console.log(defaultValues.houseName);
-  //   }
-  // }, [defaultHouseFormValues]);
 
   const {
     register,
@@ -122,7 +73,7 @@ const HouseForm = ({
     clearErrors,
     formState: { errors },
   } = useForm<IHouseForm>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(houseSchema),
   });
 
   const handleChangePhotos = (
@@ -246,3 +197,21 @@ const HouseForm = ({
 };
 
 export default HouseForm;
+
+
+
+
+
+
+
+
+
+
+  // const [defaultValues, setDefaultValues] = useState<IDefaultHouseFormValues>(defaultNoValues);
+
+  // useEffect(() => {
+  //   if (defaultHouseFormValues) {
+  //     setDefaultValues(defaultHouseFormValues);
+  //     console.log(defaultValues.houseName);
+  //   }
+  // }, [defaultHouseFormValues]);
