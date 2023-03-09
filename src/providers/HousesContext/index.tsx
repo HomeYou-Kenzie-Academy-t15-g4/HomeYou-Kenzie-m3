@@ -7,6 +7,7 @@ import {
   IHouse,
   IHousesContext,
   IHousesProviderProps,
+  IRent,
   IReserve,
 } from './types';
 import { IHouseForm } from '../../components/Forms/HouseForm';
@@ -17,6 +18,7 @@ export const HousesContext = createContext<IHousesContext>(
 
 export const HousesProvider = ({ children }: IHousesProviderProps) => {
   const [housesList, setHousesList] = useState<IHouse[]>([]);
+  const [housesRent, setHousesRent] = useState<IRent[]>([]);
   const [housesFilterList, setHousesFilterList] = useState<IHouse[]>([]);
   const [selectedHouse, setSelectedHouse] = useState<IHouse[]>([]);
   const [selectedRent, setSelectedRent] = useState<IHouse[]>([]);
@@ -48,6 +50,21 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
       }
     };
     loadHouses();
+  }, []);
+
+  useEffect(() => {
+    const loadRent = async () => {
+      const token = localStorage.getItem('@HomeYou:TOKEN');
+      if (token) {
+        try {
+          const res = await api.get('/rents');
+          setHousesRent(res.data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+    loadRent();
   }, []);
 
   // const loadHouseInfo = (productID: number): void => {
@@ -197,6 +214,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         createReserve,
         editReserve,
         deleteReserve,
+        housesRent,
       }}
     >
       {children}

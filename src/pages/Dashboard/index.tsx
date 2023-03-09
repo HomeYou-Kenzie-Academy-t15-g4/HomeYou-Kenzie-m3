@@ -1,3 +1,5 @@
+import React from 'react';
+import HouseDashCard from '../../components/Cards/DashCards/HouseDashCard';
 import React, { useContext } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import Footer from '../../components/Footer';
@@ -38,6 +40,7 @@ const DashboardPage = () => {
             </div>
           </div>
         </StyledSectionProfile>
+        <HouseDashCard /> 
         <section></section>
         <Footer />
       </div>

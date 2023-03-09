@@ -35,52 +35,42 @@ const RegisterForm = () => {
   } = useForm<IRegisterForm>({
     resolver: yupResolver(FormUser),
   });
-  
 
   return (
     <StyledForm onSubmit={handleSubmit(createUser)}>
       <StyledDivReturnToLogin>
         <p>Cadastre-se</p>
-        {/* <Link to="/login">Voltar para login</Link> */}
       </StyledDivReturnToLogin>
       <Input
-        placeholder='Digite seu nome'
         type='text'
         error={errors.name}
-        register={register}
-        name='name'
+        register={register('name')}
         label='Nome'
       />
+
       <Input
-        placeholder='Digite seu email'
         type='email'
         error={errors.email}
-        register={register}
-        name='email'
+        register={register('email')}
         label='Email'
       />
+
       <Input
-        placeholder='Digite sua senha'
         type='password'
         error={errors.password}
-        register={register}
-        name='password'
+        register={register('password')}
         label='Senha'
       />
       <Input
-        placeholder='Confirme sua senha'
         type='password'
         error={errors.confirmPassword}
-        register={register}
-        name='confirmPassword'
+        register={register('confirmPassword')}
         label='Confirmar Senha'
       />
       <Input
-        placeholder='02/03/2000'
         type='date'
-        error={errors.confirmPassword}
-        register={register}
-        name='age'
+        error={errors.age}
+        register={register('age')}
         label='Data de nascimento'
       />
       <button type='submit'>Criar conta</button>

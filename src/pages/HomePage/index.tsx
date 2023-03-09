@@ -22,10 +22,5 @@ const HomePage = () => {
     </div>
   );
 };
-// import HouseForm from '../../components/Forms/HouseForm';
-
-// const HomePage = () => {
-//   return <>HomePage</>;
-// };
 
 export default HomePage;
