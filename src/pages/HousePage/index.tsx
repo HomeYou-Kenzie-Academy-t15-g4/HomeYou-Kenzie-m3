@@ -17,6 +17,7 @@ const HousePage = () => {
       <button type='button' onClick={() => setIsOpen(true)}>
         Abrir
       </button>
+      <CommentsCard />
     </div>
   );
 };
