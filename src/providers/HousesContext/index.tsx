@@ -10,8 +10,9 @@ import {
   IRent,
   IReserve,
 } from './types';
-import { defaultNoValues, IDefaultHouseFormValues, IHouseForm } from '../../components/Forms/HouseForm';
+import { defaultNoValues} from '../../components/Forms/HouseForm';
 import { statesDatabase } from '../../components/Modal/ManageHouseModal/statesDatabase';
+import { IDefaultHouseFormValues, IHouseForm } from '../../components/Forms/HouseForm/types';
 
 export const HousesContext = createContext<IHousesContext>(
   {} as IHousesContext
@@ -28,32 +29,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     useState<IDefaultHouseFormValues>(defaultNoValues);
 
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (selectedHouse) {
-  //     const stateUF = statesDatabase.find(
-  //       (e) => e.sigla === selectedHouse?.state
-  //     );
-  //     const values = {
-  //       houseName: selectedHouse?.name,
-  //       photos: selectedHouse?.photos.map((photo) => ({
-  //         value: photo,
-  //         label: photo,
-  //       })),
-  //       state: stateUF ? stateUF.id : null,
-  //       city: { value: selectedHouse?.city, label: selectedHouse?.city },
-  //       dailyPrice: selectedHouse?.daylyPrice,
-  //       singleBed: selectedHouse?.accommodation.beds,
-  //       doubleBed: selectedHouse?.accommodation.doubleBeds,
-  //       services: selectedHouse?.services.map((service) => ({
-  //         value: service,
-  //         label: service,
-  //       })),
-  //     };
-  //     setLoadValues(values)    
-  //   }    
-    
-  //   }, [selectedHouse]);
 
   useEffect(() => {
     const filter = housesList.filter(

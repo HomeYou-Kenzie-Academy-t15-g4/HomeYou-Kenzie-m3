@@ -10,7 +10,7 @@ const RegisterPage = () => {
         <RegisterForm />
       </section>
       <aside>
-        <img src='../../assets/register-asside-img.svg' alt='' />
+        <img src='../../../assets/register-asside-img.svg' alt='' />
       </aside>
     </StyledDivRegisterPage>
   );

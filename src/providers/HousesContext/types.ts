@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { IDefaultHouseFormValues, IHouseForm } from '../../components/Forms/HouseForm';
+import { IHouseForm, IDefaultHouseFormValues } from '../../components/Forms/HouseForm/types';
 
 export interface IHousesProviderProps {
   children: ReactNode;
