@@ -10,9 +10,6 @@ import { GiMountainCave, GiToaster, GiDesk, GiMagicBroom, GiBlackBook, GiCctvCam
 import { IoIosSnow, IoMdBonfire, IoIosPaw } from "react-icons/io";
 import { MdPool, MdOutlineCleanHands, MdCurtains, MdOutlineOutdoorGrill, MdOutlineBlender } from "react-icons/md";
 
-
-
-
 interface IIconsMatchProps {
   iconName: string;
 }

@@ -1,9 +1,10 @@
 import React from 'react';
-import HouseDashCard from '../../components/Cards/DashCards/HouseDashCard';
 import React, { useContext } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
+
 import Footer from '../../components/Footer';
 import EditUser from '../../components/Forms/EditUser';
+import HouseDashCard from '../../components/Cards/DashCards/HouseDashCard';
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
 import { UserContext } from '../../providers/UserContext';
