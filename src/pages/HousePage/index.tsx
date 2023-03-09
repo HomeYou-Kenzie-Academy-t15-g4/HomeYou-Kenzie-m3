@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import CommentsCard from '../../components/Cards/CommentsCard';
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
 import { UserContext } from '../../providers/UserContext';
