@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Select, { ActionMeta, SingleValue } from "react-select";
 import { IuseStatesProps, useStates } from "../../../hooks/useStates";
+import { HousesContext } from "../../../providers/HousesContext";
 
 export interface IStatesInfo {
   value: number;
   label: string;
 }
 
-const SelectState = ({ onChange, setSelectedState, defaultValue }: IuseStatesProps) => {
+const SelectState = ({ onChange, setSelectedState }: IuseStatesProps) => {
   const { states } = useStates();
-  const [selectedStateAux, setSelectedStateAux] = useState<number | null>(defaultValue);
+  const {loadValues} = useContext(HousesContext)
+  const [selectedStateAux, setSelectedStateAux] = useState<number | null>(loadValues.state);
 
 
   const stateOptions = states.map((state) => ({
@@ -17,7 +19,7 @@ const SelectState = ({ onChange, setSelectedState, defaultValue }: IuseStatesPro
     label: state.nome
   }));
 
-  const selectedOptionState = stateOptions.find(
+  let selectedOptionState = stateOptions.find(
     (e) => Number(e.value) === selectedStateAux
   );
 
@@ -25,10 +27,15 @@ const SelectState = ({ onChange, setSelectedState, defaultValue }: IuseStatesPro
     const getStateId: number | null = Number(newValue?.value)
     
     setSelectedStateAux(getStateId);
-    const selectedUf = states.find((e) => e.id === getStateId)?.sigla;
-    setSelectedState(selectedUf ?? '')
-    onChange(selectedUf ?? '');
+    const selectedUf = states.find((e) => e.id === getStateId);
+    console.log(selectedUf?.sigla, 'SIGLA!');
+    
+    setSelectedState(selectedUf?.sigla ?? '')
+    onChange(selectedUf?.sigla ?? '');
   };
+
+  console.log(selectedOptionState);
+  
 
   return (
     <Select
@@ -36,6 +43,7 @@ const SelectState = ({ onChange, setSelectedState, defaultValue }: IuseStatesPro
       onChange={handleStateUpdate}
       options={stateOptions}
       value={selectedOptionState}
+      defaultValue={selectedOptionState}
     />
   );
 };

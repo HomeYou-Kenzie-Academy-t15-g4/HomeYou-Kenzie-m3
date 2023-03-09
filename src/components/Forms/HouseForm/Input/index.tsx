@@ -2,7 +2,7 @@ import {
   FieldError,
   UseFormRegister,
 } from 'react-hook-form';
-import { IHouseForm } from '../index';
+import { IHouseForm } from '../types';
 
 interface IInputProps {
   label?: string | undefined;
@@ -30,6 +30,7 @@ const Input = ({
       {...register(name)}
       //   label={label}
       type={type}
+      value={value}
     />
     <p>{error?.message}</p>
   </fieldset>

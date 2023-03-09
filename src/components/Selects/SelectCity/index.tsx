@@ -1,7 +1,8 @@
-import { UseFormRegister, FieldError } from 'react-hook-form';
-import Select, { ActionMeta, PropsValue, SingleValue } from 'react-select';
-import useCities from '../../../hooks/useCities';
-import { IHouseForm } from '../../Forms/HouseForm';
+import { UseFormRegister, FieldError } from "react-hook-form";
+import Select, { ActionMeta, PropsValue, SingleValue } from "react-select";
+import useCities from "../../../hooks/useCities";
+import { IHouseForm } from "../../Forms/HouseForm/types";
+
 
 export interface ISelectCityProps {
   uf: string;
@@ -40,6 +41,7 @@ const SelectCity = ({
   return (
     <Select
       defaultValue={defaultValue}
+      value={defaultValue}
       isLoading={loadingCities}
       loadingMessage={() => 'Carregando as cidades...'}
       isDisabled={loadingCities || cityOptions.length === 0}

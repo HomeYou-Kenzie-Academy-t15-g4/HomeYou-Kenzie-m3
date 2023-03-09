@@ -14,7 +14,6 @@ export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
   const [user, setUser] = useState<IUser | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const userLoad = async () => {
@@ -153,9 +152,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           createUser,
           loginUser,
           logoutUser,
-          editUser,
-          isOpen,
-          setIsOpen,
+          editUser
         }}
       >
         {children}

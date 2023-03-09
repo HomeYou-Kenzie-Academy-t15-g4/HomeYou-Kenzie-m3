@@ -15,7 +15,7 @@ const StyledModal = styled.div`
   div {
     animation: ${Animation} 0.5s;
     width: 100%;
-    max-width: 500px;
+    max-width: 900px;
     background-color: #ffff;
     border-radius: 8px;
   }

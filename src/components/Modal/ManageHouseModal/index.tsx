@@ -2,18 +2,15 @@ import { useContext, useEffect } from 'react';
 import { HousesContext } from '../../../providers/HousesContext';
 import HouseForm from '../../Forms/HouseForm';
 
-interface IManageHouseProps {
-  id: number;
-}
 
-const ManageHouseModal = ({ id }: IManageHouseProps) => {
-  const { editHouse, deleteHouse, loadOneHouse, selectedHouse } =
+const ManageHouseModal = () => {
+  const { editHouse, deleteHouse } =
     useContext(HousesContext);
 
-  useEffect(() => {
-    loadOneHouse(id)      
+  // useEffect(() => {
+  //   loadOneHouse(id)      
     
-  }, []);
+  // }, []);
 
   return (
     <article>

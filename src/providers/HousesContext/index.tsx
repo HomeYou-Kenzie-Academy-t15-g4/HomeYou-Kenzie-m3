@@ -263,6 +263,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         deleteReserve,
         loadOneHouse,
         loadValues,
+        setLoadValues,
         housesRent,
       }}
     >

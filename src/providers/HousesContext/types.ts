@@ -75,5 +75,6 @@ export interface IHousesContext {
   deleteReserve: (id: number) => Promise<void>;
   loadOneHouse: (id: number) => Promise<void>;
   loadValues: IDefaultHouseFormValues;
+  setLoadValues: React.Dispatch<React.SetStateAction<IDefaultHouseFormValues>>;
   housesRent: IRent[];
 }
