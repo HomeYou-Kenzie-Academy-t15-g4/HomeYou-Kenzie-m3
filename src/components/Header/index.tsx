@@ -1,7 +1,7 @@
 import React, { useRef, useContext } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import StyledHeader from './style';
-import imgLogo from '../../assets/logo.png';
+import imgLogo from '../../assets/logo.svg';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../providers/UserContext';
 

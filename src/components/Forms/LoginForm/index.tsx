@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { UserContext } from '../../../providers/UserContext';
+import Input from '../Input';
 import { ILoginFormValue } from './types';
 
 const LoginForm = () => {
@@ -20,14 +21,8 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit(submit)}>
-      <fieldset>
-        <label>Email</label>
-        <input type='email' id='email' {...register('email')} />
-      </fieldset>
-      <fieldset>
-        <label>Senha</label>
-        <input type='password' id='password' {...register('password')} />
-      </fieldset>
+      <Input label='Email' type='email' register={register('email')} />
+      <Input label='Senha' type='password' register={register('password')} />
 
       <button type='submit'>Entrar</button>
     </form>

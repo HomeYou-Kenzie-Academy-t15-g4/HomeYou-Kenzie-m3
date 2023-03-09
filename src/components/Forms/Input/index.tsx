@@ -5,7 +5,7 @@ import { CssTextField } from './style';
 interface IInputProps {
   label: React.ReactNode;
   register: UseFormRegisterReturn<string>;
-  type: 'text' | 'email' | 'password';
+  type: 'text' | 'email' | 'password' | 'date';
   error?: FieldError;
   fontColor?: string;
 }

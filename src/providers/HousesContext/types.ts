@@ -36,6 +36,26 @@ export interface IReserve {
   house: Pick<IHouse, 'id' | 'name' | 'photos'>;
 }
 
+export interface IRent {
+  userId: number;
+  house: IHouseRent;
+  guest: IRentGuest;
+  rentedDays: string[];
+  rentPrice: number;
+  id: number;
+}
+
+export interface IHouseRent {
+  id: number;
+  name: string;
+  photos: string[];
+}
+
+export interface IRentGuest {
+  photo: string;
+  name: string;
+}
+
 export interface IHousesContext {
   housesList: IHouse[];
   setHousesList: React.Dispatch<React.SetStateAction<IHouse[]>>;
@@ -53,4 +73,5 @@ export interface IHousesContext {
   createReserve: (newRent: IReserve) => Promise<void>;
   editReserve: (editedReserve: IReserve, id: number) => Promise<void>;
   deleteReserve: (id: number) => Promise<void>;
+  housesRent: IRent[];
 }
