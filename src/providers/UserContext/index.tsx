@@ -14,6 +14,7 @@ export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
   const [user, setUser] = useState<IUser | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const userLoad = async () => {
@@ -45,15 +46,21 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
             headers: { Authorization: `Bearer ${token}` },
           });
           setUser(res.data.user);
-          if (window.location.pathname != "/dasboard" && window.location.pathname != "/house" && window.location.pathname != "/") {
-            navigate("/");
+          if (
+            window.location.pathname != '/dasboard' &&
+            window.location.pathname != '/house' &&
+            window.location.pathname != '/'
+          ) {
+            navigate('/');
           }
         } catch (error) {
           window.localStorage.clear();
           setUser(null);
-          toast.error("Não encontramos uma sessão ativa, por favor faça o login para acessar");
-          if (window.location.pathname != "/register") {
-            navigate("/login");
+          toast.error(
+            'Não encontramos uma sessão ativa, por favor faça o login para acessar'
+          );
+          if (window.location.pathname != '/register') {
+            navigate('/login');
           }
         }
       };
@@ -101,12 +108,11 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       const res = await api.post('/login', formData);
       localStorage.setItem('@HomeYou:TOKEN', res.data.accessToken);
       console.log(res.data.user);
-      
+
       localStorage.setItem('@HomeYou:User', JSON.stringify(res.data.user));
       setUser(res.data.user);
       navigate('/dashboard');
       console.log('logou');
-      
     } catch (error) {
       console.log('falhou');
       console.log(error);
@@ -134,7 +140,16 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   return (
     <>
       <UserContext.Provider
-        value={{ user, userLoad, createUser, loginUser, logoutUser, editUser }}
+        value={{
+          user,
+          userLoad,
+          createUser,
+          loginUser,
+          logoutUser,
+          editUser,
+          isOpen,
+          setIsOpen,
+        }}
       >
         {children}
       </UserContext.Provider>
