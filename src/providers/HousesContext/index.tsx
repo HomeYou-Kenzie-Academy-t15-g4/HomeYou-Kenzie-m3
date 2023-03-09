@@ -1,6 +1,6 @@
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -9,7 +9,8 @@ import {
   IHousesProviderProps,
   IReserve,
 } from './types';
-import { IHouseForm } from '../../components/Forms/HouseForm';
+import { defaultNoValues, IDefaultHouseFormValues, IHouseForm } from '../../components/Forms/HouseForm';
+import { statesDatabase } from '../../components/Modal/ManageHouseModal/statesDatabase';
 
 export const HousesContext = createContext<IHousesContext>(
   {} as IHousesContext
@@ -18,11 +19,39 @@ export const HousesContext = createContext<IHousesContext>(
 export const HousesProvider = ({ children }: IHousesProviderProps) => {
   const [housesList, setHousesList] = useState<IHouse[]>([]);
   const [housesFilterList, setHousesFilterList] = useState<IHouse[]>([]);
-  const [selectedHouse, setSelectedHouse] = useState<IHouse[]>([]);
-  const [selectedRent, setSelectedRent] = useState<IHouse[]>([]);
+  const [selectedHouse, setSelectedHouse] = useState<IHouse | null>(null);
+  const [selectedRent, setSelectedRent] = useState<IHouse | null>(null);
   const [searchText, setSearchText] = useState<string>('');
+  const [loadValues, setLoadValues] =
+    useState<IDefaultHouseFormValues>(defaultNoValues);
 
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (selectedHouse) {
+  //     const stateUF = statesDatabase.find(
+  //       (e) => e.sigla === selectedHouse?.state
+  //     );
+  //     const values = {
+  //       houseName: selectedHouse?.name,
+  //       photos: selectedHouse?.photos.map((photo) => ({
+  //         value: photo,
+  //         label: photo,
+  //       })),
+  //       state: stateUF ? stateUF.id : null,
+  //       city: { value: selectedHouse?.city, label: selectedHouse?.city },
+  //       dailyPrice: selectedHouse?.daylyPrice,
+  //       singleBed: selectedHouse?.accommodation.beds,
+  //       doubleBed: selectedHouse?.accommodation.doubleBeds,
+  //       services: selectedHouse?.services.map((service) => ({
+  //         value: service,
+  //         label: service,
+  //       })),
+  //     };
+  //     setLoadValues(values)    
+  //   }    
+    
+  //   }, [selectedHouse]);
 
   useEffect(() => {
     const filter = housesList.filter(
@@ -55,7 +84,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   //   setSelectedHouse(findHouse);
   // };
 
-  const createHouse = async (newHouseInputs: IHouseForm): Promise<void> => {
+  const createHouse = async (dataHouse: IHouseForm): Promise<void> => {
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
     const userAuxString = localStorage.getItem('@HomeYou:User');
     const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
@@ -64,15 +93,15 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
       const newHouse = {
         ownerName: userAux.name,
         userId: userAux.id,
-        photos: newHouseInputs.photos,
-        city: newHouseInputs.city,
-        state: newHouseInputs.state,
-        daylyPrice: newHouseInputs.dailyPrice,
+        photos: dataHouse.photos,
+        city: dataHouse.city,
+        state: dataHouse.state,
+        daylyPrice: dataHouse.dailyPrice,
         accommodation: {
-          beds: newHouseInputs.singleBed,
-          doubleBeds: newHouseInputs.doubleBed,
+          beds: dataHouse.singleBed,
+          doubleBeds: dataHouse.doubleBed,
         },
-        services: newHouseInputs.services,
+        services: dataHouse.services,
       };
       try {
         const response = await api.post('/houses', newHouse, {
@@ -90,35 +119,78 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     }
   };
 
-  const editHouse = async (editedHouse: IHouse, id: number): Promise<void> => {
-    const token = window.localStorage.getItem('@HomeYou:TOKEN');
+  const loadOneHouse = async (id: number): Promise<void> => {
     try {
-      const response = await api.patch(`/houses/${id}`, editedHouse, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      toast.success('Casa atualizada com sucesso');
+      const response = await api.get(`/houses/${id}`);
+      setSelectedHouse(response.data)
+      const stateUF = statesDatabase.find(
+        (e) => e.sigla === response.data?.state
+      );
+      const values = {
+        houseName: response.data?.name,
+        photos: response.data?.photos.map((photo: string) => ({
+          value: photo,
+          label: photo,
+        })),
+        state: stateUF ? stateUF.id : null,
+        city: { value: response.data?.city, label: response.data?.city },
+        dailyPrice: response.data?.daylyPrice,
+        singleBed: response.data?.accommodation.beds,
+        doubleBed: response.data?.accommodation.doubleBeds,
+        services: response.data?.services.map((service: string) => ({
+          value: service,
+          label: service,
+        })),
+      };
+      setLoadValues(values)
+      console.log(values);
+        
     } catch (error) {
       console.error(error);
-      toast.error('Falha ao atualizar casa');
+      toast.error('Falha ao carregar dados da casa');
       // navigate('/');
     }
   };
 
-  const deleteHouse = async (id: number): Promise<void> => {
+  const editHouse = async (dataHouse: IHouseForm): Promise<void> => {
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
-    try {
-      const response = await api.delete(`/houses/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      toast.success('Casa deletada com sucesso');
-    } catch (error) {
-      console.error(error);
-      toast.error('Falha ao deletar casa');
-      // navigate('/');
+    const houseId = selectedHouse?.id
+    toast('to aqui')
+    if (token && houseId) {
+      toast('entrei')
+      
+      try {
+        const response = await api.patch(`/houses/${houseId}`, dataHouse, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        toast.success('Casa atualizada com sucesso');
+      } catch (error) {
+        console.error(error);
+        toast.error('Falha ao atualizar casa');
+        // navigate('/');
+      }
+    }
+  };
+
+  const deleteHouse = async (): Promise<void> => {
+    const houseId = selectedHouse?.id
+    const token = window.localStorage.getItem('@HomeYou:TOKEN');
+    if (houseId && token) {
+      
+      try {
+        const response = await api.delete(`/houses/${houseId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        toast.success('Casa deletada com sucesso');
+      } catch (error) {
+        console.error(error);
+        toast.error('Falha ao deletar casa');
+        // navigate('/');
+      }
     }
   };
 
@@ -197,6 +269,8 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         createReserve,
         editReserve,
         deleteReserve,
+        loadOneHouse,
+        loadValues
       }}
     >
       {children}

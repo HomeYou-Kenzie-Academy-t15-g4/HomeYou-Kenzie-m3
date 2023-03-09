@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { IHouseForm } from '../../components/Forms/HouseForm';
+import { IDefaultHouseFormValues, IHouseForm } from '../../components/Forms/HouseForm';
 
 export interface IHousesProviderProps {
   children: ReactNode;
@@ -14,10 +14,10 @@ export interface IHouse {
   state: string;
   daylyPrice: number;
   services: string[];
-  acommodation: IAcommodation;
+  accommodation: IAccommodation;
 }
 
-export interface IAcommodation {
+export interface IAccommodation {
   beds: number;
   doubleBeds: number;
 }
@@ -41,16 +41,18 @@ export interface IHousesContext {
   setHousesList: React.Dispatch<React.SetStateAction<IHouse[]>>;
   housesFilterList: IHouse[];
   setHousesFilterList: React.Dispatch<React.SetStateAction<IHouse[]>>;
-  selectedHouse: IHouse[];
-  setSelectedHouse: React.Dispatch<React.SetStateAction<IHouse[]>>;
-  selectedRent: IHouse[];
-  setSelectedRent: React.Dispatch<React.SetStateAction<IHouse[]>>;
+  selectedHouse: IHouse | null;
+  setSelectedHouse: React.Dispatch<React.SetStateAction<IHouse | null>>;
+  selectedRent: IHouse | null;
+  setSelectedRent: React.Dispatch<React.SetStateAction<IHouse | null>>;
   searchText: string;
   setSearchText: React.Dispatch<React.SetStateAction<string>>;
-  createHouse: (newHouse: IHouseForm) => Promise<void>;
-  editHouse: (editedHouse: IHouse, id: number) => Promise<void>;
-  deleteHouse: (id: number) => Promise<void>;
+  createHouse: (dataHouse: IHouseForm) => Promise<void>;
+  editHouse: (dataHouse: IHouseForm) => Promise<void>;
+  deleteHouse: () => Promise<void>;
   createReserve: (newRent: IReserve) => Promise<void>;
   editReserve: (editedReserve: IReserve, id: number) => Promise<void>;
   deleteReserve: (id: number) => Promise<void>;
+  loadOneHouse: (id: number) => Promise<void>;
+  loadValues: IDefaultHouseFormValues;
 }
