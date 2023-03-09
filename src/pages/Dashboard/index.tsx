@@ -68,7 +68,7 @@ const DashboardPage = () => {
               <img src={user?.img} alt='photo image' />
               <div>
                 <h3>{user?.name}</h3>
-                <span>{user?.age}</span>
+                <span>{user?.age} anos</span>
                 <hr />
                 <div>
                   <AiOutlineUser />

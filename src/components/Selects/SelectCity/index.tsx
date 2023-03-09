@@ -9,26 +9,33 @@ export interface ISelectCityProps {
   setSelectedCity: React.Dispatch<React.SetStateAction<string>>;
   register?: UseFormRegister<IHouseForm>;
   error?: FieldError | undefined;
-  defaultValue: PropsValue<{
-    value: string;
-    label: string;
-} | null> | undefined
+  defaultValue:
+    | PropsValue<{
+        value: string;
+        label: string;
+      } | null>
+    | undefined;
 }
 
-const SelectCity = ({ uf, setSelectedCity, defaultValue }:ISelectCityProps) => {
+const SelectCity = ({
+  uf,
+  setSelectedCity,
+  defaultValue,
+}: ISelectCityProps) => {
   const { cities, loading: loadingCities } = useCities({
-    uf
+    uf,
   });
-
 
   const cityOptions = cities.map((city) => ({
     value: city.codigo_ibge,
-    label: city.nome
+    label: city.nome,
   }));
 
-  const handleStateUpdate = (newValue: SingleValue<{ value: string; label: string; } | null>, actionMeta: ActionMeta<{ value: string; label: string; } | null>) => {
-
-    setSelectedCity(newValue?.label ?? '')
+  const handleStateUpdate = (
+    newValue: SingleValue<{ value: string; label: string } | null>,
+    actionMeta: ActionMeta<{ value: string; label: string } | null>
+  ) => {
+    setSelectedCity(newValue?.label ?? '');
   };
 
   return (
@@ -36,10 +43,10 @@ const SelectCity = ({ uf, setSelectedCity, defaultValue }:ISelectCityProps) => {
       defaultValue={defaultValue}
       value={defaultValue}
       isLoading={loadingCities}
-      loadingMessage={() => "Carregando as cidades..."}
+      loadingMessage={() => 'Carregando as cidades...'}
       isDisabled={loadingCities || cityOptions.length === 0}
       options={cityOptions}
-      placeholder="Selecione uma cidade"
+      placeholder='Selecione uma cidade'
       onChange={handleStateUpdate}
       // need to ADD text-transform:capitalize; ON CSS
     />
