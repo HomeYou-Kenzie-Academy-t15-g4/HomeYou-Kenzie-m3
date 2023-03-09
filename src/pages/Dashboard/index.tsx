@@ -1,3 +1,5 @@
+import React from 'react';
+import HouseDashCard from '../../components/Cards/DashCards/HouseDashCard';
 import React, { useContext } from 'react';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -18,6 +20,7 @@ const DashboardPage = () => {
       <button type='button' onClick={() => setIsOpen(true)}>
         Abrir
       </button>
+      <HouseDashCard />
       <Footer />
     </div>
   );
