@@ -65,6 +65,9 @@ const RegisterForm = () => {
         InputLabelProps={{
           shrink: true,
         }}
+        inputRef={
+          register('age') as unknown as React.RefObject<HTMLInputElement>
+        }
       />
 
       <StyledButton type='submit' $buttonSize='large' $buttonStyle='primary'>

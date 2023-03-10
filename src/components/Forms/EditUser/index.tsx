@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { UserContext } from '../../../providers/UserContext';
 import { IUser } from '../../../providers/UserContext/type';
+import Input from '../Input';
+import StyledFormEditUserPic from './style';
 
 interface IEditForm {
   email?: string;
@@ -28,14 +30,17 @@ const EditUser = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
-      <fieldset>
-        <label>Alterar Foto Perfil</label>
-        <input type='text' id='image' {...register('img')} />
-      </fieldset>
-      <button type='submit'>Entrar</button>
-    </form>
+    <StyledFormEditUserPic onSubmit={handleSubmit(submit)}>
+      <div className='modalContentEdit'>
+        <Input
+          type='text'
+          label='Alterar Foto Perfil'
+          register={register('img')}
+        />
+        <button type='submit'>Alterar Foto</button>
+      </div>
+    </StyledFormEditUserPic>
   );
 };
-
+// label, register, type, error
 export default EditUser;

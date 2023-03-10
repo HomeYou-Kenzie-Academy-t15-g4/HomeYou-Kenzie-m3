@@ -36,7 +36,7 @@ export interface IDefaultHouseFormValues {
   doubleBed: undefined | number;
   services: null | PropsValue<{
     value: string;
-    label: string;
+    label: string ;
   } | null>;
 }
 

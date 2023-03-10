@@ -6,7 +6,7 @@ const CreateHouseModal = () => {
   const { createHouse } = useContext(HousesContext)
 
   return (
-    <article>
+    <article className='inside'>
       <h3>Cadastrar Casa</h3>
       <HouseForm submitFunction={createHouse} children={<button type='submit'>Cadastrar</button>} />
     </article>
