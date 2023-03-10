@@ -24,8 +24,6 @@ const DashboardPage = () => {
     isCreateHouseModal,
     isManageHouseModal,
     callEditUser,
-    callManageHouse,
-    callCreateHouse,
   } = useContext(ModalsContext);
 
   return (
@@ -75,14 +73,7 @@ const DashboardPage = () => {
           </div>
         </StyledSectionProfile>
         <HouseDashCard />
-        <button type='button' onClick={() => callManageHouse(2)}>
-          <UserRentsCards />
-          Gerenciar Casa
-        </button>
-        <button type='button' onClick={() => callCreateHouse()}>
-          Cadastrar Casa
-        </button>
-        <section></section>
+        <UserRentsCards />
         <Footer />
       </div>
     </StyledContainerPage>
