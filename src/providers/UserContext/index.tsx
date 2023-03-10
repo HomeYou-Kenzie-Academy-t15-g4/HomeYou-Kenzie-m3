@@ -97,7 +97,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         console.log('deu certo', newData);
         localStorage.setItem('@IDUSER', res.data.user.id);
         toast.success('Cadastro realizado com sucesso!');
-        navigate('/');
+        navigate('/login');
       } catch (error) {
         console.log('deu errado');
         toast.error('Ops,algo deu errado!');
