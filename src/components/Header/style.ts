@@ -3,43 +3,46 @@ import styled from 'styled-components';
 const StyledHeader = styled.header`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   position: fixed;
   height: 80px;
-  width: 98%;
-  padding: 0 2rem;
+  width: 100%;
+  padding: 0 100px;
   background-color: #fff;
-  color: black;
-  box-shadow: 0 4px 10px -4px #5767aa;
+  box-shadow: 0px 2.90909px 5.81818px rgba(0, 0, 0, 0.25);
 
-  nav a {
-    margin: 0 2rem;
-    color: black;
-    text-decoration: none;
-    font-weight: 600;
-    font-family: sans-serif;
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    &:hover {
-      color: #04c35c;
+    a {
+      margin-left: 20px;
     }
   }
 
   .nav-btn {
-    padding: 5px;
     cursor: pointer;
     background: transparent;
     border: none;
     outline: none;
-    color: black;
-    visibility: hidden;
     opacity: 0;
-    font-size: 1.8rem;
+    display: none;
+  }
+  .hamburguer {
+    display: none;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 800px) {
+    padding: 0 30px;
+
+    .hamburguer {
+      display: block;
+    }
+
     .nav-btn {
-      visibility: visible;
-      opacity: 1;
+      display: block;
+      opacity: 1.5;
     }
 
     nav {

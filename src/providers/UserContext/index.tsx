@@ -44,8 +44,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           const res = await api.get(`/users/${userAux.id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
-          setUser(res.data.user);
-          console.log(window.location.pathname);
+          setUser(res.data);
 
           if (
             window.location.pathname != '/dashboard' &&

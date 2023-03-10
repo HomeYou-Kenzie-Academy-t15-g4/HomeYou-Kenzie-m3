@@ -5,7 +5,9 @@ import { UserContext } from '../../../../providers/UserContext';
 const HouseDashCard = () => {
   const { housesList, housesRent } = useContext(HousesContext);
   const { user } = useContext(UserContext);
-
+  console.log(housesList);
+  console.log(user, 'user');
+  
   const userHouses = housesList.filter((house) => house.userId === user?.id);
   const userRents = userHouses.filter((house) =>
     housesRent.some((rent) => rent.house.id === house.id)
