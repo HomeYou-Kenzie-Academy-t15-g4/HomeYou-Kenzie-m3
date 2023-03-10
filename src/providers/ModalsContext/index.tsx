@@ -6,7 +6,8 @@ import { IModalsContext, IModalsProviderProps } from './type';
 export const ModalsContext = createContext({} as IModalsContext);
 
 export const ModalsProvider = ({ children }: IModalsProviderProps) => {
-  const { loadOneHouse, setSelectedHouse } = useContext(HousesContext);
+  const { loadOneHouse, setSelectedHouse, setLoadValues } =
+    useContext(HousesContext);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isUserModal, setIsUserModal] = useState(false);
@@ -16,40 +17,41 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
   const [isCreateHouseModal, setIsCreateHouseModal] = useState(false);
 
   const callEditUser = () => {
-    setIsOpen(true)
-    setIsUserModal(true)    
-  }
- 
+    setIsOpen(true);
+    setIsUserModal(true);
+  };
+
   const callManageHouse = (id: number) => {
-    loadOneHouse(id)
-    setIsOpen(true)
-    setIsManageHouseModal(true)
-  }
-  
+    loadOneHouse(id);
+    setIsOpen(true);
+    setIsManageHouseModal(true);
+  };
+
   const callCreateHouse = () => {
-    setSelectedHouse(defaultNoValues)
-    setIsOpen(true)
-    setIsCreateHouseModal(true)
-  }
+    setIsOpen(true);
+    setIsCreateHouseModal(true);
+  };
 
   const callCreateReserve = () => {
-    setIsOpen(true)
-    setIsCreateHouseModal(true)
-  }
+    setIsOpen(true);
+    setIsCreateHouseModal(true);
+  };
 
   const callManageReserve = () => {
-    setIsOpen(true)
-    setIsCreateHouseModal(true)
-  }
+    setIsOpen(true);
+    setIsCreateHouseModal(true);
+  };
 
-  const closeModal = () => {    
-    setIsOpen(false)
-    setIsUserModal(false)
-    setIsCreateRentModal(false)
-    setIsManageRentModal(false)
-    setIsCreateHouseModal(false)
-    setIsManageHouseModal(false)
-  }
+  const closeModal = () => {
+    setSelectedHouse(null);
+    setLoadValues(defaultNoValues);
+    setIsOpen(false);
+    setIsUserModal(false);
+    setIsCreateRentModal(false);
+    setIsManageRentModal(false);
+    setIsCreateHouseModal(false);
+    setIsManageHouseModal(false);
+  };
 
   return (
     <>
@@ -72,7 +74,7 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
           callCreateHouse,
           callCreateReserve,
           callManageReserve,
-          closeModal
+          closeModal,
         }}
       >
         {children}

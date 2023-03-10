@@ -3,8 +3,9 @@ import { Navigate, Outlet } from 'react-router';
 import { UserContext } from '../providers/UserContext';
 
 const ProtectedRoute = () => {
-  const { user } = useContext(UserContext);
-  return user ? <Outlet /> : <Navigate to='/errorPage' />;
+  const token = localStorage.getItem('@HomeYou:TOKEN');
+  
+  return token ? <Outlet /> : <Navigate to='/errorPage' />;
 };
 
 export default ProtectedRoute;

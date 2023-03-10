@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
-import { UserContext } from '../../providers/UserContext';
+import { ModalsContext } from '../../providers/ModalsContext';
 
 const HomePage = () => {
-  const { isOpen, setIsOpen } = useContext(UserContext);
+  const { isOpen, setIsOpen } = useContext(ModalsContext);
 
   return (
     <div>

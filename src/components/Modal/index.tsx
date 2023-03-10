@@ -3,7 +3,6 @@ import StyledModal from './style';
 
 import { MdClose } from 'react-icons/md';
 import { useContext } from 'react';
-import { UserContext } from '../../providers/UserContext';
 import { ModalsContext } from '../../providers/ModalsContext';
 
 interface IModalProps {
@@ -11,14 +10,14 @@ interface IModalProps {
 }
 
 const Modal = ({ children }: IModalProps) => {
-  const { isOpen, setIsOpen } = useContext(ModalsContext);
+  const { isOpen, closeModal } = useContext(ModalsContext);
 
   if (isOpen) {
     return (
-      <StyledModal role={'dialog'}>
-        <div>
+      <StyledModal className='inside' role={'dialog'}>
+        <div className='inside'>
           <header>
-            <MdClose onClick={() => setIsOpen(false)} />
+            <MdClose onClick={() => closeModal()} />
           </header>
           {children}
         </div>

@@ -6,7 +6,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../../providers/UserContext/index';
 import { StyledForm, StyledDivReturnToLogin } from './style';
-import Link from '../../../routes/routes';
 
 const FormUser = yup.object().shape({
   email: yup.string().email().required(),

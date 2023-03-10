@@ -36,7 +36,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
   useEffect(() => {
     const token = localStorage.getItem('@HomeYou:TOKEN');
-    const userAuxString = localStorage.getItem('@HomeYou:user');
+    const userAuxString = localStorage.getItem('@HomeYou:User');
     const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
     if (token && userAux) {
       const userAutoLogin = async () => {
@@ -45,8 +45,10 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
             headers: { Authorization: `Bearer ${token}` },
           });
           setUser(res.data.user);
+          console.log(window.location.pathname);
+
           if (
-            window.location.pathname != '/dasboard' &&
+            window.location.pathname != '/dashboard' &&
             window.location.pathname != '/house' &&
             window.location.pathname != '/'
           ) {
@@ -152,7 +154,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           createUser,
           loginUser,
           logoutUser,
-          editUser
+          editUser,
         }}
       >
         {children}

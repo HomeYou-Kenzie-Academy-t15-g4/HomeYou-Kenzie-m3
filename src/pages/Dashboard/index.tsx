@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 
 import { ModalsContext } from '../../providers/ModalsContext';
@@ -11,26 +11,19 @@ import { UserContext } from '../../providers/UserContext';
 import { StyledSectionProfile, StyledContainerPage } from './style';
 import ManageHouseModal from '../../components/Modal/ManageHouseModal';
 import CreateHouseModal from '../../components/Modal/CreateHouseModal';
-import { HousesContext } from '../../providers/HousesContext';
 
 const DashboardPage = () => {
   const { user } = useContext(UserContext);
   const {
     isOpen,
-    setIsOpen,
     isUserModal,
-    setIsUserModal,
     isCreateRentModal,
-    setIsCreateRentModal,
     isManageRentModal,
-    setIsManageRentModal,
     isCreateHouseModal,
-    setIsCreateHouseModal,
     isManageHouseModal,
-    setIsManageHouseModal,
     callEditUser,
     callManageHouse,
-    callCreateHouse
+    callCreateHouse,
   } = useContext(ModalsContext);
 
   return (
@@ -61,7 +54,6 @@ const DashboardPage = () => {
         ) : null}
 
         <Header />
-
         <StyledSectionProfile>
           <div className='contentSection'>
             <div className='contentImage'>
@@ -81,7 +73,7 @@ const DashboardPage = () => {
           </div>
         </StyledSectionProfile>
         <HouseDashCard />
-        <button type='button' onClick={() => callManageHouse(2)}>
+        <button type='button' onClick={() => callManageHouse(3)}>
           Gerenciar Casa
         </button>
         <button type='button' onClick={() => callCreateHouse()}>

@@ -12,8 +12,8 @@ import SelectState from '../../Selects/SelectState';
 import SelectCity from '../../Selects/SelectCity';
 import { HousesContext } from '../../../providers/HousesContext';
 import { IHouseForm, IHouseFormProps } from './types';
-import { useStates } from '../../../hooks/useStates';
 import { statesDatabase } from '../../Modal/ManageHouseModal/statesDatabase';
+import { ModalsContext } from '../../../providers/ModalsContext';
 
 export const houseSchema = yup.object().shape({
   houseName: yup.string().required('Campo Obrigatório'),
@@ -57,25 +57,31 @@ export const defaultNoValues = {
   services: null,
 };
 
-const HouseForm = ({
-  submitFunction,
-  children,
-  defaultHouseFormValues,
-}: IHouseFormProps) => {
-  const { states } = useStates();
+const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
+  const { isCreateHouseModal, closeModal } = useContext(ModalsContext);
   const { loadValues, setLoadValues } = useContext(HousesContext);
 
   const [selectedUf, setSelectedUf] = useState('');
   const [selectedState, setSelectedState] = useState<string>('');
   const [selectedCity, setSelectedCity] = useState('');
-  // const [selectedCity, setSelectedCity] = useState('');
+  const [stopUpdate, setStopUpdate] = useState(false);
+
+  useEffect(() => {
+    if (!isCreateHouseModal) {
+      let selectedOptionState = statesDatabase.find(
+        (e) => Number(e.id) === loadValues?.state
+      );
+      setValue('state', selectedOptionState?.id);
+      setValue('city', loadValues?.city?.value);
+    }
+  }, [loadValues]);
 
   const {
     register,
     handleSubmit,
     setValue,
     clearErrors,
-    formState: { errors },
+    formState: { errors, dirtyFields },
   } = useForm<IHouseForm>({
     resolver: yupResolver(houseSchema),
   });
@@ -84,6 +90,7 @@ const HouseForm = ({
     newValue: MultiValue<{ value: string; label: string } | null>,
     actionMeta: ActionMeta<{ value: string; label: string } | null>
   ) => {
+    setStopUpdate(true)
     let values: string[] = [];
     (newValue ?? []).map((option) => values.push(option?.value || ''));
     let tempPhotos: { value: string; label: string }[] = [];
@@ -92,14 +99,25 @@ const HouseForm = ({
       ...loadValues,
       photos: tempPhotos,
     });
-    console.log(values, 'photos padrao');
 
     setValue('photos', values);
     clearErrors('photos');
   };
 
+  const onSubmit = (data: IHouseForm) => {
+    submitFunction(data)
+    closeModal()
+  }
+
   useEffect(() => {
-    if (loadValues !== defaultNoValues) {
+    if (loadValues !== defaultNoValues && !stopUpdate) {
+      if ('houseName' in dirtyFields) {
+        setValue('houseName', loadValues?.houseName ?? '');
+      }
+      setValue('dailyPrice', loadValues?.dailyPrice ?? 0);
+      setValue('singleBed', loadValues?.singleBed ?? 0);
+      setValue('doubleBed', loadValues?.doubleBed ?? 0);
+
       let tempPhotos: string[] = [];
       if (Array.isArray(loadValues?.photos)) {
         loadValues.photos.map((option) => tempPhotos.push(option?.value || ''));
@@ -112,10 +130,7 @@ const HouseForm = ({
         (e) => Number(e.id) === loadValues?.state
       );
 
-      console.log(selectedOptionState?.sigla, 'estaado2');
-      
-
-      setValue('state', selectedOptionState?.id);
+      setValue('state', selectedOptionState?.sigla);
 
       setValue('city', loadValues?.city?.value);
 
@@ -129,7 +144,7 @@ const HouseForm = ({
       }
       setValue('services', tempServices);
     }
-  }, [loadValues]);
+  }, [loadValues, dirtyFields]);
 
   useEffect(() => {
     setValue('state', selectedState);
@@ -145,6 +160,7 @@ const HouseForm = ({
     newValue: MultiValue<{ value: string; label: string } | null>,
     actionMeta: ActionMeta<{ value: string; label: string } | null>
   ) => {
+    setStopUpdate(true)
     let values: string[] = [];
     (newValue ?? []).map((option) => values.push(option?.value || ''));
     let tempServices: { value: string; label: string }[] = [];
@@ -158,7 +174,7 @@ const HouseForm = ({
   };
 
   return (
-    <StyledForm onSubmit={handleSubmit(submitFunction)}>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <div className='label temporario'>Nome da Casa</div>
       <Input
         value={loadValues.houseName}
@@ -182,24 +198,29 @@ const HouseForm = ({
         formatCreateLabel={(inputValue) => `Adicionar: "${inputValue}"`}
       />
       <p>{errors.photos?.message}</p>
-      <div className='label temporario'>Local</div>
-      <div style={{ display: 'flex' }}>
-        <SelectState
-          error={errors.state}
-          register={register}
-          onChange={setSelectedUf}
-          setSelectedState={setSelectedState}
-        />
-        <p>{errors.state?.message}</p>
-        <SelectCity
-          defaultValue={loadValues.city}
-          uf={selectedUf}
-          error={errors.city}
-          setSelectedCity={setSelectedCity}
-          register={register}
-        />
-        <p>{errors.city?.message}</p>
-      </div>
+      
+      {isCreateHouseModal ? (
+        <div>
+          <div className='label temporario'>Local</div>
+          <div style={{ display: 'flex' }}>
+            <SelectState
+              error={errors.state}
+              register={register}
+              onChange={setSelectedUf}
+              setSelectedState={setSelectedState}
+            />
+            <p>{errors.state?.message}</p>
+            <SelectCity
+              uf={selectedUf}
+              error={errors.city}
+              setSelectedCity={setSelectedCity}
+              register={register}
+            />
+            <p>{errors.city?.message}</p>
+          </div>
+        </div>
+      ) : null}
+
       <div className='label temporario'>Valor por noite</div>
       <Input
         value={loadValues.dailyPrice}
@@ -249,12 +270,3 @@ const HouseForm = ({
 };
 
 export default HouseForm;
-
-// const [defaultValues, setDefaultValues] = useState<IDefaultHouseFormValues>(defaultNoValues);
-
-// useEffect(() => {
-//   if (defaultHouseFormValues) {
-//     setDefaultValues(defaultHouseFormValues);
-//     console.log(defaultValues.houseName);
-//   }
-// }, [defaultHouseFormValues]);
