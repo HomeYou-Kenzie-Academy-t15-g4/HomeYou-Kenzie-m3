@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { HousesContext } from '../../../../providers/HousesContext';
 import { UserContext } from '../../../../providers/UserContext';
 

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 interface IStyledButtonProps {
   $buttonSize: 'large' | 'medium' | 'short';
-  $buttonStyle: 'primary' | 'default' | 'greenBold';
+  $buttonStyle: 'primary' | 'default' | 'greenBold' | 'none';
 }
 
 export const StyledButtonCSS = css<IStyledButtonProps>`
@@ -64,6 +64,11 @@ export const StyledButtonCSS = css<IStyledButtonProps>`
           &:hover {
             opacity: 0.5;
           }
+        `;
+      case 'none':
+        return css`
+          color: ${theme.colors.grey200};
+          background: transparent;
         `;
     }
   }}
