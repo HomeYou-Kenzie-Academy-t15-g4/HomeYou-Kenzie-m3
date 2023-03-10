@@ -142,7 +142,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           label: service,
         })),
       };
-      
+
       setLoadValues(values);
     } catch (error) {
       console.error(error);
@@ -152,7 +152,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   };
 
   const editHouse = async (dataHouse: IHouseForm): Promise<void> => {
-    
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
     const houseId = selectedHouse?.id;
     if (token && houseId) {

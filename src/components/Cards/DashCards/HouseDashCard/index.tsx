@@ -15,8 +15,7 @@ const HouseDashCard = () => {
   console.log(userHouses);
   console.log(housesList);
   console.log(user);
-  
-  
+
   return (
     <div>
       <div>

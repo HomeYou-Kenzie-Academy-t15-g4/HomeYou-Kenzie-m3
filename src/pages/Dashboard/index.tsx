@@ -71,8 +71,6 @@ const DashboardPage = () => {
           </div>
         </StyledSectionProfile>
         <HouseDashCard />
-        
-        <section></section>
         <Footer />
       </div>
     </StyledContainerPage>
