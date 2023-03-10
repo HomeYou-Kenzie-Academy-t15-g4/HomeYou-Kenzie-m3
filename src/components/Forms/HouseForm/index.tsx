@@ -71,7 +71,7 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
       let selectedOptionState = statesDatabase.find(
         (e) => Number(e.id) === loadValues?.state
       );
-      setValue('state', selectedOptionState?.id);
+      setValue('state', selectedOptionState?.sigla !== undefined ? selectedOptionState.sigla.toString() : '');
       setValue('city', loadValues?.city?.value);
     }
   }, [loadValues]);
@@ -130,7 +130,7 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
         (e) => Number(e.id) === loadValues?.state
       );
 
-      setValue('state', selectedOptionState?.sigla);
+      setValue('state', selectedOptionState?.sigla !== undefined ? selectedOptionState.sigla.toString() : '');
 
       setValue('city', loadValues?.city?.value);
 

@@ -53,6 +53,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         const response = await api.get('/houses');
         setHousesList(response.data);
         setHousesFilterList(response.data);
+        
       } catch (error) {
         window.localStorage.clear();
         setHousesList([]);
