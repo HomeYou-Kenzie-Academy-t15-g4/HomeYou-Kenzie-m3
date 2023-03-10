@@ -1,6 +1,13 @@
 import React from 'react';
 import DataComments from '../../Comments';
 import _ from 'lodash';
+import {
+  StyledContainerCardComment,
+  StyledInfoUserComment,
+  StyledPDataComment,
+  StyledPDescriptionComment,
+  StyledPNameComment,
+} from './style';
 
 const CommentsCard = () => {
   const commentRandom = _.shuffle(DataComments);
@@ -9,24 +16,26 @@ const CommentsCard = () => {
   return (
     <div>
       <div>
-        <ul>
+        <StyledContainerCardComment>
           {commentLimit.map((comentarios) => (
             <li key={comentarios.idC}>
               <div>
-                <div>
+                <StyledInfoUserComment>
                   <img src={comentarios.img} alt='Imagem usuario' />
                   <div>
-                    <p>
+                    <StyledPNameComment>
                       <strong>{comentarios.name}</strong>
-                    </p>
-                    <p>{comentarios.date}</p>
+                    </StyledPNameComment>
+                    <StyledPDataComment>{comentarios.date}</StyledPDataComment>
                   </div>
-                </div>
-                <p>{comentarios.description}</p>
+                </StyledInfoUserComment>
+                <StyledPDescriptionComment>
+                  {comentarios.description}
+                </StyledPDescriptionComment>
               </div>
             </li>
           ))}
-        </ul>
+        </StyledContainerCardComment>
       </div>
     </div>
   );
