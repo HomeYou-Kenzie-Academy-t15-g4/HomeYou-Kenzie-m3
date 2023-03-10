@@ -23,7 +23,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         const res = await api.get(`/users/${user?.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setUser(res.data);
+        setUser(res.data);        
 
         return navigate('/dashboard');
       } catch (error) {
@@ -45,7 +45,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
             headers: { Authorization: `Bearer ${token}` },
           });
           setUser(res.data);
-
           if (
             window.location.pathname != '/dashboard' &&
             window.location.pathname != '/house' &&

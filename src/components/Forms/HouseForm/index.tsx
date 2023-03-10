@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import Input from './Input';
 import { StyledForm } from './style';
 import { servicesOptions } from './servicesOptions';
 import SelectState from '../../Selects/SelectState';
@@ -81,7 +80,7 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
     handleSubmit,
     setValue,
     clearErrors,
-    formState: { errors, dirtyFields },
+    formState: { errors },
   } = useForm<IHouseForm>({
     resolver: yupResolver(houseSchema),
   });
@@ -142,7 +141,7 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
       }
       setValue('services', tempServices);
     }
-  }, [loadValues, dirtyFields]);
+  }, [loadValues]);
 
   useEffect(() => {
     setValue('state', selectedState);
