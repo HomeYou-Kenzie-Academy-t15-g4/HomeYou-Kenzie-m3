@@ -1,7 +1,12 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { UserContext } from '../../../providers/UserContext';
+import { StyledButton, StyledButtonLink } from '../../../styles/button';
+import { StyledForm } from '../../../styles/form';
+import { StyledParagraph } from '../../../styles/typograthy';
 import Input from '../Input';
+import { LoginFormSchema } from './LoginFormSchema';
 import { ILoginFormValue } from './types';
 
 const LoginForm = () => {
@@ -12,7 +17,9 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ILoginFormValue>();
+  } = useForm<ILoginFormValue>({
+    resolver: yupResolver(LoginFormSchema),
+  });
 
   const submit: SubmitHandler<ILoginFormValue> = (formData) => {
     loginUser(formData);
@@ -20,12 +27,37 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
-      <Input label='Email' type='email' register={register('email')} />
-      <Input label='Senha' type='password' register={register('password')} />
+    <StyledForm onSubmit={handleSubmit(submit)}>
+      <Input
+        label='Email'
+        type='email'
+        register={register('email')}
+        error={errors.email}
+      />
 
-      <button type='submit'>Entrar</button>
-    </form>
+      <Input
+        label='Senha'
+        type='password'
+        register={register('password')}
+        error={errors.password}
+      />
+
+      <StyledButton type='submit' $buttonSize='large' $buttonStyle='primary'>
+        Entrar
+      </StyledButton>
+
+      <StyledParagraph $textAlign='center' $fontColor='grey'>
+        Ainda não tem uma conta?
+      </StyledParagraph>
+
+      <StyledButtonLink
+        to='/register'
+        $buttonSize='large'
+        $buttonStyle='default'
+      >
+        Cadastre-se
+      </StyledButtonLink>
+    </StyledForm>
   );
 };
 

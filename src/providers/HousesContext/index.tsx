@@ -1,12 +1,13 @@
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
   IHouse,
   IHousesContext,
   IHousesProviderProps,
+  InoDefaultValue,
   IRent,
   IReserve,
 } from './types';
@@ -25,10 +26,11 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   const [housesList, setHousesList] = useState<IHouse[]>([]);
   const [housesRent, setHousesRent] = useState<IRent[]>([]);
   const [housesFilterList, setHousesFilterList] = useState<IHouse[]>([]);
-  const [selectedHouse, setSelectedHouse] = useState<IHouse | null>(null);
+  const [selectedHouse, setSelectedHouse] = useState<
+    IHouse | InoDefaultValue | null
+  >(null);
   const [selectedRent, setSelectedRent] = useState<IHouse | null>(null);
   const [searchText, setSearchText] = useState<string>('');
-  const [deleteButton, setDeleteButton] = useState(false);
   const [loadValues, setLoadValues] =
     useState<IDefaultHouseFormValues>(defaultNoValues);
 
@@ -68,7 +70,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           const res = await api.get('/rents');
           setHousesRent(res.data);
         } catch (error) {
-          console.log(error);
+          console.error(error);
         }
       }
     };
@@ -87,18 +89,20 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
 
     if (userAux && token) {
       const newHouse = {
+        name: dataHouse.name,
         ownerName: userAux.name,
         userId: userAux.id,
         photos: dataHouse.photos,
         city: dataHouse.city,
         state: dataHouse.state,
-        daylyPrice: dataHouse.dailyPrice,
+        daylyPrice: dataHouse.daylyPrice,
         accommodation: {
           beds: dataHouse.singleBed,
           doubleBeds: dataHouse.doubleBed,
         },
         services: dataHouse.services,
       };
+
       try {
         const response = await api.post('/houses', newHouse, {
           headers: {
@@ -123,14 +127,14 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         (e) => e.sigla === response.data?.state
       );
       const values = {
-        houseName: response.data?.name,
+        name: response.data?.name,
         photos: response.data?.photos.map((photo: string) => ({
           value: photo,
           label: photo,
         })),
         state: stateUF ? stateUF.id : null,
         city: { value: response.data?.city, label: response.data?.city },
-        dailyPrice: response.data?.daylyPrice,
+        daylyPrice: response.data?.daylyPrice,
         singleBed: response.data?.accommodation.beds,
         doubleBed: response.data?.accommodation.doubleBeds,
         services: response.data?.services.map((service: string) => ({
@@ -138,8 +142,8 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           label: service,
         })),
       };
+
       setLoadValues(values);
-      console.log(values);
     } catch (error) {
       console.error(error);
       toast.error('Falha ao carregar dados da casa');
@@ -150,12 +154,21 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   const editHouse = async (dataHouse: IHouseForm): Promise<void> => {
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
     const houseId = selectedHouse?.id;
-    toast('to aqui');
     if (token && houseId) {
-      toast('entrei');
-
+      const editHouse = {
+        name: dataHouse.name,
+        photos: dataHouse.photos,
+        city: dataHouse.city,
+        state: dataHouse.state,
+        daylyPrice: dataHouse.daylyPrice,
+        accommodation: {
+          beds: dataHouse.singleBed,
+          doubleBeds: dataHouse.doubleBed,
+        },
+        services: dataHouse.services,
+      };
       try {
-        const response = await api.patch(`/houses/${houseId}`, dataHouse, {
+        const response = await api.patch(`/houses/${houseId}`, editHouse, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -265,9 +278,8 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         deleteReserve,
         loadOneHouse,
         loadValues,
+        setLoadValues,
         housesRent,
-        deleteButton,
-        setDeleteButton,
       }}
     >
       {children}

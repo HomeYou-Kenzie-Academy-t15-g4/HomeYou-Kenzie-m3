@@ -4,7 +4,7 @@ import { HousesContext } from '../../../providers/HousesContext';
 import { StyledDivReturnToLogin, StyledForm } from '../HouseForm/style';
 import Select from 'react-select';
 import SelectCalendar from '../../StyledCalendar';
-import { UserContext } from '../../../providers/UserContext';
+import { ModalsContext } from '../../../providers/ModalsContext';
 import Modal from '../../Modal';
 
 interface IReservFormValue {
@@ -13,9 +13,9 @@ interface IReservFormValue {
   id: any;
 }
 
-const ReservForm = () => {
-  const { deleteButton } = useContext(HousesContext);
-  const { isOpen, setIsOpen } = useContext(UserContext);
+const ReservForm = (data: any) => {
+  const {} = useContext(HousesContext);
+  const { isOpen, setIsOpen, deleteButton } = useContext(ModalsContext);
   const [yourReservedDates, setYourReservedDates] = useState<Date[]>([]);
 
   const {

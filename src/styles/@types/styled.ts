@@ -1,7 +1,6 @@
 import 'styled-components';
 
 declare module 'styled-components';
-
 export interface IDefaultTheme {
   fonts: {
     primary: string;
@@ -20,5 +19,12 @@ export interface IDefaultTheme {
 
     white: string;
     black: string;
+
+    feedbacks: {
+      negative: string;
+      warning: string;
+      sucess: string;
+      information: string;
+    };
   };
 }

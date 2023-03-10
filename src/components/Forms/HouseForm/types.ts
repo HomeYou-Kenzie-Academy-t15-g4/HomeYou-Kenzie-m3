@@ -17,7 +17,7 @@ export interface IHouseForm extends yup.InferType<typeof houseSchema> {
 }
 
 export interface IDefaultHouseFormValues {
-  houseName: undefined | string;
+  name: undefined | string;
   photos:
     | PropsValue<{
         value: string;
@@ -31,12 +31,12 @@ export interface IDefaultHouseFormValues {
         label: string;
       } | null>
     | undefined;
-  dailyPrice: undefined | number;
+  daylyPrice: undefined | number;
   singleBed: undefined | number;
   doubleBed: undefined | number;
   services: null | PropsValue<{
     value: string;
-    label: string;
+    label: string ;
   } | null>;
 }
 

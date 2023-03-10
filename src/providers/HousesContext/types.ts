@@ -64,8 +64,10 @@ export interface IHousesContext {
   setHousesList: React.Dispatch<React.SetStateAction<IHouse[]>>;
   housesFilterList: IHouse[];
   setHousesFilterList: React.Dispatch<React.SetStateAction<IHouse[]>>;
-  selectedHouse: IHouse | null;
-  setSelectedHouse: React.Dispatch<React.SetStateAction<IHouse | null>>;
+  selectedHouse: IHouse | InoDefaultValue | null;
+  setSelectedHouse: React.Dispatch<
+    React.SetStateAction<IHouse | InoDefaultValue | null>
+  >;
   selectedRent: IHouse | null;
   setSelectedRent: React.Dispatch<React.SetStateAction<IHouse | null>>;
   searchText: string;
@@ -78,7 +80,18 @@ export interface IHousesContext {
   deleteReserve: (id: number) => Promise<void>;
   loadOneHouse: (id: number) => Promise<void>;
   loadValues: IDefaultHouseFormValues;
+  setLoadValues: React.Dispatch<React.SetStateAction<IDefaultHouseFormValues>>;
   housesRent: IRent[];
-  deleteButton: boolean;
-  setDeleteButton: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface InoDefaultValue {
+  houseName: undefined;
+  photos: null;
+  state: null;
+  city: null;
+  daylyPrice: undefined;
+  singleBed: undefined;
+  doubleBed: undefined;
+  services: null;
+  id?: number;
 }

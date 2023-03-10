@@ -14,7 +14,6 @@ export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
   const [user, setUser] = useState<IUser | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const userLoad = async () => {
@@ -37,7 +36,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
   useEffect(() => {
     const token = localStorage.getItem('@HomeYou:TOKEN');
-    const userAuxString = localStorage.getItem('@HomeYou:user');
+    const userAuxString = localStorage.getItem('@HomeYou:User');
     const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
     if (token && userAux) {
       const userAutoLogin = async () => {
@@ -45,9 +44,10 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           const res = await api.get(`/users/${userAux.id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
-          setUser(res.data.user);
+          setUser(res.data);
+
           if (
-            window.location.pathname != '/dasboard' &&
+            window.location.pathname != '/dashboard' &&
             window.location.pathname != '/house' &&
             window.location.pathname != '/'
           ) {
@@ -154,8 +154,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           loginUser,
           logoutUser,
           editUser,
-          isOpen,
-          setIsOpen,
         }}
       >
         {children}

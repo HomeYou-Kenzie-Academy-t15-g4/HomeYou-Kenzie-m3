@@ -12,12 +12,12 @@ const StyledModal = styled.div`
   background: rgba(51, 51, 51, 0.5);
   z-index: 1001;
 
-  div {
+  .inside  {
     animation: ${Animation} 0.5s;
     width: 100%;
-    max-width: 500px;
-    background-color: #ffff;
+    max-width: 1500px;
     border-radius: 8px;
+    background-color: #ffff;
   }
   header {
     display: flex;

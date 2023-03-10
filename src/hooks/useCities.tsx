@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { FieldError, UseFormRegister } from "react-hook-form";
-import { IHouseForm } from "../components/Forms/HouseForm";
+import { useEffect, useState } from 'react';
+import { FieldError, UseFormRegister } from 'react-hook-form';
+import { IHouseForm } from '../components/Forms/HouseForm/types';
 
 export interface ICity {
   nome: string;
@@ -29,8 +29,8 @@ const useCities = ({ uf }: IuseCitiesProps) => {
 
   return {
     cities,
-    loading
+    loading,
   };
 };
 
-export default useCities
+export default useCities;

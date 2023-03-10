@@ -12,9 +12,11 @@ import SelectState from '../../Selects/SelectState';
 import SelectCity from '../../Selects/SelectCity';
 import { HousesContext } from '../../../providers/HousesContext';
 import { IHouseForm, IHouseFormProps } from './types';
+import { statesDatabase } from '../../Modal/ManageHouseModal/statesDatabase';
+import { ModalsContext } from '../../../providers/ModalsContext';
 
 export const houseSchema = yup.object().shape({
-  houseName: yup.string().required('Campo Obrigatório'),
+  name: yup.string().required('Campo Obrigatório'),
   city: yup.string().required('Campo Obrigatório'),
   state: yup.string().required('Campo Obrigatório'),
   photos: yup
@@ -22,7 +24,7 @@ export const houseSchema = yup.object().shape({
     .min(3, 'Adicione no minimo 3 fotos')
     .of(yup.string())
     .required('Campo Obrigatório'),
-  dailyPrice: yup
+    daylyPrice: yup
     .number()
     .typeError('Campo Obrigatório')
     .positive('Épreciso informar um valor positivo')
@@ -45,33 +47,41 @@ export const houseSchema = yup.object().shape({
 });
 
 export const defaultNoValues = {
-  houseName: undefined,
+  name: undefined,
   photos: null,
   state: null,
   city: null,
-  dailyPrice: undefined,
+  daylyPrice: undefined,
   singleBed: undefined,
   doubleBed: undefined,
   services: null,
 };
 
-const HouseForm = ({
-  submitFunction,
-  children,
-  defaultHouseFormValues,
-}: IHouseFormProps) => {
-  const {loadValues} = useContext(HousesContext)
+const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
+  const { isCreateHouseModal, closeModal } = useContext(ModalsContext);
+  const { loadValues, setLoadValues } = useContext(HousesContext);
 
   const [selectedUf, setSelectedUf] = useState('');
   const [selectedState, setSelectedState] = useState<string>('');
   const [selectedCity, setSelectedCity] = useState('');
+  const [stopUpdate, setStopUpdate] = useState(false);
+
+  useEffect(() => {
+    if (!isCreateHouseModal) {
+      let selectedOptionState = statesDatabase.find(
+        (e) => Number(e.id) === loadValues?.state
+      );
+      setValue('state', selectedOptionState?.sigla !== undefined ? selectedOptionState.sigla.toString() : '');
+      setValue('city', loadValues?.city?.value);
+    }
+  }, [loadValues]);
 
   const {
     register,
     handleSubmit,
     setValue,
     clearErrors,
-    formState: { errors },
+    formState: { errors, dirtyFields },
   } = useForm<IHouseForm>({
     resolver: yupResolver(houseSchema),
   });
@@ -80,11 +90,59 @@ const HouseForm = ({
     newValue: MultiValue<{ value: string; label: string } | null>,
     actionMeta: ActionMeta<{ value: string; label: string } | null>
   ) => {
+    setStopUpdate(true)
     let values: string[] = [];
     (newValue ?? []).map((option) => values.push(option?.value || ''));
+    let tempPhotos: { value: string; label: string }[] = [];
+    values.map((value) => tempPhotos.push({ value: value, label: value }));
+    setLoadValues({
+      ...loadValues,
+      photos: tempPhotos,
+    });
+
     setValue('photos', values);
     clearErrors('photos');
   };
+
+  const onSubmit = (data: IHouseForm) => {
+    submitFunction(data)
+    closeModal()
+  }
+
+  useEffect(() => {
+    if (loadValues !== defaultNoValues && !stopUpdate) {
+      setValue('name', loadValues?.name ?? '');
+      setValue('dailyPrice', loadValues?.daylyPrice ?? 0);
+      setValue('singleBed', loadValues?.singleBed ?? 0);
+      setValue('doubleBed', loadValues?.doubleBed ?? 0);
+
+      let tempPhotos: string[] = [];
+      if (Array.isArray(loadValues?.photos)) {
+        loadValues.photos.map((option) => tempPhotos.push(option?.value || ''));
+      } else {
+        tempPhotos = [];
+      }
+      setValue('photos', tempPhotos);
+
+      let selectedOptionState = statesDatabase.find(
+        (e) => Number(e.id) === loadValues?.state
+      );
+
+      setValue('state', selectedOptionState?.sigla !== undefined ? selectedOptionState.sigla.toString() : '');
+
+      setValue('city', loadValues?.city?.value);
+
+      let tempServices: string[] = [];
+      if (Array.isArray(loadValues?.services)) {
+        loadValues.services.map((option) =>
+          tempServices.push(option?.value || '')
+        );
+      } else {
+        tempServices = [];
+      }
+      setValue('services', tempServices);
+    }
+  }, [loadValues, dirtyFields]);
 
   useEffect(() => {
     setValue('state', selectedState);
@@ -100,29 +158,62 @@ const HouseForm = ({
     newValue: MultiValue<{ value: string; label: string } | null>,
     actionMeta: ActionMeta<{ value: string; label: string } | null>
   ) => {
+    setStopUpdate(true)
     let values: string[] = [];
     (newValue ?? []).map((option) => values.push(option?.value || ''));
+    let tempServices: { value: string; label: string }[] = [];
+    values.map((value) => tempServices.push({ value: value, label: value }));
+    setLoadValues({
+      ...loadValues,
+      services: tempServices,
+    });
     setValue('services', values);
     clearErrors('services');
   };
 
+  const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoadValues({
+      ...loadValues,
+      name: e.target.value,
+    });    
+  }
+  const changePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoadValues({
+      ...loadValues,
+      daylyPrice: Number(e.target.value),
+    });    
+  }
+  const changeBeds = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoadValues({
+      ...loadValues,
+      singleBed: Number(e.target.value),
+    });    
+  }
+  const changeDoubleBeds = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoadValues({
+      ...loadValues,
+      doubleBed: Number(e.target.value),
+    });    
+  }
+  
   return (
-    <StyledForm onSubmit={handleSubmit(submitFunction)}>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <div className='label temporario'>Nome da Casa</div>
-      <Input
-        value={loadValues.houseName}
+      <input
+        value={loadValues.name}
         placeholder='Digite o nome da casa'
         type='text'
-        error={errors.houseName}
-        register={register}
-        name='houseName'
-        label='Nome'
-      />
+        {...register('name')}
+        name='name'
+        onChange={(e) => changeName(e)}
+        />
+        <p>{errors.houseName?.message}</p>
       <div className='label temporario'>Fotos</div>
       <CreatableSelect
         isClearable
         isMulti
         className='photo-link-select'
+        value={loadValues.photos}
         defaultValue={loadValues.photos}
         classNamePrefix='select-photos'
         placeholder='Adicione o link das fotos'
@@ -130,55 +221,59 @@ const HouseForm = ({
         formatCreateLabel={(inputValue) => `Adicionar: "${inputValue}"`}
       />
       <p>{errors.photos?.message}</p>
-      <div className='label temporario'>Local</div>
-      <div style={{ display: 'flex' }}>
-        <SelectState
-          defaultValue={loadValues.state}
-          error={errors.state}
-          register={register}
-          onChange={setSelectedUf}
-          setSelectedState={setSelectedState}
-        />
-        <p>{errors.state?.message}</p>
-        <SelectCity
-          defaultValue={loadValues.city}
-          uf={selectedUf}
-          error={errors.city}
-          setSelectedCity={setSelectedCity}
-          register={register}
-        />
-        <p>{errors.city?.message}</p>
-      </div>
+      
+      {isCreateHouseModal ? (
+        <div>
+          <div className='label temporario'>Local</div>
+          <div style={{ display: 'flex' }}>
+            <SelectState
+              error={errors.state}
+              register={register}
+              onChange={setSelectedUf}
+              setSelectedState={setSelectedState}
+            />
+            <p>{errors.state?.message}</p>
+            <SelectCity
+              uf={selectedUf}
+              error={errors.city}
+              setSelectedCity={setSelectedCity}
+              register={register}
+            />
+            <p>{errors.city?.message}</p>
+          </div>
+        </div>
+      ) : null}
+
       <div className='label temporario'>Valor por noite</div>
-      <Input
-        value={loadValues.dailyPrice}
+      <input
+        value={loadValues.daylyPrice}
         placeholder='Valor da Diaria'
         type='number'
-        error={errors.dailyPrice}
-        register={register}
-        name='dailyPrice'
-        label='Diaria'
+        {...register('daylyPrice')}
+        name='daylyPrice'
+        onChange={(e) => changePrice(e)}
       />
+      <p>{errors.daylyPrice?.message}</p>
       <div className='label temporario'>Camas</div>
       <div style={{ display: 'flex' }}>
-        <Input
+        <input
           placeholder='Camas de solteiro'
           type='number'
-          error={errors.singleBed}
           value={loadValues.singleBed}
-          register={register}
+          {...register('singleBed')}
           name='singleBed'
-          label='Quantas camas'
+          onChange={(e)=> changeBeds(e)}
         />
-        <Input
+        <p>{errors.singleBed?.message}</p>
+        <input
           value={loadValues.doubleBed}
           placeholder='Camas de casal'
           type='number'
-          error={errors.doubleBed}
-          register={register}
+          {...register('doubleBed')}
           name='doubleBed'
-          label='Quantas camas'
+          onChange={(e)=> changeDoubleBeds(e)}
         />
+        <p>{errors.doubleBed?.message}</p>
       </div>
       <div className='label temporario'>Serviços oferecidos</div>
       <Select
@@ -186,6 +281,7 @@ const HouseForm = ({
         options={servicesOptions}
         className='basic-multi-select'
         defaultValue={loadValues.services}
+        value={loadValues.services}
         classNamePrefix='select'
         placeholder='O que o local oferece?'
         onChange={handleChangeServices}
@@ -197,21 +293,3 @@ const HouseForm = ({
 };
 
 export default HouseForm;
-
-
-
-
-
-
-
-
-
-
-  // const [defaultValues, setDefaultValues] = useState<IDefaultHouseFormValues>(defaultNoValues);
-
-  // useEffect(() => {
-  //   if (defaultHouseFormValues) {
-  //     setDefaultValues(defaultHouseFormValues);
-  //     console.log(defaultValues.houseName);
-  //   }
-  // }, [defaultHouseFormValues]);
