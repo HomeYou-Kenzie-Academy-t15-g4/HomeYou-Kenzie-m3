@@ -42,7 +42,7 @@ const StyledHeader = styled.header`
 
     .nav-btn {
       display: block;
-      opacity: 1;
+      opacity: 1.5;
     }
 
     nav {
