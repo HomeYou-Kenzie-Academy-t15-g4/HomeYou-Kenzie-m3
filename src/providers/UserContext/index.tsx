@@ -25,6 +25,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(res.data);
+        console.log(user, '+++');
 
         return navigate('/dashboard');
       } catch (error) {
@@ -128,16 +129,20 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   };
 
   const editUser = async (data: IUser) => {
-    const id = localStorage.getItem('@IDUSER');
+    const userAuxString = localStorage.getItem('@HomeYou:User');
+    const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
     const token = localStorage.getItem('@HomeYou:TOKEN');
     try {
-      const response = await api.patch(`/users/${id}`, data, {
+      const response = await api.patch(`/users/${userAux.id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setUser(response.data.user);
+
       console.log('ok!');
+
+      userLoad();
+      navigate('/dashboard');
       ///toast
     } catch (error) {
       console.log(error);
