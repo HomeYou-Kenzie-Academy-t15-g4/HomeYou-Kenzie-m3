@@ -74,8 +74,8 @@ const DashboardPage = () => {
           </div>
         </StyledSectionProfile>
         <HouseDashCard />
+        <button type='button' onClick={() => callManageHouse(2)}>
         <UserRentsCards />
-        <button type='button' onClick={() => callManageHouse(3)}>
           Gerenciar Casa
         </button>
         <button type='button' onClick={() => callCreateHouse()}>

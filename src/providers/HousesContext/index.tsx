@@ -71,7 +71,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           const res = await api.get('/rents');
           setHousesRent(res.data);
         } catch (error) {
-          console.log(error);
+          console.error(error);
         }
       }
     };
@@ -90,13 +90,13 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
 
     if (userAux && token) {
       const newHouse = {
-        name: dataHouse.houseName,
+        name: dataHouse.name,
         ownerName: userAux.name,
         userId: userAux.id,
         photos: dataHouse.photos,
         city: dataHouse.city,
         state: dataHouse.state,
-        daylyPrice: dataHouse.dailyPrice,
+        daylyPrice: dataHouse.daylyPrice,
         accommodation: {
           beds: dataHouse.singleBed,
           doubleBeds: dataHouse.doubleBed,
@@ -128,14 +128,14 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         (e) => e.sigla === response.data?.state
       );
       const values = {
-        houseName: response.data?.name,
+        name: response.data?.name,
         photos: response.data?.photos.map((photo: string) => ({
           value: photo,
           label: photo,
         })),
         state: stateUF ? stateUF.id : null,
         city: { value: response.data?.city, label: response.data?.city },
-        dailyPrice: response.data?.daylyPrice,
+        daylyPrice: response.data?.daylyPrice,
         singleBed: response.data?.accommodation.beds,
         doubleBed: response.data?.accommodation.doubleBeds,
         services: response.data?.services.map((service: string) => ({
@@ -143,6 +143,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           label: service,
         })),
       };
+      
       setLoadValues(values);
     } catch (error) {
       console.error(error);
@@ -152,12 +153,24 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   };
 
   const editHouse = async (dataHouse: IHouseForm): Promise<void> => {
+    
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
     const houseId = selectedHouse?.id;
     if (token && houseId) {
-
+      const editHouse = {
+        name: dataHouse.name,
+        photos: dataHouse.photos,
+        city: dataHouse.city,
+        state: dataHouse.state,
+        daylyPrice: dataHouse.daylyPrice,
+        accommodation: {
+          beds: dataHouse.singleBed,
+          doubleBeds: dataHouse.doubleBed,
+        },
+        services: dataHouse.services,
+      };
       try {
-        const response = await api.patch(`/houses/${houseId}`, dataHouse, {
+        const response = await api.patch(`/houses/${houseId}`, editHouse, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
