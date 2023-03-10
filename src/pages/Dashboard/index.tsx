@@ -4,13 +4,14 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { ModalsContext } from '../../providers/ModalsContext';
 import Footer from '../../components/Footer';
 import EditUser from '../../components/Forms/EditUser';
-import HouseDashCard from '../../components/Cards/DashCards/HouseDashCard';
+import HouseDashCard from '../../components/Cards/DashCards/UserHousesCard';
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
 import { UserContext } from '../../providers/UserContext';
 import { StyledSectionProfile, StyledContainerPage } from './style';
 import ManageHouseModal from '../../components/Modal/ManageHouseModal';
 import CreateHouseModal from '../../components/Modal/CreateHouseModal';
+import UserRentsCards from '../../components/Cards/DashCards/UserRentsCard';
 
 const DashboardPage = () => {
   const { user } = useContext(UserContext);
@@ -73,6 +74,7 @@ const DashboardPage = () => {
           </div>
         </StyledSectionProfile>
         <HouseDashCard />
+        <UserRentsCards />
         <button type='button' onClick={() => callManageHouse(3)}>
           Gerenciar Casa
         </button>
