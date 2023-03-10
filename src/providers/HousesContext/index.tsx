@@ -10,9 +10,12 @@ import {
   IRent,
   IReserve,
 } from './types';
-import { defaultNoValues} from '../../components/Forms/HouseForm';
+import { defaultNoValues } from '../../components/Forms/HouseForm';
 import { statesDatabase } from '../../components/Modal/ManageHouseModal/statesDatabase';
-import { IDefaultHouseFormValues, IHouseForm } from '../../components/Forms/HouseForm/types';
+import {
+  IDefaultHouseFormValues,
+  IHouseForm,
+} from '../../components/Forms/HouseForm/types';
 
 export const HousesContext = createContext<IHousesContext>(
   {} as IHousesContext
@@ -25,6 +28,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   const [selectedHouse, setSelectedHouse] = useState<IHouse | null>(null);
   const [selectedRent, setSelectedRent] = useState<IHouse | null>(null);
   const [searchText, setSearchText] = useState<string>('');
+  const [deleteButton, setDeleteButton] = useState(false);
   const [loadValues, setLoadValues] =
     useState<IDefaultHouseFormValues>(defaultNoValues);
 
@@ -114,7 +118,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   const loadOneHouse = async (id: number): Promise<void> => {
     try {
       const response = await api.get(`/houses/${id}`);
-      setSelectedHouse(response.data)
+      setSelectedHouse(response.data);
       const stateUF = statesDatabase.find(
         (e) => e.sigla === response.data?.state
       );
@@ -134,9 +138,8 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           label: service,
         })),
       };
-      setLoadValues(values)
+      setLoadValues(values);
       console.log(values);
-        
     } catch (error) {
       console.error(error);
       toast.error('Falha ao carregar dados da casa');
@@ -146,11 +149,11 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
 
   const editHouse = async (dataHouse: IHouseForm): Promise<void> => {
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
-    const houseId = selectedHouse?.id
-    toast('to aqui')
+    const houseId = selectedHouse?.id;
+    toast('to aqui');
     if (token && houseId) {
-      toast('entrei')
-      
+      toast('entrei');
+
       try {
         const response = await api.patch(`/houses/${houseId}`, dataHouse, {
           headers: {
@@ -167,10 +170,9 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   };
 
   const deleteHouse = async (): Promise<void> => {
-    const houseId = selectedHouse?.id
+    const houseId = selectedHouse?.id;
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
     if (houseId && token) {
-      
       try {
         const response = await api.delete(`/houses/${houseId}`, {
           headers: {
@@ -264,6 +266,8 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         loadOneHouse,
         loadValues,
         housesRent,
+        deleteButton,
+        setDeleteButton,
       }}
     >
       {children}

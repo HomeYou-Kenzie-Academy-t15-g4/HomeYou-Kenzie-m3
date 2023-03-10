@@ -8,6 +8,7 @@ import Header from '../../components/Header';
 import Modal from '../../components/Modal';
 import { UserContext } from '../../providers/UserContext';
 import { StyledSectionProfile, StyledContainerPage } from './style';
+import ReservForm from '../../components/Forms/ReservForm';
 
 const DashboardPage = () => {
   const { isOpen, setIsOpen, user } = useContext(UserContext);

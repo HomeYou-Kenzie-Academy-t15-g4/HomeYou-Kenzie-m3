@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
-import './app.css';
 import { StyledCalendar } from './style';
 
 const SelectCalendar = () => {

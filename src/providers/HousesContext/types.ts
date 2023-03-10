@@ -1,5 +1,8 @@
 import { ReactNode } from 'react';
-import { IHouseForm, IDefaultHouseFormValues } from '../../components/Forms/HouseForm/types';
+import {
+  IHouseForm,
+  IDefaultHouseFormValues,
+} from '../../components/Forms/HouseForm/types';
 
 export interface IHousesProviderProps {
   children: ReactNode;
@@ -76,4 +79,6 @@ export interface IHousesContext {
   loadOneHouse: (id: number) => Promise<void>;
   loadValues: IDefaultHouseFormValues;
   housesRent: IRent[];
+  deleteButton: boolean;
+  setDeleteButton: React.Dispatch<React.SetStateAction<boolean>>;
 }
