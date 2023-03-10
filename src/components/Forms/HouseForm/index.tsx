@@ -71,7 +71,12 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
         (e) => Number(e.id) === loadValues?.state
       );
       setValue('state', selectedOptionState?.sigla !== undefined ? selectedOptionState.sigla.toString() : '');
-      setValue('city', loadValues?.city?.value);
+      
+      if (loadValues?.city) {
+        if ('value' in loadValues.city) {
+          setValue('city', loadValues?.city?.value?.toString() ?? '');
+        }
+      }
     }
   }, [loadValues]);
 
@@ -128,8 +133,12 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
       );
 
       setValue('state', selectedOptionState?.sigla !== undefined ? selectedOptionState.sigla.toString() : '');
-
-      setValue('city', loadValues?.city?.value);
+      
+      if (loadValues?.city) {
+        if ('value' in loadValues.city) {
+          setValue('city', loadValues?.city?.value?.toString() ?? '');
+        }
+      }
 
       let tempServices: string[] = [];
       if (Array.isArray(loadValues?.services)) {
