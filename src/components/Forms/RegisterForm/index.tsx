@@ -8,6 +8,7 @@ import { StyledForm } from '../../../styles/form';
 import { TextField } from '@mui/material';
 import { RegisterFormSchema } from './RegisterFormSchema';
 import { UserContext } from '../../../providers/UserContext';
+import { StyledParagraph } from '../../../styles/typograthy';
 
 export interface IRegisterForm {
   name: string;
@@ -66,14 +67,15 @@ const RegisterForm = () => {
         register={register('confirmPassword')}
         label='Confirmar Senha'
       />
-
+      <fieldset style={{ display: 'flex', flexDirection: 'column', border: 'none'  }}>
       <TextField      
         id='date'
         label='Data de nascimento'
         type='date'
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => ageHandleChange(e)}
         value={birthDate}
-        helperText={errors.age?.message}
+        // error={errors.age?true:false}
+        // helperText={errors.age?.message}
         InputLabelProps={{
           shrink: true,
         }}
@@ -81,6 +83,8 @@ const RegisterForm = () => {
           register('age') as unknown as React.RefObject<HTMLInputElement>
         }
       />
+      <StyledParagraph $fontColor='red'>{errors.age?.message}</StyledParagraph>
+      </fieldset>
 
       <StyledButton type='submit' $buttonSize='large' $buttonStyle='primary'>
         Criar conta
