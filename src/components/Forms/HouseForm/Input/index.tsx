@@ -11,7 +11,7 @@ interface IInputProps {
   placeholder: string;
   type: string;
   value?: number | string;
-  onChange?: (dateString: string) => number;
+  // onChange?: (dateString: string) => number;
   name: 'houseName' | 'photos' | 'city' | 'state' | 'dailyPrice' | 'singleBed' | 'doubleBed' | 'services';
 }
 

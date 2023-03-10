@@ -84,8 +84,9 @@ export interface InoDefaultValue {
     photos: null;
     state: null;
     city: null;
-    dailyPrice: undefined;
+    daylyPrice: undefined;
     singleBed: undefined;
     doubleBed: undefined;
     services: null;
+    id?: number;
 }

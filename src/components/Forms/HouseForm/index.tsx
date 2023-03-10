@@ -16,7 +16,7 @@ import { statesDatabase } from '../../Modal/ManageHouseModal/statesDatabase';
 import { ModalsContext } from '../../../providers/ModalsContext';
 
 export const houseSchema = yup.object().shape({
-  houseName: yup.string().required('Campo Obrigatório'),
+  name: yup.string().required('Campo Obrigatório'),
   city: yup.string().required('Campo Obrigatório'),
   state: yup.string().required('Campo Obrigatório'),
   photos: yup
@@ -24,7 +24,7 @@ export const houseSchema = yup.object().shape({
     .min(3, 'Adicione no minimo 3 fotos')
     .of(yup.string())
     .required('Campo Obrigatório'),
-  dailyPrice: yup
+    daylyPrice: yup
     .number()
     .typeError('Campo Obrigatório')
     .positive('Épreciso informar um valor positivo')
@@ -47,11 +47,11 @@ export const houseSchema = yup.object().shape({
 });
 
 export const defaultNoValues = {
-  houseName: undefined,
+  name: undefined,
   photos: null,
   state: null,
   city: null,
-  dailyPrice: undefined,
+  daylyPrice: undefined,
   singleBed: undefined,
   doubleBed: undefined,
   services: null,
@@ -111,10 +111,8 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
 
   useEffect(() => {
     if (loadValues !== defaultNoValues && !stopUpdate) {
-      if ('houseName' in dirtyFields) {
-        setValue('houseName', loadValues?.houseName ?? '');
-      }
-      setValue('dailyPrice', loadValues?.dailyPrice ?? 0);
+      setValue('name', loadValues?.name ?? '');
+      setValue('dailyPrice', loadValues?.daylyPrice ?? 0);
       setValue('singleBed', loadValues?.singleBed ?? 0);
       setValue('doubleBed', loadValues?.doubleBed ?? 0);
 
@@ -173,18 +171,43 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
     clearErrors('services');
   };
 
+  const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoadValues({
+      ...loadValues,
+      name: e.target.value,
+    });    
+  }
+  const changePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoadValues({
+      ...loadValues,
+      daylyPrice: Number(e.target.value),
+    });    
+  }
+  const changeBeds = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoadValues({
+      ...loadValues,
+      singleBed: Number(e.target.value),
+    });    
+  }
+  const changeDoubleBeds = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoadValues({
+      ...loadValues,
+      doubleBed: Number(e.target.value),
+    });    
+  }
+  
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <div className='label temporario'>Nome da Casa</div>
-      <Input
-        value={loadValues.houseName}
+      <input
+        value={loadValues.name}
         placeholder='Digite o nome da casa'
         type='text'
-        error={errors.houseName}
-        register={register}
-        name='houseName'
-        label='Nome'
-      />
+        {...register('name')}
+        name='name'
+        onChange={(e) => changeName(e)}
+        />
+        <p>{errors.houseName?.message}</p>
       <div className='label temporario'>Fotos</div>
       <CreatableSelect
         isClearable
@@ -222,35 +245,35 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
       ) : null}
 
       <div className='label temporario'>Valor por noite</div>
-      <Input
-        value={loadValues.dailyPrice}
+      <input
+        value={loadValues.daylyPrice}
         placeholder='Valor da Diaria'
         type='number'
-        error={errors.dailyPrice}
-        register={register}
-        name='dailyPrice'
-        label='Diaria'
+        {...register('daylyPrice')}
+        name='daylyPrice'
+        onChange={(e) => changePrice(e)}
       />
+      <p>{errors.daylyPrice?.message}</p>
       <div className='label temporario'>Camas</div>
       <div style={{ display: 'flex' }}>
-        <Input
+        <input
           placeholder='Camas de solteiro'
           type='number'
-          error={errors.singleBed}
           value={loadValues.singleBed}
-          register={register}
+          {...register('singleBed')}
           name='singleBed'
-          label='Quantas camas'
+          onChange={(e)=> changeBeds(e)}
         />
-        <Input
+        <p>{errors.singleBed?.message}</p>
+        <input
           value={loadValues.doubleBed}
           placeholder='Camas de casal'
           type='number'
-          error={errors.doubleBed}
-          register={register}
+          {...register('doubleBed')}
           name='doubleBed'
-          label='Quantas camas'
+          onChange={(e)=> changeDoubleBeds(e)}
         />
+        <p>{errors.doubleBed?.message}</p>
       </div>
       <div className='label temporario'>Serviços oferecidos</div>
       <Select
