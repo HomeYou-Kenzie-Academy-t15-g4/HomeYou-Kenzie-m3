@@ -87,6 +87,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       password: data.password,
       img: 'https://canvas.kenzie.com.br/images/messages/avatar-50.png',
     };
+    
     if (newData.age < 18) {
       console.log('É preciso ter mais de 18 anos para se cadastrar');
     } else {
