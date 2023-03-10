@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
 
   *{
     margin: 0;
@@ -10,12 +10,17 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+  input{
+    border: 5px solid red;
+  }
+
   img{
     max-width: 100%;
   }
     
   button{
     cursor: pointer;
+    border: none;
   }
   
   dialog{
@@ -24,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Container = styled.div`
+export const Container = styled.div`
   max-width: 90vw;
   width: 100%;
   margin: 0 auto;
@@ -34,5 +39,3 @@ const Container = styled.div`
     max-width: 85vw;
   }
 `;
-
-export default { GlobalStyle, Container };

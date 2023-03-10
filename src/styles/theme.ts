@@ -1,4 +1,4 @@
-const mainTheme = {
+export const mainTheme = {
   fonts: {
     primary: 'Montserrat',
   },
@@ -17,13 +17,6 @@ const mainTheme = {
     white: '#fff',
     black: '#000',
 
-    feddbacks: {
-      negative: '#E60000',
-      warning: '#FFCD07',
-      sucess: '#168821',
-      information: '#155BCB',
-    },
+    red: '#E60000',
   },
 };
-
-export default mainTheme;

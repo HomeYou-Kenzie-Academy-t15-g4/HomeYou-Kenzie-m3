@@ -1,19 +1,13 @@
 import Input from '../Input';
 
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../../providers/UserContext/index';
-import { StyledForm, StyledDivReturnToLogin } from './style';
-
-const FormUser = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().required(),
-  confirmPassword: yup.string().required(),
-  name: yup.string().required(),
-  age: yup.string().required(),
-});
+import { StyledButton } from '../../../styles/button';
+import { StyledForm } from '../../../styles/form';
+import { TextField } from '@mui/material';
+import { RegisterFormSchema } from './RegisterFormSchema';
 
 export interface IRegisterForm {
   name: string;
@@ -32,14 +26,11 @@ const RegisterForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IRegisterForm>({
-    resolver: yupResolver(FormUser),
+    resolver: yupResolver(RegisterFormSchema),
   });
 
   return (
     <StyledForm onSubmit={handleSubmit(createUser)}>
-      <StyledDivReturnToLogin>
-        <p>Cadastre-se</p>
-      </StyledDivReturnToLogin>
       <Input
         type='text'
         error={errors.name}
@@ -66,13 +57,22 @@ const RegisterForm = () => {
         register={register('confirmPassword')}
         label='Confirmar Senha'
       />
-      <Input
-        type='date'
-        error={errors.age}
-        register={register('age')}
+
+      <TextField
+        id='date'
         label='Data de nascimento'
+        type='date'
+        InputLabelProps={{
+          shrink: true,
+        }}
+        inputRef={
+          register('age') as unknown as React.RefObject<HTMLInputElement>
+        }
       />
-      <button type='submit'>Criar conta</button>
+
+      <StyledButton type='submit' $buttonSize='large' $buttonStyle='primary'>
+        Criar conta
+      </StyledButton>
     </StyledForm>
   );
 };

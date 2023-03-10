@@ -12,11 +12,11 @@ export const StyledButtonCSS = css<IStyledButtonProps>`
   align-items: center;
   justify-content: center;
 
-  font-family: ${({ theme }) => theme.fonts.primary};
+  font-family: 'Montserrat';
   font-weight: 600;
   font-size: 1rem;
 
-  border-radius: 15px;
+  border-radius: 5px;
   transition: 0.4s;
 
   ${({ $buttonSize }) => {

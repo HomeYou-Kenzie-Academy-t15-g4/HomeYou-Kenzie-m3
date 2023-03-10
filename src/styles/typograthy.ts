@@ -2,13 +2,14 @@ import styled, { css } from 'styled-components';
 import BaseText from './components/BaseText';
 
 interface IStyledTitleProps {
-  fontSize: 'one' | 'two' | 'three';
-  textAlign?: 'center' | 'left' | 'right';
+  $fontSize: 'one' | 'two' | 'three';
+  $textAlign?: 'center' | 'left' | 'right';
+  $fontColor?: 'greyBold' | 'grey' | 'red';
 }
 
 interface IStyledParagraphProps {
-  fontColor?: 'greyBold' | 'grey' | 'red';
-  textAlign?: 'center' | 'left' | 'right';
+  $fontColor?: 'greyBold' | 'grey' | 'red';
+  $textAlign?: 'center' | 'left' | 'right';
 }
 
 export const StyledTitle = styled(BaseText)<IStyledTitleProps>`
@@ -17,10 +18,10 @@ export const StyledTitle = styled(BaseText)<IStyledTitleProps>`
   font-family: ${({ theme }) => theme.fonts.primary};
   line-height: 1.6;
 
-  text-align: ${({ textAlign }) => textAlign};
+  text-align: ${({ $textAlign }) => $textAlign};
 
-  ${({ fontSize }) => {
-    switch (fontSize) {
+  ${({ $fontSize }) => {
+    switch ($fontSize) {
       case 'one':
         return css`
           font-size: 28px;
@@ -34,22 +35,13 @@ export const StyledTitle = styled(BaseText)<IStyledTitleProps>`
       case 'three':
         return css`
           font-size: 18px;
-          font-weight: 700;
+          font-weight: 600;
         `;
     }
   }}
-`;
 
-export const StyledParagraph = styled.p<IStyledParagraphProps>`
-  font-family: ${({ theme }) => theme.fonts.primary};
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.8;
-
-  text-align: ${({ textAlign }) => textAlign};
-
-  ${({ fontColor, theme }) => {
-    switch (fontColor) {
+  ${({ $fontColor, theme }) => {
+    switch ($fontColor) {
       case 'greyBold':
         return css`
           color: ${theme.colors.grey400};
@@ -60,11 +52,41 @@ export const StyledParagraph = styled.p<IStyledParagraphProps>`
         `;
       case 'red':
         return css`
-          color: ${theme.colors.feedback.negative};
+          color: ${theme.colors.red};
         `;
       default:
         return css`
-          color: ${theme.colors.gray300};
+          color: ${theme.colors.grey300};
+        `;
+    }
+  }}
+`;
+
+export const StyledParagraph = styled.p<IStyledParagraphProps>`
+  font-family: ${({ theme }) => theme.fonts.primary};
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.8;
+
+  text-align: ${({ $textAlign }) => $textAlign};
+
+  ${({ $fontColor, theme }) => {
+    switch ($fontColor) {
+      case 'greyBold':
+        return css`
+          color: ${theme.colors.grey400};
+        `;
+      case 'grey':
+        return css`
+          color: ${theme.colors.grey200};
+        `;
+      case 'red':
+        return css`
+          color: ${theme.colors.red};
+        `;
+      default:
+        return css`
+          color: ${theme.colors.grey300};
         `;
     }
   }}

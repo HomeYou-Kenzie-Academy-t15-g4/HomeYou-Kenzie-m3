@@ -1,6 +1,7 @@
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 import { StyledParagraph } from '../../../styles/typograthy';
 import { CssTextField } from './style';
+import { StyledFieldset } from './fieldSetStyled';
 
 interface IInputProps {
   label: React.ReactNode;
@@ -12,12 +13,12 @@ interface IInputProps {
 
 const Input = ({ label, register, type, error }: IInputProps) => {
   return (
-    <fieldset>
+    <StyledFieldset>
       <CssTextField label={label} type={type} {...register} />
       {error ? (
-        <StyledParagraph fontColor='red'>{error.message}</StyledParagraph>
+        <StyledParagraph $fontColor='red'>{error.message}</StyledParagraph>
       ) : null}
-    </fieldset>
+    </StyledFieldset>
   );
 };
 
