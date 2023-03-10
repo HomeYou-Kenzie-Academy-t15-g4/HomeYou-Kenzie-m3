@@ -23,7 +23,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         const res = await api.get(`/users/${user?.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setUser(res.data);
+        setUser(res.data);        
 
         return navigate('/dashboard');
       } catch (error) {
@@ -44,7 +44,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           const res = await api.get(`/users/${userAux.id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
-          setUser(res.data.user);
+          setUser(res.data);
           console.log(window.location.pathname);
 
           if (
