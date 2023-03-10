@@ -45,8 +45,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
             headers: { Authorization: `Bearer ${token}` },
           });
           setUser(res.data);
-          console.log(window.location.pathname);
-
           if (
             window.location.pathname != '/dashboard' &&
             window.location.pathname != '/house' &&
