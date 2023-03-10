@@ -1,14 +1,16 @@
-import React, { useRef, useContext } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import React, { useContext } from 'react';
 import StyledHeader from './style';
 import imgLogo from '../../assets/logo.svg';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../providers/UserContext';
+import { StyledButton } from '../../styles/button';
+import { StyledParagraph, StyledTitle } from '../../styles/typograthy';
+import menuBurger from '../../assets/menu hamburguer.svg';
 
 const Header = () => {
   const navRef = React.useRef<HTMLElement | null>(null);
 
-  const { user } = useContext(UserContext);
+  const { user, logoutUser } = useContext(UserContext);
 
   const showNavBar = () => {
     navRef.current?.classList.toggle('responsive_nav');
@@ -16,23 +18,50 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <img src={imgLogo} alt='logo' />
+      <div className='logo-box'>
+        <img src={imgLogo} alt='logo' />
+      </div>
       <nav ref={navRef}>
-        <Link to={'/'}>Início</Link>
-        <Link to={'/house'}>Galeria</Link>
-        <Link to={'/login'}>Entrar</Link>
-        <Link to={'/register'}>Cadastro</Link>
+        <Link to={'/'}>
+          <StyledParagraph $fontColor='grey'>Home</StyledParagraph>
+        </Link>
+        <Link to={'/house'}>
+          <StyledParagraph $fontColor='grey'>Galeria</StyledParagraph>
+        </Link>
+        {user ? (
+          <>
+            <Link to={'/dashboard'}>
+              <StyledParagraph $fontColor='grey'>Perfil</StyledParagraph>
+            </Link>
+            <StyledButton
+              onClick={logoutUser}
+              $buttonSize='short'
+              $buttonStyle='none'
+            >
+              <StyledParagraph $fontColor='grey'>Sair</StyledParagraph>
+            </StyledButton>
+          </>
+        ) : (
+          <>
+            <Link to={'/login'}>
+              <StyledParagraph $fontColor='grey'>Entrar</StyledParagraph>
+            </Link>
+            <Link to={'/register'}>
+              <StyledParagraph $fontColor='grey'>Cadastrar</StyledParagraph>
+            </Link>
+          </>
+        )}
+
         <button
           type='button'
           className='nav-btn nav-close-btn'
           onClick={showNavBar}
         >
-          <FaTimes />
+          <StyledParagraph $fontColor='greyBold'>X</StyledParagraph>
         </button>
       </nav>
-      {/* {user ? <h2>OK</h2> : <h2>Fail</h2>} */}
-      <button type='button' className='nav-btn' onClick={showNavBar}>
-        <FaBars />
+      <button type='button' className='nav-btn hamburger' onClick={showNavBar}>
+        <img src={menuBurger} alt='' />
       </button>
     </StyledHeader>
   );
