@@ -9,6 +9,7 @@ import { Container } from '../../styles/global';
 import { StyledParagraph, StyledTitle } from '../../styles/typograthy';
 import StyledSectionHomePage from './style';
 import homeBg from '../../assets/home-bg.svg';
+import imgLanding from '../../assets/hom-landing.svg';
 
 const HomePage = () => {
   // const { isOpen, setIsOpen } = useContext(ModalsContext);
