@@ -4,12 +4,14 @@ import StyledModal from './style';
 import { MdClose } from 'react-icons/md';
 import { useContext } from 'react';
 import { ModalsContext } from '../../providers/ModalsContext';
+import { StyledTitle } from '../../styles/typograthy';
 
 interface IModalProps {
   children: React.ReactNode;
+  title: string;
 }
 
-const Modal = ({ children }: IModalProps) => {
+const Modal = ({ children, title }: IModalProps) => {
   const { isOpen, closeModal } = useContext(ModalsContext);
 
   if (isOpen) {
@@ -17,6 +19,12 @@ const Modal = ({ children }: IModalProps) => {
       <StyledModal className='inside' role={'dialog'}>
         <div className='inside'>
           <header>
+            <StyledTitle
+              $fontSize='two'
+              children={title}
+              tag='h3'
+              className='s'
+            ></StyledTitle>
             <MdClose onClick={() => closeModal()} />
           </header>
           {children}

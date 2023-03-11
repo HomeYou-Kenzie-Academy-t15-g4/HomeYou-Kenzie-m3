@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { UserContext } from '../../../providers/UserContext';
 import { IUser } from '../../../providers/UserContext/type';
+import { StyledButton } from '../../../styles/button';
+import { StyledForm } from '../../../styles/form';
 import Input from '../Input';
 import StyledFormEditUserPic from './style';
 
@@ -30,17 +32,23 @@ const EditUser = () => {
   };
 
   return (
-    <StyledFormEditUserPic onSubmit={handleSubmit(submit)}>
-      <div className='modalContentEdit'>
+    <StyledForm onSubmit={handleSubmit(submit)}>
+      <StyledFormEditUserPic>
         <Input
           type='text'
           label='Alterar Foto Perfil'
           register={register('img')}
         />
-        <button type='submit'>Alterar Foto</button>
-      </div>
-    </StyledFormEditUserPic>
+        <StyledButton
+          type={'submit'}
+          $buttonSize='medium'
+          $buttonStyle='greenBold'
+        >
+          Alterar Foto
+        </StyledButton>
+      </StyledFormEditUserPic>
+    </StyledForm>
   );
 };
-// label, register, type, error
+
 export default EditUser;

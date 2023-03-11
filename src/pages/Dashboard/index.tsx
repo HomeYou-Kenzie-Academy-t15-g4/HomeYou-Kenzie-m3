@@ -30,23 +30,23 @@ const DashboardPage = () => {
       <div>
         {isOpen ? (
           isUserModal ? (
-            <Modal>
+            <Modal title={'Atualizar foto'}>
               <EditUser />
             </Modal>
           ) : isCreateRentModal ? (
-            <Modal>
+            <Modal title={'Editar user'}>
               <EditUser />
             </Modal>
           ) : isManageRentModal ? (
-            <Modal>
+            <Modal title={'Editar user'}>
               <EditUser />
             </Modal>
           ) : isManageHouseModal ? (
-            <Modal>
+            <Modal title={'Editar user'}>
               <ManageHouseModal />
             </Modal>
           ) : isCreateHouseModal ? (
-            <Modal>
+            <Modal title={'Editar user'}>
               <CreateHouseModal />
             </Modal>
           ) : null
