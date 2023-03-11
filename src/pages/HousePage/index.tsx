@@ -11,7 +11,7 @@ import { StyledButton } from '../../styles/button';
 import { StyledCaption, StyledTitle } from '../../styles/typograthy';
 import { CardSlider } from '../../components/Slider/carrousels/CardCarrousel';
 import { Container } from '../../styles/global';
-import { StyledHousePage} from './style';
+import { StyledHousePage } from './style';
 
 const HousePage = () => {
   const { isOpen, setIsOpen } = useContext(ModalsContext);
@@ -32,7 +32,7 @@ const HousePage = () => {
   return (
     <StyledHousePage>
       {isOpen ? (
-        <Modal>
+        <Modal title='modal'>
           <div></div>
         </Modal>
       ) : null}
@@ -103,7 +103,9 @@ const HousePage = () => {
                       <span className='iconBox'>
                         <IconsMatch iconName={service} />
                       </span>
-                      <StyledCaption className='servicesName'>{service}</StyledCaption>
+                      <StyledCaption className='servicesName'>
+                        {service}
+                      </StyledCaption>
                       {/* <p className='servicesName'>{service}</p> */}
                     </li>
                   );
