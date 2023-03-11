@@ -16,7 +16,7 @@ import { StyledHousePage } from './style';
 const HousePage = () => {
   const { isOpen, setIsOpen } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
-  
+
   useEffect(() => {
     loadOneHouse(2);
     console.log(selectedHouse);
@@ -30,122 +30,111 @@ const HousePage = () => {
     Number(selectedHouse?.accommodation?.beds) +
     Number(selectedHouse?.accommodation?.doubleBeds);
 
-
   return (
-    <StyledHousePage>
-      {isOpen ? (
-        <Modal title='modal'>
-          <div></div>
-        </Modal>
-      ) : null}
+    <>
+      <Header/>
+      <StyledHousePage>
+        {isOpen ? <Modal title='modal'><></></Modal> : null}
 
+        <section>
+          <Container>
+            <div className='mainTitle'>
+              <StyledTitle $fontSize='two' $fontColor='greyBold' tag='h2'>
+                {selectedHouse?.name}
+              </StyledTitle>
+              <StyledCaption>
+                {capacity} hospedes - {beds} camas{' '}
+              </StyledCaption>
+            </div>
+          </Container>
 
-      <button type='button' onClick={() => setIsOpen(true)}>
-        Abrir
-      </button>
-
-
-      <button
-        style={{ paddingBottom: '65px' }}
-        type='button'
-        onClick={() => setIsOpen(true)}
-      >
-        Abrir
-      </button>
-      
-      <section>
-        <Container>
-          <div className='mainTitle'>
-            <StyledTitle $fontSize='two' $fontColor='greyBold' tag='h2'>
-              {selectedHouse?.name}
-            </StyledTitle>
-            <StyledCaption>
-              {capacity} hospedes - {beds} camas{' '}
-            </StyledCaption>
-          </div>
-        </Container
-        
-        <section className='galerySection'>
-          <StyledTitle
-            $textAlign='center'
-            $fontSize='two'
-            $fontColor='greyBold'
-            tag='h2'
-          >
-            Galeria
-          </StyledTitle>
-          <div
-            style={{
-              position: 'relative',
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          ></div>
-          <div className='sliderBox'>
-            {selectedHouse?.photos ? <CardSlider></CardSlider> : null}
-          </div>
-        </section>
-        <Container>
-          <div className='reserveSection'>
+          <section className='galerySection'>
             <StyledTitle
               $textAlign='center'
               $fontSize='two'
-              $fontColor='grey'
+              $fontColor='greyBold'
               tag='h2'
             >
-              Orçamento
+              Galeria
             </StyledTitle>
-            <StyledCaption>Interessado em alugar essa casa?</StyledCaption>
-
-            <StyledButton /* onClick={FunçãoModaldeReserva(selectedHouse?.id)} */ type='button' $buttonSize='short' $buttonStyle='primary'>
-              Reservar
-            </StyledButton>
-          </div>
-          <section className='infoSection' id='infoSection'>
-            <article>
-              <StyledTitle $fontSize='two' $fontColor='grey' tag='h2'>
-                Comodidades
-              </StyledTitle>
-              <ul>
-                {selectedHouse?.services?.map((service) => {
-                  return (
-                    <li key={service}>
-                      <span className='iconBox'>
-                        <IconsMatch iconName={service} />
-                      </span>
-                      <StyledCaption className='servicesName'>
-                        {service}
-                      </StyledCaption>
-                      {/* <p className='servicesName'>{service}</p> */}
-                    </li>
-                  );
-                })}
-              </ul>
-            </article>
-            <SectionSpacer />
-            <article>
-              <StyledTitle $fontSize='two' $fontColor='grey' tag='h2'>
-                Detalhes do local
-              </StyledTitle>
-              <div className='detailsTextBox'>
-                <StyledCaption>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Corrupti hic corporis dicta sapiente est asperiores omnis
-                  ipsum odio. Eius facere totam eligendi ut beatae rerum? Cum
-                  consequatur animi aut consequuntur!Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Corrupti hic corporis dicta sapiente est asperiores omnis
-                  ipsum odio. Eius facere totam eligendi ut beatae rerum? Cum
-                  consequatur animi aut consequuntur! Eius facere totam eligendi ut beatae rerum? Cum
-                  consequatur animi aut consequuntur!
-                </StyledCaption>
-              </div>
-            </article>
+            <div
+              style={{
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            ></div>
+            <div className='sliderBox'>
+              {selectedHouse?.photos ? <CardSlider></CardSlider> : null}
+            </div>
           </section>
-        </Container>
-      </section>
+          <Container>
+            <div className='reserveSection'>
+              <StyledTitle
+                $textAlign='center'
+                $fontSize='two'
+                $fontColor='grey'
+                tag='h2'
+              >
+                Orçamento
+              </StyledTitle>
+              <StyledCaption>Interessado em alugar essa casa?</StyledCaption>
 
-      <CommentsCard />
-    </StyledHousePage>
+              <StyledButton
+                /* onClick={FunçãoModaldeReserva(selectedHouse?.id)} */ type='button'
+                $buttonSize='short'
+                $buttonStyle='primary'
+              >
+                Reservar
+              </StyledButton>
+            </div>
+            <section className='infoSection' id='infoSection'>
+              <article>
+                <StyledTitle $fontSize='two' $fontColor='grey' tag='h2'>
+                  Comodidades
+                </StyledTitle>
+                <ul>
+                  {selectedHouse?.services?.map((service) => {
+                    return (
+                      <li key={service}>
+                        <span className='iconBox'>
+                          <IconsMatch iconName={service} />
+                        </span>
+                        <StyledCaption className='servicesName'>
+                          {service}
+                        </StyledCaption>
+                        {/* <p className='servicesName'>{service}</p> */}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </article>
+              <SectionSpacer />
+              <article>
+                <StyledTitle $fontSize='two' $fontColor='grey' tag='h2'>
+                  Detalhes do local
+                </StyledTitle>
+                <div className='detailsTextBox'>
+                  <StyledCaption>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Corrupti hic corporis dicta sapiente est asperiores omnis
+                    ipsum odio. Eius facere totam eligendi ut beatae rerum? Cum
+                    consequatur animi aut consequuntur!Lorem, ipsum dolor sit
+                    amet consectetur adipisicing elit. Corrupti hic corporis
+                    dicta sapiente est asperiores omnis ipsum odio. Eius facere
+                    totam eligendi ut beatae rerum? Cum consequatur animi aut
+                    consequuntur! Eius facere totam eligendi ut beatae rerum?
+                    Cum consequatur animi aut consequuntur!
+                  </StyledCaption>
+                </div>
+              </article>
+            </section>
+          </Container>
+        </section>
+
+        <CommentsCard />
+      </StyledHousePage>
+    </>
   );
 };
 

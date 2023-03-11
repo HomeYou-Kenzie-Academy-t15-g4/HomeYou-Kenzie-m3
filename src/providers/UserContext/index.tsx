@@ -128,17 +128,19 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   };
 
   const editUser = async (data: IUser) => {
-    const id = localStorage.getItem('@IDUSER');
+    const userAuxString = localStorage.getItem('@HomeYou:User');
+    const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
     const token = localStorage.getItem('@HomeYou:TOKEN');
+    console.log(data);
+    
     try {
-      const response = await api.patch(`/users/${id}`, data, {
+      const response = await api.patch(`/users/${userAux.id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setUser(response.data.user);
-      console.log('ok!');
-      ///toast
+      setUser(response.data);
+      toast.success('Sua foto foi alterada')
     } catch (error) {
       console.log(error);
     }
