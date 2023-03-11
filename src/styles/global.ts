@@ -2,6 +2,15 @@ import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 
+  ::-webkit-scrollbar{
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb{
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 10px;
+  }
+
   *{
     margin: 0;
     padding: 0;
