@@ -14,6 +14,7 @@ export interface IHouseForm extends yup.InferType<typeof houseSchema> {
   singleBed: number;
   doubleBed: number;
   services: string[];
+  houseDesc: string;
 }
 
 export interface IDefaultHouseFormValues {
@@ -38,6 +39,7 @@ export interface IDefaultHouseFormValues {
     value: string;
     label: string ;
   } | null>;
+  houseDesc: undefined | string;
 }
 
 export interface IHouseFormProps {
