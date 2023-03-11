@@ -1,26 +1,10 @@
-<<<<<<< HEAD
-import { useContext, useState } from 'react';
-=======
 import React, { useContext, useState, useEffect } from 'react';
 import HouseCard from '../../components/Cards/HouseCard';
->>>>>>> bd9d7ac188bd78f9ba816c8fe6304c07153797bf
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
 import Ratinng from '../../components/Rating';
 import { ModalsContext } from '../../providers/ModalsContext';
-<<<<<<< HEAD
-import {
-  StyledButton,
-  StyledSectionHomePage,
-  StyledRatingFavorite,
-} from './style';
-import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
-
-const HomePage = () => {
-  const { isOpen, setIsOpen } = useContext(ModalsContext);
-  const [isLike, setIsLike] = useState(false);
-=======
 import { StyledButton } from '../../styles/button';
 import { Container } from '../../styles/global';
 import { StyledParagraph, StyledTitle } from '../../styles/typograthy';
@@ -39,7 +23,7 @@ const HomePage = () => {
   }, []);
 
   const showSection = screenWidth > 900;
->>>>>>> bd9d7ac188bd78f9ba816c8fe6304c07153797bf
+  const [isLike, setIsLike] = useState(false);
 
   return (
     <>
@@ -96,11 +80,25 @@ const HomePage = () => {
           </Container>
         </section>
       </StyledSectionHomePage>
+      {/* {isOpen ? (
+        <Modal>
+          <div></div>
+        </Modal>
+      ) : null}
+      <Header />
+      <StyledSectionHomePage />
 
       <button type='button' onClick={() => setIsOpen(true)}>
         Abrir
-      </button> 
-      <Footer /> 
+      </button>
+      <StyledRatingFavorite>
+        <Ratinng />
+        <StyledButton onClick={() => setIsLike(!isLike)}>
+          {isLike ? <FcLikePlaceholder /> : <FcLike />}
+        </StyledButton>
+      </StyledRatingFavorite>
+
+      {/* <Footer /> */}
     </>
   );
 };

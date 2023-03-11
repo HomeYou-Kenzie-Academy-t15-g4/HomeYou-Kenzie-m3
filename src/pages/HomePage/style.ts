@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
-<<<<<<< HEAD
-export const StyledSectionHomePage = styled.section`
-=======
 const StyledSectionHomePage = styled.main`
->>>>>>> bd9d7ac188bd78f9ba816c8fe6304c07153797bf
   width: 100%;
   height: 100vh;
 
@@ -61,19 +57,4 @@ const StyledSectionHomePage = styled.main`
   }
 `;
 
-export const StyledButton = styled.button`
-  --size: 100px;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 33px;
-  cursor: pointer;
-  outline: 0;
-  border-radius: 100%;
-`;
-
-export const StyledRatingFavorite = styled.div`
-  display: flex;
-`;
+export default StyledSectionHomePage;
