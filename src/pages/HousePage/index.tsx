@@ -6,6 +6,7 @@ import { ModalsContext } from '../../providers/ModalsContext';
 
 const HousePage = () => {
   const { isOpen, setIsOpen } = useContext(ModalsContext);
+
   return (
     <div>
       {isOpen ? (
@@ -14,9 +15,11 @@ const HousePage = () => {
         </Modal>
       ) : null}
       <Header />
+
       <button type='button' onClick={() => setIsOpen(true)}>
         Abrir
       </button>
+
       <CommentsCard />
     </div>
   );
