@@ -15,6 +15,7 @@ export interface IHouse {
   daylyPrice: number;
   services: string[];
   accommodation: IAccommodation;
+  houseDesc: string;
 }
 
 export interface IAccommodation {
@@ -80,7 +81,7 @@ export interface IHousesContext {
 }
 
 export interface InoDefaultValue {
-  houseName: undefined;
+    name: undefined;
     photos: null;
     state: null;
     city: null;
@@ -89,4 +90,9 @@ export interface InoDefaultValue {
     doubleBed: undefined;
     services: null;
     id?: number;
+    accommodation?: {
+      beds: number;
+      doubleBeds: number;
+    };
+    houseDesc: undefined;
 }

@@ -12,7 +12,7 @@ const StyledModal = styled.div`
   background: rgba(51, 51, 51, 0.5);
   z-index: 1001;
 
-  .inside  {
+  .inside {
     animation: ${Animation} 0.5s;
     width: 100%;
     max-width: 1500px;
