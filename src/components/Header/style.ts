@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const StyledHeader = styled.header`
+  z-index: 9;
   display: flex;
   align-items: center;
   justify-content: space-between;
