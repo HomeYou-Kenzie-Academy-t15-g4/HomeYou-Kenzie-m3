@@ -80,7 +80,7 @@ export interface IHousesContext {
 }
 
 export interface InoDefaultValue {
-  houseName: undefined;
+    name: undefined;
     photos: null;
     state: null;
     city: null;
@@ -89,4 +89,8 @@ export interface InoDefaultValue {
     doubleBed: undefined;
     services: null;
     id?: number;
+    accommodation?: {
+      beds: number;
+      doubleBeds: number;
+    };
 }
