@@ -102,6 +102,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           doubleBeds: dataHouse.doubleBed,
         },
         services: dataHouse.services,
+        houseDesc: dataHouse.houseDesc,
       };
 
       try {
@@ -142,6 +143,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           value: service,
           label: service,
         })),
+        houseDesc: response.data?.houseDesc
       };
 
       setLoadValues(values);
@@ -167,6 +169,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           doubleBeds: dataHouse.doubleBed,
         },
         services: dataHouse.services,
+        houseDesc: dataHouse.houseDesc,
       };
       try {
         const response = await api.patch(`/houses/${houseId}`, editHouse, {

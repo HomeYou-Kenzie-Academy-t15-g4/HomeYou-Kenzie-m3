@@ -1,15 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 
+import { HousesContext } from '../../providers/HousesContext';
+import { ModalsContext } from '../../providers/ModalsContext';
 import CommentsCard from '../../components/Cards/CommentsCard';
 import Header from '../../components/Header';
 import IconsMatch from '../../components/IconsMatch';
 import Modal from '../../components/Modal';
 import SectionSpacer from '../../components/SectionSpacer';
-import { HousesContext } from '../../providers/HousesContext';
-import { ModalsContext } from '../../providers/ModalsContext';
+import { CardSlider } from '../../components/Slider/carrousels/CardCarrousel';
 import { StyledButton } from '../../styles/button';
 import { StyledCaption, StyledTitle } from '../../styles/typograthy';
-import { CardSlider } from '../../components/Slider/carrousels/CardCarrousel';
 import { Container } from '../../styles/global';
 import { StyledHousePage} from './style';
 
@@ -97,8 +97,8 @@ const HousePage = () => {
             </StyledTitle>
             <StyledCaption>Interessado em alugar essa casa?</StyledCaption>
 
-            <StyledButton $buttonSize='short' $buttonStyle='primary'>
-              Reservar{' '}
+            <StyledButton /* onClick={FunçãoModaldeReserva(selectedHouse?.id)} */ type='button' $buttonSize='short' $buttonStyle='primary'>
+              Reservar
             </StyledButton>
           </div>
           <section className='infoSection' id='infoSection'>
@@ -113,8 +113,7 @@ const HousePage = () => {
                       <span className='iconBox'>
                         <IconsMatch iconName={service} />
                       </span>
-                      <StyledCaption className='servicesName'>{service}</StyledCaption>
-                      {/* <p className='servicesName'>{service}</p> */}
+                      <StyledCaption className='servicesName'>{service}</StyledCaption>                      
                     </li>
                   );
                 })}
@@ -127,9 +126,13 @@ const HousePage = () => {
               </StyledTitle>
               <div className='detailsTextBox'>
                 <StyledCaption>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                   Corrupti hic corporis dicta sapiente est asperiores omnis
                   ipsum odio. Eius facere totam eligendi ut beatae rerum? Cum
+                  consequatur animi aut consequuntur!Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Corrupti hic corporis dicta sapiente est asperiores omnis
+                  ipsum odio. Eius facere totam eligendi ut beatae rerum? Cum
+                  consequatur animi aut consequuntur! Eius facere totam eligendi ut beatae rerum? Cum
                   consequatur animi aut consequuntur!
                 </StyledCaption>
               </div>

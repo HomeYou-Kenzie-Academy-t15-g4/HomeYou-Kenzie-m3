@@ -44,9 +44,11 @@ export const StyledHousePage = styled.main`
     width: 40%;
     min-width: 209px;
     height: max-content;
+    max-width: 450px;
   }
 
   .infoSection article ul {
+    max-width: 450px;
     margin-top: 30px;
     padding: 35px 20px;
     display: flex;
