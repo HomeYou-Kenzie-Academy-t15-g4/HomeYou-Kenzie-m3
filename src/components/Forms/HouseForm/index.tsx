@@ -43,6 +43,7 @@ export const houseSchema = yup.object().shape({
     .min(3, 'Selecione no minimo 3 opções')
     .of(yup.string())
     .required('Campo Obrigatório'),
+  houseDesc: yup.string().min(200, 'Deve conter no minimo 200 caracteres').max(550, 'Deve conter no máximo 550 caracteres').required('Campo Obrigatório'),
 });
 
 export const defaultNoValues = {
@@ -54,6 +55,7 @@ export const defaultNoValues = {
   singleBed: undefined,
   doubleBed: undefined,
   services: null,
+  houseDesc: undefined,
 };
 
 const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
@@ -119,6 +121,7 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
       setValue('dailyPrice', loadValues?.daylyPrice ?? 0);
       setValue('singleBed', loadValues?.singleBed ?? 0);
       setValue('doubleBed', loadValues?.doubleBed ?? 0);
+      setValue('houseDesc', loadValues?.houseDesc ?? '');
 
       let tempPhotos: string[] = [];
       if (Array.isArray(loadValues?.photos)) {
@@ -201,6 +204,12 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
     setLoadValues({
       ...loadValues,
       doubleBed: Number(e.target.value),
+    });    
+  }
+  const changeHouseDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setLoadValues({
+      ...loadValues,
+      houseDesc: e.target.value,
     });    
   }
   
@@ -295,6 +304,14 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
         onChange={handleChangeServices}
       />
       <p>{errors.services?.message}</p>
+      <textarea
+          value={loadValues.houseDesc}
+          placeholder='Descreva o local'
+          {...register('houseDesc')}
+          name='houseDesc'
+          onChange={(e)=> changeHouseDesc(e)}>
+      </textarea>
+        <p>{errors.houseDesc?.message}</p>
       <span className='formButtons'>{children}</span>
     </StyledForm>
   );
