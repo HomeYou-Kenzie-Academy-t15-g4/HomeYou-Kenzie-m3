@@ -12,6 +12,8 @@ import { StyledSectionProfile, StyledContainerPage } from './style';
 import ManageHouseModal from '../../components/Modal/ManageHouseModal';
 import CreateHouseModal from '../../components/Modal/CreateHouseModal';
 import UserRentsCards from '../../components/Cards/DashCards/UserRentsCard';
+import UsserInfoard from '../../components/Cards/UserInfoCard';
+import { Container } from '../../styles/global';
 
 const DashboardPage = () => {
   const { user } = useContext(UserContext);
@@ -54,7 +56,8 @@ const DashboardPage = () => {
 
         <Header />
         <StyledSectionProfile>
-          <div className='contentSection'>
+          <Container>
+            {/* <div className='contentSection'>
             <div className='contentImage'>
               <img src={user?.img} alt='photo image' />
               <div>
@@ -69,7 +72,9 @@ const DashboardPage = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
+            <UsserInfoard />
+          </Container>
         </StyledSectionProfile>
         <HouseDashCard />
         <UserRentsCards />
