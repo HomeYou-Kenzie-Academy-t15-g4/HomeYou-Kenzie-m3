@@ -19,9 +19,9 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
-  input{
+  /* input{
     border: 5px solid red;
-  }
+  } */
 
   img{
     max-width: 100%;

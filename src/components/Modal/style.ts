@@ -12,17 +12,21 @@ const StyledModal = styled.div`
   background: rgba(51, 51, 51, 0.5);
   z-index: 1001;
 
-  .inside  {
+  .inside {
     animation: ${Animation} 0.5s;
-    width: 100%;
-    max-width: 1500px;
-    border-radius: 8px;
     background-color: #ffff;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 10px;
+
+    box-shadow: 5px 5px 1px 1px black;
   }
+
   header {
     display: flex;
-    justify-content: end;
-    padding: 0.5rem;
+    justify-content: space-between;
+    padding: 1.5rem;
   }
 `;
 
