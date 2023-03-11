@@ -16,6 +16,7 @@ import { StyledHousePage} from './style';
 const HousePage = () => {
   const { isOpen, setIsOpen } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
+  
   useEffect(() => {
     loadOneHouse(2);
     console.log(selectedHouse);
@@ -29,6 +30,7 @@ const HousePage = () => {
     Number(selectedHouse?.accommodation?.beds) +
     Number(selectedHouse?.accommodation?.doubleBeds);
 
+
   return (
     <StyledHousePage>
       {isOpen ? (
@@ -36,7 +38,13 @@ const HousePage = () => {
           <div></div>
         </Modal>
       ) : null}
-      <Header />
+
+
+      <button type='button' onClick={() => setIsOpen(true)}>
+        Abrir
+      </button>
+
+
       <button
         style={{ paddingBottom: '65px' }}
         type='button'
@@ -44,6 +52,7 @@ const HousePage = () => {
       >
         Abrir
       </button>
+      
       <section>
         <Container>
           <div className='mainTitle'>
@@ -54,7 +63,8 @@ const HousePage = () => {
               {capacity} hospedes - {beds} camas{' '}
             </StyledCaption>
           </div>
-        </Container>
+        </Container
+        
         <section className='galerySection'>
           <StyledTitle
             $textAlign='center'
@@ -127,6 +137,7 @@ const HousePage = () => {
           </section>
         </Container>
       </section>
+
       <CommentsCard />
     </StyledHousePage>
   );

@@ -3,6 +3,7 @@ import HouseCard from '../../components/Cards/HouseCard';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
+import Ratinng from '../../components/Rating';
 import { ModalsContext } from '../../providers/ModalsContext';
 import { StyledButton } from '../../styles/button';
 import { Container } from '../../styles/global';
@@ -22,6 +23,7 @@ const HomePage = () => {
   }, []);
 
   const showSection = screenWidth > 900;
+  const [isLike, setIsLike] = useState(false);
 
   return (
     <>
@@ -83,9 +85,18 @@ const HomePage = () => {
           <div></div>
         </Modal>
       ) : null}
+      <Header />
+      <StyledSectionHomePage />
+
       <button type='button' onClick={() => setIsOpen(true)}>
         Abrir
-      </button> */}
+      </button>
+      <StyledRatingFavorite>
+        <Ratinng />
+        <StyledButton onClick={() => setIsLike(!isLike)}>
+          {isLike ? <FcLikePlaceholder /> : <FcLike />}
+        </StyledButton>
+      </StyledRatingFavorite>
 
       {/* <Footer /> */}
     </>
