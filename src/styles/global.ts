@@ -42,7 +42,7 @@ export const Container = styled.div`
   max-width: 90vw;
   width: 100%;
   margin: 0 auto;
-  padding: 1rem 0;
+  padding: 1rem 20px;
 
   @media (min-width: 800px) {
     max-width: 85vw;

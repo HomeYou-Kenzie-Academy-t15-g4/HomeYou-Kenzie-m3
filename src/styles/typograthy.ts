@@ -8,6 +8,7 @@ interface IStyledTitleProps {
 }
 
 interface IStyledParagraphProps {
+  $fontWeight?: 'one' | 'two' | 'three';
   $fontColor?: 'greyBold' | 'grey' | 'red';
   $textAlign?: 'center' | 'left' | 'right';
 }
@@ -16,7 +17,7 @@ export const StyledTitle = styled(BaseText)<IStyledTitleProps>`
   width: 100%;
 
   font-family: ${({ theme }) => theme.fonts.primary};
-  line-height: 1.6;
+  line-height: 1.33;
 
   text-align: ${({ $textAlign }) => $textAlign};
 
@@ -24,13 +25,13 @@ export const StyledTitle = styled(BaseText)<IStyledTitleProps>`
     switch ($fontSize) {
       case 'one':
         return css`
-          font-size: 28px;
+          font-size: 35px;
           font-weight: 700;
         `;
       case 'two':
         return css`
           font-size: 22px;
-          font-weight: 700;
+          font-weight: 600;
         `;
       case 'three':
         return css`
@@ -69,6 +70,26 @@ export const StyledParagraph = styled.p<IStyledParagraphProps>`
   line-height: 1.8;
 
   text-align: ${({ $textAlign }) => $textAlign};
+
+  ${({ $fontWeight }) => {
+    switch ($fontWeight) {
+      case 'one':
+        return css`
+          font-size: 16px;
+          font-weight: 700;
+        `;
+      case 'two':
+        return css`
+          font-size: 16px;
+          font-weight: 600;
+        `;
+      case 'three':
+        return css`
+          font-size: 16px;
+          font-weight: 400;
+        `;
+    }
+  }}
 
   ${({ $fontColor, theme }) => {
     switch ($fontColor) {
