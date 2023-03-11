@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Modal from '../../components/Modal';
 import { ModalsContext } from '../../providers/ModalsContext';
 import StyledSectionHomePage from './style';
+import imgLanding from '../../assets/hom-landing.svg';
 
 const HomePage = () => {
   const { isOpen, setIsOpen } = useContext(ModalsContext);
