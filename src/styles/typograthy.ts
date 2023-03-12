@@ -35,7 +35,7 @@ export const StyledTitle = styled(BaseText)<IStyledTitleProps>`
         `;
       case 'three':
         return css`
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 600;
         `;
     }
