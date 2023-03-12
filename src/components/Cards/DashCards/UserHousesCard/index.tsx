@@ -1,48 +1,108 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { HousesContext } from '../../../../providers/HousesContext';
 import { UserContext } from '../../../../providers/UserContext';
 import { ModalsContext } from '../../../../providers/ModalsContext';
+
+import { StyledButton } from '../../../../styles/button';
+import {
+  StyledCaption,
+  StyledParagraph,
+  StyledTitle,
+} from '../../../../styles/typograthy';
+import { UserHousesSection } from './style';
+
 import { IHouse } from '../../../../providers/HousesContext/types';
+
 
 const HouseDashCard = () => {
   const { housesList, housesRent } = useContext(HousesContext);
   const { user } = useContext(UserContext);
   const { callManageHouse, callCreateHouse } = useContext(ModalsContext);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const userHouses = housesList.filter((house) => house.userId == user?.id);
   const userRents = userHouses.filter((house) =>
     housesRent.some((rent) => rent.house.id === house.id)
   );
 
+  useEffect(() => {
+    const handleReSize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener('resize', handleReSize);
+    return () => window.removeEventListener('resize', handleReSize);
+  }, []);
+
+  const showSection = screenWidth > 900;
+
   return (
-    <div>
-      <div>
-        <h3>Gerenciar casas</h3>
-        <button type='button' onClick={() => callCreateHouse()}>
-          Cadastrar Casa
-        </button>
+    <UserHousesSection>
+      <div className='title-box'>
+        <StyledTitle
+          tag='h3'
+          $fontSize='three'
+          $fontColor='greyBold'
+          $textAlign='left'
+        >
+          Gerenciar casas
+        </StyledTitle>
+
+        {showSection && (
+          <StyledButton
+            $buttonSize='short'
+            $buttonStyle='primary'
+            type='button'
+            onClick={() => callCreateHouse()}
+          >
+            Cadastrar Casa
+          </StyledButton>
+        )}
       </div>
-      <ul>
+
+      <ul className='houses-list'>
         {userHouses.map((house) => (
-          <li key={house.id}>
-            <div>
-              <h2>{house.name}</h2>
-              <button
-                type='button'
+          <li className='houses-box' key={house.id}>
+            <div className='button-box'>
+              <StyledTitle tag='h2' $fontSize='three' $fontColor='grey'>
+                {house.name}
+              </StyledTitle>
+
+              <StyledButton
+                $buttonSize='short'
+                $buttonStyle='none'
                 onClick={() => callManageHouse(Number(house.id))}
               >
-                Gerenciar Casa
-              </button>
+                <StyledCaption>pen</StyledCaption>
+              </StyledButton>
             </div>
-            <p>{house.city}</p>
-            <img src={house.photos[0]} alt={house.name} />
-            <div>
-              <p>Reservas ativas: {userRents.length}</p>
+
+            <div className='image-box'>
+              <img src={house.photos[0]} alt={house.name} />
+            </div>
+
+            <div className='reserve-box'>
+              <StyledParagraph $fontColor='grey' $fontWeight='three'>
+                Reservas ativas:
+              </StyledParagraph>
+              <StyledParagraph $fontColor='grey' $fontWeight='three'>
+                {userRents.length}
+              </StyledParagraph>
             </div>
           </li>
         ))}
       </ul>
-    </div>
+
+      {!showSection && (
+        <div className='button-mobile'>
+          <StyledButton
+            $buttonSize='short'
+            $buttonStyle='primary'
+            type='button'
+            onClick={() => callCreateHouse()}
+          >
+            Cadastrar Casa
+          </StyledButton>
+        </div>
+      )}
+    </UserHousesSection>
   );
 };
 
