@@ -1,5 +1,8 @@
 import { ReactNode } from 'react';
-import { IHouseForm, IDefaultHouseFormValues } from '../../components/Forms/HouseForm/types';
+import {
+  IHouseForm,
+  IDefaultHouseFormValues,
+} from '../../components/Forms/HouseForm/types';
 
 export interface IHousesProviderProps {
   children: ReactNode;
@@ -63,7 +66,9 @@ export interface IHousesContext {
   housesFilterList: IHouse[];
   setHousesFilterList: React.Dispatch<React.SetStateAction<IHouse[]>>;
   selectedHouse: IHouse | InoDefaultValue | null;
-  setSelectedHouse: React.Dispatch<React.SetStateAction<IHouse | InoDefaultValue | null>>;
+  setSelectedHouse: React.Dispatch<
+    React.SetStateAction<IHouse | InoDefaultValue | null>
+  >;
   selectedRent: IHouse | null;
   setSelectedRent: React.Dispatch<React.SetStateAction<IHouse | null>>;
   searchText: string;
@@ -81,18 +86,18 @@ export interface IHousesContext {
 }
 
 export interface InoDefaultValue {
-    name: undefined;
-    photos: null;
-    state: null;
-    city: null;
-    daylyPrice: undefined;
-    singleBed: undefined;
-    doubleBed: undefined;
-    services: null;
-    id?: number;
-    accommodation?: {
-      beds: number;
-      doubleBeds: number;
-    };
-    houseDesc: undefined;
+  name: undefined;
+  photos: null;
+  state: null;
+  city: null;
+  daylyPrice: undefined;
+  singleBed: undefined;
+  doubleBed: undefined;
+  services: null;
+  id?: number;
+  accommodation?: {
+    beds: number;
+    doubleBeds: number;
+  };
+  houseDesc: undefined;
 }

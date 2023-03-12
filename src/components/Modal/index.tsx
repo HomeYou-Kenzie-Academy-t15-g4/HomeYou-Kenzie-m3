@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import StyledModal from './style';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 import { MdClose } from 'react-icons/md';
 import { useContext } from 'react';
@@ -14,9 +15,16 @@ interface IModalProps {
 const Modal = ({ children, title }: IModalProps) => {
   const { isOpen, closeModal } = useContext(ModalsContext);
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
   if (isOpen) {
     return (
-      <StyledModal className='inside' role={'dialog'}>
+      <StyledModal className='box' role={'dialog'}>
         <div className='inside'>
           <header>
             <StyledTitle

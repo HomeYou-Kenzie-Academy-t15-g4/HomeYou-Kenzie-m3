@@ -12,9 +12,11 @@ import { StyledSectionProfile, StyledContainerPage } from './style';
 import ManageHouseModal from '../../components/Modal/ManageHouseModal';
 import CreateHouseModal from '../../components/Modal/CreateHouseModal';
 import UserRentsCards from '../../components/Cards/DashCards/UserRentsCard';
+import { HousesContext } from '../../providers/HousesContext';
 
 const DashboardPage = () => {
   const { user } = useContext(UserContext);
+  const { selectedHouse } = useContext(HousesContext);
   const {
     isOpen,
     isUserModal,
@@ -34,19 +36,19 @@ const DashboardPage = () => {
               <EditUser />
             </Modal>
           ) : isCreateRentModal ? (
-            <Modal title={'Editar user'}>
+            <Modal title={`R$ ${selectedHouse?.daylyPrice} noite`}>
               <EditUser />
             </Modal>
           ) : isManageRentModal ? (
-            <Modal title={'Editar user'}>
+            <Modal title={'Editar reserva'}>
               <EditUser />
             </Modal>
           ) : isManageHouseModal ? (
-            <Modal title={'Editar user'}>
+            <Modal title={'Editar casa'}>
               <ManageHouseModal />
             </Modal>
           ) : isCreateHouseModal ? (
-            <Modal title={'Editar user'}>
+            <Modal title={'Cadastrar casa'}>
               <CreateHouseModal />
             </Modal>
           ) : null

@@ -3,7 +3,9 @@ import styled from 'styled-components';
 export const StyledHousePage = styled.main`
   display: flex;
   flex-direction: column;
+
   .mainTitle {
+    margin-top: 80px;
     padding-bottom: 27px;
   }
 
@@ -103,7 +105,7 @@ export const StyledHousePage = styled.main`
       gap: 40px;
       flex-direction: column;
     }
-    .infoSection article{
+    .infoSection article {
       width: 288px;
     }
   }

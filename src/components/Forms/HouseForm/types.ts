@@ -1,8 +1,7 @@
-import { ReactNode } from "react";
-import { PropsValue } from "react-select";
+import { ReactNode } from 'react';
+import { PropsValue } from 'react-select';
 import * as yup from 'yup';
-import { houseSchema } from ".";
-
+import { houseSchema } from '.';
 
 export interface IHouseForm extends yup.InferType<typeof houseSchema> {
   id?: number;
@@ -18,28 +17,20 @@ export interface IHouseForm extends yup.InferType<typeof houseSchema> {
 }
 
 export interface IDefaultHouseFormValues {
-  name: undefined | string;
+  name: string;
   photos:
     | PropsValue<{
         value: string;
         label: string;
       } | null>
     | undefined;
-  state: null | number;
-  city:
-    | PropsValue<{
-        value: string;
-        label: string;
-      } | null>
-    | undefined;
-  daylyPrice: undefined | number;
-  singleBed: undefined | number;
-  doubleBed: undefined | number;
-  services: null | PropsValue<{
-    value: string;
-    label: string ;
-  } | null>;
-  houseDesc: undefined | string;
+  state: string;
+  city: string;
+  daylyPrice: number | string;
+  singleBed: number | string;
+  doubleBed: number | string;
+  services: string[];
+  houseDesc: string;
 }
 
 export interface IHouseFormProps {
