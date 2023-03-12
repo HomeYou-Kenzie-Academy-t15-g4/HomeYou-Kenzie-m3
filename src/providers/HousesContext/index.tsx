@@ -53,7 +53,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         const response = await api.get('/houses');
         setHousesList(response.data);
         setHousesFilterList(response.data);
-        
       } catch (error) {
         window.localStorage.clear();
         setHousesList([]);
@@ -143,7 +142,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           value: service,
           label: service,
         })),
-        houseDesc: response.data?.houseDesc
+        houseDesc: response.data?.houseDesc,
       };
 
       setLoadValues(values);
