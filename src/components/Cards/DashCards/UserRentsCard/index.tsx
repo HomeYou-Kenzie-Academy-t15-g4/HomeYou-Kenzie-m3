@@ -7,10 +7,9 @@ const UserRentsCards = () => {
   const { housesRent } = useContext(HousesContext);
   const { user } = useContext(UserContext);
 
-
-   const rentsUserHouses = housesRent.filter(
-      (house) => house.userId === user?.id
-      );
+  const rentsUserHouses = housesRent.filter(
+    (house) => house.userId === user?.id
+    );
   // exemplo, as infos já estão chegando, na hora de estilizar ai já faço com todas infos deixa tudo certinho
 
   return (
