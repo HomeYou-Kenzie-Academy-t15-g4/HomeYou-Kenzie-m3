@@ -8,9 +8,10 @@ import { StyledParagraph } from '../../../styles/typograthy';
 import Input from '../Input';
 import { LoginFormSchema } from './LoginFormSchema';
 import { ILoginFormValue } from './types';
+import { CgSpinnerTwo } from 'react-icons/cg';
 
 const LoginForm = () => {
-  const { loginUser } = useContext(UserContext);
+  const { loginUser, loading } = useContext(UserContext);
 
   const {
     register,
@@ -43,7 +44,7 @@ const LoginForm = () => {
       />
 
       <StyledButton type='submit' $buttonSize='large' $buttonStyle='primary'>
-        Entrar
+        {loading ? <CgSpinnerTwo className='spinner' /> : 'Entrar'}
       </StyledButton>
 
       <StyledParagraph $textAlign='center' $fontColor='grey'>
