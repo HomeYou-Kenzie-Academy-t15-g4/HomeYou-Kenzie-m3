@@ -17,7 +17,7 @@ import UsserInfoard from '../../components/Cards/UserInfoCard';
 import { Container } from '../../styles/global';
 
 import { HousesContext } from '../../providers/HousesContext';
-
+import UsserInfocard from '../../components/Cards/UserInfoCard';
 
 const DashboardPage = () => {
   const { user } = useContext(UserContext);
@@ -34,54 +34,43 @@ const DashboardPage = () => {
 
   return (
     <StyledContainerPage>
-      <div>
-        {isOpen ? (
-          isUserModal ? (
-            <Modal title={'Atualizar foto'}>
-              <EditUser />
-            </Modal>
-          ) : isCreateRentModal ? (
-            <Modal title={`R$ ${selectedHouse?.daylyPrice} noite`}>
-              <EditUser />
-            </Modal>
-          ) : isManageRentModal ? (
-            <Modal title={'Editar reserva'}>
-              <EditUser />
-            </Modal>
-          ) : isManageHouseModal ? (
-            <Modal title={'Editar casa'}>
-              <ManageHouseModal />
-            </Modal>
-          ) : isCreateHouseModal ? (
-            <Modal title={'Cadastrar casa'}>
-              <CreateHouseModal />
-            </Modal>
-          ) : null
-        ) : null}
+      {isOpen ? (
+        isUserModal ? (
+          <Modal title={'Atualizar foto'}>
+            <EditUser />
+          </Modal>
+        ) : isCreateRentModal ? (
+          <Modal title={`R$ ${selectedHouse?.daylyPrice} noite`}>
+            <EditUser />
+          </Modal>
+        ) : isManageRentModal ? (
+          <Modal title={'Editar reserva'}>
+            <EditUser />
+          </Modal>
+        ) : isManageHouseModal ? (
+          <Modal title={'Editar casa'}>
+            <ManageHouseModal />
+          </Modal>
+        ) : isCreateHouseModal ? (
+          <Modal title={'Cadastrar casa'}>
+            <CreateHouseModal />
+          </Modal>
+        ) : null
+      ) : null}
 
-        <Header />
-        <StyledSectionProfile>
-          <div className='contentSection'>
-            <div className='contentImage'>
-              <img src={user?.img} alt='photo image' />
-              <div>
-                <h3>{user?.name}</h3>
-                <span>{user?.age} anos</span>
-                <hr />
-                <div>
-                  <AiOutlineUser />
-                  <button type='button' onClick={() => callEditUser()}>
-                    Editar Perfil
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </StyledSectionProfile>
-        <HouseDashCard />
-        <UserRentsCards />
-        <Footer />
-      </div>
+      <Header />
+
+      <Container>
+        <section className='info-section'>
+          <UsserInfocard />
+
+          <section className='user-cards'>
+            <HouseDashCard />
+            <UserRentsCards />
+          </section>
+        </section>
+      </Container>
+      <Footer />
     </StyledContainerPage>
   );
 };
