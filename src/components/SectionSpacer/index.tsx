@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { StyledSectionSpacer } from "./style";
+import { StyledSectionSpacer } from './style';
 
 const SectionSpacer = () => {
   return <StyledSectionSpacer />;

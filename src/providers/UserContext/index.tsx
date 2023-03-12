@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 import {
   ILoginFormValue,
   IUser,
@@ -14,6 +14,7 @@ export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
   const [user, setUser] = useState<IUser | null>(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const userLoad = async () => {
@@ -23,7 +24,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         const res = await api.get(`/users/${user?.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setUser(res.data);        
+        setUser(res.data);
 
         return navigate('/dashboard');
       } catch (error) {
@@ -80,6 +81,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   };
 
   const createUser = async (data: IRegisterForm) => {
+    setLoading(true);
     const newData = {
       email: data.email,
       name: data.name,
@@ -87,7 +89,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       password: data.password,
       img: 'https://canvas.kenzie.com.br/images/messages/avatar-50.png',
     };
-    
+
     if (newData.age < 18) {
       console.log('É preciso ter mais de 18 anos para se cadastrar');
     } else {
@@ -100,11 +102,14 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       } catch (error) {
         console.log('deu errado');
         toast.error('Ops,algo deu errado!');
+      } finally {
+        setLoading(false);
       }
     }
   };
 
   const loginUser = async (formData: ILoginFormValue) => {
+    setLoading(true);
     try {
       const res = await api.post('/login', formData);
       localStorage.setItem('@HomeYou:TOKEN', res.data.accessToken);
@@ -118,6 +123,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       console.log('falhou');
       console.log(error);
       // toast.error(error.response.data)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -128,19 +135,25 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   };
 
   const editUser = async (data: IUser) => {
-    const id = localStorage.getItem('@IDUSER');
+    const userAuxString = localStorage.getItem('@HomeYou:User');
+    const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
     const token = localStorage.getItem('@HomeYou:TOKEN');
+    console.log(data);
+
     try {
-      const response = await api.patch(`/users/${id}`, data, {
+      const response = await api.patch(`/users/${userAux.id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setUser(response.data.user);
       console.log('ok!');
-      ///toast
+      userLoad();
+      toast.success('Alteração feita com sucesso!');
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -154,6 +167,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           loginUser,
           logoutUser,
           editUser,
+          loading,
+          setLoading,
         }}
       >
         {children}

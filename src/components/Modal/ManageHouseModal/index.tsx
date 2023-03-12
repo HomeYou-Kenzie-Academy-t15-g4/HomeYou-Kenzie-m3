@@ -13,9 +13,6 @@ const ManageHouseModal = () => {
   }  
 
   return (
-    <article>
-      <h3>Editar Casa</h3>
-
       <HouseForm
         submitFunction={editHouse}
         children={
@@ -27,7 +24,6 @@ const ManageHouseModal = () => {
           </div>
         }
       />
-    </article>
   );
 };
 

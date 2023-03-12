@@ -65,7 +65,6 @@ const HomePage = () => {
             </Container>
           </div>
         </section>
-
         <section>
           <Container>
             <StyledTitle

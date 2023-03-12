@@ -1,9 +1,9 @@
-import { useContext } from 'react';
 import { UseFormRegister, FieldError } from 'react-hook-form';
-import Select, { ActionMeta, PropsValue, SingleValue } from 'react-select';
 import useCities from '../../../hooks/useCities';
-import { HousesContext } from '../../../providers/HousesContext';
 import { IHouseForm } from '../../Forms/HouseForm/types';
+import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { HousesContext } from '../../../providers/HousesContext';
+import { useContext } from 'react';
 
 export interface ISelectCityProps {
   uf: string;
@@ -12,41 +12,39 @@ export interface ISelectCityProps {
   error?: FieldError | undefined;
 }
 
-const SelectCity = ({
-  uf,
-  setSelectedCity,
-}: ISelectCityProps) => {
-  const { loadValues ,setLoadValues } = useContext(HousesContext)
+const SelectCity = ({ uf, setSelectedCity }: ISelectCityProps) => {
+  const { loadValues, setLoadValues } = useContext(HousesContext);
+
   const { cities, loading: loadingCities } = useCities({
     uf,
   });
 
-  const cityOptions = cities.map((city) => ({
-    value: city.codigo_ibge,
-    label: city.nome,
-  }));
-
-  const handleStateUpdate = (
-    newValue: SingleValue<{ value: string; label: string } | null>,
-    actionMeta: ActionMeta<{ value: string; label: string } | null>
-  ) => {
-    setSelectedCity(newValue?.label ?? '');
-    
+  const handleCityUpdate = (event: SelectChangeEvent<string>) => {
     setLoadValues({
       ...loadValues,
-      city:  { value: newValue?.value ?? '', label: newValue?.label ?? ''}
+      city: event.target.value,
     });
+    setSelectedCity(event.target.value);
   };
 
   return (
-    <Select 
-      isLoading={loadingCities}
-      isDisabled={loadingCities || cityOptions.length === 0}
-      options={cityOptions}
-      placeholder={'Selecione uma cidade'}
-      onChange={handleStateUpdate}
-      // need to ADD text-transform:capitalize; ON CSS
-    />
+    <Select
+      disabled={loadingCities || cities.length === 0}
+      labelId='city-select-label'
+      value={loadValues.city}
+      id='city-select'
+      name='Cidade'
+      label='Cidade'
+      onChange={(event: SelectChangeEvent<string>) => handleCityUpdate(event)}
+    >
+      {cities.map((city) => {
+        return (
+          <MenuItem key={city.nome} value={city.nome}>
+            {city.nome}
+          </MenuItem>
+        );
+      })}
+    </Select>
   );
 };
 

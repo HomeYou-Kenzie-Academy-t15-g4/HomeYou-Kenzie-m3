@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { ModalsContext } from '../../../providers/ModalsContext';
 import { UserContext } from '../../../providers/UserContext';
 import { IUser } from '../../../providers/UserContext/type';
 import { StyledButton } from '../../../styles/button';
 import { StyledForm } from '../../../styles/form';
 import Input from '../Input';
 import StyledFormEditUserPic from './style';
+import { CgSpinnerTwo } from 'react-icons/cg';
 
 interface IEditForm {
   email?: string;
@@ -18,7 +20,8 @@ interface IEditForm {
 }
 
 const EditUser = () => {
-  const { editUser } = useContext(UserContext);
+  const { editUser, loading } = useContext(UserContext);
+  const { closeModal } = useContext(ModalsContext);
   const {
     register,
     handleSubmit,
@@ -29,6 +32,9 @@ const EditUser = () => {
   const submit: SubmitHandler<IUser> = (formData) => {
     editUser(formData);
     reset();
+    setTimeout(() => {
+      closeModal();
+    }, 2000);
   };
 
   return (
@@ -44,7 +50,7 @@ const EditUser = () => {
           $buttonSize='medium'
           $buttonStyle='greenBold'
         >
-          Alterar Foto
+          {loading ? <CgSpinnerTwo className='spinner' /> : 'Alterar foto'}
         </StyledButton>
       </StyledFormEditUserPic>
     </StyledForm>

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { defaultNoValues } from '../../components/Forms/HouseForm';
+import { defaultNoValues } from '../../components/Forms/HouseForm/servicesOptions';
 import { HousesContext } from '../HousesContext';
 import { IModalsContext, IModalsProviderProps } from './type';
 
