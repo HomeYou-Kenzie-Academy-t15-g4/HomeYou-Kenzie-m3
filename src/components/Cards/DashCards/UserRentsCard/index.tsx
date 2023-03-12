@@ -9,7 +9,7 @@ const UserRentsCards = () => {
 
   const rentsUserHouses = housesRent.filter(
     (house) => house.userId === user?.id
-    );
+  );
   // exemplo, as infos já estão chegando, na hora de estilizar ai já faço com todas infos deixa tudo certinho
 
   return (
