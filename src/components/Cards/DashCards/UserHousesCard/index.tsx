@@ -9,11 +9,10 @@ const HouseDashCard = () => {
   const { user } = useContext(UserContext);
   const { callManageHouse, callCreateHouse } = useContext(ModalsContext);
 
-  
-    const userHouses = housesList.filter((house) => house.userId == user?.id);
-    const userRents = userHouses.filter((house) =>
-      housesRent.some((rent) => rent.house.id === house.id)
-    );
+  const userHouses = housesList.filter((house) => house.userId == user?.id);
+  const userRents = userHouses.filter((house) =>
+    housesRent.some((rent) => rent.house.id === house.id)
+  );
 
   return (
     <div>
