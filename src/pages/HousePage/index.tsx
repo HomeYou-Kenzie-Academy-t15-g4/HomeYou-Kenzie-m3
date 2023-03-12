@@ -16,7 +16,7 @@ import { StyledHousePage } from './style';
 const HousePage = () => {
   const { isOpen, setIsOpen } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
-  
+
   useEffect(() => {
     loadOneHouse(2);
     console.log(selectedHouse);
@@ -30,7 +30,6 @@ const HousePage = () => {
     Number(selectedHouse?.accommodation?.beds) +
     Number(selectedHouse?.accommodation?.doubleBeds);
 
-
   return (
     <StyledHousePage>
       {isOpen ? (
@@ -39,11 +38,9 @@ const HousePage = () => {
         </Modal>
       ) : null}
 
-
       <button type='button' onClick={() => setIsOpen(true)}>
         Abrir
       </button>
-
 
       <button
         style={{ paddingBottom: '65px' }}
@@ -52,7 +49,7 @@ const HousePage = () => {
       >
         Abrir
       </button>
-      
+
       <section>
         <Container>
           <div className='mainTitle'>
@@ -63,8 +60,8 @@ const HousePage = () => {
               {capacity} hospedes - {beds} camas{' '}
             </StyledCaption>
           </div>
-        </Container
-        
+        </Container>
+
         <section className='galerySection'>
           <StyledTitle
             $textAlign='center'
@@ -97,7 +94,11 @@ const HousePage = () => {
             </StyledTitle>
             <StyledCaption>Interessado em alugar essa casa?</StyledCaption>
 
-            <StyledButton /* onClick={FunçãoModaldeReserva(selectedHouse?.id)} */ type='button' $buttonSize='short' $buttonStyle='primary'>
+            <StyledButton
+              /* onClick={FunçãoModaldeReserva(selectedHouse?.id)} */ type='button'
+              $buttonSize='short'
+              $buttonStyle='primary'
+            >
               Reservar
             </StyledButton>
           </div>
@@ -129,13 +130,14 @@ const HousePage = () => {
               </StyledTitle>
               <div className='detailsTextBox'>
                 <StyledCaption>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                   Corrupti hic corporis dicta sapiente est asperiores omnis
                   ipsum odio. Eius facere totam eligendi ut beatae rerum? Cum
-                  consequatur animi aut consequuntur!Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Corrupti hic corporis dicta sapiente est asperiores omnis
-                  ipsum odio. Eius facere totam eligendi ut beatae rerum? Cum
-                  consequatur animi aut consequuntur! Eius facere totam eligendi ut beatae rerum? Cum
+                  consequatur animi aut consequuntur!Lorem, ipsum dolor sit amet
+                  consectetur adipisicing elit. Corrupti hic corporis dicta
+                  sapiente est asperiores omnis ipsum odio. Eius facere totam
+                  eligendi ut beatae rerum? Cum consequatur animi aut
+                  consequuntur! Eius facere totam eligendi ut beatae rerum? Cum
                   consequatur animi aut consequuntur!
                 </StyledCaption>
               </div>
