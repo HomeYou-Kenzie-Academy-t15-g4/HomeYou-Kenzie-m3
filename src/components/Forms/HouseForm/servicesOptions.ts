@@ -43,3 +43,15 @@ export const servicesOptions = [
   { value: 'Espaço de trabalho', label: 'Espaço de trabalho' },
   { value: 'Torradeira', label: 'Torradeira' }
 ]
+
+export const defaultNoValues = {
+  name: '',
+  photos: null,
+  state: '',
+  city: '',
+  daylyPrice: '',
+  singleBed: '',
+  doubleBed: '',
+  services: [],
+  houseDesc: '',
+};

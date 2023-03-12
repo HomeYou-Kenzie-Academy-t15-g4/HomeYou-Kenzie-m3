@@ -1,18 +1,47 @@
 import { useContext, useEffect, useState } from 'react';
-import Select, { ActionMeta, MultiValue } from 'react-select';
+import { ActionMeta, MultiValue } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Theme, useTheme } from '@mui/material/styles';
+import { SelectChangeEvent } from '@mui/material/Select';
+import {
+  Box,
+  Checkbox,
+  Chip,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  OutlinedInput,
+  Select,
+} from '@mui/material';
 
-import { StyledForm } from './style';
-import { servicesOptions } from './servicesOptions';
+import {
+  MenuProps,
+  reactSelectStyle,
+  StyledForm,
+  StyleMuiSelector,
+  StyleMuiSelectorMidWidth,
+} from './style';
+import { defaultNoValues, servicesOptions } from './servicesOptions';
 import SelectState from '../../Selects/SelectState';
 import SelectCity from '../../Selects/SelectCity';
 import { HousesContext } from '../../../providers/HousesContext';
 import { IHouseForm, IHouseFormProps } from './types';
-import { statesDatabase } from '../../Modal/ManageHouseModal/statesDatabase';
 import { ModalsContext } from '../../../providers/ModalsContext';
+import HouseInput from './HouseInput';
+import { StyledParagraph } from '../../../styles/typograthy';
+import IconsMatch from '../../IconsMatch';
+
+function getStyles(name: string, personName: readonly string[], theme: Theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
 
 export const houseSchema = yup.object().shape({
   name: yup.string().required('Campo Obrigatório'),
@@ -23,10 +52,10 @@ export const houseSchema = yup.object().shape({
     .min(3, 'Adicione no minimo 3 fotos')
     .of(yup.string())
     .required('Campo Obrigatório'),
-    daylyPrice: yup
+  daylyPrice: yup
     .number()
     .typeError('Campo Obrigatório')
-    .positive('Épreciso informar um valor positivo')
+    .positive('É preciso informar um valor positivo')
     .required(),
   singleBed: yup
     .number()
@@ -43,22 +72,16 @@ export const houseSchema = yup.object().shape({
     .min(3, 'Selecione no minimo 3 opções')
     .of(yup.string())
     .required('Campo Obrigatório'),
-  houseDesc: yup.string().min(200, 'Deve conter no minimo 200 caracteres').max(550, 'Deve conter no máximo 550 caracteres').required('Campo Obrigatório'),
+  houseDesc: yup
+    .string()
+    .min(200, 'Deve conter no minimo 200 caracteres')
+    .max(550, 'Deve conter no máximo 550 caracteres')
+    .required('Campo Obrigatório'),
 });
 
-export const defaultNoValues = {
-  name: undefined,
-  photos: null,
-  state: null,
-  city: null,
-  daylyPrice: undefined,
-  singleBed: undefined,
-  doubleBed: undefined,
-  services: null,
-  houseDesc: undefined,
-};
-
 const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
+  const theme = useTheme();
+
   const { isCreateHouseModal, closeModal } = useContext(ModalsContext);
   const { loadValues, setLoadValues } = useContext(HousesContext);
 
@@ -69,16 +92,8 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
 
   useEffect(() => {
     if (!isCreateHouseModal) {
-      let selectedOptionState = statesDatabase.find(
-        (e) => Number(e.id) === loadValues?.state
-      );
-      setValue('state', selectedOptionState?.sigla !== undefined ? selectedOptionState.sigla.toString() : '');
-      
-      if (loadValues?.city) {
-        if ('value' in loadValues.city) {
-          setValue('city', loadValues?.city?.value?.toString() ?? '');
-        }
-      }
+      setValue('state', loadValues?.state ?? '');
+      setValue('city', loadValues?.city ?? '');
     }
   }, [loadValues]);
 
@@ -92,35 +107,17 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
     resolver: yupResolver(houseSchema),
   });
 
-  const handleChangePhotos = (
-    newValue: MultiValue<{ value: string; label: string } | null>,
-    actionMeta: ActionMeta<{ value: string; label: string } | null>
-  ) => {
-    setStopUpdate(true)
-    let values: string[] = [];
-    (newValue ?? []).map((option) => values.push(option?.value || ''));
-    let tempPhotos: { value: string; label: string }[] = [];
-    values.map((value) => tempPhotos.push({ value: value, label: value }));
-    setLoadValues({
-      ...loadValues,
-      photos: tempPhotos,
-    });
-
-    setValue('photos', values);
-    clearErrors('photos');
-  };
-
-  const onSubmit = (data: IHouseForm) => {
-    submitFunction(data)
-    closeModal()
-  }
-
   useEffect(() => {
-    if (loadValues !== defaultNoValues && !stopUpdate) {
+    if (loadValues !== defaultNoValues && loadValues && !stopUpdate) {
       setValue('name', loadValues?.name ?? '');
-      setValue('dailyPrice', loadValues?.daylyPrice ?? 0);
-      setValue('singleBed', loadValues?.singleBed ?? 0);
-      setValue('doubleBed', loadValues?.doubleBed ?? 0);
+      setValue('dailyPrice', Number(loadValues?.daylyPrice) ?? '');
+
+      if (loadValues?.singleBed !== '') {
+        setValue('singleBed', Number(loadValues?.singleBed) ?? '');
+      }
+      if (loadValues?.doubleBed !== '') {
+        setValue('doubleBed', Number(loadValues?.doubleBed) ?? '');
+      }
       setValue('houseDesc', loadValues?.houseDesc ?? '');
 
       let tempPhotos: string[] = [];
@@ -131,23 +128,13 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
       }
       setValue('photos', tempPhotos);
 
-      let selectedOptionState = statesDatabase.find(
-        (e) => Number(e.id) === loadValues?.state
-      );
+      setValue('state', loadValues?.state ?? '');
 
-      setValue('state', selectedOptionState?.sigla !== undefined ? selectedOptionState.sigla.toString() : '');
-      
-      if (loadValues?.city) {
-        if ('value' in loadValues.city) {
-          setValue('city', loadValues?.city?.value?.toString() ?? '');
-        }
-      }
+      setValue('city', loadValues?.city ?? '');
 
       let tempServices: string[] = [];
       if (Array.isArray(loadValues?.services)) {
-        loadValues.services.map((option) =>
-          tempServices.push(option?.value || '')
-        );
+        loadValues.services.map((option) => tempServices.push(option || ''));
       } else {
         tempServices = [];
       }
@@ -165,20 +152,31 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
     clearErrors('city');
   }, [selectedCity]);
 
-  const handleChangeServices = (
+  const handleChangePhotos = (
     newValue: MultiValue<{ value: string; label: string } | null>,
     actionMeta: ActionMeta<{ value: string; label: string } | null>
   ) => {
-    setStopUpdate(true)
+    setStopUpdate(true);
     let values: string[] = [];
     (newValue ?? []).map((option) => values.push(option?.value || ''));
-    let tempServices: { value: string; label: string }[] = [];
-    values.map((value) => tempServices.push({ value: value, label: value }));
+    let tempPhotos: { value: string; label: string }[] = [];
+    values.map((value) => tempPhotos.push({ value: value, label: value }));
     setLoadValues({
       ...loadValues,
-      services: tempServices,
+      photos: tempPhotos,
     });
-    setValue('services', values);
+
+    setValue('photos', values);
+    clearErrors('photos');
+  };
+
+  const handleChangeServices = (event: SelectChangeEvent<string[]>) => {
+    setStopUpdate(true);
+    setLoadValues({
+      ...loadValues,
+      services: event.target.value as string[],
+    });
+    setValue('services', event.target.value as string[]);
     clearErrors('services');
   };
 
@@ -186,132 +184,219 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
     setLoadValues({
       ...loadValues,
       name: e.target.value,
-    });    
-  }
+    });
+  };
   const changePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoadValues({
       ...loadValues,
       daylyPrice: Number(e.target.value),
-    });    
-  }
+    });
+  };
   const changeBeds = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoadValues({
       ...loadValues,
       singleBed: Number(e.target.value),
-    });    
-  }
+    });
+  };
   const changeDoubleBeds = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoadValues({
       ...loadValues,
       doubleBed: Number(e.target.value),
-    });    
-  }
+    });
+  };
   const changeHouseDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setLoadValues({
       ...loadValues,
       houseDesc: e.target.value,
-    });    
-  }
-  
+    });
+
+    clearErrors('houseDesc');
+  };
+
+  const onSubmit = (data: IHouseForm) => {
+    submitFunction(data);
+    closeModal();
+  };
+
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <div className='label temporario'>Nome da Casa</div>
-      <input
+      <HouseInput
         value={loadValues.name}
-        placeholder='Digite o nome da casa'
+        onChange={changeName}
+        label='Nome da Casa'
         type='text'
-        {...register('name')}
-        name='name'
-        onChange={(e) => changeName(e)}
-        />
-        <p>{errors.houseName?.message}</p>
-      <div className='label temporario'>Fotos</div>
-      <CreatableSelect
-        isClearable
-        isMulti
-        className='photo-link-select'
-        value={loadValues.photos}
-        defaultValue={loadValues.photos}
-        classNamePrefix='select-photos'
-        placeholder='Adicione o link das fotos'
-        onChange={handleChangePhotos}
-        formatCreateLabel={(inputValue) => `Adicionar: "${inputValue}"`}
+        register={register('name')}
+        error={errors.houseName}
       />
-      <p>{errors.photos?.message}</p>
-      
+
       {isCreateHouseModal ? (
         <div>
-          <div className='label temporario'>Local</div>
-          <div style={{ display: 'flex' }}>
-            <SelectState
-              error={errors.state}
-              register={register}
-              onChange={setSelectedUf}
-              setSelectedState={setSelectedState}
-            />
-            <p>{errors.state?.message}</p>
-            <SelectCity
-              uf={selectedUf}
-              error={errors.city}
-              setSelectedCity={setSelectedCity}
-              register={register}
-            />
-            <p>{errors.city?.message}</p>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              width: '100%',
+            }}
+          >
+            <FormControl sx={StyleMuiSelectorMidWidth}>
+              <InputLabel id='state-select-label'>Estado</InputLabel>
+              <SelectState
+                error={errors.state}
+                onChange={setSelectedUf}
+                setSelectedState={setSelectedState}
+              />
+              {errors.state ? (
+                <StyledParagraph $fontColor='red'>
+                  {errors.state?.message}
+                </StyledParagraph>
+              ) : null}
+            </FormControl>
+            <FormControl
+              title='Primeiro selecione o estado'
+              sx={StyleMuiSelectorMidWidth}
+            >
+              <InputLabel id='city-select-label'>Cidade</InputLabel>
+              <SelectCity
+                error={errors.city}
+                uf={selectedUf}
+                setSelectedCity={setSelectedCity}
+              />
+              {errors.city ? (
+                <StyledParagraph $fontColor='red'>
+                  {errors.city?.message}
+                </StyledParagraph>
+              ) : null}
+            </FormControl>
           </div>
         </div>
       ) : null}
 
-      <div className='label temporario'>Valor por noite</div>
-      <input
-        value={loadValues.daylyPrice}
-        placeholder='Valor da Diaria'
+      <HouseInput
+        value={loadValues.daylyPrice?.toString()}
+        onChange={changePrice}
+        label='Valor por noite'
         type='number'
-        {...register('daylyPrice')}
-        name='daylyPrice'
-        onChange={(e) => changePrice(e)}
+        register={register('daylyPrice')}
+        error={errors.daylyPrice}
       />
-      <p>{errors.daylyPrice?.message}</p>
-      <div className='label temporario'>Camas</div>
-      <div style={{ display: 'flex' }}>
-        <input
-          placeholder='Camas de solteiro'
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '100%',
+        }}
+      >
+        <HouseInput
+          controlSx={{ width: '45%' }}
+          value={loadValues.singleBed?.toString()}
+          onChange={changeBeds}
+          label='Camas de solteiro'
           type='number'
-          value={loadValues.singleBed}
-          {...register('singleBed')}
-          name='singleBed'
-          onChange={(e)=> changeBeds(e)}
+          register={register('singleBed')}
+          error={errors.singleBed}
         />
-        <p>{errors.singleBed?.message}</p>
-        <input
-          value={loadValues.doubleBed}
-          placeholder='Camas de casal'
+        <HouseInput
+          controlSx={{ width: '45%' }}
+          value={loadValues.doubleBed?.toString()}
+          onChange={changeDoubleBeds}
+          label='Camas de casal'
           type='number'
-          {...register('doubleBed')}
-          name='doubleBed'
-          onChange={(e)=> changeDoubleBeds(e)}
+          register={register('doubleBed')}
+          error={errors.doubleBed}
         />
-        <p>{errors.doubleBed?.message}</p>
       </div>
-      <div className='label temporario'>Serviços oferecidos</div>
-      <Select
-        isMulti
-        options={servicesOptions}
-        className='basic-multi-select'
-        defaultValue={loadValues.services}
-        value={loadValues.services}
-        classNamePrefix='select'
-        placeholder='O que o local oferece?'
-        onChange={handleChangeServices}
+      <FormControl sx={StyleMuiSelector}>
+        <InputLabel id='services-select-label'>
+          O que o local oferece?
+        </InputLabel>
+        <Select
+          multiple
+          error={errors.services ? true : false}
+          labelId='services-select-label'
+          id='services-select'
+          label='O que o local oferece?'
+          value={loadValues.services}
+          onChange={(event: SelectChangeEvent<string[]>) =>
+            handleChangeServices(event)
+          }
+          input={
+            <OutlinedInput
+              id='select-multiple-chip'
+              label='O que o local oferece?'
+            />
+          }
+          renderValue={(selected) => (
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+              {selected.map((value) => (
+                <Chip key={value} label={value} />
+              ))}
+            </Box>
+          )}
+          MenuProps={MenuProps}
+        >
+          {servicesOptions.map((service) => {
+            return (
+              <MenuItem
+                sx={{ display: 'flex', gap: '7px', alignItems: 'center' }}
+                style={getStyles(service.value, loadValues.services, theme)}
+                key={service.value}
+                value={service.value}
+              >
+                <Checkbox
+                  checked={loadValues.services.indexOf(service.value) > -1}
+                />
+                <IconsMatch iconName={service.value} />
+                {service.value}
+              </MenuItem>
+            );
+          })}
+        </Select>
+        {errors.services ? (
+          <StyledParagraph $fontColor='red'>
+            {errors.services?.message}
+          </StyledParagraph>
+        ) : null}
+      </FormControl>
+
+      <HouseInput
+        value={loadValues.houseDesc}
+        onChange={changeHouseDesc}
+        label='Descreva o local'
+        type='text'
+        register={register('houseDesc')}
+        error={errors.houseDesc}
+        multiline={true}
+        helperText={true}
       />
-      <p>{errors.services?.message}</p>
-      <textarea
-          value={loadValues.houseDesc}
-          placeholder='Descreva o local'
-          {...register('houseDesc')}
-          name='houseDesc'
-          onChange={(e)=> changeHouseDesc(e)}>
-      </textarea>
-        <p>{errors.houseDesc?.message}</p>
+      <StyledParagraph className='labelPhotos' $fontColor='grey'>
+        Fotos
+      </StyledParagraph>
+      <CreatableSelect
+        isClearable
+        isMulti
+        styles={reactSelectStyle}
+        className='photo-link-select'
+        value={loadValues.photos}
+        defaultValue={loadValues.photos}
+        classNamePrefix='select-photos'
+        placeholder='Adicione os links das fotos'
+        onChange={handleChangePhotos}
+        formatCreateLabel={(inputValue) => `Adicionar: "${inputValue}"`}
+        theme={(theme) => ({
+          ...theme,
+          borderRadius: 0,
+          colors: {
+            ...theme.colors,
+            primary25: '#04C35C',
+            primary: '#0C6B38',
+          },
+        })}
+      />
+      {errors.photos ? (
+        <StyledParagraph className='errorPhotos' $fontColor='red'>
+          {errors.photos?.message}
+        </StyledParagraph>
+      ) : null}
       <span className='formButtons'>{children}</span>
     </StyledForm>
   );

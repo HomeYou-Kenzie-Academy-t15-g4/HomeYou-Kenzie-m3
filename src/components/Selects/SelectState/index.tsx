@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
-import Select, { ActionMeta, PropsValue, SingleValue } from 'react-select';
+import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { useContext } from 'react';
 import { IuseStatesProps, useStates } from '../../../hooks/useStates';
 import { HousesContext } from '../../../providers/HousesContext';
 
@@ -8,44 +8,37 @@ export interface IStatesInfo {
   label: string;
 }
 
-const SelectState = ({
-  onChange,
-  setSelectedState
-}: IuseStatesProps) => {
+const SelectState = ({ onChange, setSelectedState }: IuseStatesProps) => {
   const { states } = useStates();
-  const { loadValues } = useContext(HousesContext);
-  const [selectedStateAux, setSelectedStateAux] = useState<number | null>(
-    loadValues.state
-  );
+  const { loadValues, setLoadValues } = useContext(HousesContext);
 
-  const stateOptions = states.map((state) => ({
-    value: state.id.toString(),
-    label: state.nome,
-  }));
-
-  let selectedOptionState = stateOptions.find(
-    (e) => Number(e.value) === selectedStateAux
-  );
-
-  const handleStateUpdate = (
-    newValue: SingleValue<{ value: string; label: string } | null>,
-    actionMeta: ActionMeta<{ value: string; label: string } | null>
-  ) => {
-    const getStateId: number | null = Number(newValue?.value);
-
-    setSelectedStateAux(getStateId);
-    const selectedUf = states.find((e) => e.id === getStateId);
-
-    setSelectedState(selectedUf?.sigla ?? '');
-    onChange(selectedUf?.sigla ?? '');
+  const handleStateUpdate = (event: SelectChangeEvent<string>) => {
+    setLoadValues({
+      ...loadValues,
+      state: event.target.value,
+    });
+    setSelectedState(event.target.value);
+    onChange(event.target.value);
   };
 
   return (
     <Select
-      onChange={handleStateUpdate}
-      options={stateOptions}
-      placeholder={'Selecione um estado'}
-    />
+      labelId='state-select-label'
+      id='state-select'
+      defaultValue=''
+      value={loadValues.state}
+      name='Estado'
+      label='Estado'
+      onChange={(event: SelectChangeEvent<string>) => handleStateUpdate(event)}
+    >
+      {states.map((state) => {
+        return (
+          <MenuItem key={state.id} value={state.sigla}>
+            {state.sigla}
+          </MenuItem>
+        );
+      })}
+    </Select>
   );
 };
 
