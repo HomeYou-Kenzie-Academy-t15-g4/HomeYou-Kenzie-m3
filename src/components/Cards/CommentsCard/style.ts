@@ -33,13 +33,13 @@ export const StyledContainerCardComment = styled.ul`
     li {
       gap: 190px;
       padding: 0;
-      width: 30%;
+      width: 40%;
       min-width: 390px;
       margin-left: 0;
     }
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
   }
 `;
 
