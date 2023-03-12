@@ -33,60 +33,26 @@ const HousePage = () => {
   return (
     <>
       <Header />
+      <StyledHousePage>
+        {isOpen ? (
+          <Modal title='modal'>
+            <div></div>
+          </Modal>
+        ) : null}
 
-    <StyledHousePage>
-      {isOpen ? (
-        <Modal title='modal'>
-          <div></div>
-        </Modal>
-      ) : null}
+        <section>
+          <Container>
+            <div className='mainTitle'>
+              <StyledTitle $fontSize='two' $fontColor='greyBold' tag='h2'>
+                {selectedHouse?.name}
+              </StyledTitle>
+              <StyledCaption>
+                {capacity} hospedes - {beds} camas{' '}
+              </StyledCaption>
+            </div>
+          </Container>
 
-      <button type='button' onClick={() => setIsOpen(true)}>
-        Abrir
-      </button>
-
-      <button
-        style={{ paddingBottom: '65px' }}
-        type='button'
-        onClick={() => setIsOpen(true)}
-      >
-        Abrir
-      </button>
-
-      <section>
-        <Container>
-          <div className='mainTitle'>
-            <StyledTitle $fontSize='two' $fontColor='greyBold' tag='h2'>
-              {selectedHouse?.name}
-            </StyledTitle>
-            <StyledCaption>
-              {capacity} hospedes - {beds} camas{' '}
-            </StyledCaption>
-          </div>
-        </Container>
-
-        <section className='galerySection'>
-          <StyledTitle
-            $textAlign='center'
-            $fontSize='two'
-            $fontColor='greyBold'
-            tag='h2'
-          >
-            Galeria
-          </StyledTitle>
-          <div
-            style={{
-              position: 'relative',
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          ></div>
-          <div className='sliderBox'>
-            {selectedHouse?.photos ? <CardSlider></CardSlider> : null}
-          </div>
-        </section>
-        <Container>
-          <div className='reserveSection'>
+          <section className='galerySection'>
             <StyledTitle
               $textAlign='center'
               $fontSize='two'
@@ -95,7 +61,16 @@ const HousePage = () => {
             >
               Galeria
             </StyledTitle>
-
+            <div
+              style={{
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            ></div>
+            <div className='sliderBox'>
+              {selectedHouse?.photos ? <CardSlider></CardSlider> : null}
+            </div>
           </section>
           <Container>
             <div className='reserveSection'>
@@ -132,6 +107,7 @@ const HousePage = () => {
                         <StyledCaption className='servicesName'>
                           {service}
                         </StyledCaption>
+                        {/* <p className='servicesName'>{service}</p> */}
                       </li>
                     );
                   })}
