@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import StyledModal from './style';
-import OutsideClickHandler from 'react-outside-click-handler';
 
 import { MdClose } from 'react-icons/md';
 import { useContext } from 'react';
