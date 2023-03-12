@@ -9,6 +9,7 @@ import { TextField } from '@mui/material';
 import { RegisterFormSchema } from './RegisterFormSchema';
 import { UserContext } from '../../../providers/UserContext';
 import { StyledParagraph } from '../../../styles/typograthy';
+import { CgSpinnerTwo } from 'react-icons/cg';
 
 export interface IRegisterForm {
   name: string;
@@ -19,7 +20,7 @@ export interface IRegisterForm {
 }
 
 const RegisterForm = () => {
-  const { createUser } = useContext(UserContext);
+  const { createUser, loading } = useContext(UserContext);
   const [birthDate, setBirthDate] = useState('');
 
   const {
@@ -92,7 +93,7 @@ const RegisterForm = () => {
       </fieldset>
 
       <StyledButton type='submit' $buttonSize='large' $buttonStyle='primary'>
-        Criar conta
+        {loading ? <CgSpinnerTwo className='spinner' /> : 'Criar Conta'}
       </StyledButton>
     </StyledForm>
   );

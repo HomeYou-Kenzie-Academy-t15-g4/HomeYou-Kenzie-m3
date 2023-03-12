@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 import {
   ILoginFormValue,
   IUser,
@@ -14,6 +14,7 @@ export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
   const [user, setUser] = useState<IUser | null>(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const userLoad = async () => {
@@ -80,6 +81,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   };
 
   const createUser = async (data: IRegisterForm) => {
+    setLoading(true);
     const newData = {
       email: data.email,
       name: data.name,
@@ -100,11 +102,14 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       } catch (error) {
         console.log('deu errado');
         toast.error('Ops,algo deu errado!');
+      } finally {
+        setLoading(false);
       }
     }
   };
 
   const loginUser = async (formData: ILoginFormValue) => {
+    setLoading(true);
     try {
       const res = await api.post('/login', formData);
       localStorage.setItem('@HomeYou:TOKEN', res.data.accessToken);
@@ -118,6 +123,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       console.log('falhou');
       console.log(error);
       // toast.error(error.response.data)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -139,10 +146,14 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setUser(response.data);
-      toast.success('Sua foto foi alterada');
+      setUser(response.data.user);
+      console.log('ok!');
+      userLoad();
+      toast.success('Alteração feita com sucesso!');
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -156,6 +167,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           loginUser,
           logoutUser,
           editUser,
+          loading,
+          setLoading,
         }}
       >
         {children}

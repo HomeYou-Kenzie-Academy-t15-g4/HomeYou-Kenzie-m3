@@ -19,6 +19,18 @@ export const StyledButtonCSS = css<IStyledButtonProps>`
   border-radius: 5px;
   transition: 0.4s;
 
+  .spinner {
+    animation: spinner infinite 0.7s forwards;
+  }
+  @keyframes spinner {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   ${({ $buttonSize }) => {
     switch ($buttonSize) {
       case 'large':
