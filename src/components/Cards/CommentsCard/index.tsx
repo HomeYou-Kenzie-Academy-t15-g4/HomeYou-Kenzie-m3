@@ -22,7 +22,7 @@ const CommentsCard = () => {
               <div>
                 <StyledInfoUserComment>
                   <img src={comentarios.img} alt='Imagem usuario' />
-                  <div>
+                  <div className='contentBox'>
                     <StyledPNameComment>
                       <strong>{comentarios.name}</strong>
                     </StyledPNameComment>

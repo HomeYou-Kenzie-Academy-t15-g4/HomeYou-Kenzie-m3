@@ -18,7 +18,6 @@ import { Container } from '../../styles/global';
 
 import { HousesContext } from '../../providers/HousesContext';
 
-
 const DashboardPage = () => {
   const { user } = useContext(UserContext);
   const { selectedHouse } = useContext(HousesContext);
@@ -60,24 +59,22 @@ const DashboardPage = () => {
         ) : null}
 
         <Header />
-        <StyledSectionProfile>
-          <div className='contentSection'>
-            <div className='contentImage'>
-              <img src={user?.img} alt='photo image' />
+        <div className='contentSection'>
+          <div className='contentImage'>
+            <img src={user?.img} alt='photo image' />
+            <div>
+              <h3>{user?.name}</h3>
+              <span>{user?.age} anos</span>
+              <hr />
               <div>
-                <h3>{user?.name}</h3>
-                <span>{user?.age} anos</span>
-                <hr />
-                <div>
-                  <AiOutlineUser />
-                  <button type='button' onClick={() => callEditUser()}>
-                    Editar Perfil
-                  </button>
-                </div>
+                <AiOutlineUser />
+                <button type='button' onClick={() => callEditUser()}>
+                  Editar Perfil
+                </button>
               </div>
             </div>
           </div>
-        </StyledSectionProfile>
+        </div>
         <HouseDashCard />
         <UserRentsCards />
         <Footer />
