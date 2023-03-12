@@ -20,7 +20,7 @@ export interface IRegisterForm {
 
 const RegisterForm = () => {
   const { createUser } = useContext(UserContext);
-  const [birthDate, setBirthDate] = useState('')
+  const [birthDate, setBirthDate] = useState('');
 
   const {
     register,
@@ -33,11 +33,10 @@ const RegisterForm = () => {
   });
 
   const ageHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-
-    setBirthDate(event.target.value)
-    setValue('age', event.target.value)
-    clearErrors('age')
-  }
+    setBirthDate(event.target.value);
+    setValue('age', event.target.value);
+    clearErrors('age');
+  };
 
   return (
     <StyledForm onSubmit={handleSubmit(createUser)}>
@@ -67,23 +66,29 @@ const RegisterForm = () => {
         register={register('confirmPassword')}
         label='Confirmar Senha'
       />
-      <fieldset style={{ display: 'flex', flexDirection: 'column', border: 'none'  }}>
-      <TextField      
-        id='date'
-        label='Data de nascimento'
-        type='date'
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => ageHandleChange(e)}
-        value={birthDate}
-        // error={errors.age?true:false}
-        // helperText={errors.age?.message}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        inputRef={
-          register('age') as unknown as React.RefObject<HTMLInputElement>
-        }
-      />
-      <StyledParagraph $fontColor='red'>{errors.age?.message}</StyledParagraph>
+      <fieldset
+        style={{ display: 'flex', flexDirection: 'column', border: 'none' }}
+      >
+        <TextField
+          id='date'
+          label='Data de nascimento'
+          type='date'
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            ageHandleChange(e)
+          }
+          value={birthDate}
+          // error={errors.age?true:false}
+          // helperText={errors.age?.message}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          inputRef={
+            register('age') as unknown as React.RefObject<HTMLInputElement>
+          }
+        />
+        <StyledParagraph $fontColor='red'>
+          {errors.age?.message}
+        </StyledParagraph>
       </fieldset>
 
       <StyledButton type='submit' $buttonSize='large' $buttonStyle='primary'>

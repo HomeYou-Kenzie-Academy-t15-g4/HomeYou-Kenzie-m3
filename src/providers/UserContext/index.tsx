@@ -23,7 +23,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         const res = await api.get(`/users/${user?.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setUser(res.data);        
+        setUser(res.data);
 
         return navigate('/dashboard');
       } catch (error) {
@@ -87,7 +87,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       password: data.password,
       img: 'https://canvas.kenzie.com.br/images/messages/avatar-50.png',
     };
-    
+
     if (newData.age < 18) {
       console.log('É preciso ter mais de 18 anos para se cadastrar');
     } else {
@@ -132,7 +132,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
     const token = localStorage.getItem('@HomeYou:TOKEN');
     console.log(data);
-    
+
     try {
       const response = await api.patch(`/users/${userAux.id}`, data, {
         headers: {
@@ -140,7 +140,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         },
       });
       setUser(response.data);
-      toast.success('Sua foto foi alterada')
+      toast.success('Sua foto foi alterada');
     } catch (error) {
       console.log(error);
     }

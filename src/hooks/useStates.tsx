@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
-  FieldError,
-  RegisterOptions,
-  UseFormRegisterReturn,
+  FieldError
 } from 'react-hook-form';
 import { IHouseForm } from '../components/Forms/HouseForm/types';
 
@@ -21,10 +19,6 @@ export interface IState {
 
 export interface IuseStatesProps {
   onChange: React.Dispatch<React.SetStateAction<string>>;
-  register: (
-    name: any,
-    options?: RegisterOptions<IHouseForm, any> | undefined
-  ) => UseFormRegisterReturn<any>;
   error?: FieldError | undefined;
   setSelectedState: React.Dispatch<React.SetStateAction<string>>;
   defaultValue?: any;

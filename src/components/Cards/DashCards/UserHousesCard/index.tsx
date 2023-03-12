@@ -2,16 +2,18 @@ import { useContext } from 'react';
 import { HousesContext } from '../../../../providers/HousesContext';
 import { UserContext } from '../../../../providers/UserContext';
 import { ModalsContext } from '../../../../providers/ModalsContext';
+import { IHouse } from '../../../../providers/HousesContext/types';
 
 const HouseDashCard = () => {
   const { housesList, housesRent } = useContext(HousesContext);
   const { user } = useContext(UserContext);
   const { callManageHouse, callCreateHouse } = useContext(ModalsContext);
 
-  const userHouses = housesList.filter((house) => house.userId == user?.id);
-  const userRents = userHouses.filter((house) =>
-    housesRent.some((rent) => rent.house.id === house.id)
-  );
+  
+    const userHouses = housesList.filter((house) => house.userId == user?.id);
+    const userRents = userHouses.filter((house) =>
+      housesRent.some((rent) => rent.house.id === house.id)
+    );
 
   return (
     <div>

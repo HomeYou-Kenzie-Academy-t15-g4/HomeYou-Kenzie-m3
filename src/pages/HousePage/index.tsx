@@ -32,9 +32,13 @@ const HousePage = () => {
 
   return (
     <>
-      <Header/>
+      <Header />
       <StyledHousePage>
-        {isOpen ? <Modal title='modal'><></></Modal> : null}
+        {isOpen ? (
+          <Modal title='modal'>
+            <></>
+          </Modal>
+        ) : null}
 
         <section>
           <Container>

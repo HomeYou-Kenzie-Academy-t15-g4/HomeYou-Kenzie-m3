@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import react, { useState, useEffect } from 'react';
 import LoginForm from '../../components/Forms/LoginForm';
 import { StyledParagraph, StyledTitle } from '../../styles/typograthy';
 import { StyledLoginPage } from './style';
@@ -30,7 +30,7 @@ const LoginPage = () => {
         <div className='text-container'>
           <StyledParagraph $fontColor='grey'>Bem vindo</StyledParagraph>
           <StyledTitle $fontColor='grey' tag='h3' $fontSize='three'>
-            Faça logi na sua conta
+            Faça login na sua conta
           </StyledTitle>
         </div>
         <div className='form-container'>
