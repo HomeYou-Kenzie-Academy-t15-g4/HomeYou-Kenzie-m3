@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { HousesContext } from '../../../../providers/HousesContext';
-import { IRent } from '../../../../providers/HousesContext/types';
 import { UserContext } from '../../../../providers/UserContext';
 
 const UserRentsCards = () => {
