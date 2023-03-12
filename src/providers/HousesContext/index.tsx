@@ -1,6 +1,6 @@
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -11,12 +11,11 @@ import {
   IRent,
   IReserve,
 } from './types';
-import { defaultNoValues } from '../../components/Forms/HouseForm';
-import { statesDatabase } from '../../components/Modal/ManageHouseModal/statesDatabase';
 import {
   IDefaultHouseFormValues,
   IHouseForm,
 } from '../../components/Forms/HouseForm/types';
+import { defaultNoValues } from '../../components/Forms/HouseForm/servicesOptions';
 
 export const HousesContext = createContext<IHousesContext>(
   {} as IHousesContext
@@ -53,7 +52,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         const response = await api.get('/houses');
         setHousesList(response.data);
         setHousesFilterList(response.data);
-        
       } catch (error) {
         window.localStorage.clear();
         setHousesList([]);
@@ -125,25 +123,20 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     try {
       const response = await api.get(`/houses/${id}`);
       setSelectedHouse(response.data);
-      const stateUF = statesDatabase.find(
-        (e) => e.sigla === response.data?.state
-      );
+
       const values = {
         name: response.data?.name,
         photos: response.data?.photos.map((photo: string) => ({
           value: photo,
           label: photo,
         })),
-        state: stateUF ? stateUF.id : null,
-        city: { value: response.data?.city, label: response.data?.city },
+        state: response.data?.state,
+        city: response.data?.city,
         daylyPrice: response.data?.daylyPrice,
         singleBed: response.data?.accommodation.beds,
         doubleBed: response.data?.accommodation.doubleBeds,
-        services: response.data?.services.map((service: string) => ({
-          value: service,
-          label: service,
-        })),
-        houseDesc: response.data?.houseDesc
+        services: response.data?.services.map((service: string) => service),
+        houseDesc: response.data?.houseDesc,
       };
 
       setLoadValues(values);

@@ -1,9 +1,13 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+  html{
+    /* overflow-y: hidden; */
+  }
 
   ::-webkit-scrollbar{
     width: 10px;
+    background-color: rgba(0, 0, 0, 0.13);
   }
 
   ::-webkit-scrollbar-thumb{
@@ -16,11 +20,8 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     list-style: none;
-    text-decoration: none;
-  }
-
-  input{
-    border: 5px solid red;
+    text-decoration: none;    
+    user-select: none;
   }
 
   img{

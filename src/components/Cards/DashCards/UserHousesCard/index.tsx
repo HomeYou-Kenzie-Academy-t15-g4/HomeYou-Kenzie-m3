@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { HousesContext } from '../../../../providers/HousesContext';
 import { UserContext } from '../../../../providers/UserContext';
 import { ModalsContext } from '../../../../providers/ModalsContext';
+
 import { StyledButton } from '../../../../styles/button';
 import {
   StyledCaption,
@@ -9,6 +10,9 @@ import {
   StyledTitle,
 } from '../../../../styles/typograthy';
 import { UserHousesSection } from './style';
+
+import { IHouse } from '../../../../providers/HousesContext/types';
+
 
 const HouseDashCard = () => {
   const { housesList, housesRent } = useContext(HousesContext);

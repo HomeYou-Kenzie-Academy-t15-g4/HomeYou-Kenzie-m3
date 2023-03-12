@@ -9,6 +9,7 @@ export const CssTextField = styled(TextField)({
     borderBottomColor: '#0C6B38',
   },
   '& .MuiOutlinedInput-root': {
+    borderRadius: '15px',
     '& fieldset': {
       borderColor: '#343B41',
     },

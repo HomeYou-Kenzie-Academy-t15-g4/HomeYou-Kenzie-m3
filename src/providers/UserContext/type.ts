@@ -12,6 +12,8 @@ export interface IUserContext {
   logoutUser: () => void;
   user: IUser | null;
   editUser: (data: IUser) => Promise<void>;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IUser {

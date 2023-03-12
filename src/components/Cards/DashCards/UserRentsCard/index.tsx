@@ -28,6 +28,7 @@ const UserRentsCards = () => {
     (house) => house.userId === user?.id
   );
 
+
   return (
     <UserRentsSection>
       <div className='title-box'>

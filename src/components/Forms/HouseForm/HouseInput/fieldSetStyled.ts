@@ -3,6 +3,6 @@ import styled from 'styled-components';
 export const StyledFieldset = styled.fieldset`
   border: none;
   p {
-    max-width: 25ch;
+    max-width: 55ch;
   }
 `;
