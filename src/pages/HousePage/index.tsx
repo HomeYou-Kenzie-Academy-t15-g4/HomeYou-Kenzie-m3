@@ -36,7 +36,7 @@ const HousePage = () => {
       <StyledHousePage>
         {isOpen ? (
           <Modal title='modal'>
-            <></>
+            <div></div>
           </Modal>
         ) : null}
 
