@@ -21,4 +21,6 @@ export interface IModalsContext {
   callCreateReserve: () => void;
   callManageReserve: () => void;
   closeModal: () => void;
+  deleteButton: boolean;
+  setDeleteButton: React.Dispatch<React.SetStateAction<boolean>>;
 }

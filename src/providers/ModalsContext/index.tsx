@@ -15,6 +15,7 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
   const [isManageRentModal, setIsManageRentModal] = useState(false);
   const [isManageHouseModal, setIsManageHouseModal] = useState(false);
   const [isCreateHouseModal, setIsCreateHouseModal] = useState(false);
+  const [deleteButton, setDeleteButton] = useState(false);
 
   const callEditUser = () => {
     setIsOpen(true);
@@ -40,6 +41,7 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
   const callManageReserve = () => {
     setIsOpen(true);
     setIsCreateHouseModal(true);
+    setDeleteButton(true);
   };
 
   const closeModal = () => {
@@ -51,6 +53,7 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
     setIsManageRentModal(false);
     setIsCreateHouseModal(false);
     setIsManageHouseModal(false);
+    setDeleteButton(false);
   };
 
   return (
@@ -75,6 +78,8 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
           callCreateReserve,
           callManageReserve,
           closeModal,
+          deleteButton,
+          setDeleteButton,
         }}
       >
         {children}
