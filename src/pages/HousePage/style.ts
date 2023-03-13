@@ -15,7 +15,11 @@ export const StyledHousePage = styled.main`
     justify-content: center;
     border: 1px;
     background-color: ${({ theme }) => theme.colors.grey00};
-    padding: 15px 30px;
+    padding: 35px 30px;
+  }
+
+  
+  .galerySection img{
   }
 
   .galeryTitle {
@@ -47,22 +51,31 @@ export const StyledHousePage = styled.main`
     min-width: 209px;
     height: max-content;
     max-width: 450px;
+    min-width: 300px;
   }
-
-  .infoSection article ul {
+  
+  .servicesBox{
     max-width: 450px;
     margin-top: 30px;
     padding: 35px 20px;
+    width: 100%;
+    height: fit-content;
+    background-color: ${({ theme }) => theme.colors.grey00};
+    border-radius: 20px;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .infoSection article ul {
     display: flex;
+    max-width: 100%;
+    max-height: 210px;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 13px;
-    width: 100%;
-    max-height: 210px;
     overflow-y: auto;
-    background-color: ${({ theme }) => theme.colors.grey00};
-    border-radius: 20px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    overflow-x: hidden;
+    padding-right: 25px;
   }
 
   .infoSection article ul li {
@@ -99,6 +112,9 @@ export const StyledHousePage = styled.main`
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
   @media (max-width: 720px) {
+    ul{
+      
+    }
     .infoSection {
       justify-content: center;
       align-items: center;

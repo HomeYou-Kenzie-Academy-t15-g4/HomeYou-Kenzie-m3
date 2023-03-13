@@ -1,21 +1,25 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HousesContext } from '../../../providers/HousesContext';
 import { IHouse } from '../../../providers/HousesContext/types';
 import { StyledParagraph } from '../../../styles/typograthy';
 import { StyledList } from './style';
 
 const HouseCard = () => {
-  const { housesList } = useContext(HousesContext);
+  const { housesList, loadOneHouse } = useContext(HousesContext);
+  const navigate = useNavigate()
+
+  const callHouse = (id: number) =>{
+    loadOneHouse(id)
+    navigate('/house')
+  }
 
   return (
     <div>
       <StyledList>
-        {housesList.map((house: IHouse) => (
-          <Link className='house-link' to={'/house'}>
-            {/* fiz uma 'gambiarra' com esse link enquanto o bug não resolve */}
-            <li key={house.id} onClick={() => console.log(house.id)}>
-              <div className='image-box'>
+        {housesList.map((house: IHouse) => 
+            <li className='link-house' key={house.id} >
+              <div className='image-box' onClick={() => callHouse(Number(house.id))}>
                 <img src={house.photos[0]} alt='Image House' />
               </div>
 
@@ -27,13 +31,8 @@ const HouseCard = () => {
                   Alugar
                 </StyledParagraph>
               </div>
-              {/* esse link esta bugado, não sei nem consegui entender o motivo, se alguém conseguir consertar */}
-              {/* <Link to={'/house'} className='link-house'>
-              ↗
-            </Link> */}
             </li>
-          </Link>
-        ))}
+        )}
       </StyledList>
     </div>
   );

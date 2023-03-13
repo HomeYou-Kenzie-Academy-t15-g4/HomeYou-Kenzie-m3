@@ -13,7 +13,6 @@ export const StyledList = styled.ul`
   li {
     display: flex;
     flex-direction: column;
-    z-index: -1;
 
     background: ${({ theme }) => theme.colors.grey00};
     border-bottom: 1px solid ${({ theme }) => theme.colors.grey100};
@@ -59,8 +58,8 @@ export const StyledList = styled.ul`
       top: -280px;
       right: -280px;
 
-      cursor: pointer;
     }
+    cursor: pointer;
   }
 
   @media (min-width: 800px) {
