@@ -14,7 +14,7 @@ interface IInputProps {
 const Input = ({ label, register, type, error }: IInputProps) => {
   return (
     <StyledFieldset>
-      <CssTextField label={label} type={type} {...register} />
+      <CssTextField fullWidth label={label} type={type} {...register} />
       {error ? (
         <StyledParagraph $fontColor='red'>{error.message}</StyledParagraph>
       ) : null}

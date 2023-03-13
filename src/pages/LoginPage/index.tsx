@@ -25,8 +25,10 @@ const LoginPage = () => {
           </div>
         </section>
       )}
-      <section className='form-section'>
+      <div className='login-box'>
+
         <img src={logo} alt='' />
+      <section className='form-section'>
         <div className='text-container'>
           <StyledParagraph $fontColor='grey'>Bem vindo</StyledParagraph>
           <StyledTitle $fontColor='grey' tag='h3' $fontSize='three'>
@@ -37,6 +39,7 @@ const LoginPage = () => {
           <LoginForm />
         </div>
       </section>
+      </div>
     </StyledLoginPage>
   );
 };
