@@ -96,9 +96,7 @@ const ReservForm = () => {
 
   return (
     <StyledForm onSubmit={handleSubmit(submit)}>
-      <StyledDivReturnToLogin>
-        <button>Editar Reserva</button>
-      </StyledDivReturnToLogin>
+      <StyledDivReturnToLogin></StyledDivReturnToLogin>
       {isOpenCalendar ? (
         deleteButton ? (
           <Modal title='Editar reserva'>

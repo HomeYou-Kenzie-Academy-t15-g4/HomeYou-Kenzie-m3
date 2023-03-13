@@ -23,9 +23,10 @@ const UserRentsCards = () => {
     return () => window.removeEventListener('resize', handleReSize);
   }, []);
 
-  const EditReserv = (id: any) => {
-    setSelectedRent(housesRent.find((Rent) => Rent.id == id) ?? null);
-    loadOneHouse(selectedRent?.house.id ?? 0);
+  const EditReserv = (house: any) => {
+    const thisRent = housesRent.find((Rent) => Rent.id == house.id) ?? null;
+    setSelectedRent(thisRent);
+    loadOneHouse(house.house.id);
     callManageReserve();
   };
 
@@ -70,7 +71,7 @@ const UserRentsCards = () => {
               <StyledButton
                 $buttonSize='short'
                 $buttonStyle='none'
-                onClick={() => EditReserv(house.id)}
+                onClick={() => EditReserv(house)}
               >
                 <StyledCaption>pen</StyledCaption>
               </StyledButton>

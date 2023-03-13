@@ -1,6 +1,6 @@
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -16,12 +16,14 @@ import {
   IHouseForm,
 } from '../../components/Forms/HouseForm/types';
 import { defaultNoValues } from '../../components/Forms/HouseForm/servicesOptions';
+import { ModalsContext } from '../ModalsContext';
 
 export const HousesContext = createContext<IHousesContext>(
   {} as IHousesContext
 );
 
 export const HousesProvider = ({ children }: IHousesProviderProps) => {
+  const { closeModal } = useContext(ModalsContext);
   const [housesList, setHousesList] = useState<IHouse[]>([]);
   const [housesRent, setHousesRent] = useState<IRent[]>([]);
   const [housesFilterList, setHousesFilterList] = useState<IHouse[]>([]);
@@ -213,9 +215,11 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           },
         });
         toast.success('Casa reservada com sucesso');
+        closeModal();
       } catch (error) {
         console.error(error);
         toast.error('Falha ao reservar casa');
+        closeModal();
         // navigate('/');
       }
     }
@@ -234,9 +238,11 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         },
       });
       toast.success('Reserva atualizada com sucesso');
+      closeModal();
     } catch (error) {
       console.error(error);
       toast.error('Falha ao atualizar reserva');
+      closeModal();
       // navigate('/');
     }
   };
@@ -250,9 +256,11 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         },
       });
       toast.success('Casa deletada com sucesso');
+      closeModal();
     } catch (error) {
       console.error(error);
       toast.error('Falha ao deletar casa');
+      closeModal();
       // navigate('/');
     }
   };

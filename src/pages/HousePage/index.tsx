@@ -15,9 +15,10 @@ import { StyledHousePage, StyledRatingBox } from './style';
 import Ratinng from '../../components/Rating';
 import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
 import Footer from '../../components/Footer';
+import ReservForm from '../../components/Forms/ReservForm';
 
 const HousePage = (id: number) => {
-  const { isOpen, setIsOpen } = useContext(ModalsContext);
+  const { isOpen, callCreateReserve } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
   const [isLike, setIsLike] = useState(false);
 
@@ -35,7 +36,7 @@ const HousePage = (id: number) => {
       <StyledHousePage>
         {isOpen ? (
           <Modal title='modal'>
-            <div></div>
+            <ReservForm />
           </Modal>
         ) : null}
 
@@ -94,7 +95,8 @@ const HousePage = (id: number) => {
               <StyledCaption>Interessado em alugar essa casa?</StyledCaption>
 
               <StyledButton
-                /* onClick={FunçãoModaldeReserva(selectedHouse?.id)} */ type='button'
+                onClick={() => callCreateReserve()}
+                type='button'
                 $buttonSize='short'
                 $buttonStyle='primary'
               >

@@ -15,17 +15,25 @@ const SelectCalendar = () => {
       let listHouses = housesRent.filter(
         (rent) => rent.house.id == selectedHouse.id
       );
-      let listReservs: any = [];
-      listHouses.map((reserv) => listReservs.concat(reserv.rentedDays));
-
-      listReservs.map(
-        (datea: string | number | Date, index: string | number) => {
-          listReservs[index] = new Date(datea);
-        }
+      let arrayTest: any = [];
+      listHouses.forEach((reserv) =>
+        reserv.rentedDays.forEach((item) => {
+          arrayTest.push(item);
+        })
       );
-      setReservedDates(listReservs);
+
+      setReservedDates(
+        arrayTest.map(
+          (
+            datea: string | number | Date,
+            index: string | number | Date | any
+          ) => {
+            return (arrayTest[index] = new Date(datea));
+          }
+        )
+      );
     }
-  }, [housesRent]);
+  }, [selectedHouse]);
 
   const onChange = (calendarValue: Date[]) => {
     let tempReserve: Date[] = [new Date(), new Date()];
