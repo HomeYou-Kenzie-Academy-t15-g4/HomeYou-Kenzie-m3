@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 
 import { ModalsContext } from '../../providers/ModalsContext';
@@ -32,6 +32,12 @@ const DashboardPage = () => {
     isManageHouseModal,
     callEditUser,
   } = useContext(ModalsContext);
+
+  
+  useEffect(() => {  
+    window.scroll(0, 0);
+  }, [])
+
 
   return (
     <StyledContainerPage>

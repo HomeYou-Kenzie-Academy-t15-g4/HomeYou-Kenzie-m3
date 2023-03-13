@@ -7,7 +7,6 @@ import { ModalsProvider } from './providers/ModalsContext';
 import { UserProvider } from './providers/UserContext';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
           <HousesProvider>
@@ -17,5 +16,4 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           </HousesProvider>
       </UserProvider>
     </BrowserRouter>
-  </React.StrictMode>
 );

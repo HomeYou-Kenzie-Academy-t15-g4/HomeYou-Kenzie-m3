@@ -4,13 +4,24 @@ export const StyledContainerCardComment = styled.ul`
   background-color: #d9dbde;
   margin: 0;
   padding: 2rem;
-  margin-top: 20%;
+  margin-top: 50px;
   display: flex;
-  overflow: scroll;
+  overflow: auto;
   justify-content: flex-start;
   width: 100%;
   gap: 1em;
+
+  .container{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 30px;
+  }
   @media (min-width: 650px) {
+    .container{
+    justify-content: center;
+    flex-wrap: wrap;
+  }
     flex-wrap: wrap;
     justify-content: center;
     display: flex;
@@ -68,6 +79,7 @@ export const StyledPNameComment = styled.p`
   max-width: 100px;
 `;
 export const StyledPDataComment = styled.p`
+
   font-size: small;
   color: #343b41;
 `;
