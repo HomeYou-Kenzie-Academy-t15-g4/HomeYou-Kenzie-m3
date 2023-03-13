@@ -28,7 +28,7 @@ const ReservForm = () => {
     selectedHouse,
     selectedDate,
   } = useContext(HousesContext);
-  const { isOpenCalendar, setIsOpenCalendar, deleteButton } =
+  const { isOpenCalendar, setIsOpenCalendar, deleteButton, closeModal } =
     useContext(ModalsContext);
   const { user } = useContext(UserContext);
   const [days, setDays] = useState(0);
@@ -79,8 +79,10 @@ const ReservForm = () => {
     };
     if (deleteButton) {
       editReserve(data, selectedRent?.id ?? 0);
+      closeModal();
     } else {
       createReserve(data);
+      closeModal();
     }
   };
 
@@ -181,7 +183,12 @@ const ReservForm = () => {
       {deleteButton ? (
         <div>
           <button type='submit'>Editar</button>
-          <button onClick={() => deleteReserve(selectedRent?.id ?? 0)}>
+          <button
+            onClick={() => {
+              deleteReserve(selectedRent?.id ?? 0);
+              closeModal();
+            }}
+          >
             Cancelar
           </button>
         </div>

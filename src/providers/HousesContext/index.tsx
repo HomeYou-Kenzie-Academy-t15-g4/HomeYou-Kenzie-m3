@@ -23,7 +23,6 @@ export const HousesContext = createContext<IHousesContext>(
 );
 
 export const HousesProvider = ({ children }: IHousesProviderProps) => {
-  const { closeModal } = useContext(ModalsContext);
   const [housesList, setHousesList] = useState<IHouse[]>([]);
   const [housesRent, setHousesRent] = useState<IRent[]>([]);
   const [housesFilterList, setHousesFilterList] = useState<IHouse[]>([]);
@@ -215,11 +214,10 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           },
         });
         toast.success('Casa reservada com sucesso');
-        closeModal();
       } catch (error) {
         console.error(error);
         toast.error('Falha ao reservar casa');
-        closeModal();
+
         // navigate('/');
       }
     }
@@ -238,11 +236,10 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         },
       });
       toast.success('Reserva atualizada com sucesso');
-      closeModal();
     } catch (error) {
       console.error(error);
       toast.error('Falha ao atualizar reserva');
-      closeModal();
+
       // navigate('/');
     }
   };
@@ -256,11 +253,10 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         },
       });
       toast.success('Casa deletada com sucesso');
-      closeModal();
     } catch (error) {
       console.error(error);
       toast.error('Falha ao deletar casa');
-      closeModal();
+
       // navigate('/');
     }
   };
