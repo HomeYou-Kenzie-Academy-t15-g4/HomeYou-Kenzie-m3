@@ -32,7 +32,7 @@ const UsserInfoard = () => {
             $fontColor='grey'
             $textAlign='center'
           >
-            {user?.age}
+            {user?.age} anos
           </StyledParagraph>
           <div className='detail'></div>
 
