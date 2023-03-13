@@ -1,6 +1,6 @@
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -16,6 +16,7 @@ import {
   IHouseForm,
 } from '../../components/Forms/HouseForm/types';
 import { defaultNoValues } from '../../components/Forms/HouseForm/servicesOptions';
+import { ModalsContext } from '../ModalsContext';
 
 export const HousesContext = createContext<IHousesContext>(
   {} as IHousesContext
@@ -216,6 +217,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
       } catch (error) {
         console.error(error);
         toast.error('Falha ao reservar casa');
+
         // navigate('/');
       }
     }
@@ -237,6 +239,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     } catch (error) {
       console.error(error);
       toast.error('Falha ao atualizar reserva');
+
       // navigate('/');
     }
   };
@@ -253,6 +256,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     } catch (error) {
       console.error(error);
       toast.error('Falha ao deletar casa');
+
       // navigate('/');
     }
   };

@@ -18,9 +18,10 @@ import Footer from '../../components/Footer';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../providers/UserContext';
 import LikeButton from '../../components/LikeButton';
+import ReservForm from '../../components/Forms/ReservForm';
 
 const HousePage = (id: number) => {
-  const { isOpen, setIsOpen, callCreateReserve } = useContext(ModalsContext);
+  const { isOpen, callCreateReserve } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
   const { user } = useContext(UserContext);
 
@@ -38,7 +39,7 @@ const HousePage = (id: number) => {
       <StyledHousePage>
         {isOpen ? (
           <Modal title='modal'>
-            <div></div>
+            <ReservForm />
           </Modal>
         ) : null}
 
