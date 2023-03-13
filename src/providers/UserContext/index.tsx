@@ -113,16 +113,18 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     try {
       const res = await api.post('/login', formData);
       localStorage.setItem('@HomeYou:TOKEN', res.data.accessToken);
-      console.log(res.data.user);
+      toast.success('Login bem sucedido')
 
       localStorage.setItem('@HomeYou:User', JSON.stringify(res.data.user));
       setUser(res.data.user);
       navigate('/dashboard');
-      console.log('logou');
-    } catch (error) {
-      console.log('falhou');
-      console.log(error);
-      // toast.error(error.response.data)
+    } catch (error: any) {
+      if (error.response.data === 'Incorrect password'){
+        toast.error('Email e/ou senha incorretos')
+      } else {
+        toast.error('Algo deu errado :(')
+        console.error(error)
+      }
     } finally {
       setLoading(false);
     }
@@ -131,6 +133,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const logoutUser = () => {
     setUser(null);
     localStorage.removeItem('@HomeYou:TOKEN');
+    toast.info('Sessão encerrada')
     navigate('/');
   };
 

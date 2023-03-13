@@ -15,15 +15,10 @@ import { StyledHousePage, StyledRatingBox } from './style';
 import Ratinng from '../../components/Rating';
 import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
 
-const HousePage = () => {
+const HousePage = (id: number) => {
   const { isOpen, setIsOpen } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
   const [isLike, setIsLike] = useState(false);
-
-  useEffect(() => {
-    loadOneHouse(3);
-    console.log(selectedHouse);
-  }, []);
 
   console.log(selectedHouse?.accommodation?.beds);
   const capacity =
@@ -64,24 +59,26 @@ const HousePage = () => {
           </Container>
 
           <section className='galerySection'>
-            <StyledTitle
-              $textAlign='center'
-              $fontSize='two'
-              $fontColor='greyBold'
-              tag='h2'
-            >
-              Galeria
-            </StyledTitle>
-            <div
-              style={{
-                position: 'relative',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            ></div>
-            <div className='sliderBox'>
-              {selectedHouse?.photos ? <CardSlider></CardSlider> : null}
-            </div>
+            <Container>
+              <StyledTitle
+                $textAlign='center'
+                $fontSize='two'
+                $fontColor='greyBold'
+                tag='h2'
+              >
+                Galeria
+              </StyledTitle>
+              <div
+                style={{
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              ></div>
+              <div className='sliderBox'>
+                {selectedHouse?.photos ? <CardSlider></CardSlider> : null}
+              </div>
+            </Container>
           </section>
           <Container>
             <div className='reserveSection'>
@@ -108,21 +105,23 @@ const HousePage = () => {
                 <StyledTitle $fontSize='two' $fontColor='grey' tag='h2'>
                   Comodidades
                 </StyledTitle>
+                  <div className='servicesBox'>
                 <ul>
-                  {selectedHouse?.services?.map((service) => {
-                    return (
-                      <li key={service}>
-                        <span className='iconBox'>
-                          <IconsMatch iconName={service} />
-                        </span>
-                        <StyledCaption className='servicesName'>
-                          {service}
-                        </StyledCaption>
-                        {/* <p className='servicesName'>{service}</p> */}
-                      </li>
-                    );
-                  })}
+                    {selectedHouse?.services?.map((service) => {
+                      return (
+                        <li key={service}>
+                          <span className='iconBox'>
+                            <IconsMatch iconName={service} />
+                          </span>
+                          <StyledCaption className='servicesName'>
+                            {service}
+                          </StyledCaption>
+                          {/* <p className='servicesName'>{service}</p> */}
+                        </li>
+                      );
+                    })}
                 </ul>
+                  </div>
               </article>
               <SectionSpacer />
               <article>

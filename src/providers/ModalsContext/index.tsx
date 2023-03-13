@@ -19,27 +19,32 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
   const callEditUser = () => {
     setIsOpen(true);
     setIsUserModal(true);
+    window.scroll(0, 0)
   };
 
   const callManageHouse = (id: number) => {
     loadOneHouse(id);
     setIsOpen(true);
     setIsManageHouseModal(true);
+    window.scroll(0, 0)
   };
 
   const callCreateHouse = () => {
     setIsOpen(true);
     setIsCreateHouseModal(true);
+    window.scroll(0, 0)
   };
 
   const callCreateReserve = () => {
     setIsOpen(true);
     setIsCreateHouseModal(true);
+    window.scroll(0, 0)
   };
 
   const callManageReserve = () => {
     setIsOpen(true);
     setIsCreateHouseModal(true);
+    window.scroll(0, 0)
   };
 
   const closeModal = () => {

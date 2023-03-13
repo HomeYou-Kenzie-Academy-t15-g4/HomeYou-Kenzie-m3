@@ -32,9 +32,12 @@
 /* .swiper-pagination-bullet {} */
 
 .swiper-button-prev {
+  left: -1px;
   color: #718096
 }
 
 .swiper-button-next {
+  
+  right: 1px;
   color: #718096
 }
