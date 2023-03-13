@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import HouseCard from '../../components/Cards/HouseCard';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -14,8 +14,9 @@ import { ModalsContext } from '../../providers/ModalsContext';
 const HomePage = () => {
   const { isOpen, setIsOpen } = useContext(ModalsContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  
-  useEffect(() => {    
+  const galleryRef = useRef(null);
+
+  useEffect(() => {
     window.scroll(0, 0);
     const handleReSize = () => setScreenWidth(window.innerWidth);
     window.addEventListener('resize', handleReSize);
@@ -64,7 +65,7 @@ const HomePage = () => {
             </Container>
           </div>
         </section>
-        <section>
+        <section ref={galleryRef}>
           <Container>
             <StyledTitle
               $textAlign='center'
