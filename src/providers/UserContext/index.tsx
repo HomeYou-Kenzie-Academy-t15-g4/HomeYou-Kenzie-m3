@@ -135,6 +135,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   };
 
   const editUser = async (data: IUser) => {
+    setLoading(true);
     const userAuxString = localStorage.getItem('@HomeYou:User');
     const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
     const token = localStorage.getItem('@HomeYou:TOKEN');

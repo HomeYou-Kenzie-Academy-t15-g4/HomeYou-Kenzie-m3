@@ -34,7 +34,7 @@ const EditUser = () => {
     reset();
     setTimeout(() => {
       closeModal();
-    }, 2000);
+    }, 1000);
   };
 
   return (
