@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { MultiValue } from 'react-select';
 import {
   IHouseForm,
   IDefaultHouseFormValues,
@@ -12,10 +13,13 @@ export interface IHouse {
   id?: number;
   userId?: number;
   name: string;
-  photos: string[];
+  photos:
+    | string[]
+    | { value: string; label: string }
+    | MultiValue<{ value: string; label: string } | null>;
   city: string;
   state: string;
-  daylyPrice: number;
+  daylyPrice: number | any;
   services: string[];
   accommodation: IAccommodation;
   houseDesc: string;
@@ -68,7 +72,9 @@ export interface IHousesContext {
   setHousesFilterList: React.Dispatch<React.SetStateAction<IHouse[]>>;
   selectedHouse: IHouse | InoDefaultValue | IDefaultHouseFormValues | null;
   setSelectedHouse: React.Dispatch<
-    React.SetStateAction<IHouse | IDefaultHouseFormValues | InoDefaultValue | null>
+    React.SetStateAction<
+      IHouse | IDefaultHouseFormValues | InoDefaultValue | null
+    >
   >;
   selectedRent: IRent | null;
   setSelectedRent: React.Dispatch<React.SetStateAction<IRent | null>>;
