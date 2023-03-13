@@ -1,20 +1,22 @@
 import styled from 'styled-components';
+export const CommentsSection = styled.section`
+  margin: 0;
+  background: ${({ theme }) => theme.colors.grey00};
+  margin-top: 30px;
+`;
 
 export const StyledContainerCardComment = styled.ul`
-  background-color: #d9dbde;
-  margin: 0;
-  padding: 2rem;
-  margin-top: 20%;
-  display: flex;
   overflow: scroll;
-  justify-content: flex-start;
   width: 100%;
   gap: 1em;
+
   @media (min-width: 650px) {
     flex-wrap: wrap;
     justify-content: center;
     display: flex;
+    overflow: hidden;
   }
+
   li {
     list-style: none;
     margin-left: 15px;

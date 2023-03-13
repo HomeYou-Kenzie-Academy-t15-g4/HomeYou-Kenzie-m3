@@ -2,6 +2,7 @@ import React from 'react';
 import DataComments from '../../Comments';
 import _ from 'lodash';
 import {
+  CommentsSection,
   StyledContainerCardComment,
   StyledInfoUserComment,
   StyledPDataComment,
@@ -13,17 +14,18 @@ import {
   StyledParagraph,
   StyledTitle,
 } from '../../../styles/typograthy';
+import { Container } from '../../../styles/global';
 
 const CommentsCard = () => {
   const commentRandom = _.shuffle(DataComments);
   const commentLimit = commentRandom.slice(0, 4);
 
   return (
-    <div>
-      <div>
+    <CommentsSection>
+      <Container>
         <StyledContainerCardComment>
           {commentLimit.map((comentarios) => (
-            <li key={comentarios.idC}>
+            <li className='comments-box' key={comentarios.idC}>
               <div>
                 <StyledInfoUserComment>
                   <img src={comentarios.img} alt='Imagem usuario' />
@@ -45,8 +47,8 @@ const CommentsCard = () => {
             </li>
           ))}
         </StyledContainerCardComment>
-      </div>
-    </div>
+      </Container>
+    </CommentsSection>
   );
 };
 
