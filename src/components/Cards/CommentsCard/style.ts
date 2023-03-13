@@ -6,6 +6,7 @@ export const CommentsSection = styled.section`
 `;
 
 export const StyledContainerCardComment = styled.ul`
+<<<<<<< HEAD
   overflow: scroll;
   width: 100%;
   gap: 1em;
@@ -15,6 +16,29 @@ export const StyledContainerCardComment = styled.ul`
       justify-content: center;
       flex-wrap: wrap;
     }
+=======
+  background-color: #d9dbde;
+  margin: 0;
+  padding: 2rem;
+  margin-top: 50px;
+  display: flex;
+  overflow: auto;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 1em;
+
+  .container{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 30px;
+  }
+  @media (min-width: 650px) {
+    .container{
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+>>>>>>> eaf175c2b64b646d6a2cd3c816302f40a5345698
     flex-wrap: wrap;
     justify-content: center;
     display: flex;
@@ -74,6 +98,7 @@ export const StyledPNameComment = styled.p`
   max-width: 100px;
 `;
 export const StyledPDataComment = styled.p`
+
   font-size: small;
   color: ${({ theme }) => theme.colors.grey400};
 `;

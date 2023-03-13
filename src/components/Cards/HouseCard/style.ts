@@ -23,9 +23,7 @@ export const StyledList = styled.ul`
 
     background: ${({ theme }) => theme.colors.grey00};
     border-bottom: 1px solid ${({ theme }) => theme.colors.grey100};
-
     width: 280px;
-
     height: 270px;
     border-radius: 10px;
     box-shadow: 0px 3.34259px 3.34259px rgba(0, 0, 0, 0.25);
@@ -52,26 +50,6 @@ export const StyledList = styled.ul`
       .city-name {
         text-transform: capitalize;
       }
-    }
-
-    .link-house {
-      font-size: 20px;
-      font-family: ${({ theme }) => theme.fonts.primary};
-      color: ${({ theme }) => theme.colors.grey200};
-      background: ${({ theme }) => theme.colors.grey100};
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-
-      width: 50px;
-      height: 50px;
-      border-radius: 25px;
-
-      position: relative;
-      top: -280px;
-      right: -280px;
     }
   }
 `;
