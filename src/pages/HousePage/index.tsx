@@ -39,19 +39,6 @@ const HousePage = () => {
             <div></div>
           </Modal>
         ) : null}
-
-        <button type='button' onClick={() => setIsOpen(true)}>
-          Abrir
-        </button>
-
-        <button
-          style={{ paddingBottom: '65px' }}
-          type='button'
-          onClick={() => setIsOpen(true)}
-        >
-          Abrir
-        </button>
-
         <section>
           <Container>
             <div className='mainTitle'>

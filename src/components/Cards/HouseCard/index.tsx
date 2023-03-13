@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { HousesContext } from '../../../providers/HousesContext';
 import { IHouse } from '../../../providers/HousesContext/types';
-import { StyledButtonLink } from '../../../styles/button';
 import { StyledParagraph } from '../../../styles/typograthy';
 import { StyledList } from './style';
 
