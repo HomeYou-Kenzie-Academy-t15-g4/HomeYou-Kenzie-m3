@@ -17,12 +17,12 @@ import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
 import Footer from '../../components/Footer';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../providers/UserContext';
+import LikeButton from '../../components/LikeButton';
 
 const HousePage = (id: number) => {
   const { isOpen, setIsOpen, callCreateReserve } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
   const { user } = useContext(UserContext);
-  const [isLike, setIsLike] = useState(false);
 
   console.log(selectedHouse?.accommodation?.beds);
   const capacity =
@@ -55,9 +55,7 @@ const HousePage = (id: number) => {
               </div>
               <div className='btnRating'>
                 <Ratinng />
-                <button onClick={() => setIsLike(!isLike)}>
-                  {isLike ? <FcLikePlaceholder /> : <FcLike />}
-                </button>
+                <LikeButton />
               </div>
             </StyledRatingBox>
           </Container>
