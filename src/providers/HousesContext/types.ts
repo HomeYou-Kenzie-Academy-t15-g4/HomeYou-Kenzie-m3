@@ -35,7 +35,7 @@ export interface IReserve {
   id?: number;
   userId?: number;
   rentPrice: number;
-  rentedDays: string[];
+  rentedDays: Date[];
   guest: IGuest;
   house: Pick<IHouse, 'id' | 'name' | 'photos'>;
 }
@@ -44,7 +44,7 @@ export interface IRent {
   userId: number;
   house: IHouseRent;
   guest: IRentGuest;
-  rentedDays: string[];
+  rentedDays: Date[];
   rentPrice: number;
   id: number;
 }
@@ -69,8 +69,8 @@ export interface IHousesContext {
   setSelectedHouse: React.Dispatch<
     React.SetStateAction<IHouse | InoDefaultValue | null>
   >;
-  selectedRent: IHouse | null;
-  setSelectedRent: React.Dispatch<React.SetStateAction<IHouse | null>>;
+  selectedRent: IRent | null;
+  setSelectedRent: React.Dispatch<React.SetStateAction<IRent | null>>;
   searchText: string;
   setSearchText: React.Dispatch<React.SetStateAction<string>>;
   createHouse: (dataHouse: IHouseForm) => Promise<void>;
@@ -83,6 +83,8 @@ export interface IHousesContext {
   loadValues: IDefaultHouseFormValues;
   setLoadValues: React.Dispatch<React.SetStateAction<IDefaultHouseFormValues>>;
   housesRent: IRent[];
+  selectedDate: Date[] | null;
+  setSelectedDate: any;
 }
 
 export interface InoDefaultValue {

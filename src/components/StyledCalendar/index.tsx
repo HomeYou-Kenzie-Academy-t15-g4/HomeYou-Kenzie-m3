@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
+import { HousesContext } from '../../providers/HousesContext';
 import './app.css';
 import { StyledCalendar } from './style';
 
-const SelectCalendar = () => {
+const SelectCalendar = (data: any) => {
+  const { selectedDate, setSelectedDate } = useContext(HousesContext);
   const [value, setValue] = useState<Date[]>([]);
   const [reservedDates, setReservedDates] = useState<Date[]>([]);
   const [newReserve, setNewReserve] = useState<Date[]>([]);
 
-  const localStorageReseve = localStorage.getItem('@reservedDates');
-
   useEffect(() => {
-    if (localStorageReseve) {
-      let formatDate = JSON.parse(localStorageReseve);
+    if (data) {
+      let formatDate = data.rentedDays;
       formatDate.map(
         (datea: string | number | Date, index: string | number) => {
           formatDate[index] = new Date(datea);
@@ -39,10 +39,8 @@ const SelectCalendar = () => {
     getDatesBetweenDates(calendarValue[0], calendarValue[1]);
 
     setReservedDates(tempReserve.concat(reservedDates));
-    localStorage.setItem(
-      '@reservedDates',
-      JSON.stringify(tempReserve.concat(reservedDates))
-    );
+
+    setSelectedDate(tempReserve.concat(reservedDates));
     setValue(calendarValue);
   };
 
