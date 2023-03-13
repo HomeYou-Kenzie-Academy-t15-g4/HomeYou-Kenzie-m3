@@ -14,6 +14,7 @@ import { Container } from '../../styles/global';
 import { StyledHousePage, StyledRatingBox } from './style';
 import Ratinng from '../../components/Rating';
 import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
+import Footer from '../../components/Footer';
 
 const HousePage = (id: number) => {
   const { isOpen, setIsOpen } = useContext(ModalsContext);
@@ -105,8 +106,8 @@ const HousePage = (id: number) => {
                 <StyledTitle $fontSize='two' $fontColor='grey' tag='h2'>
                   Comodidades
                 </StyledTitle>
-                  <div className='servicesBox'>
-                <ul>
+                <div className='servicesBox'>
+                  <ul>
                     {selectedHouse?.services?.map((service) => {
                       return (
                         <li key={service}>
@@ -120,8 +121,8 @@ const HousePage = (id: number) => {
                         </li>
                       );
                     })}
-                </ul>
-                  </div>
+                  </ul>
+                </div>
               </article>
               <SectionSpacer />
               <article>
@@ -138,6 +139,8 @@ const HousePage = (id: number) => {
         </section>
 
         <CommentsCard />
+
+        <Footer />
       </StyledHousePage>
     </>
   );

@@ -1,38 +1,32 @@
 import styled from 'styled-components';
 
-const StyledDivFooter = styled.footer`
-  background-color: #d9dbde;
-  height: 164px;
-  position: relative;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+export const StyledFooter = styled.footer`
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f5f5f5;
+`;
+
+export const Icon = styled.img`
+  height: 3rem;
+  margin-bottom: 1rem;
+`;
+
+export const Devs = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  img {
-    width: 3rem;
-    height: 3rem;
-    margin: 1rem;
-  }
-
-  .footerBody {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .footerBody--devs {
-    display: flex;
-    gap: 0.5rem;
-  }
-
-  @media (min-width: 624px) {
-    flex-direction: column;
-    padding-bottom: 0.5rem;
-  }
 `;
 
-export default StyledDivFooter;
+export const DevLink = styled.a`
+  margin: 0.5rem 0.5rem;
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors.grey200};
+  transition: 0.3s;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
+`;

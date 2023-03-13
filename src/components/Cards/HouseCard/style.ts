@@ -27,7 +27,6 @@ export const StyledList = styled.ul`
         width: 100%;
         height: 230px;
         max-height: 230px;
-        /* max-height: 100%; */
       }
     }
 
