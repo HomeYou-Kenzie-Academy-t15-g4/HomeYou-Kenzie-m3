@@ -15,10 +15,13 @@ import { StyledHousePage, StyledRatingBox } from './style';
 import Ratinng from '../../components/Rating';
 import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
 import Footer from '../../components/Footer';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../../providers/UserContext';
 
 const HousePage = (id: number) => {
-  const { isOpen, setIsOpen } = useContext(ModalsContext);
+  const { isOpen, setIsOpen, callCreateReserve } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
+  const { user } = useContext(UserContext);
   const [isLike, setIsLike] = useState(false);
 
   console.log(selectedHouse?.accommodation?.beds);
@@ -93,13 +96,26 @@ const HousePage = (id: number) => {
               </StyledTitle>
               <StyledCaption>Interessado em alugar essa casa?</StyledCaption>
 
-              <StyledButton
-                /* onClick={FunçãoModaldeReserva(selectedHouse?.id)} */ type='button'
-                $buttonSize='short'
-                $buttonStyle='primary'
-              >
-                Reservar
-              </StyledButton>
+              {user ? (
+                <StyledButton
+                  type='button'
+                  $buttonSize='short'
+                  $buttonStyle='primary'
+                  onClick={() => callCreateReserve()}
+                >
+                  Reservar
+                </StyledButton>
+              ) : (
+                <Link to={'/login'}>
+                  <StyledButton
+                    type='button'
+                    $buttonSize='short'
+                    $buttonStyle='primary'
+                  >
+                    Reservar
+                  </StyledButton>
+                </Link>
+              )}
             </div>
             <section className='infoSection' id='infoSection'>
               <article>
