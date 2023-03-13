@@ -78,6 +78,8 @@ const HomePage = () => {
             <HouseCard />
           </Container>
         </section>
+
+        <Footer />
       </StyledSectionHomePage>
 
       {/* {isOpen ? (
@@ -97,8 +99,6 @@ const HomePage = () => {
           {isLike ? <FcLikePlaceholder /> : <FcLike />}
         </StyledButton>
       </StyledRatingFavorite> */}
-
-      {/* <Footer /> */}
     </>
   );
 };
