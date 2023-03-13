@@ -238,8 +238,7 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
               width: '100%',
             }}
           >
-            <FormControl sx={StyleMuiSelectorMidWidth}>
-              <InputLabel id='state-select-label'>Estado</InputLabel>
+            <FormControl sx={StyleMuiSelectorMidWidth} >
               <SelectState
                 error={errors.state}
                 onChange={setSelectedUf}
@@ -255,7 +254,6 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
               title='Primeiro selecione o estado'
               sx={StyleMuiSelectorMidWidth}
             >
-              <InputLabel id='city-select-label'>Cidade</InputLabel>
               <SelectCity
                 error={errors.city}
                 uf={selectedUf}
@@ -309,6 +307,7 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
         <InputLabel id='services-select-label'>
           O que o local oferece?
         </InputLabel>
+        
         <Select
           multiple
           error={errors.services ? true : false}

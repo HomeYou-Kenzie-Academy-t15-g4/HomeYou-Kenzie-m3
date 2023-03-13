@@ -19,8 +19,9 @@ const RegisterPage = () => {
 
   return (
     <StyledRegisterPage>
-      <section className='form-section'>
+      <div className='register-box'>
         <img src={logo} alt='' />
+      <section className='form-section'>
         <div className='text-container'>
           <Link to={'/login'}>
             <StyledTitle $fontColor='grey' tag='h3' $fontSize='three'>
@@ -30,6 +31,8 @@ const RegisterPage = () => {
         </div>
         <RegisterForm />
       </section>
+
+      </div>
       {showSection && (
         <section className='image-section'>
           <div>
