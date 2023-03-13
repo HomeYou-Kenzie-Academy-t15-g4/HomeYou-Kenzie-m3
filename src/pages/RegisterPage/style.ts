@@ -7,14 +7,27 @@ export const StyledRegisterPage = styled.main`
   margin: 0 auto;
   height: 100vh;
 
-  .image-section {    
+  .image-section {
     width: 50%;
     height: auto;
     min-height: 100vh;
     min-height: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
+
+    button{
+      border-radius: 49px;
+      background-color: ${({ theme }) => theme.colors.grey00};
+      color: ${({ theme }) => theme.colors.secondary};
+    }
+
+    .asside-home-link{
+      z-index: 10;
+      position: absolute;
+      margin-top: -667px;
+    }
 
     div {
       margin: 200px auto;
@@ -25,7 +38,7 @@ export const StyledRegisterPage = styled.main`
 
     background: ${({ theme }) => theme.colors.primary};
   }
-  .register-box{
+  .register-box {
     margin: 30px auto;
     display: flex;
     flex-direction: column;
@@ -51,36 +64,71 @@ export const StyledRegisterPage = styled.main`
     padding: 40px;
     width: 430px;
     max-width: 95%;
-    
-    .form-container{
-      width: 100%
+
+    .form-title{
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      h3{
+        width: fit-content;
+      }
+      div{
+        display: flex;
+        gap: 7px;
+      }
+      .form-home-link{
+        
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 2px
+      }
     }
-    
+
+    .form-container {
+      width: 100%;
+    }
+
     .text-container {
-      margin-bottom: 40px;
+      margin-bottom: 25px;
       padding-left: 0;
+    }
+
+    .linkToLogin{
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
     }
   }
 
   @media (max-width: 1400px) {
-  .form-section {width: 30vw}    
+    .form-section {
+      width: 30vw;
+    }
   }
 
-  
   @media (max-width: 1200px) {
-  .form-section {width: 360px}    
+    .form-section {
+      width: 360px;
+    }
   }
 
   @media (max-width: 400px) {
-  .form-section {width: 94vw}    
+    .form-section {
+      width: 94vw;
+      padding: 20px;
+    }
   }
 
-  
-  @media (max-height: 700px) {    
-    height: 700px;
-    
-  .image-section {  
-    height: 100%;
-  }
+  @media (max-height: 700px) {
+    height: 830px;
+
+    .register-box{
+      padding-top: 50px;
+    }
+
+    .image-section {
+      height: 100%;
+      padding-top: 50px;
+    }
   }
 `;

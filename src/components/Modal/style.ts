@@ -28,7 +28,7 @@ const StyledModal = styled.div`
     border-radius: 10px;
     box-shadow: 3px 3px 3px 1px #2e2e2e37;
     height: max-content;
-    padding: 7vw;
+    padding: 30px;
   }
 
   header {

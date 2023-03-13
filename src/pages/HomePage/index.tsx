@@ -1,29 +1,28 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import HouseCard from '../../components/Cards/HouseCard';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
-import Modal from '../../components/Modal';
-import Ratinng from '../../components/Rating';
-import { ModalsContext } from '../../providers/ModalsContext';
 import { StyledButton } from '../../styles/button';
 import { Container } from '../../styles/global';
 import { StyledParagraph, StyledTitle } from '../../styles/typograthy';
 import StyledSectionHomePage from './style';
 import homeBg from '../../assets/home-bg.svg';
 import imgLanding from '../../assets/hom-landing.svg';
+import LikeButton from '../../components/LikeButton';
+import { ModalsContext } from '../../providers/ModalsContext';
 
 const HomePage = () => {
-  // const { isOpen, setIsOpen } = useContext(ModalsContext);
+  const { isOpen, setIsOpen } = useContext(ModalsContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
+  
+  useEffect(() => {    
+    window.scroll(0, 0);
     const handleReSize = () => setScreenWidth(window.innerWidth);
     window.addEventListener('resize', handleReSize);
     return () => window.removeEventListener('resize', handleReSize);
   }, []);
 
   const showSection = screenWidth > 900;
-  const [isLike, setIsLike] = useState(false);
 
   return (
     <>
@@ -78,7 +77,9 @@ const HomePage = () => {
             <HouseCard />
           </Container>
         </section>
+        <Footer />
       </StyledSectionHomePage>
+
       {/* {isOpen ? (
         <Modal>
           <div></div>
@@ -95,9 +96,7 @@ const HomePage = () => {
         <StyledButton onClick={() => setIsLike(!isLike)}>
           {isLike ? <FcLikePlaceholder /> : <FcLike />}
         </StyledButton>
-      </StyledRatingFavorite>
-
-      {/* <Footer /> */}
+      </StyledRatingFavorite> */}
     </>
   );
 };

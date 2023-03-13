@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { PropsValue } from 'react-select';
 import * as yup from 'yup';
 import { houseSchema } from '.';
+import { IAccommodation } from '../../../providers/HousesContext/types';
 
 export interface IHouseForm extends yup.InferType<typeof houseSchema> {
   id?: number;
@@ -31,6 +32,8 @@ export interface IDefaultHouseFormValues {
   doubleBed: number | string;
   services: string[];
   houseDesc: string;
+  id?: number;  
+  accommodation?: IAccommodation;
 }
 
 export interface IHouseFormProps {

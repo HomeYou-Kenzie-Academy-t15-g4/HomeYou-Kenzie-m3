@@ -25,9 +25,6 @@ const Header = () => {
         <Link to={'/'}>
           <StyledParagraph $fontColor='grey'>Home</StyledParagraph>
         </Link>
-        <Link to={'/house'}>
-          <StyledParagraph $fontColor='grey'>Galeria</StyledParagraph>
-        </Link>
         {user ? (
           <>
             <Link to={'/dashboard'}>
