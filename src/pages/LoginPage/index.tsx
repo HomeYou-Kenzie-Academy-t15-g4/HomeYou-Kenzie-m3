@@ -26,19 +26,18 @@ const LoginPage = () => {
         </section>
       )}
       <div className='login-box'>
-
         <img src={logo} alt='' />
-      <section className='form-section'>
-        <div className='text-container'>
-          <StyledParagraph $fontColor='grey'>Bem vindo</StyledParagraph>
-          <StyledTitle $fontColor='grey' tag='h3' $fontSize='three'>
-            Faça login na sua conta
-          </StyledTitle>
-        </div>
-        <div className='form-container'>
-          <LoginForm />
-        </div>
-      </section>
+        <section className='form-section'>
+          <div className='text-container'>
+            <StyledParagraph $fontColor='grey'>Bem vindo</StyledParagraph>
+            <StyledTitle $fontColor='grey' tag='h3' $fontSize='three'>
+              Faça login na sua conta
+            </StyledTitle>
+          </div>
+          <div className='form-container'>
+            <LoginForm />
+          </div>
+        </section>
       </div>
     </StyledLoginPage>
   );

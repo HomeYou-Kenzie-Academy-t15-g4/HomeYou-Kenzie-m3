@@ -78,8 +78,7 @@ export const StyledLoginPage = styled.main`
   @media (max-width: 400px) {
     .form-section {
       width: 94vw;
-      
-    padding: 20px;
+      padding: 20px;
     }
   }
 

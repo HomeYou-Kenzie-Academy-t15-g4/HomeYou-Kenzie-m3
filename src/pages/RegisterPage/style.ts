@@ -7,7 +7,7 @@ export const StyledRegisterPage = styled.main`
   margin: 0 auto;
   height: 100vh;
 
-  .image-section {    
+  .image-section {
     width: 50%;
     height: auto;
     min-height: 100vh;
@@ -25,7 +25,7 @@ export const StyledRegisterPage = styled.main`
 
     background: ${({ theme }) => theme.colors.primary};
   }
-  .register-box{
+  .register-box {
     margin: 30px auto;
     display: flex;
     flex-direction: column;
@@ -51,11 +51,11 @@ export const StyledRegisterPage = styled.main`
     padding: 40px;
     width: 430px;
     max-width: 95%;
-    
-    .form-container{
-      width: 100%
+
+    .form-container {
+      width: 100%;
     }
-    
+
     .text-container {
       margin-bottom: 40px;
       padding-left: 0;
@@ -63,24 +63,29 @@ export const StyledRegisterPage = styled.main`
   }
 
   @media (max-width: 1400px) {
-  .form-section {width: 30vw}    
+    .form-section {
+      width: 30vw;
+    }
   }
 
-  
   @media (max-width: 1200px) {
-  .form-section {width: 360px}    
+    .form-section {
+      width: 360px;
+    }
   }
 
   @media (max-width: 400px) {
-  .form-section {width: 94vw}    
+    .form-section {
+      width: 94vw;
+      padding: 20px;
+    }
   }
 
-  
-  @media (max-height: 700px) {    
+  @media (max-height: 700px) {
     height: 700px;
-    
-  .image-section {  
-    height: 100%;
-  }
+
+    .image-section {
+      height: 100%;
+    }
   }
 `;
