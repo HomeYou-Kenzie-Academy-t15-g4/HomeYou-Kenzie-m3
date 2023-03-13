@@ -1,6 +1,6 @@
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -15,18 +15,21 @@ import {
   IDefaultHouseFormValues,
   IHouseForm,
 } from '../../components/Forms/HouseForm/types';
-import { defaultNoValues } from '../../components/Forms/HouseForm/servicesOptions';
+import { defaultHouseFormValues, defaultNoValues } from '../../components/Forms/HouseForm/servicesOptions';
+import { UserContext } from '../UserContext';
 
 export const HousesContext = createContext<IHousesContext>(
   {} as IHousesContext
 );
 
 export const HousesProvider = ({ children }: IHousesProviderProps) => {
+  const { setLoading } = useContext(UserContext);
+
   const [housesList, setHousesList] = useState<IHouse[]>([]);
   const [housesRent, setHousesRent] = useState<IRent[]>([]);
   const [housesFilterList, setHousesFilterList] = useState<IHouse[]>([]);
   const [selectedHouse, setSelectedHouse] = useState<
-    IHouse | InoDefaultValue | null
+    IHouse | InoDefaultValue | IDefaultHouseFormValues | null
   >(null);
   const [selectedRent, setSelectedRent] = useState<IRent | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date[] | null>(null);
@@ -48,6 +51,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   }, [searchText]);
 
   useEffect(() => {
+    setLoading(true);
     const loadHouses = async (): Promise<void> => {
       try {
         const response = await api.get('/houses');
@@ -57,12 +61,15 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         window.localStorage.clear();
         setHousesList([]);
         toast.error('Não foi possivel acessar as casas');
+      } finally {
+        setLoading(false);
       }
     };
     loadHouses();
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     const loadRent = async () => {
       const token = localStorage.getItem('@HomeYou:TOKEN');
       if (token) {
@@ -71,6 +78,8 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           setHousesRent(res.data);
         } catch (error) {
           console.error(error);
+        } finally {
+          setLoading(false);
         }
       }
     };
@@ -83,6 +92,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   // };
 
   const createHouse = async (dataHouse: IHouseForm): Promise<void> => {
+    setLoading(true);
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
     const userAuxString = localStorage.getItem('@HomeYou:User');
     const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
@@ -116,11 +126,16 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         console.error(error);
         toast.error('Falha ao cadastrar casa');
         // navigate('/');
+      } finally {
+        setLoading(false);
       }
     }
   };
 
   const loadOneHouse = async (id: number): Promise<void> => {
+    
+    setSelectedHouse(defaultHouseFormValues);
+    setLoading(true);
     try {
       const response = await api.get(`/houses/${id}`);
       setSelectedHouse(response.data);
@@ -142,13 +157,17 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
 
       setLoadValues(values);
     } catch (error) {
+      setSelectedHouse(null);
       console.error(error);
       toast.error('Falha ao carregar dados da casa');
       // navigate('/');
+    } finally {
+      setLoading(false);
     }
   };
 
   const editHouse = async (dataHouse: IHouseForm): Promise<void> => {
+    setLoading(true);
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
     const houseId = selectedHouse?.id;
     if (token && houseId) {
@@ -176,11 +195,14 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         console.error(error);
         toast.error('Falha ao atualizar casa');
         // navigate('/');
+      } finally {
+        setLoading(false);
       }
     }
   };
 
   const deleteHouse = async (): Promise<void> => {
+    setLoading(true);
     const houseId = selectedHouse?.id;
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
     if (houseId && token) {
@@ -195,11 +217,14 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         console.error(error);
         toast.error('Falha ao deletar casa');
         // navigate('/');
+      } finally {
+        setLoading(false);
       }
     }
   };
 
   const createReserve = async (newRent: IReserve): Promise<void> => {
+    setLoading(true);
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
     const userAuxString = localStorage.getItem('@HomeYou:User');
     const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
@@ -217,6 +242,8 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         console.error(error);
         toast.error('Falha ao reservar casa');
         // navigate('/');
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -225,6 +252,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     editedReserve: IReserve,
     id: number
   ): Promise<void> => {
+    setLoading(true);
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
     console.log(editedReserve);
     try {
@@ -238,10 +266,13 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
       console.error(error);
       toast.error('Falha ao atualizar reserva');
       // navigate('/');
+    } finally {
+      setLoading(false);
     }
   };
 
   const deleteReserve = async (id: number): Promise<void> => {
+    setLoading(true);
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
     try {
       const response = await api.delete(`/rents/${id}`, {
@@ -254,6 +285,8 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
       console.error(error);
       toast.error('Falha ao deletar casa');
       // navigate('/');
+    } finally  {
+      setLoading(false);
     }
   };
 

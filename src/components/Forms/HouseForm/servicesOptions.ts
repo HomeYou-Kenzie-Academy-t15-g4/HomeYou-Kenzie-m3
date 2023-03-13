@@ -55,3 +55,18 @@ export const defaultNoValues = {
   services: [],
   houseDesc: '',
 };
+
+export const  defaultHouseFormValues = {
+  name: '',
+  photos: {
+        value: '',
+        label: ''
+      } , 
+  city: '',
+  state: '',
+  daylyPrice: '',
+  singleBed: '',
+  doubleBed: '',
+  services: [],
+  houseDesc: '',
+}

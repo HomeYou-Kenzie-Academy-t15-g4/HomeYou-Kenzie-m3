@@ -5,6 +5,9 @@ export const StyledList = styled.ul`
   flex-direction: column;
   gap: 30px;
   margin-top: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
 
   .house-link {
     width: 33%;
@@ -17,6 +20,8 @@ export const StyledList = styled.ul`
     background: ${({ theme }) => theme.colors.grey00};
     border-bottom: 1px solid ${({ theme }) => theme.colors.grey100};
     width: 100%;
+    max-width: 360px;
+
     height: 340px;
     border-radius: 10px;
     box-shadow: 0px 3.34259px 3.34259px rgba(0, 0, 0, 0.25);
@@ -37,6 +42,9 @@ export const StyledList = styled.ul`
       display: flex;
       flex-direction: column;
       margin-left: 20px;
+      .city-name {
+        text-transform: capitalize;
+      }
     }
 
     .link-house {
@@ -57,9 +65,7 @@ export const StyledList = styled.ul`
       position: relative;
       top: -280px;
       right: -280px;
-
     }
-    cursor: pointer;
   }
 
   @media (min-width: 800px) {
@@ -68,9 +74,5 @@ export const StyledList = styled.ul`
     gap: 70px;
     align-items: center;
     justify-content: center;
-
-    li {
-      max-width: 360px;
-    }
   }
 `;
