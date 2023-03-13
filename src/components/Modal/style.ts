@@ -9,7 +9,7 @@ const StyledModal = styled.div`
   width: 100%;
   height: 100vh;
   background: rgba(51, 51, 51, 0.5);
-  z-index: 99009;
+  z-index: 1020;
   overflow-y: auto;
   padding-top: 100px;
   padding-bottom: 50px;

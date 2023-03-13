@@ -80,7 +80,7 @@ export const StyleMuiSelector = {
     '&.Mui-focused fieldset': {
       borderColor: '#0C6B38',
     },
-  },
+  }
 };
 
 export const StyleMuiSelectorMidWidth = {
