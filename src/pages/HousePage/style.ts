@@ -5,8 +5,15 @@ export const StyledHousePage = styled.main`
   flex-direction: column;
 
   .mainTitle {
-    margin-top: 80px;
-    padding-bottom: 27px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .guests {
+    display: flex;
+    align-self: flex-start;
   }
 
   .galerySection {
@@ -93,6 +100,9 @@ export const StyledHousePage = styled.main`
     height: 100%;
     padding: 35px 25px;
     margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     color: ${({ theme }) => theme.colors.grey400};
     background-color: ${({ theme }) => theme.colors.grey00};
     border-radius: 20px;
@@ -108,5 +118,29 @@ export const StyledHousePage = styled.main`
     .infoSection article {
       width: 288px;
     }
+  }
+`;
+
+export const StyledRatingBox = styled.div`
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  margin-top: 80px;
+
+  .btnRating {
+    display: flex;
+    align-items: center;
+  }
+
+  .btnRating button {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 100%;
+    font-size: 2.5rem;
   }
 `;

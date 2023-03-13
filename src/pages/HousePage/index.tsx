@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { HousesContext } from '../../providers/HousesContext';
 import { ModalsContext } from '../../providers/ModalsContext';
@@ -11,11 +11,14 @@ import { CardSlider } from '../../components/Slider/carrousels/CardCarrousel';
 import { StyledButton } from '../../styles/button';
 import { StyledCaption, StyledTitle } from '../../styles/typograthy';
 import { Container } from '../../styles/global';
-import { StyledHousePage } from './style';
+import { StyledHousePage, StyledRatingBox } from './style';
+import Ratinng from '../../components/Rating';
+import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
 
 const HousePage = () => {
   const { isOpen, setIsOpen } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
+  const [isLike, setIsLike] = useState(false);
 
   useEffect(() => {
     loadOneHouse(3);
@@ -42,14 +45,22 @@ const HousePage = () => {
 
         <section>
           <Container>
-            <div className='mainTitle'>
-              <StyledTitle $fontSize='two' $fontColor='greyBold' tag='h2'>
-                {selectedHouse?.name}
-              </StyledTitle>
-              <StyledCaption>
-                {capacity} hospedes - {beds} camas{' '}
-              </StyledCaption>
-            </div>
+            <StyledRatingBox>
+              <div className='mainTitle'>
+                <StyledTitle $fontSize='two' $fontColor='greyBold' tag='h2'>
+                  {selectedHouse?.name}
+                </StyledTitle>
+                <StyledCaption className='guests'>
+                  {capacity} hospedes - {beds} camas
+                </StyledCaption>
+              </div>
+              <div className='btnRating'>
+                <Ratinng />
+                <button onClick={() => setIsLike(!isLike)}>
+                  {isLike ? <FcLikePlaceholder /> : <FcLike />}
+                </button>
+              </div>
+            </StyledRatingBox>
           </Container>
 
           <section className='galerySection'>
@@ -119,17 +130,8 @@ const HousePage = () => {
                   Detalhes do local
                 </StyledTitle>
                 <div className='detailsTextBox'>
-                  <StyledCaption>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Corrupti hic corporis dicta sapiente est asperiores omnis
-                    ipsum odio. Eius facere totam eligendi ut beatae rerum? Cum
-                    consequatur animi aut consequuntur!Lorem, ipsum dolor sit
-                    amet consectetur adipisicing elit. Corrupti hic corporis
-                    dicta sapiente est asperiores omnis ipsum odio. Eius facere
-                    totam eligendi ut beatae rerum? Cum consequatur animi aut
-                    consequuntur! Eius facere totam eligendi ut beatae rerum?
-                    Cum consequatur animi aut consequuntur!
-                  </StyledCaption>
+                  <StyledCaption>{selectedHouse?.houseDesc}</StyledCaption>
+                  <Ratinng />
                 </div>
               </article>
             </section>
