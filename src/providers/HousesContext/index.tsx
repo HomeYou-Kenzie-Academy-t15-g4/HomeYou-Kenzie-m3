@@ -1,6 +1,6 @@
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -241,6 +241,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
       } catch (error) {
         console.error(error);
         toast.error('Falha ao reservar casa');
+
         // navigate('/');
       } finally {
         setLoading(false);
@@ -265,6 +266,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     } catch (error) {
       console.error(error);
       toast.error('Falha ao atualizar reserva');
+
       // navigate('/');
     } finally {
       setLoading(false);
@@ -284,6 +286,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     } catch (error) {
       console.error(error);
       toast.error('Falha ao deletar casa');
+
       // navigate('/');
     } finally  {
       setLoading(false);

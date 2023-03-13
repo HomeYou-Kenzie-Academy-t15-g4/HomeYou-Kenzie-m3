@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import HouseCard from '../../components/Cards/HouseCard';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -7,8 +7,12 @@ import { Container } from '../../styles/global';
 import { StyledParagraph, StyledTitle } from '../../styles/typograthy';
 import StyledSectionHomePage from './style';
 import homeBg from '../../assets/home-bg.svg';
+import imgLanding from '../../assets/hom-landing.svg';
+import LikeButton from '../../components/LikeButton';
+import { ModalsContext } from '../../providers/ModalsContext';
 
 const HomePage = () => {
+  const { isOpen, setIsOpen } = useContext(ModalsContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   
   useEffect(() => {    
@@ -73,9 +77,26 @@ const HomePage = () => {
             <HouseCard />
           </Container>
         </section>
+        <Footer />
       </StyledSectionHomePage>
-      
-      {/* <Footer /> */}
+
+      {/* {isOpen ? (
+        <Modal>
+          <div></div>
+        </Modal>
+      ) : null}
+      <Header />
+      <StyledSectionHomePage />
+
+      <button type='button' onClick={() => setIsOpen(true)}>
+        Abrir
+      </button>
+      <StyledRatingFavorite>
+        <Ratinng />
+        <StyledButton onClick={() => setIsLike(!isLike)}>
+          {isLike ? <FcLikePlaceholder /> : <FcLike />}
+        </StyledButton>
+      </StyledRatingFavorite> */}
     </>
   );
 };

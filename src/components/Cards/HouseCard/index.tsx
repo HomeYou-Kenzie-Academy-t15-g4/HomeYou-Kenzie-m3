@@ -28,7 +28,7 @@ const HouseCard = () => {
 
             <div className='text-box'>
               <StyledParagraph $fontWeight='two' $fontColor='greyBold'>
-                <span className='city-name'>{house.city.toLowerCase()}</span>,{' '}
+                <span className='city-name'>{house.city.toLowerCase()}</span>,
                 {house.state}
               </StyledParagraph>
               <StyledParagraph $fontColor='grey' $fontWeight='three'>

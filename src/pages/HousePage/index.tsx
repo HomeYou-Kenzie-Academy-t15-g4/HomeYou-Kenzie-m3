@@ -18,20 +18,25 @@ import Skeleton from '@mui/material/Skeleton';
 import { UserContext } from '../../providers/UserContext';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../../components/Footer';
+import { Link } from 'react-router-dom';
+import LikeButton from '../../components/LikeButton';
+import ReservForm from '../../components/Forms/ReservForm';
 
 const HousePage = (id: number) => {
-  const { isOpen } = useContext(ModalsContext);
   const { loading } = useContext(UserContext);
-  const { selectedHouse } = useContext(HousesContext);
   const [isLike, setIsLike] = useState(false);
+  const { isOpen, callCreateReserve } = useContext(ModalsContext);
+  const { selectedHouse, loadOneHouse } = useContext(HousesContext);
+  const { user } = useContext(UserContext);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scroll(0, 0);
     if (selectedHouse == null) {
-      toast.info('Selecione uma casa antes de acessar essa página')
-      navigate('/')
+      toast.info('Selecione uma casa antes de acessar essa página');
+      navigate('/');
     }
   }, []);
 
@@ -146,14 +151,26 @@ const HousePage = (id: number) => {
                   Orçamento
                 </StyledTitle>
                 <StyledCaption>Interessado em alugar essa casa?</StyledCaption>
-
-                <StyledButton
-                  /* onClick={FunçãoModaldeReserva(selectedHouse?.id)} */ type='button'
-                  $buttonSize='short'
-                  $buttonStyle='primary'
-                >
-                  Reservar
-                </StyledButton>
+                {user ? (
+                  <StyledButton
+                    type='button'
+                    $buttonSize='short'
+                    $buttonStyle='primary'
+                    onClick={() => callCreateReserve()}
+                  >
+                    Reservar
+                  </StyledButton>
+                ) : (
+                  <Link to={'/login'}>
+                    <StyledButton
+                      type='button'
+                      $buttonSize='short'
+                      $buttonStyle='primary'
+                    >
+                      Reservar
+                    </StyledButton>
+                  </Link>
+                )}
               </div>
               <section className='infoSection' id='infoSection'>
                 <article>
@@ -190,7 +207,6 @@ const HousePage = (id: number) => {
               </section>
             </Container>
           </section>
-
           <CommentsCard />
         </StyledHousePage>
       )}
