@@ -2,27 +2,27 @@ import styled from 'styled-components';
 import Animation from '../../styles/animations';
 
 const StyledModal = styled.div`
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: center;
 
   width: 100%;
   height: 100vh;
   background: rgba(51, 51, 51, 0.5);
-  z-index: 1001;
+  z-index: 99009;
   overflow-y: auto;
   padding-top: 100px;
   padding-bottom: 50px;
   padding: 50px 2vw;
 
   .box {
-    max-width: 700px;
+    max-width: max-content;
     display: flex;
     justify-content: center;
   }
 
   .inside {
-    max-width: 700px;
+    max-width: max-content;
     animation: ${Animation} 0.5s;
     background-color: #ffff;
     border-radius: 10px;

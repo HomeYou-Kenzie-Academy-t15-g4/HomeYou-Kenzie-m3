@@ -18,7 +18,7 @@ const HousePage = () => {
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
 
   useEffect(() => {
-    loadOneHouse(2);
+    loadOneHouse(3);
     console.log(selectedHouse);
   }, []);
 
