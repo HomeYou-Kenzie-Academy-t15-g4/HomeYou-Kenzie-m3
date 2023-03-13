@@ -12,11 +12,11 @@ export const StyledList = styled.ul`
     flex-direction: column;
 
     background: ${({ theme }) => theme.colors.grey00};
-    border-bottom: 1px solid ${({ theme }) => theme.colors.grey100};
+    border: 1px solid ${({ theme }) => theme.colors.grey100};
     width: 100%;
     height: 340px;
     border-radius: 10px;
-    box-shadow: 0px 3.34259px 3.34259px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.07);
 
     .image-box {
       width: 100%;
@@ -41,7 +41,6 @@ export const StyledList = styled.ul`
       width: 100%;
       height: 340px;
       border-radius: 10px;
-      box-shadow: 0px 3.34259px 3.34259px rgba(0, 0, 0, 0.25);
 
       .image-box {
         width: 100%;
