@@ -16,7 +16,6 @@ export const UserSection = styled.section`
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
 
     .bg-user {
-      /* min-width: 280px; */
       width: 100%;
       min-height: 130px;
 

@@ -3,13 +3,15 @@ import styled from 'styled-components';
 export const UserHousesSection = styled.section`
   margin-top: 20px;
   width: 100%;
-  min-height: 490px;
+  min-height: 500px;
   border-radius: 10px;
   padding: 10px;
 
   @media (min-width: 900px) {
     padding: 25px;
     max-width: 45%;
+    height: 530px;
+    min-height: 530px;
     .title-box {
       button {
         max-width: 60%;
@@ -71,30 +73,32 @@ export const UserHousesSection = styled.section`
         align-items: center;
 
         button {
-          margin-left: -20px;
+          width: 20%;
         }
       }
 
       .image-box {
         width: 100%;
         min-height: 214px;
+        max-height: 214px;
         @media (min-width: 900px) {
-          max-height: 248px;
+          height: 230px;
+          max-height: 230px;
         }
 
         img {
           width: 100%;
-          height: 100%;
+          min-height: 214px;
+          max-height: 214px;
           border: 1px solid ${({ theme }) => theme.colors.grey100};
         }
       }
-    }
-
-    .reserve-box {
-      padding: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      .reserve-box {
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
   }
 
