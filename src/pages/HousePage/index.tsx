@@ -14,13 +14,14 @@ import { Container } from '../../styles/global';
 import { StyledHousePage, StyledRatingBox } from './style';
 import Ratinng from '../../components/Rating';
 import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
-import ReservForm from '../../components/Forms/ReservForm';
+import Footer from '../../components/Footer';
 
 const HousePage = (id: number) => {
-  const { isOpen, setIsOpen, callCreateReserve } = useContext(ModalsContext);
+  const { isOpen, setIsOpen } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
   const [isLike, setIsLike] = useState(false);
 
+  console.log(selectedHouse?.accommodation?.beds);
   const capacity =
     Number(selectedHouse?.accommodation?.beds) +
     2 * Number(selectedHouse?.accommodation?.doubleBeds);
@@ -34,7 +35,7 @@ const HousePage = (id: number) => {
       <StyledHousePage>
         {isOpen ? (
           <Modal title='modal'>
-            <ReservForm />
+            <div></div>
           </Modal>
         ) : null}
 
@@ -85,67 +86,6 @@ const HousePage = (id: number) => {
               <StyledTitle
                 $textAlign='center'
                 $fontSize='two'
-                $fontColor='greyBold'
-                tag='h2'
-              >
-                Galeria
-              </StyledTitle>
-              <StyledCaption>Interessado em alugar essa casa?</StyledCaption>
-
-              <StyledButton
-                onClick={() => callCreateReserve()}
-                type='button'
-                $buttonSize='short'
-                $buttonStyle='primary'
-              >
-                Reservar
-              </StyledButton>
-            </div>
-            <section className='infoSection' id='infoSection'>
-              <article>
-                <StyledTitle $fontSize='two' $fontColor='grey' tag='h2'>
-                  Comodidades
-                </StyledTitle>
-                <ul>
-                  {selectedHouse?.services?.map((service) => {
-                    return (
-                      <li key={service}>
-                        <span className='iconBox'>
-                          <IconsMatch iconName={service} />
-                        </span>
-                        <StyledCaption className='servicesName'>
-                          {service}
-                        </StyledCaption>
-                        {/* <p className='servicesName'>{service}</p> */}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </article>
-              <SectionSpacer />
-              <article>
-                <StyledTitle $fontSize='two' $fontColor='grey' tag='h2'>
-                  Detalhes do local
-                </StyledTitle>
-                <div className='detailsTextBox'>
-                  <StyledCaption>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Corrupti hic corporis dicta sapiente est asperiores omnis
-                    ipsum odio. Eius facere totam eligendi ut beatae rerum? Cum
-                    consequatur animi aut consequuntur!Lorem, ipsum dolor sit
-                    amet consectetur adipisicing elit. Corrupti hic corporis
-                    dicta sapiente est asperiores omnis ipsum odio. Eius facere
-                    totam eligendi ut beatae rerum? Cum consequatur animi aut
-                    consequuntur! Eius facere totam eligendi ut beatae rerum?
-                    Cum consequatur animi aut consequuntur!
-                  </StyledCaption>
-                </div>
-              </article>
-            </section>
-            <div className='reserveSection'>
-              <StyledTitle
-                $textAlign='center'
-                $fontSize='two'
                 $fontColor='grey'
                 tag='h2'
               >
@@ -154,8 +94,7 @@ const HousePage = (id: number) => {
               <StyledCaption>Interessado em alugar essa casa?</StyledCaption>
 
               <StyledButton
-                onClick={() => callCreateReserve()}
-                type='button'
+                /* onClick={FunçãoModaldeReserva(selectedHouse?.id)} */ type='button'
                 $buttonSize='short'
                 $buttonStyle='primary'
               >
@@ -200,6 +139,8 @@ const HousePage = (id: number) => {
         </section>
 
         <CommentsCard />
+
+        <Footer />
       </StyledHousePage>
     </>
   );

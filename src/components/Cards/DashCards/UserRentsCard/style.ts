@@ -3,13 +3,15 @@ import styled from 'styled-components';
 export const UserRentsSection = styled.section`
   margin-top: 20px;
   width: 100%;
-  min-height: 490px;
+  min-height: 500px;
   border-radius: 10px;
   padding: 10px;
 
   @media (min-width: 900px) {
     padding: 25px;
     width: 45%;
+    height: 530px;
+    min-height: 530px;
     .title-box {
       button {
         max-width: 60%;
@@ -71,20 +73,23 @@ export const UserRentsSection = styled.section`
         align-items: center;
 
         button {
-          margin-left: -20px;
+          margin-left: 20px;
         }
       }
 
       .image-box {
         width: 100%;
         min-height: 214px;
+        max-height: 214px;
         @media (min-width: 900px) {
           height: 248px;
+          max-height: 248px;
         }
 
         img {
           width: 100%;
-          height: 100%;
+          min-height: 214px;
+          max-height: 214px;
           border: 1px solid ${({ theme }) => theme.colors.grey100};
         }
       }

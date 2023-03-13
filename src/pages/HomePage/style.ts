@@ -4,10 +4,6 @@ const StyledSectionHomePage = styled.main`
   width: 100%;
   height: 100vh;
 
-  header {
-    box-shadow: none;
-  }
-
   .home-section {
     padding-top: 70px;
 
