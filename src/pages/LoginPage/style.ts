@@ -14,7 +14,20 @@ export const StyledLoginPage = styled.main`
     min-height: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
+
+    button{
+      border-radius: 49px;
+      background-color: ${({ theme }) => theme.colors.grey00};
+      color: ${({ theme }) => theme.colors.secondary};
+    }
+
+    .asside-home-link{
+      z-index: 10;
+      position: absolute;
+      margin-top: -534px;
+    }
 
     div {
       margin: 200px auto;
@@ -52,6 +65,25 @@ export const StyledLoginPage = styled.main`
     padding: 40px;
     width: 430px;
     max-width: 95%;
+
+    .form-title{
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      h3{
+        width: fit-content;
+      }
+      div{
+        display: flex;
+        gap: 7px;
+      }
+      .form-home-link{
+        
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 2px
+      }
+    }
 
     .form-container {
       width: 100%;

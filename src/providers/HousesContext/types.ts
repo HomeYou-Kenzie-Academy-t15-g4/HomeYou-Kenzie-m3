@@ -66,9 +66,9 @@ export interface IHousesContext {
   setHousesList: React.Dispatch<React.SetStateAction<IHouse[]>>;
   housesFilterList: IHouse[];
   setHousesFilterList: React.Dispatch<React.SetStateAction<IHouse[]>>;
-  selectedHouse: IHouse | InoDefaultValue | null;
+  selectedHouse: IHouse | InoDefaultValue | IDefaultHouseFormValues | null;
   setSelectedHouse: React.Dispatch<
-    React.SetStateAction<IHouse | InoDefaultValue | null>
+    React.SetStateAction<IHouse | IDefaultHouseFormValues | InoDefaultValue | null>
   >;
   selectedRent: IRent | null;
   setSelectedRent: React.Dispatch<React.SetStateAction<IRent | null>>;

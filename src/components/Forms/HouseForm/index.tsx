@@ -238,7 +238,7 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
               width: '100%',
             }}
           >
-            <FormControl sx={StyleMuiSelectorMidWidth} >
+            <FormControl sx={StyleMuiSelectorMidWidth}>
               <SelectState
                 error={errors.state}
                 onChange={setSelectedUf}
@@ -307,8 +307,8 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
         <InputLabel id='services-select-label'>
           O que o local oferece?
         </InputLabel>
-        
-        <Select
+        <Select sx={{
+    maxWidth: '74vw',}}
           multiple
           error={errors.services ? true : false}
           labelId='services-select-label'

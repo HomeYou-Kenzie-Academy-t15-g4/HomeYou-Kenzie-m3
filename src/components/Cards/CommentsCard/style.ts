@@ -2,7 +2,7 @@ import styled from 'styled-components';
 export const CommentsSection = styled.section`
   margin: 0;
   background: ${({ theme }) => theme.colors.grey00};
-  margin-top: 30px;
+  margin-top: 50px;
 `;
 
 export const StyledContainerCardComment = styled.ul`
@@ -11,6 +11,10 @@ export const StyledContainerCardComment = styled.ul`
   gap: 1em;
 
   @media (min-width: 650px) {
+    .container {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
     flex-wrap: wrap;
     justify-content: center;
     display: flex;
@@ -71,5 +75,5 @@ export const StyledPNameComment = styled.p`
 `;
 export const StyledPDataComment = styled.p`
   font-size: small;
-  color: #343b41;
+  color: ${({ theme }) => theme.colors.grey400};
 `;

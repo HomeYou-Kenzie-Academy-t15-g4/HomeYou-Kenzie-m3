@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { HousesContext } from '../../../providers/HousesContext';
 import { IHouse } from '../../../providers/HousesContext/types';
 import { StyledParagraph } from '../../../styles/typograthy';
@@ -28,7 +28,8 @@ const HouseCard = () => {
 
             <div className='text-box'>
               <StyledParagraph $fontWeight='two' $fontColor='greyBold'>
-                {house.city}, {house.state}
+                <span className='city-name'>{house.city.toLowerCase()}</span>,
+                {house.state}
               </StyledParagraph>
               <StyledParagraph $fontColor='grey' $fontWeight='three'>
                 Alugar

@@ -9,6 +9,7 @@ export const StyledHousePage = styled.main`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    margin-right: 13px;
   }
 
   .guests {
@@ -20,13 +21,11 @@ export const StyledHousePage = styled.main`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 1px;
     background-color: ${({ theme }) => theme.colors.grey00};
     padding: 35px 30px;
   }
 
-  
-  .galerySection img{
+  .galerySection img {
   }
 
   .galeryTitle {
@@ -58,10 +57,10 @@ export const StyledHousePage = styled.main`
     min-width: 209px;
     height: max-content;
     max-width: 450px;
-    min-width: 300px;
+    min-width: 350px;
   }
-  
-  .servicesBox{
+
+  .servicesBox {
     max-width: 450px;
     margin-top: 30px;
     padding: 35px 20px;
@@ -120,11 +119,17 @@ export const StyledHousePage = styled.main`
     background-color: ${({ theme }) => theme.colors.grey00};
     border-radius: 20px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  }
-  @media (max-width: 720px) {
-    ul{
-      
+
+    div {
+      margin-top: 10px;
+      margin-bottom: -10px;
+      p {
+        margin-top: 10px;
+        margin-bottom: -10px;
+      }
     }
+  }
+  @media (max-width: 870px) {
     .infoSection {
       justify-content: center;
       align-items: center;
@@ -133,6 +138,45 @@ export const StyledHousePage = styled.main`
     }
     .infoSection article {
       width: 288px;
+      max-width: 288px;
+      
+    }
+  }
+
+  @media (max-width: 420px) {
+    .detailsTextBox {
+      div {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        margin-top: 10px;
+        margin-bottom: -10px;
+        p {
+          margin-top: 10px;
+          margin-bottom: -10px;
+        }
+      }
+    }
+    .servicesBox{
+        width: 100%;
+    }
+    .infoSection article {
+        min-width: 80%;
+      
+      div {
+        width: 100%;
+      }
+      ul {
+        padding-right: 25px;
+        max-width: 100%;
+      }
+      li {
+        span {
+          display: flex;
+          flex-wrap: wrap;
+        }
+      }
+      width: 96vw;
     }
   }
 `;
@@ -158,5 +202,13 @@ export const StyledRatingBox = styled.div`
     text-align: center;
     border-radius: 100%;
     font-size: 2.5rem;
+  }
+
+  @media (max-width: 800px) {
+    .btnRating {
+      div {
+        display: none;
+      }
+    }
   }
 `;

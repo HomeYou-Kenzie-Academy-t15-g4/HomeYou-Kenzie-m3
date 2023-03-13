@@ -52,6 +52,7 @@ export const reactSelectStyle = {
     borderRadius: '15px',
     minHeight: '56px',
     marginTop: '-13px',
+    maxWidth: '74vw',
     borderColor: 'rgba(0, 0, 0, 0.87)',
     color: 'rgba(0, 0, 0, 0.4)',
     cursor: 'text',
