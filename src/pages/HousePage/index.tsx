@@ -15,12 +15,15 @@ import { StyledHousePage, StyledRatingBox } from './style';
 import Ratinng from '../../components/Rating';
 import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
 import Footer from '../../components/Footer';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../../providers/UserContext';
+import LikeButton from '../../components/LikeButton';
 import ReservForm from '../../components/Forms/ReservForm';
 
 const HousePage = (id: number) => {
   const { isOpen, callCreateReserve } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
-  const [isLike, setIsLike] = useState(false);
+  const { user } = useContext(UserContext);
 
   console.log(selectedHouse?.accommodation?.beds);
   const capacity =
@@ -53,9 +56,7 @@ const HousePage = (id: number) => {
               </div>
               <div className='btnRating'>
                 <Ratinng />
-                <button onClick={() => setIsLike(!isLike)}>
-                  {isLike ? <FcLikePlaceholder /> : <FcLike />}
-                </button>
+                <LikeButton />
               </div>
             </StyledRatingBox>
           </Container>
@@ -94,14 +95,26 @@ const HousePage = (id: number) => {
               </StyledTitle>
               <StyledCaption>Interessado em alugar essa casa?</StyledCaption>
 
-              <StyledButton
-                onClick={() => callCreateReserve()}
-                type='button'
-                $buttonSize='short'
-                $buttonStyle='primary'
-              >
-                Reservar
-              </StyledButton>
+              {user ? (
+                <StyledButton
+                  type='button'
+                  $buttonSize='short'
+                  $buttonStyle='primary'
+                  onClick={() => callCreateReserve()}
+                >
+                  Reservar
+                </StyledButton>
+              ) : (
+                <Link to={'/login'}>
+                  <StyledButton
+                    type='button'
+                    $buttonSize='short'
+                    $buttonStyle='primary'
+                  >
+                    Reservar
+                  </StyledButton>
+                </Link>
+              )}
             </div>
             <section className='infoSection' id='infoSection'>
               <article>

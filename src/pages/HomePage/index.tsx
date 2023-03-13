@@ -11,6 +11,7 @@ import { StyledParagraph, StyledTitle } from '../../styles/typograthy';
 import StyledSectionHomePage from './style';
 import homeBg from '../../assets/home-bg.svg';
 import imgLanding from '../../assets/hom-landing.svg';
+import LikeButton from '../../components/LikeButton';
 
 const HomePage = () => {
   const { isOpen, setIsOpen } = useContext(ModalsContext);
@@ -78,7 +79,6 @@ const HomePage = () => {
             <HouseCard />
           </Container>
         </section>
-
         <Footer />
       </StyledSectionHomePage>
 
