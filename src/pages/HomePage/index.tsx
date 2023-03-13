@@ -13,7 +13,7 @@ import homeBg from '../../assets/home-bg.svg';
 import imgLanding from '../../assets/hom-landing.svg';
 
 const HomePage = () => {
-  // const { isOpen, setIsOpen } = useContext(ModalsContext);
+  const { isOpen, setIsOpen } = useContext(ModalsContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -79,6 +79,7 @@ const HomePage = () => {
           </Container>
         </section>
       </StyledSectionHomePage>
+
       {/* {isOpen ? (
         <Modal>
           <div></div>
@@ -95,7 +96,7 @@ const HomePage = () => {
         <StyledButton onClick={() => setIsLike(!isLike)}>
           {isLike ? <FcLikePlaceholder /> : <FcLike />}
         </StyledButton>
-      </StyledRatingFavorite>
+      </StyledRatingFavorite> */}
 
       {/* <Footer /> */}
     </>

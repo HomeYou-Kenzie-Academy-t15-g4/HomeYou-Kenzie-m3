@@ -13,7 +13,6 @@ const HouseCard = () => {
       <StyledList>
         {housesList.map((house: IHouse) => (
           <Link className='house-link' to={'/house'}>
-            {/* fiz uma 'gambiarra' com esse link enquanto o bug não resolve */}
             <li key={house.id} onClick={() => console.log(house.id)}>
               <div className='image-box'>
                 <img src={house.photos[0]} alt='Image House' />
