@@ -204,6 +204,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     const userAuxString = localStorage.getItem('@HomeYou:User');
     const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
 
+    console.log(newRent);
     if (userAux) {
       try {
         const response = await api.post('/rents', newRent, {
@@ -225,6 +226,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     id: number
   ): Promise<void> => {
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
+    console.log(editedReserve);
     try {
       const response = await api.patch(`/rents/${id}`, editedReserve, {
         headers: {

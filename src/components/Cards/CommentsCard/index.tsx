@@ -8,6 +8,11 @@ import {
   StyledPDescriptionComment,
   StyledPNameComment,
 } from './style';
+import {
+  StyledCaption,
+  StyledParagraph,
+  StyledTitle,
+} from '../../../styles/typograthy';
 
 const CommentsCard = () => {
   const commentRandom = _.shuffle(DataComments);
@@ -22,16 +27,20 @@ const CommentsCard = () => {
               <div>
                 <StyledInfoUserComment>
                   <img src={comentarios.img} alt='Imagem usuario' />
-                  <div>
+                  <div className='contentBox'>
                     <StyledPNameComment>
-                      <strong>{comentarios.name}</strong>
+                      <StyledTitle
+                        $fontSize='two'
+                        children={comentarios.name}
+                        tag='h3'
+                      ></StyledTitle>
                     </StyledPNameComment>
-                    <StyledPDataComment>{comentarios.date}</StyledPDataComment>
+                    <StyledCaption>{comentarios.date}</StyledCaption>
                   </div>
                 </StyledInfoUserComment>
-                <StyledPDescriptionComment>
+                <StyledParagraph $textAlign='left'>
                   {comentarios.description}
-                </StyledPDescriptionComment>
+                </StyledParagraph>
               </div>
             </li>
           ))}

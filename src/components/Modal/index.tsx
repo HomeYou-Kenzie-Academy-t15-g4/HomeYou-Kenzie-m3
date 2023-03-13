@@ -12,7 +12,8 @@ interface IModalProps {
 }
 
 const Modal = ({ children, title }: IModalProps) => {
-  const { isOpen, closeModal } = useContext(ModalsContext);
+  const { isOpen, isOpenCalendar, closeModal, closeModalCalendar } =
+    useContext(ModalsContext);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -32,7 +33,11 @@ const Modal = ({ children, title }: IModalProps) => {
               tag='h3'
               className='s'
             ></StyledTitle>
-            <MdClose onClick={() => closeModal()} />
+            <MdClose
+              onClick={() =>
+                isOpenCalendar ? closeModalCalendar() : closeModal()
+              }
+            />
           </header>
           {children}
         </div>

@@ -28,7 +28,8 @@ const ReservForm = () => {
     selectedHouse,
     selectedDate,
   } = useContext(HousesContext);
-  const { isOpen, setIsOpen, deleteButton } = useContext(ModalsContext);
+  const { isOpenCalendar, setIsOpenCalendar, deleteButton } =
+    useContext(ModalsContext);
   const { user } = useContext(UserContext);
   const [days, setDays] = useState(0);
   const userAuxString = localStorage.getItem('@HomeYou:User');
@@ -53,6 +54,7 @@ const ReservForm = () => {
   useEffect(() => {
     if (selectedDate) {
       setValue('rentedDays', selectedDate);
+      selectedDate?.length ? setDays(selectedDate.length - 1) : setDays(0);
       clearErrors('rentedDays');
     }
   }, [selectedDate]);
@@ -60,7 +62,7 @@ const ReservForm = () => {
   const submit: SubmitHandler<IReserveForm> = ({ rentedDays }) => {
     const data: IReserve = {
       rentedDays,
-      userId: userAux,
+      userId: userAux.id,
       rentPrice: selectedHouse?.daylyPrice
         ? selectedHouse.daylyPrice * days * 0.02 +
           selectedHouse.daylyPrice * days
@@ -92,14 +94,12 @@ const ReservForm = () => {
     });
   }
 
-  selectedDate?.length ? setDays(selectedDate.length - 1) : setDays(0);
-
   return (
     <StyledForm onSubmit={handleSubmit(submit)}>
       <StyledDivReturnToLogin>
         <button>Editar Reserva</button>
       </StyledDivReturnToLogin>
-      {isOpen ? (
+      {isOpenCalendar ? (
         deleteButton ? (
           <Modal title='Editar reserva'>
             <SelectCalendar />
@@ -110,7 +110,7 @@ const ReservForm = () => {
           </Modal>
         )
       ) : null}
-      <div onClick={() => setIsOpen(true)}>
+      <div onClick={() => setIsOpenCalendar(true)}>
         {selectedRent?.rentedDays.length !== 0 && selectedDate ? (
           <div>
             <div>
@@ -120,25 +120,19 @@ const ReservForm = () => {
                   ? selectedDate[0].toLocaleString('default', {
                       day: '2-digit',
                     })
-                  : selectedRent?.rentedDays[0].toLocaleString('default', {
-                      day: '2-digit',
-                    })}
+                  : selectedRent?.rentedDays[0]}
                 /
                 {selectedDate[0]
                   ? selectedDate[0].toLocaleString('default', {
                       month: '2-digit',
                     })
-                  : selectedRent?.rentedDays[0].toLocaleString('default', {
-                      month: '2-digit',
-                    })}
+                  : selectedRent?.rentedDays[0]}
                 /
                 {selectedDate[0]
                   ? selectedDate[0].toLocaleString('default', {
                       year: 'numeric',
                     })
-                  : selectedRent?.rentedDays[0].toLocaleString('default', {
-                      year: 'numeric',
-                    })}
+                  : selectedRent?.rentedDays[0]}
               </p>
             </div>
             <div>
@@ -153,9 +147,7 @@ const ReservForm = () => {
                     )
                   : selectedRent?.rentedDays[
                       selectedRent?.rentedDays.length - 1
-                    ].toLocaleString('default', {
-                      day: '2-digit',
-                    })}
+                    ]}
                 /
                 {selectedDate[0]
                   ? selectedDate[selectedDate.length - 1].toLocaleString(
@@ -166,9 +158,7 @@ const ReservForm = () => {
                     )
                   : selectedRent?.rentedDays[
                       selectedRent?.rentedDays.length - 1
-                    ].toLocaleString('default', {
-                      month: '2-digit',
-                    })}
+                    ]}
                 /
                 {selectedDate[0]
                   ? selectedDate[selectedDate.length - 1].toLocaleString(
@@ -179,9 +169,7 @@ const ReservForm = () => {
                     )
                   : selectedRent?.rentedDays[
                       selectedRent?.rentedDays.length - 1
-                    ].toLocaleString('default', {
-                      year: 'numeric',
-                    })}
+                    ]}
               </p>
             </div>
           </div>

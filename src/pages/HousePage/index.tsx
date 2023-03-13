@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { HousesContext } from '../../providers/HousesContext';
 import { ModalsContext } from '../../providers/ModalsContext';
@@ -11,18 +11,16 @@ import { CardSlider } from '../../components/Slider/carrousels/CardCarrousel';
 import { StyledButton } from '../../styles/button';
 import { StyledCaption, StyledTitle } from '../../styles/typograthy';
 import { Container } from '../../styles/global';
-import { StyledHousePage } from './style';
+import { StyledHousePage, StyledRatingBox } from './style';
+import Ratinng from '../../components/Rating';
+import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
+import ReservForm from '../../components/Forms/ReservForm';
 
-const HousePage = () => {
-  const { isOpen, setIsOpen } = useContext(ModalsContext);
+const HousePage = (id: number) => {
+  const { isOpen, setIsOpen, callCreateReserve } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
+  const [isLike, setIsLike] = useState(false);
 
-  useEffect(() => {
-    loadOneHouse(2);
-    console.log(selectedHouse);
-  }, []);
-
-  console.log(selectedHouse?.accommodation?.beds);
   const capacity =
     Number(selectedHouse?.accommodation?.beds) +
     2 * Number(selectedHouse?.accommodation?.doubleBeds);
@@ -36,41 +34,51 @@ const HousePage = () => {
       <StyledHousePage>
         {isOpen ? (
           <Modal title='modal'>
-            <div></div>
+            <ReservForm />
           </Modal>
         ) : null}
 
         <section>
           <Container>
-            <div className='mainTitle'>
-              <StyledTitle $fontSize='two' $fontColor='greyBold' tag='h2'>
-                {selectedHouse?.name}
-              </StyledTitle>
-              <StyledCaption>
-                {capacity} hospedes - {beds} camas{' '}
-              </StyledCaption>
-            </div>
+            <StyledRatingBox>
+              <div className='mainTitle'>
+                <StyledTitle $fontSize='two' $fontColor='greyBold' tag='h2'>
+                  {selectedHouse?.name}
+                </StyledTitle>
+                <StyledCaption className='guests'>
+                  {capacity} hospedes - {beds} camas
+                </StyledCaption>
+              </div>
+              <div className='btnRating'>
+                <Ratinng />
+                <button onClick={() => setIsLike(!isLike)}>
+                  {isLike ? <FcLikePlaceholder /> : <FcLike />}
+                </button>
+              </div>
+            </StyledRatingBox>
           </Container>
 
           <section className='galerySection'>
-            <StyledTitle
-              $textAlign='center'
-              $fontSize='two'
-              $fontColor='greyBold'
-              tag='h2'
-            >
-              Galeria
-            </StyledTitle>
-            <div
-              style={{
-                position: 'relative',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            ></div>
-            <div className='sliderBox'>
-              {selectedHouse?.photos ? <CardSlider></CardSlider> : null}
-            </div>
+            <Container>
+              <StyledTitle
+                $textAlign='center'
+                $fontSize='two'
+                $fontColor='greyBold'
+                tag='h2'
+              >
+                Galeria
+              </StyledTitle>
+              <div
+                style={{
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              ></div>
+              <div className='sliderBox'>
+                {selectedHouse?.photos ? <CardSlider></CardSlider> : null}
+              </div>
+            </Container>
           </section>
           <Container>
             <div className='reserveSection'>
@@ -85,7 +93,8 @@ const HousePage = () => {
               <StyledCaption>Interessado em alugar essa casa?</StyledCaption>
 
               <StyledButton
-                /* onClick={FunçãoModaldeReserva(selectedHouse?.id)} */ type='button'
+                onClick={() => callCreateReserve()}
+                type='button'
                 $buttonSize='short'
                 $buttonStyle='primary'
               >
@@ -145,7 +154,8 @@ const HousePage = () => {
               <StyledCaption>Interessado em alugar essa casa?</StyledCaption>
 
               <StyledButton
-                /* onClick={FunçãoModaldeReserva(selectedHouse?.id)} */ type='button'
+                onClick={() => callCreateReserve()}
+                type='button'
                 $buttonSize='short'
                 $buttonStyle='primary'
               >
@@ -157,21 +167,23 @@ const HousePage = () => {
                 <StyledTitle $fontSize='two' $fontColor='grey' tag='h2'>
                   Comodidades
                 </StyledTitle>
-                <ul>
-                  {selectedHouse?.services?.map((service) => {
-                    return (
-                      <li key={service}>
-                        <span className='iconBox'>
-                          <IconsMatch iconName={service} />
-                        </span>
-                        <StyledCaption className='servicesName'>
-                          {service}
-                        </StyledCaption>
-                        {/* <p className='servicesName'>{service}</p> */}
-                      </li>
-                    );
-                  })}
-                </ul>
+                <div className='servicesBox'>
+                  <ul>
+                    {selectedHouse?.services?.map((service) => {
+                      return (
+                        <li key={service}>
+                          <span className='iconBox'>
+                            <IconsMatch iconName={service} />
+                          </span>
+                          <StyledCaption className='servicesName'>
+                            {service}
+                          </StyledCaption>
+                          {/* <p className='servicesName'>{service}</p> */}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </article>
               <SectionSpacer />
               <article>
@@ -179,17 +191,8 @@ const HousePage = () => {
                   Detalhes do local
                 </StyledTitle>
                 <div className='detailsTextBox'>
-                  <StyledCaption>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Corrupti hic corporis dicta sapiente est asperiores omnis
-                    ipsum odio. Eius facere totam eligendi ut beatae rerum? Cum
-                    consequatur animi aut consequuntur!Lorem, ipsum dolor sit
-                    amet consectetur adipisicing elit. Corrupti hic corporis
-                    dicta sapiente est asperiores omnis ipsum odio. Eius facere
-                    totam eligendi ut beatae rerum? Cum consequatur animi aut
-                    consequuntur! Eius facere totam eligendi ut beatae rerum?
-                    Cum consequatur animi aut consequuntur!
-                  </StyledCaption>
+                  <StyledCaption>{selectedHouse?.houseDesc}</StyledCaption>
+                  <Ratinng />
                 </div>
               </article>
             </section>
