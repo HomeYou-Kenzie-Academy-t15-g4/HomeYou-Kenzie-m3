@@ -47,7 +47,8 @@ export const UserSection = styled.section`
 
         img {
           width: 96%;
-          border-radius: 50%;
+          max-height: 96%;
+          border-radius: 55%;
           object-fit: cover;
           align-self: center;
           z-index: 99;
