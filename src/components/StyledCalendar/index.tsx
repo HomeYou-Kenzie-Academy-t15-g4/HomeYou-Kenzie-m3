@@ -1,30 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
-import './app.css';
+import { HousesContext } from '../../providers/HousesContext';
 import { StyledCalendar } from './style';
 
 const SelectCalendar = () => {
+  const { setSelectedDate, housesRent, selectedHouse, selectedRent } =
+    useContext(HousesContext);
   const [value, setValue] = useState<Date[]>([]);
   const [reservedDates, setReservedDates] = useState<Date[]>([]);
   const [newReserve, setNewReserve] = useState<Date[]>([]);
 
-  const localStorageReseve = localStorage.getItem('@reservedDates');
-
   useEffect(() => {
-    if (localStorageReseve) {
-      let formatDate = JSON.parse(localStorageReseve);
-      formatDate.map(
+    if (selectedHouse) {
+      let listHouses = housesRent.filter(
+        (rent) => rent.house.id == selectedHouse.id
+      );
+      let listReservs: any = [];
+      listHouses.map((reserv) => listReservs.concat(reserv.rentedDays));
+
+      listReservs.map(
         (datea: string | number | Date, index: string | number) => {
-          formatDate[index] = new Date(datea);
+          listReservs[index] = new Date(datea);
         }
       );
-      setReservedDates(formatDate);
+      setReservedDates(listReservs);
     }
-  }, []);
+  }, [housesRent]);
 
   const onChange = (calendarValue: Date[]) => {
     let tempReserve: Date[] = [new Date(), new Date()];
-    console.log(tempReserve);
 
     const getDatesBetweenDates = (startDate: Date, endDate: Date) => {
       let tempDates: Date[] = [];
@@ -39,10 +43,8 @@ const SelectCalendar = () => {
     getDatesBetweenDates(calendarValue[0], calendarValue[1]);
 
     setReservedDates(tempReserve.concat(reservedDates));
-    localStorage.setItem(
-      '@reservedDates',
-      JSON.stringify(tempReserve.concat(reservedDates))
-    );
+
+    setSelectedDate(tempReserve.concat(reservedDates));
     setValue(calendarValue);
   };
 

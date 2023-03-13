@@ -18,6 +18,7 @@ import { Container } from '../../styles/global';
 
 import { HousesContext } from '../../providers/HousesContext';
 import UsserInfocard from '../../components/Cards/UserInfoCard';
+import ReservForm from '../../components/Forms/ReservForm';
 
 const DashboardPage = () => {
   const { user } = useContext(UserContext);
@@ -39,13 +40,9 @@ const DashboardPage = () => {
           <Modal title={'Atualizar foto'}>
             <EditUser />
           </Modal>
-        ) : isCreateRentModal ? (
-          <Modal title={`R$ ${selectedHouse?.daylyPrice} noite`}>
-            <EditUser />
-          </Modal>
         ) : isManageRentModal ? (
           <Modal title={'Editar reserva'}>
-            <EditUser />
+            <ReservForm />
           </Modal>
         ) : isManageHouseModal ? (
           <Modal title={'Editar casa'}>
