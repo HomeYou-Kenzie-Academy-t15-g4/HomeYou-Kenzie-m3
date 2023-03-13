@@ -28,7 +28,8 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   const [selectedHouse, setSelectedHouse] = useState<
     IHouse | InoDefaultValue | null
   >(null);
-  const [selectedRent, setSelectedRent] = useState<IHouse | null>(null);
+  const [selectedRent, setSelectedRent] = useState<IRent | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date[] | null>(null);
   const [searchText, setSearchText] = useState<string>('');
   const [loadValues, setLoadValues] =
     useState<IDefaultHouseFormValues>(defaultNoValues);
@@ -203,6 +204,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     const userAuxString = localStorage.getItem('@HomeYou:User');
     const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
 
+    console.log(newRent);
     if (userAux) {
       try {
         const response = await api.post('/rents', newRent, {
@@ -224,6 +226,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     id: number
   ): Promise<void> => {
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
+    console.log(editedReserve);
     try {
       const response = await api.patch(`/rents/${id}`, editedReserve, {
         headers: {
@@ -277,6 +280,8 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         loadValues,
         setLoadValues,
         housesRent,
+        selectedDate,
+        setSelectedDate,
       }}
     >
       {children}

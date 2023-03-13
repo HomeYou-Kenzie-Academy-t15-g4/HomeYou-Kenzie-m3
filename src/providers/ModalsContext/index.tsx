@@ -15,36 +15,39 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
   const [isManageRentModal, setIsManageRentModal] = useState(false);
   const [isManageHouseModal, setIsManageHouseModal] = useState(false);
   const [isCreateHouseModal, setIsCreateHouseModal] = useState(false);
+  const [deleteButton, setDeleteButton] = useState(false);
+  const [isOpenCalendar, setIsOpenCalendar] = useState(false);
 
   const callEditUser = () => {
     setIsOpen(true);
     setIsUserModal(true);
-    window.scroll(0, 0)
+    window.scroll(0, 0);
   };
 
   const callManageHouse = (id: number) => {
     loadOneHouse(id);
     setIsOpen(true);
     setIsManageHouseModal(true);
-    window.scroll(0, 0)
+    window.scroll(0, 0);
   };
 
   const callCreateHouse = () => {
     setIsOpen(true);
     setIsCreateHouseModal(true);
-    window.scroll(0, 0)
+    window.scroll(0, 0);
   };
 
   const callCreateReserve = () => {
     setIsOpen(true);
     setIsCreateHouseModal(true);
-    window.scroll(0, 0)
+    window.scroll(0, 0);
   };
 
   const callManageReserve = () => {
     setIsOpen(true);
-    setIsCreateHouseModal(true);
-    window.scroll(0, 0)
+    setIsManageRentModal(true);
+    setDeleteButton(true);
+    window.scroll(0, 0);
   };
 
   const closeModal = () => {
@@ -56,6 +59,12 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
     setIsManageRentModal(false);
     setIsCreateHouseModal(false);
     setIsManageHouseModal(false);
+    setDeleteButton(false);
+    setIsOpenCalendar(false);
+  };
+
+  const closeModalCalendar = () => {
+    setIsOpenCalendar(false);
   };
 
   return (
@@ -74,12 +83,17 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
           setIsCreateHouseModal,
           isManageHouseModal,
           setIsManageHouseModal,
+          isOpenCalendar,
+          setIsOpenCalendar,
           callEditUser,
           callManageHouse,
           callCreateHouse,
           callCreateReserve,
           callManageReserve,
+          closeModalCalendar,
           closeModal,
+          deleteButton,
+          setDeleteButton,
         }}
       >
         {children}

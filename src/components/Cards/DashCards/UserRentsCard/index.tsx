@@ -11,9 +11,10 @@ import {
 import { UserRentsSection } from './style';
 
 const UserRentsCards = () => {
-  const { housesRent } = useContext(HousesContext);
+  const { housesRent, selectedRent, setSelectedRent, loadOneHouse } =
+    useContext(HousesContext);
   const { user } = useContext(UserContext);
-  const { callManageReserve } = useContext(ModalsContext);
+  const { callManageReserve, callCreateReserve } = useContext(ModalsContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -22,12 +23,17 @@ const UserRentsCards = () => {
     return () => window.removeEventListener('resize', handleReSize);
   }, []);
 
+  const EditReserv = (id: any) => {
+    setSelectedRent(housesRent.find((Rent) => Rent.id == id) ?? null);
+    loadOneHouse(selectedRent?.house.id ?? 0);
+    callManageReserve();
+  };
+
   const showSection = screenWidth > 900;
 
   const rentsUserHouses = housesRent.filter(
     (house) => house.userId === user?.id
   );
-
 
   return (
     <UserRentsSection>
@@ -64,7 +70,7 @@ const UserRentsCards = () => {
               <StyledButton
                 $buttonSize='short'
                 $buttonStyle='none'
-                onClick={() => console.log('clic')}
+                onClick={() => EditReserv(house.id)}
               >
                 <StyledCaption>pen</StyledCaption>
               </StyledButton>

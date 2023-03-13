@@ -21,4 +21,9 @@ export interface IModalsContext {
   callCreateReserve: () => void;
   callManageReserve: () => void;
   closeModal: () => void;
+  closeModalCalendar: () => void;
+  deleteButton: boolean;
+  setDeleteButton: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpenCalendar: Boolean;
+  setIsOpenCalendar: React.Dispatch<React.SetStateAction<boolean>>;
 }
