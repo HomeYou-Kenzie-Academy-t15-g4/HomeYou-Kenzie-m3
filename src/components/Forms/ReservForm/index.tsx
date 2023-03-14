@@ -62,7 +62,7 @@ const ReservForm = () => {
     formState: { errors },
     reset,
   } = useForm<IReserveForm>({
-    resolver: yupResolver(ReserveFormSchema),
+    resolver: yupResolver(ReserveFormSchema as any),
   });
 
   useEffect(() => {
@@ -289,7 +289,7 @@ const ReservForm = () => {
         <p className='resumCalc'>
           R${' '}
           {selectedHouse?.dailyPrice
-            ? selectedHouse.dailyPrice * days * 0.02
+            ? (selectedHouse.dailyPrice * days * 0.02).toFixed(2)
             : 0}{' '}
         </p>
       </span>
@@ -299,8 +299,8 @@ const ReservForm = () => {
         <p className=''>
           R${' '}
           {selectedHouse?.dailyPrice
-            ? selectedHouse.dailyPrice * days * 0.02 +
-              selectedHouse.dailyPrice * days
+            ? (selectedHouse.dailyPrice * days * 0.02 +
+              selectedHouse.dailyPrice * days).toFixed(2)
             : 0}
         </p>
       </span>

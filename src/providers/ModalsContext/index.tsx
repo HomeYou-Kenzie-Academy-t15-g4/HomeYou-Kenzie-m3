@@ -67,15 +67,7 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
   };
 
   const closeModalCalendar = () => {
-    setIsOpen(false);
     setIsOpenCalendar(false);
-    if (isCreateRentModal) {
-      setIsCreateRentModal(false);
-      callCreateReserve();
-    } else {
-      setIsManageRentModal(false);
-      callManageReserve();
-    }
   };
 
   return (

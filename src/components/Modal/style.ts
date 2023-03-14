@@ -51,6 +51,14 @@ const StyledModal = styled.div`
     margin-bottom: 40px;
   }
 
+  .createReserv {
+    display: flex;
+    align-items: center;
+    span{
+      margin-left: 3px;
+    }
+  }
+
   header svg {
     height: 20px;
     width: 20px;
