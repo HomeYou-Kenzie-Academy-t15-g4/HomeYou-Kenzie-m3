@@ -87,7 +87,7 @@ const UserRentsCards = () => {
             {house.rentedDays.length > 0 ? (
               <div className='reserve-box'>
                 <div className='checkin-box'>
-                  <StyledTitle $fontSize='three' $fontColor='grey' tag='h3'>
+                  <StyledTitle $textAlign='center' $fontSize='three' $fontColor='grey' tag='h3'>
                     Checkin
                   </StyledTitle>
                   <StyledParagraph $fontColor='grey' $fontWeight='three'>
@@ -106,7 +106,7 @@ const UserRentsCards = () => {
                 </div>
 
                 <div className='checkout-box'>
-                  <StyledTitle $fontSize='three' $fontColor='grey' tag='h3'>
+                  <StyledTitle $textAlign='center' $fontSize='three' $fontColor='grey' tag='h3'>
                     Checkout
                   </StyledTitle>
                   <StyledParagraph $fontColor='grey' $fontWeight='three'>
@@ -135,10 +135,10 @@ const UserRentsCards = () => {
                 <StyledTitle
                   tag='h2'
                   $fontSize='three'
-                  $fontColor='greyBold'
+                  $fontColor='grey'
                   $textAlign='center'
                 >
-                  Sem reserva
+                  Nenhuma reserva
                 </StyledTitle>
               </div>
             )}
