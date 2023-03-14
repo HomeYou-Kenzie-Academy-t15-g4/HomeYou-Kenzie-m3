@@ -6,22 +6,10 @@ export const CommentsSection = styled.section`
 `;
 
 export const StyledContainerCardComment = styled.ul`
-  background-color: #d9dbde;
-  margin: 0;
-  padding: 2rem;
-  margin-top: 50px;
-  display: flex;
-  overflow: auto;
-  justify-content: flex-start;
+  overflow: scroll;
   width: 100%;
   gap: 1em;
 
-  .container {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    gap: 30px;
-  }
   @media (min-width: 650px) {
     .container {
       justify-content: center;

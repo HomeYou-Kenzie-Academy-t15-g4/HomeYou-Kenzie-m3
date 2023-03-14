@@ -19,7 +19,7 @@ const LoginForm = () => {
     formState: { errors },
     reset,
   } = useForm<ILoginFormValue>({
-    resolver: yupResolver(LoginFormSchema),
+    resolver: yupResolver(LoginFormSchema as any),
   });
 
   const submit: SubmitHandler<ILoginFormValue> = (formData) => {
