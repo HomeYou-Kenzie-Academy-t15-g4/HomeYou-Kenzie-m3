@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { MultiValue, PropsValue } from 'react-select';
+import { PropsValue } from 'react-select';
 import {
   IHouseForm,
   IDefaultHouseFormValues,

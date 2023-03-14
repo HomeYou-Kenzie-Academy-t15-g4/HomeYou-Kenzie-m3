@@ -13,7 +13,6 @@ import { StyledCaption, StyledTitle } from '../../styles/typograthy';
 import { Container } from '../../styles/global';
 import { StyledHousePage, StyledRatingBox } from './style';
 import Ratinng from '../../components/Rating';
-import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
 import Skeleton from '@mui/material/Skeleton';
 import { UserContext } from '../../providers/UserContext';
 import { toast } from 'react-toastify';
@@ -90,7 +89,10 @@ const HousePage = () => {
       ) : (
         <StyledHousePage>
           {isOpen ? (
-            <Modal price={selectedHouse?.dailyPrice?.toString() ?? ''} title={''}>
+            <Modal
+              price={selectedHouse?.dailyPrice?.toString() ?? ''}
+              title={''}
+            >
               <ReservForm />
             </Modal>
           ) : null}

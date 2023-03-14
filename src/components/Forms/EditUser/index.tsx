@@ -9,23 +9,13 @@ import Input from '../Input';
 import StyledFormEditUserPic from './style';
 import { CgSpinnerTwo } from 'react-icons/cg';
 
-interface IEditForm {
-  email?: string;
-  password?: string;
-  name?: string;
-  age?: string;
-  photo?: string;
-  city?: string;
-  state?: string;
-}
-
 const EditUser = () => {
   const { editUser, loading } = useContext(UserContext);
   const { closeModal } = useContext(ModalsContext);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {},
     reset,
   } = useForm<IUser>();
 

@@ -97,10 +97,10 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         localStorage.setItem('@IDUSER', res.data.user.id);
         toast.success('Cadastro realizado com sucesso!');
         navigate('/login');
-      } catch (error: any) {        
+      } catch (error: any) {
         if (error?.response?.data == 'Email already exists') {
           toast.error('Email já cadastrado');
-        } else{
+        } else {
           console.error(error);
           toast.error('Ops,algo deu errado!');
         }
