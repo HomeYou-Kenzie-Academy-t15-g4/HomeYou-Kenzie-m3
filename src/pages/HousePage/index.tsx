@@ -6,7 +6,7 @@ import CommentsCard from '../../components/Cards/CommentsCard';
 import Header from '../../components/Header';
 import IconsMatch from '../../components/IconsMatch';
 import Modal from '../../components/Modal';
-import SectionSpacer from '../../components/SectionSpacer';
+import SectionSpacer from '../../components/SectionSpacers/VerticalSpacer';
 import { CardSlider } from '../../components/Slider/carrousels/CardCarrousel';
 import { StyledButton } from '../../styles/button';
 import { StyledCaption, StyledTitle } from '../../styles/typograthy';

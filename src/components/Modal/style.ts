@@ -16,7 +16,12 @@ const StyledModal = styled.div`
   padding: 50px 2vw;
 
   .box {
-    max-width: 700px;
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
   }
