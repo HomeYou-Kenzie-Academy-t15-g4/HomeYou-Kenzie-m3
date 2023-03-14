@@ -93,7 +93,7 @@ const HousePage = (id: number) => {
         <StyledHousePage>
           {isOpen ? (
             <Modal title='modal'>
-              <div></div>
+              <ReservForm />
             </Modal>
           ) : null}
 
