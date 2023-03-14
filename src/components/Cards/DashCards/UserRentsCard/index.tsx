@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HousesContext } from '../../../../providers/HousesContext';
+import { IRent } from '../../../../providers/HousesContext/types';
 import { ModalsContext } from '../../../../providers/ModalsContext';
 import { UserContext } from '../../../../providers/UserContext';
 import { StyledButton } from '../../../../styles/button';
@@ -35,9 +36,13 @@ const UserRentsCards = () => {
 
   const showSection = screenWidth > 900;
 
-  const rentsUserHouses = housesRent.filter(
-    (house) => house.userId === user?.id
-  );
+  let rentsUserHouses: IRent[] = []
+  useEffect(() => {
+  
+    rentsUserHouses = housesRent.filter(
+      (house) => house.userId === user?.id
+      );
+    }, [housesRent])
 
   return (
     <UserRentsSection>
