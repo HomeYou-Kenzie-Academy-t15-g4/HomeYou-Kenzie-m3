@@ -36,8 +36,13 @@ const ReservForm = () => {
     selectedDate,
     setSelectedDate,
   } = useContext(HousesContext);
-  const { isOpenCalendar, setIsOpenCalendar, deleteButton, closeModal } =
-    useContext(ModalsContext);
+  const {
+    isOpenCalendar,
+    setIsOpenCalendar,
+    deleteButton,
+    closeModal,
+    isOpen,
+  } = useContext(ModalsContext);
   const { user } = useContext(UserContext);
   const [days, setDays] = useState(0);
   const userAuxString = localStorage.getItem('@HomeYou:User');
@@ -61,7 +66,7 @@ const ReservForm = () => {
 
   useEffect(() => {
     setSelectedDate();
-  }, []);
+  }, [isOpen]);
 
   useEffect(() => {
     if (selectedDate) {
