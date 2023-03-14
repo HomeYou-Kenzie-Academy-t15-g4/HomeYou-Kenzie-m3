@@ -277,11 +277,11 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      toast.success('Casa deletada com sucesso');
+      toast.success('Reserva deletada com sucesso');
       loadRent();
     } catch (error) {
       console.error(error);
-      toast.error('Falha ao deletar casa');
+      toast.error('Falha ao deletar reserva');
     } finally {
       setLoading(false);
     }

@@ -35,6 +35,7 @@ const ReservForm = () => {
     selectedHouse,
     selectedDate,
     setSelectedDate,
+    setSelectedRent,
   } = useContext(HousesContext);
   const {
     isOpenCalendar,
@@ -65,7 +66,7 @@ const ReservForm = () => {
   });
 
   useEffect(() => {
-    setSelectedDate();
+    setSelectedDate(null);
   }, [isOpen]);
 
   useEffect(() => {
@@ -97,11 +98,9 @@ const ReservForm = () => {
     if (deleteButton) {
       editReserve(data, selectedRent?.id ?? 0);
       closeModal();
-      setSelectedDate([]);
     } else {
       createReserve(data);
       closeModal();
-      setSelectedDate([]);
     }
   };
 
@@ -320,6 +319,7 @@ const ReservForm = () => {
             onClick={() => {
               deleteReserve(selectedRent?.id ?? 0);
               closeModal();
+              setSelectedRent(null);
             }}
             className='deleteButton'
             $buttonSize='short'
