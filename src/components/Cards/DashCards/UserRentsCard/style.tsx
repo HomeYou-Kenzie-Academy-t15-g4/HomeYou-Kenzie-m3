@@ -10,10 +10,9 @@ export const UserRentsSection = styled.section`
   @media (min-width: 900px) {
     padding: 25px;
     width: 45%;
-    height: 530px;
-    min-height: 530px;
     .title-box {
       button {
+        height: 40px;
         max-width: 60%;
       }
     }
@@ -30,9 +29,11 @@ export const UserRentsSection = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 40px;
 
     margin-bottom: 30px;
     width: 100%;
+    
 
     button {
       min-width: 40%;
@@ -57,7 +58,7 @@ export const UserRentsSection = styled.section`
     min-width: 250px;
     max-width: 80%;
     margin-bottom: 20px;
-    min-height: 320px;
+    height: 330px;
     gap: 13px;
     cursor: pointer;
     background-color: rgb(241, 238, 238);
@@ -89,17 +90,13 @@ export const UserRentsSection = styled.section`
     .houses-box {
       display: flex;
       flex-direction: column;
-      min-width: 250px;
-      max-width: 80%;
+      width: 250px;
       margin-bottom: 20px;
       min-height: 320px;
       border-radius: 10px;
       border: 1px solid ${({ theme }) => theme.colors.grey100};
       box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
 
-      @media (min-width: 900px) {
-        height: 370px;
-      }
 
       h2 {
         white-space: nowrap;
@@ -113,6 +110,9 @@ export const UserRentsSection = styled.section`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        border-left: 1px solid ${({ theme }) => theme.colors.grey100};
+        border-right: 1px solid ${({ theme }) => theme.colors.grey100};
+        border-radius: 8px 8px 0 0;
 
         button {
           margin-left: 20px;
@@ -123,10 +123,6 @@ export const UserRentsSection = styled.section`
         width: 100%;
         min-height: 214px;
         max-height: 214px;
-        @media (min-width: 900px) {
-          height: 248px;
-          max-height: 248px;
-        }
 
         img {
           width: 100%;
@@ -137,24 +133,42 @@ export const UserRentsSection = styled.section`
       }
 
       .reserve-box {
-        padding: 10px;
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        height: 60px;
+        margin-top: -1px;
+        border-left: 1px solid ${({ theme }) => theme.colors.grey100};
+        border-right: 1px solid ${({ theme }) => theme.colors.grey100};
+        
 
         .checkin-box {
-          padding-top: 10px;
-          padding-right: 30px;
-          border-right: 1px solid #000;
+          
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
         }
 
         .checkout-box {
-          padding-top: 10px;
-          padding-left: 30px;
-          border-left: 1px solid #000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
+          border-left: 0.1px solid  ${({ theme }) => theme.colors.grey100};
         }
       }
     }
+  }
+
+  .no-reserve-box{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
   }
 
   .button-mobile {

@@ -10,8 +10,7 @@ export const UserHousesSection = styled.section`
   @media (min-width: 900px) {
     padding: 25px;
     max-width: 45%;
-    height: 530px;
-    min-height: 530px;
+    height: 500px;
     .title-box {
       button {
         max-width: 60%;
@@ -57,10 +56,10 @@ export const UserHousesSection = styled.section`
     min-width: 250px;
     max-width: 80%;
     margin-bottom: 20px;
-    min-height: 320px;
+    height: 330px;
     gap: 13px;
     cursor: pointer;
-    background-color: ${({ theme }) => theme.colors.grey100};
+    background-color: rgb(241, 238, 238);
     border-radius: 10px;
     p {
       color: ${({ theme }) => theme.colors.grey200};
@@ -97,9 +96,6 @@ export const UserHousesSection = styled.section`
       border: 1px solid ${({ theme }) => theme.colors.grey100};
       box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
 
-      @media (min-width: 900px) {
-        height: 370px;
-      }
 
       h2 {
         white-space: nowrap;
@@ -123,10 +119,6 @@ export const UserHousesSection = styled.section`
         width: 100%;
         min-height: 214px;
         max-height: 214px;
-        @media (min-width: 900px) {
-          height: 230px;
-          max-height: 230px;
-        }
 
         img {
           width: 100%;

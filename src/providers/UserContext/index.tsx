@@ -86,7 +86,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       name: data.name,
       age: getAge(data.age),
       password: data.password,
-      img: 'https://canvas.kenzie.com.br/images/messages/avatar-50.png',
+      img: 'https://cdn.discordapp.com/attachments/1080736903537639494/1085117335439937576/5766b8e3-5b64-4b79-87c0-067818bf66bf.jpg',
     };
 
     if (newData.age < 18) {
@@ -97,8 +97,13 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         localStorage.setItem('@IDUSER', res.data.user.id);
         toast.success('Cadastro realizado com sucesso!');
         navigate('/login');
-      } catch (error) {
-        toast.error('Ops,algo deu errado!');
+      } catch (error: any) {
+        if (error?.response?.data === 'Email already registered') {
+          toast.error('Email já cadastrado');
+        } else{
+          console.error(error);
+          toast.error('Ops,algo deu errado!');
+        }
       } finally {
         setLoading(false);
       }
