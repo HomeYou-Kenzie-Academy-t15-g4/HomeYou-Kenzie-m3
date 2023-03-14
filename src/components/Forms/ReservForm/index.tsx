@@ -36,8 +36,13 @@ const ReservForm = () => {
     selectedDate,
     setSelectedDate,
   } = useContext(HousesContext);
-  const { isOpenCalendar, setIsOpenCalendar, deleteButton, closeModal } =
-    useContext(ModalsContext);
+  const {
+    isOpenCalendar,
+    setIsOpenCalendar,
+    deleteButton,
+    closeModal,
+    isOpen,
+  } = useContext(ModalsContext);
   const { user } = useContext(UserContext);
   const [days, setDays] = useState(0);
   const userAuxString = localStorage.getItem('@HomeYou:User');
@@ -58,6 +63,10 @@ const ReservForm = () => {
   } = useForm<IReserveForm>({
     resolver: yupResolver(ReserveFormSchema),
   });
+
+  useEffect(() => {
+    setSelectedDate();
+  }, [isOpen]);
 
   useEffect(() => {
     if (selectedDate) {
@@ -126,7 +135,7 @@ const ReservForm = () => {
       ) : null}
       <div className='formArea'>
         <div onClick={() => openCalendar()}>
-          {selectedRent?.rentedDays.length !== 0 && selectedDate ? (
+          {selectedRent || selectedDate ? (
             <div className='selectedDates'>
               <div className='checkIn'>
                 <StyledTitle
@@ -138,7 +147,9 @@ const ReservForm = () => {
                   Check-in
                 </StyledTitle>
                 <StyledParagraph $fontColor='greyBold' $textAlign='center'>
-                  {selectedDate[0]
+                  {selectedDate !== undefined &&
+                  selectedDate !== null &&
+                  selectedDate.length !== 0
                     ? selectedDate[0].toLocaleString('default', {
                         day: '2-digit',
                       })
@@ -148,7 +159,9 @@ const ReservForm = () => {
                         day: '2-digit',
                       })}
                   /
-                  {selectedDate[0]
+                  {selectedDate !== undefined &&
+                  selectedDate !== null &&
+                  selectedDate.length !== 0
                     ? selectedDate[0].toLocaleString('default', {
                         month: '2-digit',
                       })
@@ -158,7 +171,9 @@ const ReservForm = () => {
                         month: '2-digit',
                       })}
                   /
-                  {selectedDate[0]
+                  {selectedDate !== undefined &&
+                  selectedDate !== null &&
+                  selectedDate.length !== 0
                     ? selectedDate[0].toLocaleString('default', {
                         year: 'numeric',
                       })
@@ -179,7 +194,9 @@ const ReservForm = () => {
                   Check-out
                 </StyledTitle>
                 <StyledParagraph $fontColor='greyBold' $textAlign='center'>
-                  {selectedDate[0]
+                  {selectedDate !== undefined &&
+                  selectedDate !== null &&
+                  selectedDate.length !== 0
                     ? selectedDate[selectedDate.length - 1].toLocaleString(
                         'default',
                         {
@@ -194,7 +211,9 @@ const ReservForm = () => {
                         day: '2-digit',
                       })}
                   /
-                  {selectedDate[0]
+                  {selectedDate !== undefined &&
+                  selectedDate !== null &&
+                  selectedDate.length !== 0
                     ? selectedDate[selectedDate.length - 1].toLocaleString(
                         'default',
                         {
@@ -209,7 +228,9 @@ const ReservForm = () => {
                         month: '2-digit',
                       })}
                   /
-                  {selectedDate[0]
+                  {selectedDate !== undefined &&
+                  selectedDate !== null &&
+                  selectedDate.length !== 0
                     ? selectedDate[selectedDate.length - 1].toLocaleString(
                         'default',
                         {
