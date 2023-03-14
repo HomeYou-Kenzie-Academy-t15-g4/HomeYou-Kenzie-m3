@@ -49,7 +49,7 @@ const HomePage = () => {
                   </StyledParagraph>
 
                   <StyledButton $buttonSize='short' $buttonStyle='primary'>
-                    Ver casas
+                    <a href='#houseGallery'>Ver casas</a>
                   </StyledButton>
                 </div>
                 {showSection && (
@@ -61,7 +61,7 @@ const HomePage = () => {
             </Container>
           </div>
         </section>
-        <section ref={galleryRef}>
+        <section id='houseGallery'>
           <Container>
             <StyledTitle
               $textAlign='center'
