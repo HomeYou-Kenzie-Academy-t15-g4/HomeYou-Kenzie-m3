@@ -15,7 +15,10 @@ import {
   IDefaultHouseFormValues,
   IHouseForm,
 } from '../../components/Forms/HouseForm/types';
-import { defaultHouseFormValues, defaultNoValues } from '../../components/Forms/HouseForm/servicesOptions';
+import {
+  defaultHouseFormValues,
+  defaultNoValues,
+} from '../../components/Forms/HouseForm/servicesOptions';
 import { UserContext } from '../UserContext';
 
 export const HousesContext = createContext<IHousesContext>(
@@ -87,11 +90,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     loadRent();
   }, []);
 
-  // const loadHouseInfo = (productID: number): void => {
-  //   const findHouse = housesList.find((houses) => houses.id === productID);
-  //   setSelectedHouse(findHouse);
-  // };
-
   const createHouse = async (dataHouse: IHouseForm): Promise<void> => {
     setLoading(true);
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
@@ -126,7 +124,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
       } catch (error) {
         console.error(error);
         toast.error('Falha ao cadastrar casa');
-        // navigate('/');
       } finally {
         setLoading(false);
       }
@@ -134,7 +131,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   };
 
   const loadOneHouse = async (id: number): Promise<void> => {
-    
     setSelectedHouse(defaultHouseFormValues);
     setLoading(true);
     try {
@@ -196,7 +192,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
       } catch (error) {
         console.error(error);
         toast.error('Falha ao atualizar casa');
-        // navigate('/');
       } finally {
         setLoading(false);
       }
@@ -219,7 +214,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
       } catch (error) {
         console.error(error);
         toast.error('Falha ao deletar casa');
-        // navigate('/');
       } finally {
         setLoading(false);
       }
@@ -232,7 +226,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     const userAuxString = localStorage.getItem('@HomeYou:User');
     const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
 
-    console.log(newRent);
     if (userAux) {
       try {
         const response = await api.post('/rents', newRent, {
@@ -244,8 +237,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
       } catch (error) {
         console.error(error);
         toast.error('Falha ao reservar casa');
-
-        // navigate('/');
       } finally {
         setLoading(false);
       }
@@ -258,7 +249,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   ): Promise<void> => {
     setLoading(true);
     const token = window.localStorage.getItem('@HomeYou:TOKEN');
-    console.log(editedReserve);
     try {
       const response = await api.patch(`/rents/${id}`, editedReserve, {
         headers: {
@@ -269,8 +259,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     } catch (error) {
       console.error(error);
       toast.error('Falha ao atualizar reserva');
-
-      // navigate('/');
     } finally {
       setLoading(false);
     }
@@ -289,9 +277,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     } catch (error) {
       console.error(error);
       toast.error('Falha ao deletar casa');
-
-      // navigate('/');
-    } finally  {
+    } finally {
       setLoading(false);
     }
   };

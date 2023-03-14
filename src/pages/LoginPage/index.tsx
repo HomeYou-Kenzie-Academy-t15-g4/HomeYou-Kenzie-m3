@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginForm from '../../components/Forms/LoginForm';
 import { StyledParagraph, StyledTitle } from '../../styles/typograthy';
 import { StyledLoginPage } from './style';
@@ -21,11 +21,12 @@ const LoginPage = () => {
   return (
     <StyledLoginPage>
       {showSection && (
-        <section className='image-section'><Link className='asside-home-link' to={'/'}>
-        <StyledButton $buttonSize='short' $buttonStyle='default'>
-          Ir para o site
-        </StyledButton>
-      </Link>
+        <section className='image-section'>
+          <Link className='asside-home-link' to={'/'}>
+            <StyledButton $buttonSize='short' $buttonStyle='default'>
+              Ir para o site
+            </StyledButton>
+          </Link>
           <div>
             <img src={loginImg} alt='' />
           </div>
@@ -40,18 +41,19 @@ const LoginPage = () => {
               <StyledTitle $fontColor='grey' tag='h3' $fontSize='two'>
                 {showSection ? ' Faça login na sua conta' : 'Faça login'}
               </StyledTitle>
-              {!showSection && 
-              <div>
-                <StyledParagraph $fontColor='grey'>ou</StyledParagraph>
-                <Link to={'/'}>
-                  <StyledParagraph
-                    className='form-home-link'
-                    $fontColor='greyBold'
-                  >
-                    Acesse o site
-                  </StyledParagraph>
-                </Link>
-              </div>}
+              {!showSection && (
+                <div>
+                  <StyledParagraph $fontColor='grey'>ou</StyledParagraph>
+                  <Link to={'/'}>
+                    <StyledParagraph
+                      className='form-home-link'
+                      $fontColor='greyBold'
+                    >
+                      Acesse o site
+                    </StyledParagraph>
+                  </Link>
+                </div>
+              )}
             </span>
           </div>
           <div className='form-container'>
