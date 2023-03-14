@@ -24,7 +24,7 @@ export const StyledList = styled.ul`
     background: ${({ theme }) => theme.colors.grey00};
     border-bottom: 1px solid ${({ theme }) => theme.colors.grey100};
     width: 280px;
-    height: 270px;
+    height: auto;
     border-radius: 10px;
     box-shadow: 0px 3.34259px 3.34259px rgba(0, 0, 0, 0.25);
 

@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { HousesContext } from '../../../../providers/HousesContext';
 import { UserContext } from '../../../../providers/UserContext';
 import { ModalsContext } from '../../../../providers/ModalsContext';
+import buttonAdd from '../../../../assets/buttonAdd.svg';
 
 import { StyledButton } from '../../../../styles/button';
 import {
@@ -97,7 +98,7 @@ const HouseDashCard = () => {
             <img
               className='add-button'
               alt='Botão cadastrar casa'
-              src='../../../../../src/assets/buttonAdd.svg'
+              src={buttonAdd}
             />
           </div>
         )}
