@@ -37,7 +37,6 @@ const HousePage = (id: number) => {
     }
   }, []);
 
-  console.log(selectedHouse?.accommodation?.beds);
   const capacity =
     Number(selectedHouse?.accommodation?.beds) +
     2 * Number(selectedHouse?.accommodation?.doubleBeds);

@@ -16,8 +16,6 @@ const SelectState = ({ onChange, setSelectedState }: IuseStatesProps) => {
     event: React.SyntheticEvent<Element, Event>,
     value: IState | null
   ) => {
-    console.log(value);
-
     setLoadValues({
       ...loadValues,
       state: value ? value.sigla : '',

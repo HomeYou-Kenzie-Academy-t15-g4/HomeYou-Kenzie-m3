@@ -138,7 +138,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     const userAuxString = localStorage.getItem('@HomeYou:User');
     const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
     const token = localStorage.getItem('@HomeYou:TOKEN');
-    console.log(data);
 
     try {
       const response = await api.patch(`/users/${userAux.id}`, data, {
