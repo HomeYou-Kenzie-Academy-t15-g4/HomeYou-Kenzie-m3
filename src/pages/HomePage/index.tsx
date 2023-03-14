@@ -7,15 +7,11 @@ import { Container } from '../../styles/global';
 import { StyledParagraph, StyledTitle } from '../../styles/typograthy';
 import StyledSectionHomePage from './style';
 import homeBg from '../../assets/home-bg.svg';
-import imgLanding from '../../assets/hom-landing.svg';
-import LikeButton from '../../components/LikeButton';
-import { ModalsContext } from '../../providers/ModalsContext';
 
 const HomePage = () => {
-  const { isOpen, setIsOpen } = useContext(ModalsContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  
-  useEffect(() => {    
+
+  useEffect(() => {
     window.scroll(0, 0);
     const handleReSize = () => setScreenWidth(window.innerWidth);
     window.addEventListener('resize', handleReSize);
@@ -79,24 +75,6 @@ const HomePage = () => {
         </section>
         <Footer />
       </StyledSectionHomePage>
-
-      {/* {isOpen ? (
-        <Modal>
-          <div></div>
-        </Modal>
-      ) : null}
-      <Header />
-      <StyledSectionHomePage />
-
-      <button type='button' onClick={() => setIsOpen(true)}>
-        Abrir
-      </button>
-      <StyledRatingFavorite>
-        <Ratinng />
-        <StyledButton onClick={() => setIsLike(!isLike)}>
-          {isLike ? <FcLikePlaceholder /> : <FcLike />}
-        </StyledButton>
-      </StyledRatingFavorite> */}
     </>
   );
 };

@@ -11,8 +11,6 @@ import {
 } from '../../../../styles/typograthy';
 import { UserHousesSection } from './style';
 
-import { IHouse } from '../../../../providers/HousesContext/types';
-
 const HouseDashCard = () => {
   const { housesList, housesRent } = useContext(HousesContext);
   const { user } = useContext(UserContext);

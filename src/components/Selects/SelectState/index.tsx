@@ -1,4 +1,4 @@
-import { Autocomplete, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
+import { Autocomplete, TextField } from '@mui/material';
 import { useContext } from 'react';
 import { IState, IuseStatesProps, useStates } from '../../../hooks/useStates';
 import { HousesContext } from '../../../providers/HousesContext';
@@ -12,9 +12,12 @@ const SelectState = ({ onChange, setSelectedState }: IuseStatesProps) => {
   const { states } = useStates();
   const { loadValues, setLoadValues } = useContext(HousesContext);
 
-  const handleStateUpdate = (event: React.SyntheticEvent<Element, Event>, value: IState | null) => {
+  const handleStateUpdate = (
+    event: React.SyntheticEvent<Element, Event>,
+    value: IState | null
+  ) => {
     console.log(value);
-    
+
     setLoadValues({
       ...loadValues,
       state: value ? value.sigla : '',
@@ -25,18 +28,16 @@ const SelectState = ({ onChange, setSelectedState }: IuseStatesProps) => {
 
   return (
     <Autocomplete
-        id="tags-outlined"
-        options={states}
-        getOptionLabel={(option) => option.sigla}
-        filterSelectedOptions
-        onChange={(event: React.SyntheticEvent<Element, Event>, value: IState | null) => handleStateUpdate(event, value)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Estado"
-          />
-        )}
-      />
+      id='tags-outlined'
+      options={states}
+      getOptionLabel={(option) => option.sigla}
+      filterSelectedOptions
+      onChange={(
+        event: React.SyntheticEvent<Element, Event>,
+        value: IState | null
+      ) => handleStateUpdate(event, value)}
+      renderInput={(params) => <TextField {...params} label='Estado' />}
+    />
   );
 };
 

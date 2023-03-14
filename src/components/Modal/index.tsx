@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import StyledModal from './style';
 
 import { MdClose } from 'react-icons/md';

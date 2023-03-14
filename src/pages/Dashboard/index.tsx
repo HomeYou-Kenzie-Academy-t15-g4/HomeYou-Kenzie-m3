@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import { AiOutlineUser } from 'react-icons/ai';
 
 import { ModalsContext } from '../../providers/ModalsContext';
 import Footer from '../../components/Footer';
@@ -12,17 +11,12 @@ import { StyledContainerPage } from './style';
 import ManageHouseModal from '../../components/Modal/ManageHouseModal';
 import CreateHouseModal from '../../components/Modal/CreateHouseModal';
 import UserRentsCards from '../../components/Cards/DashCards/UserRentsCard';
-
-import UsserInfoard from '../../components/Cards/UserInfoCard';
 import { Container } from '../../styles/global';
 
-import { HousesContext } from '../../providers/HousesContext';
 import UsserInfocard from '../../components/Cards/UserInfoCard';
 import ReservForm from '../../components/Forms/ReservForm';
 
 const DashboardPage = () => {
-  const { user } = useContext(UserContext);
-  const { selectedHouse } = useContext(HousesContext);
   const {
     isOpen,
     isUserModal,
@@ -33,11 +27,9 @@ const DashboardPage = () => {
     callEditUser,
   } = useContext(ModalsContext);
 
-  
-  useEffect(() => {  
+  useEffect(() => {
     window.scroll(0, 0);
-  }, [])
-
+  }, []);
 
   return (
     <StyledContainerPage>
