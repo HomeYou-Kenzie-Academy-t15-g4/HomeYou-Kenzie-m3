@@ -31,7 +31,7 @@ const RegisterForm = () => {
     clearErrors,
     formState: { errors },
   } = useForm<IRegisterForm>({
-    resolver: yupResolver(RegisterFormSchema),
+    resolver: yupResolver(RegisterFormSchema as any),
   });
 
   const ageHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

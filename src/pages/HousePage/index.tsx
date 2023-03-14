@@ -19,8 +19,10 @@ import { UserContext } from '../../providers/UserContext';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import ReservForm from '../../components/Forms/ReservForm';
+import LikeButton from '../../components/LikeButton';
 
-const HousePage = (id: number) => {
+const HousePage = () => {
   const { loading } = useContext(UserContext);
   const { isOpen, callCreateReserve } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
