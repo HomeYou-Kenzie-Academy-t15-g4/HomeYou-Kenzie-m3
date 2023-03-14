@@ -6,7 +6,7 @@ import { IModalsContext, IModalsProviderProps } from './type';
 export const ModalsContext = createContext({} as IModalsContext);
 
 export const ModalsProvider = ({ children }: IModalsProviderProps) => {
-  const { loadOneHouse, setSelectedHouse, setLoadValues } =
+  const { loadOneHouse, setSelectedHouse, setLoadValues, setSelectedRent } =
     useContext(HousesContext);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -63,6 +63,7 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
     setIsManageHouseModal(false);
     setDeleteButton(false);
     setIsOpenCalendar(false);
+    setSelectedRent(null);
   };
 
   const closeModalCalendar = () => {

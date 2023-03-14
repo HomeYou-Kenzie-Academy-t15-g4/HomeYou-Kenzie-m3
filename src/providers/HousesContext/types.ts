@@ -94,7 +94,7 @@ export interface IHousesContext {
   setLoadValues: React.Dispatch<React.SetStateAction<IDefaultHouseFormValues>>;
   housesRent: IRent[];
   selectedDate: Date[] | null;
-  setSelectedDate: any;
+  setSelectedDate: React.Dispatch<React.SetStateAction<Date[] | null>>;
 }
 
 export interface InoDefaultValue {
