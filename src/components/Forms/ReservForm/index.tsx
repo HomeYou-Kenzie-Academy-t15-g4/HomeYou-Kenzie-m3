@@ -10,11 +10,7 @@ import { IReserve } from '../../../providers/HousesContext/types';
 import * as yup from 'yup';
 import { UserContext } from '../../../providers/UserContext';
 import { reactSelectReservStyle, StyledReservForm } from './style';
-import {
-  StyledCaption,
-  StyledParagraph,
-  StyledTitle,
-} from '../../../styles/typograthy';
+import { StyledParagraph, StyledTitle } from '../../../styles/typograthy';
 import { StyledButton } from '../../../styles/button';
 import HorizontalSpacer from '../../SectionSpacers/HorizontalSpacer';
 
@@ -23,7 +19,7 @@ interface IReserveForm {
 }
 
 export const ReserveFormSchema = yup.object().shape({
-  rentedDays: yup.array().required('campo obrigatório'),
+  rentedDays: yup.array().required('Selecione a Data'),
 });
 
 const ReservForm = () => {
@@ -55,14 +51,12 @@ const ReservForm = () => {
     2 * Number(selectedHouse?.accommodation?.doubleBeds);
 
   const {
-    register,
     handleSubmit,
     setValue,
     clearErrors,
     formState: { errors },
-    reset,
   } = useForm<IReserveForm>({
-    resolver: yupResolver(ReserveFormSchema as any),
+    resolver: yupResolver(ReserveFormSchema),
   });
 
   useEffect(() => {
@@ -264,7 +258,15 @@ const ReservForm = () => {
           options={options}
         />
       </div>
-      {errors.rentedDays?.message}
+      {errors.rentedDays && (
+        <StyledParagraph
+          style={{ marginTop: -25, marginLeft: 20 }}
+          $fontColor='red'
+          $textAlign='left'
+        >
+          {errors.rentedDays.message}
+        </StyledParagraph>
+      )}
       {deleteButton ? null : (
         <StyledButton
           className='reservButton'
@@ -299,8 +301,10 @@ const ReservForm = () => {
         <p className=''>
           R${' '}
           {selectedHouse?.dailyPrice
-            ? (selectedHouse.dailyPrice * days * 0.02 +
-              selectedHouse.dailyPrice * days).toFixed(2)
+            ? (
+                selectedHouse.dailyPrice * days * 0.02 +
+                selectedHouse.dailyPrice * days
+              ).toFixed(2)
             : 0}
         </p>
       </span>

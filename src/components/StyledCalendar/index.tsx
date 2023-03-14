@@ -2,27 +2,20 @@ import React, { useContext, useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import { HousesContext } from '../../providers/HousesContext';
 import { ModalsContext } from '../../providers/ModalsContext';
-import { UserContext } from '../../providers/UserContext';
 import { StyledCalendar } from './style';
 
 const SelectCalendar = () => {
-  const {
-    setSelectedDate,
-    selectedDate,
-    housesRent,
-    selectedHouse,
-    selectedRent,
-  } = useContext(HousesContext);
+  const { setSelectedDate, housesRent, selectedHouse, selectedRent } =
+    useContext(HousesContext);
   const { setIsOpenCalendar } = useContext(ModalsContext);
-  const { user } = useContext(UserContext);
   const [value, setValue] = useState<Date[]>([]);
   const [reservedDates, setReservedDates] = useState<Date[]>([]);
-  const [newReserve, setNewReserve] = useState<Date[]>([]);
 
   useEffect(() => {
     if (selectedHouse) {
       let listHouses = housesRent.filter(
-        (rent) => rent.house.id == selectedHouse.id && rent.userId !== user?.id
+        (rent) =>
+          rent.house.id == selectedHouse.id && rent.id !== selectedRent?.id
       );
       let supArray: any = [];
       listHouses.forEach((reserv) =>
@@ -52,7 +45,6 @@ const SelectCalendar = () => {
         theDate.setDate(theDate.getDate() + 1);
       }
       tempReserve = [...tempDates, new Date(endDate)];
-      setNewReserve(tempReserve);
     };
     getDatesBetweenDates(calendarValue[0], calendarValue[1]);
 

@@ -6,7 +6,6 @@ import EditUser from '../../components/Forms/EditUser';
 import HouseDashCard from '../../components/Cards/DashCards/UserHousesCard';
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
-import { UserContext } from '../../providers/UserContext';
 import { StyledContainerPage } from './style';
 import ManageHouseModal from '../../components/Modal/ManageHouseModal';
 import CreateHouseModal from '../../components/Modal/CreateHouseModal';

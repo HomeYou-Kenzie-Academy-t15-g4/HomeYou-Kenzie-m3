@@ -1,8 +1,10 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import * as yup from 'yup';
 
 export const houseSchema = yup.object().shape({
-  name: yup.string().max(45, `Deve ter no máximo 45 letras`).required('Campo Obrigatório'),
+  name: yup
+    .string()
+    .max(45, `Deve ter no máximo 45 letras`)
+    .required('Campo Obrigatório'),
   city: yup.string().required('Campo Obrigatório'),
   state: yup.string().required('Campo Obrigatório'),
   photos: yup
@@ -10,7 +12,7 @@ export const houseSchema = yup.object().shape({
     .min(3, 'Adicione no minimo 3 fotos')
     .of(yup.string())
     .required('Campo Obrigatório'),
-    dailyPrice: yup
+  dailyPrice: yup
     .number()
     .typeError('Campo Obrigatório')
     .positive('É preciso informar um valor positivo')

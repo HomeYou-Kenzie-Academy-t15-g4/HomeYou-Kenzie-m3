@@ -4,7 +4,7 @@ import imgLogo from '../../assets/logo.svg';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../providers/UserContext';
 import { StyledButton } from '../../styles/button';
-import { StyledParagraph, StyledTitle } from '../../styles/typograthy';
+import { StyledParagraph } from '../../styles/typograthy';
 import menuBurger from '../../assets/menu hamburguer.svg';
 
 const Header = () => {
