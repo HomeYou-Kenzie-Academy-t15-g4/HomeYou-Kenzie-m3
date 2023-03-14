@@ -15,6 +15,8 @@ export interface IModalsContext {
   setIsManageHouseModal: React.Dispatch<React.SetStateAction<boolean>>;
   isCreateHouseModal: boolean;
   setIsCreateHouseModal: React.Dispatch<React.SetStateAction<boolean>>;
+  calendarValue: Date[];
+  setCalendarValue: React.Dispatch<React.SetStateAction<Date[]>>;
   callEditUser: () => void;
   callManageHouse: (id: number) => void;
   callCreateHouse: () => void;

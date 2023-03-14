@@ -8,12 +8,23 @@ export const StyledCalendar = styled.div`
     height: 100vh;
   }
 
+  .calendarResum{
+    margin-top: 23px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    button{
+      width: 200px;
+      border-radius: 10px;
+    }
+  }
+
   .react-calendar {
-    height: 350px;
+    height: max-content;
     width: 280px;
     @media (min-width: 600px) {
       width: 350px;
-      height: 400px;
+      height: max-content;
     }
     max-width: 100%;
     background: white;
