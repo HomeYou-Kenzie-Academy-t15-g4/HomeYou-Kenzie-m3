@@ -142,7 +142,9 @@ const ReservForm = () => {
                   Check-in
                 </StyledTitle>
                 <StyledParagraph $fontColor='greyBold' $textAlign='center'>
-                  {selectedDate
+                  {selectedDate !== undefined &&
+                  selectedDate !== null &&
+                  selectedDate.length !== 0
                     ? selectedDate[0].toLocaleString('default', {
                         day: '2-digit',
                       })
@@ -152,7 +154,9 @@ const ReservForm = () => {
                         day: '2-digit',
                       })}
                   /
-                  {selectedDate
+                  {selectedDate !== undefined &&
+                  selectedDate !== null &&
+                  selectedDate.length !== 0
                     ? selectedDate[0].toLocaleString('default', {
                         month: '2-digit',
                       })
@@ -162,7 +166,9 @@ const ReservForm = () => {
                         month: '2-digit',
                       })}
                   /
-                  {selectedDate
+                  {selectedDate !== undefined &&
+                  selectedDate !== null &&
+                  selectedDate.length !== 0
                     ? selectedDate[0].toLocaleString('default', {
                         year: 'numeric',
                       })
@@ -183,7 +189,9 @@ const ReservForm = () => {
                   Check-out
                 </StyledTitle>
                 <StyledParagraph $fontColor='greyBold' $textAlign='center'>
-                  {selectedDate
+                  {selectedDate !== undefined &&
+                  selectedDate !== null &&
+                  selectedDate.length !== 0
                     ? selectedDate[selectedDate.length - 1].toLocaleString(
                         'default',
                         {
@@ -198,7 +206,9 @@ const ReservForm = () => {
                         day: '2-digit',
                       })}
                   /
-                  {selectedDate
+                  {selectedDate !== undefined &&
+                  selectedDate !== null &&
+                  selectedDate.length !== 0
                     ? selectedDate[selectedDate.length - 1].toLocaleString(
                         'default',
                         {
@@ -213,7 +223,9 @@ const ReservForm = () => {
                         month: '2-digit',
                       })}
                   /
-                  {selectedDate
+                  {selectedDate !== undefined &&
+                  selectedDate !== null &&
+                  selectedDate.length !== 0
                     ? selectedDate[selectedDate.length - 1].toLocaleString(
                         'default',
                         {
