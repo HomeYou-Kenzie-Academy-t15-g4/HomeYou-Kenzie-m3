@@ -22,7 +22,6 @@ import { Link } from 'react-router-dom';
 
 const HousePage = (id: number) => {
   const { loading } = useContext(UserContext);
-  const [isLike, setIsLike] = useState(false);
   const { isOpen, callCreateReserve } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
   const { user } = useContext(UserContext);
@@ -90,7 +89,7 @@ const HousePage = (id: number) => {
         <StyledHousePage>
           {isOpen ? (
             <Modal title='modal'>
-              <div></div>
+              <ReservForm />
             </Modal>
           ) : null}
 
@@ -107,9 +106,7 @@ const HousePage = (id: number) => {
                 </div>
                 <div className='btnRating'>
                   <Ratinng />
-                  <button onClick={() => setIsLike(!isLike)}>
-                    {isLike ? <FcLikePlaceholder /> : <FcLike />}
-                  </button>
+                  <LikeButton />
                 </div>
               </StyledRatingBox>
             </Container>

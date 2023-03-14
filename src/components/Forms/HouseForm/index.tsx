@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 import { ActionMeta, MultiValue } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Theme, useTheme } from '@mui/material/styles';
 import { SelectChangeEvent } from '@mui/material/Select';
@@ -33,6 +32,7 @@ import { ModalsContext } from '../../../providers/ModalsContext';
 import HouseInput from './HouseInput';
 import { StyledParagraph } from '../../../styles/typograthy';
 import IconsMatch from '../../IconsMatch';
+import { houseSchema } from './validations';
 
 function getStyles(name: string, personName: readonly string[], theme: Theme) {
   return {
@@ -42,42 +42,6 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
         : theme.typography.fontWeightMedium,
   };
 }
-
-export const houseSchema = yup.object().shape({
-  name: yup.string().required('Campo Obrigatório'),
-  city: yup.string().required('Campo Obrigatório'),
-  state: yup.string().required('Campo Obrigatório'),
-  photos: yup
-    .array()
-    .min(3, 'Adicione no minimo 3 fotos')
-    .of(yup.string())
-    .required('Campo Obrigatório'),
-  daylyPrice: yup
-    .number()
-    .typeError('Campo Obrigatório')
-    .positive('É preciso informar um valor positivo')
-    .required(),
-  singleBed: yup
-    .number()
-    .typeError('Campo Obrigatório')
-    .integer('É preciso informar um numero inteiro')
-    .required('Campo Obrigatório'),
-  doubleBed: yup
-    .number()
-    .typeError('Campo Obrigatório')
-    .integer('É preciso informar um numero inteiro')
-    .required('Campo Obrigatório'),
-  services: yup
-    .array()
-    .min(3, 'Selecione no minimo 3 opções')
-    .of(yup.string())
-    .required('Campo Obrigatório'),
-  houseDesc: yup
-    .string()
-    .min(200, 'Deve conter no minimo 200 caracteres')
-    .max(550, 'Deve conter no máximo 550 caracteres')
-    .required('Campo Obrigatório'),
-});
 
 const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
   const theme = useTheme();
@@ -104,13 +68,13 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
     clearErrors,
     formState: { errors },
   } = useForm<IHouseForm>({
-    resolver: yupResolver(houseSchema),
+    resolver: yupResolver(houseSchema as any),
   });
 
   useEffect(() => {
     if (loadValues !== defaultNoValues && loadValues && !stopUpdate) {
       setValue('name', loadValues?.name ?? '');
-      setValue('dailyPrice', Number(loadValues?.daylyPrice) ?? '');
+      setValue('dailyPrice', Number(loadValues?.dailyPrice) ?? '');
 
       if (loadValues?.singleBed !== '') {
         setValue('singleBed', Number(loadValues?.singleBed) ?? '');
@@ -184,32 +148,35 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
     setLoadValues({
       ...loadValues,
       name: e.target.value,
-    });
+    });    
+    clearErrors('name');
   };
   const changePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoadValues({
       ...loadValues,
-      daylyPrice: Number(e.target.value),
+      dailyPrice: Number(e.target.value),
     });
+    clearErrors('dailyPrice');
   };
   const changeBeds = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoadValues({
       ...loadValues,
       singleBed: Number(e.target.value),
     });
+    clearErrors('singleBed');
   };
   const changeDoubleBeds = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoadValues({
       ...loadValues,
       doubleBed: Number(e.target.value),
     });
+    clearErrors('doubleBed');
   };
   const changeHouseDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setLoadValues({
       ...loadValues,
       houseDesc: e.target.value,
     });
-
     clearErrors('houseDesc');
   };
 
@@ -226,7 +193,7 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
         label='Nome da Casa'
         type='text'
         register={register('name')}
-        error={errors.houseName}
+        error={errors.name}
       />
 
       {isCreateHouseModal ? (
@@ -270,12 +237,12 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
       ) : null}
 
       <HouseInput
-        value={loadValues.daylyPrice?.toString()}
+        value={loadValues.dailyPrice?.toString()}
         onChange={changePrice}
         label='Valor por noite'
         type='number'
-        register={register('daylyPrice')}
-        error={errors.daylyPrice}
+        register={register('dailyPrice')}
+        error={errors.dailyPrice}
       />
       <div
         style={{
@@ -307,8 +274,10 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
         <InputLabel id='services-select-label'>
           O que o local oferece?
         </InputLabel>
-        <Select sx={{
-    maxWidth: '74vw',}}
+        <Select
+          sx={{
+            maxWidth: '74vw',
+          }}
           multiple
           error={errors.services ? true : false}
           labelId='services-select-label'

@@ -53,21 +53,22 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     setHousesFilterList(filter);
   }, [searchText]);
 
-  useEffect(() => {
+  const loadHouses = async (): Promise<void> => {
     setLoading(true);
-    const loadHouses = async (): Promise<void> => {
-      try {
-        const response = await api.get('/houses');
-        setHousesList(response.data);
-        setHousesFilterList(response.data);
-      } catch (error) {
-        window.localStorage.clear();
-        setHousesList([]);
-        toast.error('Não foi possivel acessar as casas');
-      } finally {
-        setLoading(false);
-      }
-    };
+    try {
+      const response = await api.get('/houses');
+      setHousesList(response.data);
+      setHousesFilterList(response.data);
+    } catch (error) {
+      window.localStorage.clear();
+      setHousesList([]);
+      toast.error('Não foi possivel acessar as casas');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {    
     loadHouses();
   }, []);
 
@@ -103,7 +104,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         photos: dataHouse.photos,
         city: dataHouse.city,
         state: dataHouse.state,
-        daylyPrice: dataHouse.daylyPrice,
+        dailyPrice: dataHouse.dailyPrice,
         accommodation: {
           beds: dataHouse.singleBed,
           doubleBeds: dataHouse.doubleBed,
@@ -118,7 +119,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
             Authorization: `Bearer ${token}`,
           },
         });
-
+        loadHouses()
         toast.success('Casa cadastrada com sucesso');
       } catch (error) {
         console.error(error);
@@ -144,7 +145,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         })),
         state: response.data?.state,
         city: response.data?.city,
-        daylyPrice: response.data?.daylyPrice,
+        dailyPrice: response.data?.dailyPrice,
         singleBed: response.data?.accommodation.beds,
         doubleBed: response.data?.accommodation.doubleBeds,
         services: response.data?.services.map((service: string) => service),
@@ -172,7 +173,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         photos: dataHouse.photos,
         city: dataHouse.city,
         state: dataHouse.state,
-        daylyPrice: dataHouse.daylyPrice,
+        dailyPrice: dataHouse.dailyPrice,
         accommodation: {
           beds: dataHouse.singleBed,
           doubleBeds: dataHouse.doubleBed,
@@ -185,7 +186,8 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });
+        });        
+        loadHouses()
         toast.success('Casa atualizada com sucesso');
       } catch (error) {
         console.error(error);
@@ -206,7 +208,8 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });
+        });        
+        loadHouses()
         toast.success('Casa deletada com sucesso');
       } catch (error) {
         console.error(error);

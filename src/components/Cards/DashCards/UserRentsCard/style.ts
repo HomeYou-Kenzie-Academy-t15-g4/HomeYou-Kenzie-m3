@@ -40,6 +40,42 @@ export const UserRentsSection = styled.section`
     }
   }
 
+  .edit-button {
+    cursor: pointer;
+  }
+
+  .edit-button:hover {
+    cursor: pointer;
+    text-transform: underline;
+  }
+
+  .add-button-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 250px;
+    max-width: 80%;
+    margin-bottom: 20px;
+    min-height: 320px;
+    gap: 13px;
+    cursor: pointer;
+    background-color: ${({ theme }) => theme.colors.grey100};
+    border-radius: 10px;
+    p {
+      color: ${({ theme }) => theme.colors.grey200};
+    }
+  }
+
+  .add-button-box:hover {
+    .add-button {
+      filter: brightness(1.1);
+    }
+    p {
+      color: ${({ theme }) => theme.colors.grey400};
+    }
+  }
+
   .houses-list {
     width: 100%;
 
@@ -53,18 +89,24 @@ export const UserRentsSection = styled.section`
     .houses-box {
       display: flex;
       flex-direction: column;
-
       min-width: 250px;
       max-width: 80%;
       margin-bottom: 20px;
       min-height: 320px;
+      border-radius: 10px;
+      border: 1px solid ${({ theme }) => theme.colors.grey100};
+      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+
       @media (min-width: 900px) {
         height: 370px;
       }
-      border-radius: 10px;
 
-      border: 1px solid ${({ theme }) => theme.colors.grey100};
-      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+      h2 {
+        white-space: nowrap;
+        width: 15ch;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
       .button-box {
         padding: 8px;

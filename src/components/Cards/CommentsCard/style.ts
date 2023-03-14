@@ -1,6 +1,22 @@
 import styled from 'styled-components';
+export const CommentsSection = styled.section`
+  margin: 0;
+  background: ${({ theme }) => theme.colors.grey00};
+  margin-top: 50px;
+`;
 
 export const StyledContainerCardComment = styled.ul`
+<<<<<<< HEAD
+  overflow: scroll;
+  width: 100%;
+  gap: 1em;
+
+  @media (min-width: 650px) {
+    .container {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+=======
   background-color: #d9dbde;
   margin: 0;
   padding: 2rem;
@@ -22,10 +38,13 @@ export const StyledContainerCardComment = styled.ul`
     justify-content: center;
     flex-wrap: wrap;
   }
+>>>>>>> eaf175c2b64b646d6a2cd3c816302f40a5345698
     flex-wrap: wrap;
     justify-content: center;
     display: flex;
+    overflow: hidden;
   }
+
   li {
     list-style: none;
     margin-left: 15px;
@@ -81,5 +100,5 @@ export const StyledPNameComment = styled.p`
 export const StyledPDataComment = styled.p`
 
   font-size: small;
-  color: #343b41;
+  color: ${({ theme }) => theme.colors.grey400};
 `;

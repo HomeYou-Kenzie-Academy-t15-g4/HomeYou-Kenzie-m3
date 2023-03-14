@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { HousesContext } from '../../../../providers/HousesContext';
 import { ModalsContext } from '../../../../providers/ModalsContext';
 import { UserContext } from '../../../../providers/UserContext';
@@ -16,6 +17,8 @@ const UserRentsCards = () => {
   const { user } = useContext(UserContext);
   const { callManageReserve, callCreateReserve } = useContext(ModalsContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleReSize = () => setScreenWidth(window.innerWidth);
@@ -48,7 +51,7 @@ const UserRentsCards = () => {
           Gerenciar reservas
         </StyledTitle>
 
-        {showSection && (
+        {showSection && rentsUserHouses.length > 0 && (
           <StyledButton
             $buttonSize='short'
             $buttonStyle='primary'
@@ -73,7 +76,7 @@ const UserRentsCards = () => {
                 $buttonStyle='none'
                 onClick={() => EditReserv(house)}
               >
-                <StyledCaption>pen</StyledCaption>
+                <StyledCaption className='edit-button'>Editar</StyledCaption>
               </StyledButton>
             </div>
 
@@ -115,9 +118,23 @@ const UserRentsCards = () => {
             )}
           </li>
         ))}
+        {rentsUserHouses.length <= 1 && (
+          <div onClick={() => navigate('/')} className='add-button-box'>
+            {rentsUserHouses.length == 0 && (
+              <StyledParagraph $fontColor='grey' $fontWeight='three'>
+                Agende já sua viagem!
+              </StyledParagraph>
+            )}
+            <img
+              className='add-button'
+              alt='Buscar nova reserva casa'
+              src='../../../../../src/assets/buttonAdd.svg'
+            />
+          </div>
+        )}
       </ul>
 
-      {!showSection && (
+      {!showSection && rentsUserHouses.length > 0 && (
         <div className='button-mobile'>
           <StyledButton
             $buttonSize='short'
