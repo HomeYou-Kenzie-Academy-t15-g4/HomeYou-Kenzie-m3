@@ -4,6 +4,8 @@ import { HousesContext } from '../../../../providers/HousesContext';
 import { ModalsContext } from '../../../../providers/ModalsContext';
 import { UserContext } from '../../../../providers/UserContext';
 import { StyledButton } from '../../../../styles/button';
+import buttonAdd from '../../../../assets/buttonAdd.svg';
+
 import {
   StyledCaption,
   StyledParagraph,
@@ -87,7 +89,12 @@ const UserRentsCards = () => {
             {house.rentedDays.length > 0 ? (
               <div className='reserve-box'>
                 <div className='checkin-box'>
-                  <StyledTitle $textAlign='center' $fontSize='three' $fontColor='grey' tag='h3'>
+                  <StyledTitle
+                    $textAlign='center'
+                    $fontSize='three'
+                    $fontColor='grey'
+                    tag='h3'
+                  >
                     Checkin
                   </StyledTitle>
                   <StyledParagraph $fontColor='grey' $fontWeight='three'>
@@ -106,7 +113,12 @@ const UserRentsCards = () => {
                 </div>
 
                 <div className='checkout-box'>
-                  <StyledTitle $textAlign='center' $fontSize='three' $fontColor='grey' tag='h3'>
+                  <StyledTitle
+                    $textAlign='center'
+                    $fontSize='three'
+                    $fontColor='grey'
+                    tag='h3'
+                  >
                     Checkout
                   </StyledTitle>
                   <StyledParagraph $fontColor='grey' $fontWeight='three'>
@@ -154,7 +166,7 @@ const UserRentsCards = () => {
             <img
               className='add-button'
               alt='Buscar nova reserva casa'
-              src='../../../../../src/assets/buttonAdd.svg'
+              src={buttonAdd}
             />
           </div>
         )}
