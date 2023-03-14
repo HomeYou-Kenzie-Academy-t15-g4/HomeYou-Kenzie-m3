@@ -91,7 +91,7 @@ const HouseDashCard = () => {
           <div onClick={() => callCreateHouse()} className='add-button-box'>
             {userHouses.length == 0 && (
               <StyledParagraph $fontColor='grey' $fontWeight='three'>
-                Cadastrar nova
+                Cadastrar nova casa
               </StyledParagraph>
             )}
             <img
