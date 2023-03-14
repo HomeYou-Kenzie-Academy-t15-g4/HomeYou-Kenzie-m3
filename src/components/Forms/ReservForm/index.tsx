@@ -19,7 +19,7 @@ interface IReserveForm {
 }
 
 export const ReserveFormSchema = yup.object().shape({
-  rentedDays: yup.array().required('campo obrigatório'),
+  rentedDays: yup.array().required('Selecione a Data'),
 });
 
 const ReservForm = () => {
@@ -259,7 +259,11 @@ const ReservForm = () => {
         />
       </div>
       {errors.rentedDays && (
-        <StyledParagraph $fontColor='red' $textAlign='left'>
+        <StyledParagraph
+          style={{ marginTop: -25, marginLeft: 20 }}
+          $fontColor='red'
+          $textAlign='left'
+        >
           {errors.rentedDays.message}
         </StyledParagraph>
       )}
