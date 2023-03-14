@@ -36,10 +36,10 @@ const UserRentsCards = () => {
   };
 
   const showSection = screenWidth > 900;
-  
+
   const rentsUserHouses = housesRent.filter(
-      (house) => house.userId === user?.id
-      );
+    (house) => house.userId === user?.id
+  );
 
   return (
     <UserRentsSection>
