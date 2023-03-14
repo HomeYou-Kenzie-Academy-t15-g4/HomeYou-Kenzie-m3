@@ -27,6 +27,7 @@ const ReservForm = () => {
     selectedRent,
     selectedHouse,
     selectedDate,
+    setSelectedDate,
   } = useContext(HousesContext);
   const { isOpenCalendar, setIsOpenCalendar, deleteButton, closeModal } =
     useContext(ModalsContext);
@@ -80,9 +81,11 @@ const ReservForm = () => {
     if (deleteButton) {
       editReserve(data, selectedRent?.id ?? 0);
       closeModal();
+      setSelectedDate([]);
     } else {
       createReserve(data);
       closeModal();
+      setSelectedDate([]);
     }
   };
 
@@ -105,7 +108,7 @@ const ReservForm = () => {
             <SelectCalendar />
           </Modal>
         ) : (
-          <Modal title={selectedHouse?.dailyPrice?.toString() ?? ''}>
+          <Modal title='Escolher Data'>
             <SelectCalendar />
           </Modal>
         )
@@ -120,19 +123,34 @@ const ReservForm = () => {
                   ? selectedDate[0].toLocaleString('default', {
                       day: '2-digit',
                     })
-                  : selectedRent?.rentedDays[0]}
+                  : new Date(selectedRent?.rentedDays[0] ?? '').toLocaleString(
+                      'default',
+                      {
+                        day: '2-digit',
+                      }
+                    )}
                 /
                 {selectedDate[0]
                   ? selectedDate[0].toLocaleString('default', {
                       month: '2-digit',
                     })
-                  : selectedRent?.rentedDays[0]}
+                  : new Date(selectedRent?.rentedDays[0] ?? '').toLocaleString(
+                      'default',
+                      {
+                        month: '2-digit',
+                      }
+                    )}
                 /
                 {selectedDate[0]
                   ? selectedDate[0].toLocaleString('default', {
                       year: 'numeric',
                     })
-                  : selectedRent?.rentedDays[0]}
+                  : new Date(selectedRent?.rentedDays[0] ?? '').toLocaleString(
+                      'default',
+                      {
+                        year: 'numeric',
+                      }
+                    )}
               </p>
             </div>
             <div>
@@ -145,9 +163,13 @@ const ReservForm = () => {
                         day: '2-digit',
                       }
                     )
-                  : selectedRent?.rentedDays[
-                      selectedRent?.rentedDays.length - 1
-                    ]}
+                  : new Date(
+                      selectedRent?.rentedDays[
+                        selectedRent?.rentedDays.length - 1
+                      ] ?? ''
+                    ).toLocaleString('default', {
+                      day: '2-digit',
+                    })}
                 /
                 {selectedDate[0]
                   ? selectedDate[selectedDate.length - 1].toLocaleString(
@@ -156,9 +178,13 @@ const ReservForm = () => {
                         month: '2-digit',
                       }
                     )
-                  : selectedRent?.rentedDays[
-                      selectedRent?.rentedDays.length - 1
-                    ]}
+                  : new Date(
+                      selectedRent?.rentedDays[
+                        selectedRent?.rentedDays.length - 1
+                      ] ?? ''
+                    ).toLocaleString('default', {
+                      month: '2-digit',
+                    })}
                 /
                 {selectedDate[0]
                   ? selectedDate[selectedDate.length - 1].toLocaleString(
@@ -167,9 +193,13 @@ const ReservForm = () => {
                         year: 'numeric',
                       }
                     )
-                  : selectedRent?.rentedDays[
-                      selectedRent?.rentedDays.length - 1
-                    ]}
+                  : new Date(
+                      selectedRent?.rentedDays[
+                        selectedRent?.rentedDays.length - 1
+                      ] ?? ''
+                    ).toLocaleString('default', {
+                      year: 'numeric',
+                    })}
               </p>
             </div>
           </div>
