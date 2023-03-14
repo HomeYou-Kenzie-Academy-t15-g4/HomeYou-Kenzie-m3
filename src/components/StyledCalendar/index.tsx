@@ -1,14 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
+import { toast } from 'react-toastify';
 import { HousesContext } from '../../providers/HousesContext';
 import { ModalsContext } from '../../providers/ModalsContext';
+import { StyledButton } from '../../styles/button';
+import { StyledCaption, StyledTitle } from '../../styles/typograthy';
 import { StyledCalendar } from './style';
 
 const SelectCalendar = () => {
-  const { setSelectedDate, housesRent, selectedHouse, selectedRent } =
-    useContext(HousesContext);
-  const { setIsOpenCalendar } = useContext(ModalsContext);
-  const [value, setValue] = useState<Date[]>([]);
+  const {
+    setSelectedDate,
+    selectedDate,
+    housesRent,
+    selectedHouse,
+    selectedRent,
+  } = useContext(HousesContext);
+  const { setIsOpenCalendar, calendarValue, setCalendarValue } =
+    useContext(ModalsContext);
   const [reservedDates, setReservedDates] = useState<Date[]>([]);
 
   useEffect(() => {
@@ -36,7 +44,6 @@ const SelectCalendar = () => {
 
   const onChange = (calendarValue: Date[]) => {
     let tempReserve: Date[] = [new Date(), new Date()];
-
     const getDatesBetweenDates = (startDate: Date, endDate: Date) => {
       let tempDates: Date[] = [];
       const theDate = new Date(startDate);
@@ -48,10 +55,23 @@ const SelectCalendar = () => {
     };
     getDatesBetweenDates(calendarValue[0], calendarValue[1]);
 
-    setReservedDates(tempReserve.concat(reservedDates));
+    const hasCommonDate = tempReserve.some((date) => {
+      return reservedDates.some((reservedDate) => {
+        return date.getTime() === reservedDate.getTime();
+      });
+    });
+    console.log(hasCommonDate, 'hasCommonDate');
 
-    setSelectedDate(tempReserve);
-    setValue(calendarValue);
+    if (hasCommonDate) {
+      toast.warn('Período indisponível');
+    } else {
+      setSelectedDate(tempReserve);
+      setCalendarValue(calendarValue);
+    }
+  };
+
+  const confirmReserveDate = () => {
+    setReservedDates(selectedDate?.concat(reservedDates) ?? reservedDates);
     setIsOpenCalendar(false);
   };
 
@@ -62,7 +82,7 @@ const SelectCalendar = () => {
         minDate={new Date()}
         defaultActiveStartDate={new Date()}
         onChange={onChange}
-        value={value}
+        value={calendarValue}
         tileDisabled={({ date, view }) =>
           view === 'month' &&
           reservedDates?.some(
@@ -73,6 +93,28 @@ const SelectCalendar = () => {
           )
         }
       />
+      {selectedDate && (
+        <div className='calendarResum'>
+          <StyledTitle
+            tag='h3'
+            $fontSize='two'
+            $fontColor='greyBold'
+            $textAlign='right'
+          >
+            {selectedDate.length - 2 == 1
+              ? 'Uma noite'
+              : `${selectedDate.length - 2} noites`}
+          </StyledTitle>
+
+          <StyledButton
+            onClick={confirmReserveDate}
+            $buttonSize='short'
+            $buttonStyle='greenBold'
+          >
+            Confirmar
+          </StyledButton>
+        </div>
+      )}
     </StyledCalendar>
   );
 };

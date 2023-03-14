@@ -8,6 +8,7 @@ export const ModalsContext = createContext({} as IModalsContext);
 export const ModalsProvider = ({ children }: IModalsProviderProps) => {
   const { loadOneHouse, setSelectedHouse, setLoadValues, setSelectedRent } =
     useContext(HousesContext);
+    const [calendarValue, setCalendarValue] = useState<Date[]>([]);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isUserModal, setIsUserModal] = useState(false);
@@ -54,6 +55,7 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
     if (window.location.pathname !== '/house') {
       setSelectedHouse(null);
     }
+    setCalendarValue([])
     setLoadValues(defaultNoValues);
     setIsOpen(false);
     setIsUserModal(false);
@@ -97,6 +99,8 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
           closeModal,
           deleteButton,
           setDeleteButton,
+          calendarValue,
+          setCalendarValue,
         }}
       >
         {children}

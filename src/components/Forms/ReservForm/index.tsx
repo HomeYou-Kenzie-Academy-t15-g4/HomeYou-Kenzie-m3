@@ -40,6 +40,7 @@ const ReservForm = () => {
     setIsOpenCalendar,
     deleteButton,
     closeModal,
+    setCalendarValue,
     isOpen,
   } = useContext(ModalsContext);
   const { user } = useContext(UserContext);
@@ -75,6 +76,17 @@ const ReservForm = () => {
       clearErrors('rentedDays');
     }
   }, [selectedDate]);
+
+  useEffect(() => {
+    if (selectedRent && deleteButton) {
+      const dateArray = selectedRent.rentedDays.map(
+        (stringDate) => new Date(stringDate)
+      );
+
+      setCalendarValue([dateArray[0], dateArray[dateArray.length - 1]]);
+      setSelectedDate(dateArray);
+    }
+  }, []);
 
   const submit: SubmitHandler<IReserveForm> = ({ rentedDays, guestNumber }) => {
     const data: IReserve = {
