@@ -51,8 +51,8 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
   };
 
   const closeModal = () => {
-    if (window.location.pathname !== '/houses') {
-      setSelectedHouse(null);      
+    if (window.location.pathname !== '/house') {
+      setSelectedHouse(null);
     }
     setLoadValues(defaultNoValues);
     setIsOpen(false);
@@ -66,7 +66,15 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
   };
 
   const closeModalCalendar = () => {
+    setIsOpen(false);
     setIsOpenCalendar(false);
+    if (isCreateRentModal) {
+      setIsCreateRentModal(false);
+      callCreateReserve();
+    } else {
+      setIsManageRentModal(false);
+      callManageReserve();
+    }
   };
 
   return (

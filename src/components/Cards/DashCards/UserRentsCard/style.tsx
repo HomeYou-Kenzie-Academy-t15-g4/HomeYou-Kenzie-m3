@@ -60,7 +60,7 @@ export const UserRentsSection = styled.section`
     min-height: 320px;
     gap: 13px;
     cursor: pointer;
-    background-color: ${({ theme }) => theme.colors.grey100};
+    background-color: rgb(241, 238, 238);
     border-radius: 10px;
     p {
       color: ${({ theme }) => theme.colors.grey200};
