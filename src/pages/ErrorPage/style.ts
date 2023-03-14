@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const StyledDivNotFound = styled.div`
+  padding-top: 100px;
   .box {
     width: 100%;
     display: flex;
