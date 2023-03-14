@@ -48,7 +48,7 @@ const ReservForm = () => {
     formState: { errors },
     reset,
   } = useForm<IReserveForm>({
-    resolver: yupResolver(ReserveFormSchema),
+    resolver: yupResolver(ReserveFormSchema as any),
   });
 
   useEffect(() => {
@@ -63,9 +63,9 @@ const ReservForm = () => {
     const data: IReserve = {
       rentedDays,
       userId: userAux.id,
-      rentPrice: selectedHouse?.daylyPrice
-        ? selectedHouse.daylyPrice * days * 0.02 +
-          selectedHouse.daylyPrice * days
+      rentPrice: selectedHouse?.dailyPrice
+        ? selectedHouse.dailyPrice * days * 0.02 +
+          selectedHouse.dailyPrice * days
         : 0,
       guest: {
         photo: user?.photo ?? '',
@@ -105,7 +105,7 @@ const ReservForm = () => {
             <SelectCalendar />
           </Modal>
         ) : (
-          <Modal title={selectedHouse?.daylyPrice?.toString() ?? ''}>
+          <Modal title={selectedHouse?.dailyPrice?.toString() ?? ''}>
             <SelectCalendar />
           </Modal>
         )
@@ -198,7 +198,7 @@ const ReservForm = () => {
       <div>
         <div>
           <label>
-            R$ {selectedHouse?.daylyPrice} x {days} noites
+            R$ {selectedHouse?.dailyPrice} x {days} noites
           </label>
           <label>Taxa de serviço</label>
           <label>Total:</label>
@@ -206,21 +206,21 @@ const ReservForm = () => {
         <div>
           <label>
             {' '}
-            R$ {selectedHouse?.daylyPrice ? selectedHouse.daylyPrice * days : 0}
+            R$ {selectedHouse?.dailyPrice ? selectedHouse.dailyPrice * days : 0}
           </label>
           <label>
             {' '}
             R${' '}
-            {selectedHouse?.daylyPrice
-              ? selectedHouse.daylyPrice * days * 0.02
+            {selectedHouse?.dailyPrice
+              ? selectedHouse.dailyPrice * days * 0.02
               : 0}
           </label>
           <label>
             {' '}
             R${' '}
-            {selectedHouse?.daylyPrice
-              ? selectedHouse.daylyPrice * days * 0.02 +
-                selectedHouse.daylyPrice * days
+            {selectedHouse?.dailyPrice
+              ? selectedHouse.dailyPrice * days * 0.02 +
+                selectedHouse.dailyPrice * days
               : 0}
           </label>
         </div>

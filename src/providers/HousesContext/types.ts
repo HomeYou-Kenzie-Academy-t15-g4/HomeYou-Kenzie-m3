@@ -19,7 +19,7 @@ export interface IHouse {
     | MultiValue<{ value: string; label: string } | null>;
   city: string;
   state: string;
-  daylyPrice: number | any;
+  dailyPrice: number | any;
   services: string[];
   accommodation: IAccommodation;
   houseDesc: string;
@@ -99,7 +99,7 @@ export interface InoDefaultValue {
   photos: null;
   state: null;
   city: null;
-  daylyPrice: undefined;
+  dailyPrice: undefined;
   singleBed: undefined;
   doubleBed: undefined;
   services: null;
