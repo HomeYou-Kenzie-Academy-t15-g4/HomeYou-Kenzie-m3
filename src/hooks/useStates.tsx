@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  FieldError
-} from 'react-hook-form';
-import { IHouseForm } from '../components/Forms/HouseForm/types';
+import { FieldError } from 'react-hook-form';
 
 export interface Region {
   id: number;

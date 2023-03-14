@@ -6,13 +6,13 @@
 
 ## 🚩 Qual a solução que a aplicação traz ?
 
-Nossa equipe de 5 devs da **Kenzie Academy** concluiu com sucesso nosso projeto final do módulo, que é uma plataforma que resolve o problema de encontrar propriedades de aluguel de curto prazo acessíveis e convenientes.
+Concluímos com sucesso o projeto final do módulo três: Uma plataforma intuitiva, de fácil uso que traz a agilidade de encontrar propriedades para aluguel de curto prazo com preços bastante acessíveis.
 
-Usando nossa experiência em _React, Javascript, Typescript, CSS e HTML,_ conseguimos criar uma plataforma intuitiva e fácil de usar que oferece uma ampla gama de propriedades de aluguel aos usuários. Nossa plataforma torna o processo de locação o mais simples possível, permitindo que os usuários naveguem facilmente pelas propriedades, visualizem informações detalhadas e reservem sua estadia com apenas alguns cliques.
+A plataforma oferece uma lista completa e detalhada das mais variadas casas para aluguel, permitindo que o usuário navegue facilmente pelas páginas, visualize as informações e reserve sua estadia com apenas alguns cliques.
 
-Nosso projeto é uma prova das habilidades e conhecimentos que adquirimos durante nosso tempo na **Kenzie Academy**. Temos orgulho de poder aplicar os conceitos que aprendemos nas aulas para criar uma solução prática e útil para um problema do mundo real.
+Com toda experiência já adquirida por nós ao longo do curso - em _React, Javascript, Typescript, CSS e HTML_ -, temos orgulho de poder aplicar os conceitos que aprendemos nas aulas para criar uma solução acertada e prática para o dia a dia. O projeto demonstra nossa capacidade de usar as tecnologias de ponta para resolver os mais variados problemas.
 
-Em conclusão, nosso projeto demonstra nossa capacidade de usar tecnologias de ponta para resolver problemas complexos. Somos gratos pela oportunidade de ter trabalhado neste projeto e por ter adquirido uma experiência valiosa que nos será muito útil em nossas futuras carreiras como desenvolvedores.
+Agradecemos pela oportunidade de trabalharmos juntos, uma equipe de cinco desenvolvedores da **Kenzie Academy**. Adquirimos uma experiência valiosa que nos será útil em nossas futuras e promissoras carreiras.
 
 ## 📕 Sobre
 

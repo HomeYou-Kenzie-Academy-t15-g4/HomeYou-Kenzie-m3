@@ -1,11 +1,7 @@
 import React from 'react';
 import { DevLink, Devs, Icon, StyledFooter } from './style';
 import icon from '../../assets/icon.svg';
-import {
-  StyledCaption,
-  StyledParagraph,
-  StyledTitle,
-} from '../../styles/typograthy';
+import { StyledCaption, StyledTitle } from '../../styles/typograthy';
 
 const Footer = () => {
   return (

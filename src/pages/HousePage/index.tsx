@@ -18,12 +18,11 @@ import Skeleton from '@mui/material/Skeleton';
 import { UserContext } from '../../providers/UserContext';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../../components/Footer';
 import { Link } from 'react-router-dom';
-import LikeButton from '../../components/LikeButton';
 import ReservForm from '../../components/Forms/ReservForm';
+import LikeButton from '../../components/LikeButton';
 
-const HousePage = (id: number) => {
+const HousePage = () => {
   const { loading } = useContext(UserContext);
   const { isOpen, callCreateReserve } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
@@ -39,7 +38,6 @@ const HousePage = (id: number) => {
     }
   }, []);
 
-  console.log(selectedHouse?.accommodation?.beds);
   const capacity =
     Number(selectedHouse?.accommodation?.beds) +
     2 * Number(selectedHouse?.accommodation?.doubleBeds);

@@ -49,7 +49,7 @@ const ReservForm = () => {
     formState: { errors },
     reset,
   } = useForm<IReserveForm>({
-    resolver: yupResolver(ReserveFormSchema as any),
+    resolver: yupResolver(ReserveFormSchema),
   });
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const ReservForm = () => {
       house: {
         id: selectedHouse?.id,
         name: selectedHouse?.name ?? '',
-        photos: selectedHouse?.photos ?? [],
+        photos: selectedHouse?.photos,
       },
     };
     if (deleteButton) {
@@ -90,7 +90,6 @@ const ReservForm = () => {
   };
 
   const options = [{ value: '1', label: '1 hospede' }];
-
   while (optionsNumber < capacity) {
     optionsNumber++;
     options.push({

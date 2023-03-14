@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { MultiValue } from 'react-select';
+import { MultiValue, PropsValue } from 'react-select';
 import {
   IHouseForm,
   IDefaultHouseFormValues,
@@ -15,8 +15,11 @@ export interface IHouse {
   name: string;
   photos:
     | string[]
-    | { value: string; label: string }
-    | MultiValue<{ value: string; label: string } | null>;
+    | PropsValue<{
+        value: string;
+        label: string;
+      } | null>
+    | undefined;
   city: string;
   state: string;
   dailyPrice: number | any;
