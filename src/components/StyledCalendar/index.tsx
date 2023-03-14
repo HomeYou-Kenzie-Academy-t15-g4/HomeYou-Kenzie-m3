@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import { HousesContext } from '../../providers/HousesContext';
+import { ModalsContext } from '../../providers/ModalsContext';
 import { StyledCalendar } from './style';
 
 const SelectCalendar = () => {
   const { setSelectedDate, housesRent, selectedHouse, selectedRent } =
     useContext(HousesContext);
+  const { setIsOpenCalendar } = useContext(ModalsContext);
   const [value, setValue] = useState<Date[]>([]);
   const [reservedDates, setReservedDates] = useState<Date[]>([]);
   const [newReserve, setNewReserve] = useState<Date[]>([]);
@@ -54,6 +56,7 @@ const SelectCalendar = () => {
 
     setSelectedDate(tempReserve.concat(reservedDates));
     setValue(calendarValue);
+    setIsOpenCalendar(false);
   };
 
   return (

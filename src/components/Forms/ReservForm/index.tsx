@@ -54,7 +54,7 @@ const ReservForm = () => {
   useEffect(() => {
     if (selectedDate) {
       setValue('rentedDays', selectedDate);
-      selectedDate?.length ? setDays(selectedDate.length - 1) : setDays(0);
+      selectedDate?.length ? setDays(selectedDate.length - 2) : setDays(0);
       clearErrors('rentedDays');
     }
   }, [selectedDate]);

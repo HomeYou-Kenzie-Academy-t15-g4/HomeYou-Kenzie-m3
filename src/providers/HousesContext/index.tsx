@@ -15,7 +15,10 @@ import {
   IDefaultHouseFormValues,
   IHouseForm,
 } from '../../components/Forms/HouseForm/types';
-import { defaultHouseFormValues, defaultNoValues } from '../../components/Forms/HouseForm/servicesOptions';
+import {
+  defaultHouseFormValues,
+  defaultNoValues,
+} from '../../components/Forms/HouseForm/servicesOptions';
 import { UserContext } from '../UserContext';
 
 export const HousesContext = createContext<IHousesContext>(
@@ -68,21 +71,23 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     loadHouses();
   }, []);
 
+  const loadRent = async () => {
+    const token = localStorage.getItem('@HomeYou:TOKEN');
+    if (token) {
+      try {
+        const res = await api.get('/rents');
+        setHousesRent(res.data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
   useEffect(() => {
     setLoading(true);
-    const loadRent = async () => {
-      const token = localStorage.getItem('@HomeYou:TOKEN');
-      if (token) {
-        try {
-          const res = await api.get('/rents');
-          setHousesRent(res.data);
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setLoading(false);
-        }
-      }
-    };
+
     loadRent();
   }, []);
 
@@ -133,7 +138,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   };
 
   const loadOneHouse = async (id: number): Promise<void> => {
-    
     setSelectedHouse(defaultHouseFormValues);
     setLoading(true);
     try {
@@ -238,6 +242,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           },
         });
         toast.success('Casa reservada com sucesso');
+        loadRent();
       } catch (error) {
         console.error(error);
         toast.error('Falha ao reservar casa');
@@ -263,6 +268,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         },
       });
       toast.success('Reserva atualizada com sucesso');
+      loadRent();
     } catch (error) {
       console.error(error);
       toast.error('Falha ao atualizar reserva');
@@ -283,12 +289,13 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         },
       });
       toast.success('Casa deletada com sucesso');
+      loadRent();
     } catch (error) {
       console.error(error);
       toast.error('Falha ao deletar casa');
 
       // navigate('/');
-    } finally  {
+    } finally {
       setLoading(false);
     }
   };
