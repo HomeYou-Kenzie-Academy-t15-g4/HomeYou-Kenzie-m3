@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HousesContext } from '../../../../providers/HousesContext';
-import { IRent } from '../../../../providers/HousesContext/types';
 import { ModalsContext } from '../../../../providers/ModalsContext';
 import { UserContext } from '../../../../providers/UserContext';
 import { StyledButton } from '../../../../styles/button';
@@ -15,10 +14,10 @@ import {
 import { UserRentsSection } from './style';
 
 const UserRentsCards = () => {
-  const { housesRent, selectedRent, setSelectedRent, loadOneHouse } =
+  const { housesRent, setSelectedRent, loadOneHouse } =
     useContext(HousesContext);
   const { user } = useContext(UserContext);
-  const { callManageReserve, callCreateReserve } = useContext(ModalsContext);
+  const { callManageReserve } = useContext(ModalsContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const navigate = useNavigate();
@@ -37,14 +36,10 @@ const UserRentsCards = () => {
   };
 
   const showSection = screenWidth > 900;
-
-  let rentsUserHouses: IRent[] = []
-  useEffect(() => {
   
-    rentsUserHouses = housesRent.filter(
+  const rentsUserHouses = housesRent.filter(
       (house) => house.userId === user?.id
       );
-    }, [housesRent])
 
   return (
     <UserRentsSection>
