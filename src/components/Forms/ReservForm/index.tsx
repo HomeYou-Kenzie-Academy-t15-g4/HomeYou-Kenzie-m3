@@ -20,8 +20,8 @@ interface IReserveForm {
 }
 
 export const ReserveFormSchema = yup.object().shape({
-  rentedDays: yup.array().required('Selecione a Data'),
-  guestNumber: yup.string().required('Informe os hospedes'),
+  rentedDays: yup.array().required('Selecione a data da reserva'),
+  guestNumber: yup.string().required('Informe quantos hospedes'),
 });
 
 const ReservForm = () => {
@@ -61,7 +61,7 @@ const ReservForm = () => {
     clearErrors,
     formState: { errors },
   } = useForm<IReserveForm>({
-    resolver: yupResolver(ReserveFormSchema),
+    resolver: yupResolver(ReserveFormSchema as any),
   });
 
   useEffect(() => {
@@ -113,16 +113,17 @@ const ReservForm = () => {
   }
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      const tempOptionsGuest = options.find(
-        (option) => option.value == selectedRent?.guestNumber
-      );
-
-      setOptionsGuest(tempOptionsGuest);
-    }, 1);
-
-    return () => clearTimeout(timeout);
-  }, [selectedRent]);
+    const tempOptionsGuest = options.find(
+      (option) => option.value == selectedRent?.guestNumber
+    );
+    setOptionsGuest(tempOptionsGuest);
+    let tempDates: Date[] = selectedRent?.rentedDays?.map(
+      (dateString) => new Date(dateString)
+    ) as Date[];
+    setValue('rentedDays', tempDates);
+    setValue('guestNumber', tempOptionsGuest?.value ?? '');
+    
+  }, [selectedHouse]);
 
   const openCalendar = () => {
     window.scroll(0, 0);
@@ -290,15 +291,21 @@ const ReservForm = () => {
           value={optionsGuest}
         />
       </div>
-      {errors.rentedDays && (
-        <StyledParagraph
-          style={{ marginTop: -25, marginLeft: 20 }}
-          $fontColor='red'
-          $textAlign='left'
-        >
-          {errors.rentedDays.message}
-        </StyledParagraph>
-      )}
+      <div className='reservFormErrors'>
+        {errors.rentedDays && errors.guestNumber ? (
+          <StyledParagraph $fontColor='red' $textAlign='left'>
+            Todos campos são obrigatórios
+          </StyledParagraph>
+        ) : errors.rentedDays ? (
+          <StyledParagraph $fontColor='red' $textAlign='left'>
+            {errors.rentedDays.message}
+          </StyledParagraph>
+        ) : errors.guestNumber ? (
+          <StyledParagraph $fontColor='red' $textAlign='left'>
+            {errors.guestNumber?.message}
+          </StyledParagraph>
+        ) : null}
+      </div>
       {deleteButton ? null : (
         <StyledButton
           className='reservButton'
