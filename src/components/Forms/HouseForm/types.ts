@@ -1,11 +1,12 @@
 import { ReactNode } from 'react';
 import { PropsValue } from 'react-select';
 import * as yup from 'yup';
-import { houseSchema } from '.';
+import { IAccommodation } from '../../../providers/HousesContext/types';
+import { houseSchema } from './validations';
 
 export interface IHouseForm extends yup.InferType<typeof houseSchema> {
   id?: number;
-  houseName: string;
+  name: string;
   photos: string[];
   city: string;
   state: string;
@@ -26,11 +27,13 @@ export interface IDefaultHouseFormValues {
     | undefined;
   state: string;
   city: string;
-  daylyPrice: number | string;
+  dailyPrice: number | string;
   singleBed: number | string;
   doubleBed: number | string;
   services: string[];
   houseDesc: string;
+  id?: number;  
+  accommodation?: IAccommodation;
 }
 
 export interface IHouseFormProps {

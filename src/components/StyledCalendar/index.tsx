@@ -1,30 +1,48 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
-import './app.css';
+import { HousesContext } from '../../providers/HousesContext';
+import { ModalsContext } from '../../providers/ModalsContext';
+import { UserContext } from '../../providers/UserContext';
 import { StyledCalendar } from './style';
 
 const SelectCalendar = () => {
+  const {
+    setSelectedDate,
+    selectedDate,
+    housesRent,
+    selectedHouse,
+    selectedRent,
+  } = useContext(HousesContext);
+  const { setIsOpenCalendar } = useContext(ModalsContext);
+  const { user } = useContext(UserContext);
   const [value, setValue] = useState<Date[]>([]);
   const [reservedDates, setReservedDates] = useState<Date[]>([]);
   const [newReserve, setNewReserve] = useState<Date[]>([]);
 
-  const localStorageReseve = localStorage.getItem('@reservedDates');
-
   useEffect(() => {
-    if (localStorageReseve) {
-      let formatDate = JSON.parse(localStorageReseve);
-      formatDate.map(
-        (datea: string | number | Date, index: string | number) => {
-          formatDate[index] = new Date(datea);
-        }
+    if (selectedHouse) {
+      let listHouses = housesRent.filter(
+        (rent) => rent.house.id == selectedHouse.id && rent.userId !== user?.id
       );
-      setReservedDates(formatDate);
+      let supArray: any = [];
+      listHouses.forEach((reserv) =>
+        reserv.rentedDays.forEach((item) => {
+          supArray.push(item);
+        })
+      );
+
+      setReservedDates(
+        supArray.map(
+          (datea: string | number | Date, index: string | number) => {
+            return (supArray[index] = new Date(datea));
+          }
+        )
+      );
     }
-  }, []);
+  }, [selectedHouse]);
 
   const onChange = (calendarValue: Date[]) => {
     let tempReserve: Date[] = [new Date(), new Date()];
-    console.log(tempReserve);
 
     const getDatesBetweenDates = (startDate: Date, endDate: Date) => {
       let tempDates: Date[] = [];
@@ -39,11 +57,10 @@ const SelectCalendar = () => {
     getDatesBetweenDates(calendarValue[0], calendarValue[1]);
 
     setReservedDates(tempReserve.concat(reservedDates));
-    localStorage.setItem(
-      '@reservedDates',
-      JSON.stringify(tempReserve.concat(reservedDates))
-    );
+
+    setSelectedDate(tempReserve);
     setValue(calendarValue);
+    setIsOpenCalendar(false);
   };
 
   return (

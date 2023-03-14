@@ -11,9 +11,6 @@ import {
 } from '../../../../styles/typograthy';
 import { UserHousesSection } from './style';
 
-import { IHouse } from '../../../../providers/HousesContext/types';
-
-
 const HouseDashCard = () => {
   const { housesList, housesRent } = useContext(HousesContext);
   const { user } = useContext(UserContext);
@@ -45,7 +42,7 @@ const HouseDashCard = () => {
           Gerenciar casas
         </StyledTitle>
 
-        {showSection && (
+        {showSection && userHouses.length > 0 && (
           <StyledButton
             $buttonSize='short'
             $buttonStyle='primary'
@@ -70,12 +67,14 @@ const HouseDashCard = () => {
                 $buttonStyle='none'
                 onClick={() => callManageHouse(Number(house.id))}
               >
-                <StyledCaption>pen</StyledCaption>
+                <StyledCaption className='edit-button'>Editar</StyledCaption>
               </StyledButton>
             </div>
 
             <div className='image-box'>
-              <img src={house.photos[0]} alt={house.name} />
+              {Array.isArray(house.photos) && house.photos.length > 0 && (
+                <img src={house.photos[0]} alt={house.name} />
+              )}
             </div>
 
             <div className='reserve-box'>
@@ -88,9 +87,23 @@ const HouseDashCard = () => {
             </div>
           </li>
         ))}
+        {userHouses.length <= 1 && (
+          <div onClick={() => callCreateHouse()} className='add-button-box'>
+            {userHouses.length == 0 && (
+              <StyledParagraph $fontColor='grey' $fontWeight='three'>
+                Cadastrar nova casa
+              </StyledParagraph>
+            )}
+            <img
+              className='add-button'
+              alt='Botão cadastrar casa'
+              src='../../../../../src/assets/buttonAdd.svg'
+            />
+          </div>
+        )}
       </ul>
 
-      {!showSection && (
+      {!showSection && userHouses.length > 0 && (
         <div className='button-mobile'>
           <StyledButton
             $buttonSize='short'

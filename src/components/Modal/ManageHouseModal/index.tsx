@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { HousesContext } from '../../../providers/HousesContext';
 import { ModalsContext } from '../../../providers/ModalsContext';
+import { StyledButton } from '../../../styles/button';
 import HouseForm from '../../Forms/HouseForm';
 
 const ManageHouseModal = () => {
@@ -16,11 +17,11 @@ const ManageHouseModal = () => {
       <HouseForm
         submitFunction={editHouse}
         children={
-          <div>
-            <button type='submit'>Salvar</button>{' '}
-            <button type='button' onClick={() => deleteIt()}>
-              Excluir
-            </button>
+          <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
+            <StyledButton style={{width: '45%'}} type='submit' $buttonSize='medium' $buttonStyle='primary'>Salvar</StyledButton>
+            <StyledButton style={{width: '45%'}} onClick={() => deleteIt()} type='button' $buttonSize='medium' $buttonStyle='default'>Excluir</StyledButton>
+            
+            
           </div>
         }
       />

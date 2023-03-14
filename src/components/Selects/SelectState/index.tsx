@@ -1,6 +1,6 @@
-import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { Autocomplete, TextField } from '@mui/material';
 import { useContext } from 'react';
-import { IuseStatesProps, useStates } from '../../../hooks/useStates';
+import { IState, IuseStatesProps, useStates } from '../../../hooks/useStates';
 import { HousesContext } from '../../../providers/HousesContext';
 
 export interface IStatesInfo {
@@ -12,33 +12,30 @@ const SelectState = ({ onChange, setSelectedState }: IuseStatesProps) => {
   const { states } = useStates();
   const { loadValues, setLoadValues } = useContext(HousesContext);
 
-  const handleStateUpdate = (event: SelectChangeEvent<string>) => {
+  const handleStateUpdate = (
+    event: React.SyntheticEvent<Element, Event>,
+    value: IState | null
+  ) => {
     setLoadValues({
       ...loadValues,
-      state: event.target.value,
+      state: value ? value.sigla : '',
     });
-    setSelectedState(event.target.value);
-    onChange(event.target.value);
+    setSelectedState(value ? String(value.sigla) : '');
+    onChange(value ? value.sigla : '');
   };
 
   return (
-    <Select
-      labelId='state-select-label'
-      id='state-select'
-      defaultValue=''
-      value={loadValues.state}
-      name='Estado'
-      label='Estado'
-      onChange={(event: SelectChangeEvent<string>) => handleStateUpdate(event)}
-    >
-      {states.map((state) => {
-        return (
-          <MenuItem key={state.id} value={state.sigla}>
-            {state.sigla}
-          </MenuItem>
-        );
-      })}
-    </Select>
+    <Autocomplete
+      id='tags-outlined'
+      options={states}
+      getOptionLabel={(option) => option.sigla}
+      filterSelectedOptions
+      onChange={(
+        event: React.SyntheticEvent<Element, Event>,
+        value: IState | null
+      ) => handleStateUpdate(event, value)}
+      renderInput={(params) => <TextField {...params} label='Estado' />}
+    />
   );
 };
 

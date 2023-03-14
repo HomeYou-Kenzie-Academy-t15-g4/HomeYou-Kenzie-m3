@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { HousesContext } from '../../../../providers/HousesContext';
 import { ModalsContext } from '../../../../providers/ModalsContext';
 import { UserContext } from '../../../../providers/UserContext';
@@ -11,10 +12,13 @@ import {
 import { UserRentsSection } from './style';
 
 const UserRentsCards = () => {
-  const { housesRent } = useContext(HousesContext);
+  const { housesRent, selectedRent, setSelectedRent, loadOneHouse } =
+    useContext(HousesContext);
   const { user } = useContext(UserContext);
-  const { callManageReserve } = useContext(ModalsContext);
+  const { callManageReserve, callCreateReserve } = useContext(ModalsContext);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleReSize = () => setScreenWidth(window.innerWidth);
@@ -22,12 +26,18 @@ const UserRentsCards = () => {
     return () => window.removeEventListener('resize', handleReSize);
   }, []);
 
+  const EditReserv = (house: any) => {
+    const thisRent = housesRent.find((Rent) => Rent.id == house.id) ?? null;
+    setSelectedRent(thisRent);
+    loadOneHouse(house.house.id);
+    callManageReserve();
+  };
+
   const showSection = screenWidth > 900;
 
   const rentsUserHouses = housesRent.filter(
     (house) => house.userId === user?.id
   );
-
 
   return (
     <UserRentsSection>
@@ -41,12 +51,12 @@ const UserRentsCards = () => {
           Gerenciar reservas
         </StyledTitle>
 
-        {showSection && (
+        {showSection && rentsUserHouses.length > 0 && (
           <StyledButton
             $buttonSize='short'
             $buttonStyle='primary'
             type='button'
-            onClick={() => callManageReserve()}
+            onClick={() => navigate('/')}
           >
             Agendar viagem
           </StyledButton>
@@ -64,9 +74,9 @@ const UserRentsCards = () => {
               <StyledButton
                 $buttonSize='short'
                 $buttonStyle='none'
-                onClick={() => console.log('clic')}
+                onClick={() => EditReserv(house)}
               >
-                <StyledCaption>pen</StyledCaption>
+                <StyledCaption className='edit-button'>Editar</StyledCaption>
               </StyledButton>
             </div>
 
@@ -77,20 +87,46 @@ const UserRentsCards = () => {
             {house.rentedDays.length > 0 ? (
               <div className='reserve-box'>
                 <div className='checkin-box'>
-                  <StyledTitle $fontSize='three' $fontColor='grey' tag='h3'>
+                  <StyledTitle $textAlign='center' $fontSize='three' $fontColor='grey' tag='h3'>
                     Checkin
                   </StyledTitle>
                   <StyledParagraph $fontColor='grey' $fontWeight='three'>
-                    {house.rentedDays[0]}
+                    {new Date(house.rentedDays[0]).toLocaleString('default', {
+                      day: '2-digit',
+                    })}
+                    /
+                    {new Date(house.rentedDays[0]).toLocaleString('default', {
+                      month: '2-digit',
+                    })}
+                    /
+                    {new Date(house.rentedDays[0]).toLocaleString('default', {
+                      year: 'numeric',
+                    })}
                   </StyledParagraph>
                 </div>
 
                 <div className='checkout-box'>
-                  <StyledTitle $fontSize='three' $fontColor='grey' tag='h3'>
+                  <StyledTitle $textAlign='center' $fontSize='three' $fontColor='grey' tag='h3'>
                     Checkout
                   </StyledTitle>
                   <StyledParagraph $fontColor='grey' $fontWeight='three'>
-                    {house.rentedDays[1]}
+                    {new Date(
+                      house.rentedDays[house.rentedDays.length - 1]
+                    ).toLocaleString('default', {
+                      day: '2-digit',
+                    })}
+                    /
+                    {new Date(
+                      house.rentedDays[house.rentedDays.length - 1]
+                    ).toLocaleString('default', {
+                      month: '2-digit',
+                    })}
+                    /
+                    {new Date(
+                      house.rentedDays[house.rentedDays.length - 1]
+                    ).toLocaleString('default', {
+                      year: 'numeric',
+                    })}
                   </StyledParagraph>
                 </div>
               </div>
@@ -99,24 +135,38 @@ const UserRentsCards = () => {
                 <StyledTitle
                   tag='h2'
                   $fontSize='three'
-                  $fontColor='greyBold'
+                  $fontColor='grey'
                   $textAlign='center'
                 >
-                  Sem reserva
+                  Nenhuma reserva
                 </StyledTitle>
               </div>
             )}
           </li>
         ))}
+        {rentsUserHouses.length <= 1 && (
+          <div onClick={() => navigate('/')} className='add-button-box'>
+            {rentsUserHouses.length == 0 && (
+              <StyledParagraph $fontColor='grey' $fontWeight='three'>
+                Agende já sua viagem!
+              </StyledParagraph>
+            )}
+            <img
+              className='add-button'
+              alt='Buscar nova reserva casa'
+              src='../../../../../src/assets/buttonAdd.svg'
+            />
+          </div>
+        )}
       </ul>
 
-      {!showSection && (
+      {!showSection && rentsUserHouses.length > 0 && (
         <div className='button-mobile'>
           <StyledButton
             $buttonSize='short'
             $buttonStyle='primary'
             type='button'
-            onClick={() => callManageReserve()}
+            onClick={() => navigate('/')}
           >
             Agendar viagem
           </StyledButton>

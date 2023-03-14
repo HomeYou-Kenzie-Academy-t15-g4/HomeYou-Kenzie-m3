@@ -6,7 +6,7 @@ import { IModalsContext, IModalsProviderProps } from './type';
 export const ModalsContext = createContext({} as IModalsContext);
 
 export const ModalsProvider = ({ children }: IModalsProviderProps) => {
-  const { loadOneHouse, setSelectedHouse, setLoadValues } =
+  const { loadOneHouse, setSelectedHouse, setLoadValues, setSelectedRent } =
     useContext(HousesContext);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -15,40 +15,45 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
   const [isManageRentModal, setIsManageRentModal] = useState(false);
   const [isManageHouseModal, setIsManageHouseModal] = useState(false);
   const [isCreateHouseModal, setIsCreateHouseModal] = useState(false);
+  const [deleteButton, setDeleteButton] = useState(false);
+  const [isOpenCalendar, setIsOpenCalendar] = useState(false);
 
   const callEditUser = () => {
     setIsOpen(true);
     setIsUserModal(true);
-    window.scroll(0, 0)
+    window.scroll(0, 0);
   };
 
   const callManageHouse = (id: number) => {
     loadOneHouse(id);
     setIsOpen(true);
     setIsManageHouseModal(true);
-    window.scroll(0, 0)
+    window.scroll(0, 0);
   };
 
   const callCreateHouse = () => {
     setIsOpen(true);
     setIsCreateHouseModal(true);
-    window.scroll(0, 0)
+    window.scroll(0, 0);
   };
 
   const callCreateReserve = () => {
     setIsOpen(true);
     setIsCreateHouseModal(true);
-    window.scroll(0, 0)
+    window.scroll(0, 0);
   };
 
   const callManageReserve = () => {
     setIsOpen(true);
-    setIsCreateHouseModal(true);
-    window.scroll(0, 0)
+    setIsManageRentModal(true);
+    setDeleteButton(true);
+    window.scroll(0, 0);
   };
 
   const closeModal = () => {
-    setSelectedHouse(null);
+    if (window.location.pathname !== '/house') {
+      setSelectedHouse(null);
+    }
     setLoadValues(defaultNoValues);
     setIsOpen(false);
     setIsUserModal(false);
@@ -56,6 +61,13 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
     setIsManageRentModal(false);
     setIsCreateHouseModal(false);
     setIsManageHouseModal(false);
+    setDeleteButton(false);
+    setIsOpenCalendar(false);
+    setSelectedRent(null);
+  };
+
+  const closeModalCalendar = () => {
+    setIsOpenCalendar(false);
   };
 
   return (
@@ -74,12 +86,17 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
           setIsCreateHouseModal,
           isManageHouseModal,
           setIsManageHouseModal,
+          isOpenCalendar,
+          setIsOpenCalendar,
           callEditUser,
           callManageHouse,
           callCreateHouse,
           callCreateReserve,
           callManageReserve,
+          closeModalCalendar,
           closeModal,
+          deleteButton,
+          setDeleteButton,
         }}
       >
         {children}

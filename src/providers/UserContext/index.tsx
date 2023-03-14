@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useContext } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import {
   ILoginFormValue,
   IUser,
@@ -28,7 +28,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
         return navigate('/dashboard');
       } catch (error) {
-        console.log(error);
         localStorage.removeItem('@HomeYou:TOKEN');
         return navigate('/');
       }
@@ -87,21 +86,24 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       name: data.name,
       age: getAge(data.age),
       password: data.password,
-      img: 'https://canvas.kenzie.com.br/images/messages/avatar-50.png',
+      img: 'https://cdn.discordapp.com/attachments/1080736903537639494/1085117335439937576/5766b8e3-5b64-4b79-87c0-067818bf66bf.jpg',
     };
 
     if (newData.age < 18) {
-      console.log('É preciso ter mais de 18 anos para se cadastrar');
+      toast.error('É preciso ter mais de 18 anos para se cadastrar');
     } else {
       try {
         const res = await api.post('/users', newData);
-        console.log('deu certo', newData);
         localStorage.setItem('@IDUSER', res.data.user.id);
         toast.success('Cadastro realizado com sucesso!');
         navigate('/login');
-      } catch (error) {
-        console.log('deu errado');
-        toast.error('Ops,algo deu errado!');
+      } catch (error: any) {        
+        if (error?.response?.data == 'Email already exists') {
+          toast.error('Email já cadastrado');
+        } else{
+          console.error(error);
+          toast.error('Ops,algo deu errado!');
+        }
       } finally {
         setLoading(false);
       }
@@ -113,17 +115,16 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     try {
       const res = await api.post('/login', formData);
       localStorage.setItem('@HomeYou:TOKEN', res.data.accessToken);
-      toast.success('Login bem sucedido')
+      toast.success('Login bem sucedido');
 
       localStorage.setItem('@HomeYou:User', JSON.stringify(res.data.user));
       setUser(res.data.user);
       navigate('/dashboard');
     } catch (error: any) {
-      if (error.response.data === 'Incorrect password'){
-        toast.error('Email e/ou senha incorretos')
+      if (error.response.data === 'Incorrect password') {
+        toast.error('Email e/ou senha incorretos');
       } else {
-        toast.error('Algo deu errado :(')
-        console.error(error)
+        toast.error('Algo deu errado :(');
       }
     } finally {
       setLoading(false);
@@ -133,7 +134,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const logoutUser = () => {
     setUser(null);
     localStorage.removeItem('@HomeYou:TOKEN');
-    toast.info('Sessão encerrada')
+    toast.info('Sessão encerrada');
     navigate('/');
   };
 
@@ -142,7 +143,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     const userAuxString = localStorage.getItem('@HomeYou:User');
     const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
     const token = localStorage.getItem('@HomeYou:TOKEN');
-    console.log(data);
 
     try {
       const response = await api.patch(`/users/${userAux.id}`, data, {
@@ -151,11 +151,10 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         },
       });
       setUser(response.data.user);
-      console.log('ok!');
       userLoad();
       toast.success('Alteração feita com sucesso!');
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }

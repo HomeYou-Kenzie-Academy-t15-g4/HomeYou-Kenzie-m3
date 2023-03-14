@@ -4,10 +4,6 @@ const StyledSectionHomePage = styled.main`
   width: 100%;
   height: 100vh;
 
-  header {
-    box-shadow: none;
-  }
-
   .home-section {
     padding-top: 70px;
 
@@ -22,6 +18,9 @@ const StyledSectionHomePage = styled.main`
 
         button {
           width: 50%;
+          a {
+            color: ${({ theme }) => theme.colors.grey00};
+          }
         }
       }
     }

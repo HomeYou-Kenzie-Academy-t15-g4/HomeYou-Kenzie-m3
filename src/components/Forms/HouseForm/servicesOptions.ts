@@ -49,9 +49,24 @@ export const defaultNoValues = {
   photos: null,
   state: '',
   city: '',
-  daylyPrice: '',
+  dailyPrice: '',
   singleBed: '',
   doubleBed: '',
   services: [],
   houseDesc: '',
 };
+
+export const  defaultHouseFormValues = {
+  name: '',
+  photos: {
+        value: '',
+        label: ''
+      } , 
+  city: '',
+  state: '',
+  dailyPrice: '',
+  singleBed: '',
+  doubleBed: '',
+  services: [],
+  houseDesc: '',
+}

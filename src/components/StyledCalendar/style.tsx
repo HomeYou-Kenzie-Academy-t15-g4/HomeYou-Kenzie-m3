@@ -9,10 +9,14 @@ export const StyledCalendar = styled.div`
   }
 
   .react-calendar {
-    width: 350px;
+    height: 350px;
+    width: 280px;
+    @media (min-width: 600px) {
+      width: 350px;
+      height: 400px;
+    }
     max-width: 100%;
     background: white;
-    border: 1px solid #a0a096;
     line-height: 1.125em;
     border-radius: 4px;
   }
@@ -73,6 +77,7 @@ export const StyledCalendar = styled.div`
   }
   .react-calendar__month-view__weekdays__weekday {
     padding: 0.5em;
+    font-family: Montserrat;
   }
   .react-calendar__month-view__weekNumbers .react-calendar__tile {
     display: flex;
@@ -93,7 +98,11 @@ export const StyledCalendar = styled.div`
     padding: 2em 0.5em;
   }
   .react-calendar__tile {
-    height: 49.73px;
+    height: 40px;
+    @media (min-width: 600px) {
+      height: 50px;
+      border-radius: 50%;
+    }
     padding: 10px 6.6667px;
     background: none;
     text-align: center;
@@ -106,31 +115,36 @@ export const StyledCalendar = styled.div`
   }
   .react-calendar__tile:enabled:hover,
   .react-calendar__tile:enabled:focus {
-    background-color: #76baff;
+    background-color: #6af39fb3;
+    background: #6af39fb3;
   }
   .react-calendar__tile--now {
-    background: #ffff76;
+    background: #6af39fb3;
   }
   .react-calendar__tile--now:enabled:hover,
   .react-calendar__tile--now:enabled:focus {
     background: #ffffa9;
   }
   .react-calendar__tile--hasActive {
-    background: #76baff;
+    background-color: #6af39fb3;
+    background: #6af39fb3;
   }
   .react-calendar__tile--hasActive:enabled:hover,
   .react-calendar__tile--hasActive:enabled:focus {
-    background: #a9d4ff;
+    background-color: #6af39fb3;
+    background: #6af39fb3;
   }
   .react-calendar__tile--active {
-    background: #006edc;
+    background: #04c35c;
+
+    background-color: #0c6b38;
     color: white;
   }
   .react-calendar__tile--active:enabled:hover,
   .react-calendar__tile--active:enabled:focus {
-    background: #1087ff;
+    background-color: #0c6b38;
   }
   .react-calendar--selectRange .react-calendar__tile--hover {
-    background-color: #a9d4ff;
+    background-color: #04c35c;
   }
 `;

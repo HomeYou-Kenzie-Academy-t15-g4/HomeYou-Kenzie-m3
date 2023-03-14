@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const UserHousesSection = styled.section`
+export const UserRentsSection = styled.section`
   margin-top: 20px;
   width: 100%;
   min-height: 500px;
@@ -9,10 +9,10 @@ export const UserHousesSection = styled.section`
 
   @media (min-width: 900px) {
     padding: 25px;
-    max-width: 45%;
-    height: 500px;
+    width: 45%;
     .title-box {
       button {
+        height: 40px;
         max-width: 60%;
       }
     }
@@ -29,9 +29,11 @@ export const UserHousesSection = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 40px;
 
     margin-bottom: 30px;
     width: 100%;
+    
 
     button {
       min-width: 40%;
@@ -88,8 +90,7 @@ export const UserHousesSection = styled.section`
     .houses-box {
       display: flex;
       flex-direction: column;
-      min-width: 250px;
-      max-width: 80%;
+      width: 250px;
       margin-bottom: 20px;
       min-height: 320px;
       border-radius: 10px;
@@ -109,9 +110,12 @@ export const UserHousesSection = styled.section`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        border-left: 1px solid ${({ theme }) => theme.colors.grey100};
+        border-right: 1px solid ${({ theme }) => theme.colors.grey100};
+        border-radius: 8px 8px 0 0;
 
         button {
-          width: 20%;
+          margin-left: 20px;
         }
       }
 
@@ -127,13 +131,44 @@ export const UserHousesSection = styled.section`
           border: 1px solid ${({ theme }) => theme.colors.grey100};
         }
       }
+
       .reserve-box {
-        padding: 16px;
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        height: 60px;
+        margin-top: -1px;
+        border-left: 1px solid ${({ theme }) => theme.colors.grey100};
+        border-right: 1px solid ${({ theme }) => theme.colors.grey100};
+        
+
+        .checkin-box {
+          
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
+        }
+
+        .checkout-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
+          border-left: 0.1px solid  ${({ theme }) => theme.colors.grey100};
+        }
       }
     }
+  }
+
+  .no-reserve-box{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
   }
 
   .button-mobile {

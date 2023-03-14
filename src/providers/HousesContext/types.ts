@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { MultiValue, PropsValue } from 'react-select';
 import {
   IHouseForm,
   IDefaultHouseFormValues,
@@ -12,10 +13,16 @@ export interface IHouse {
   id?: number;
   userId?: number;
   name: string;
-  photos: string[];
+  photos:
+    | string[]
+    | PropsValue<{
+        value: string;
+        label: string;
+      } | null>
+    | undefined;
   city: string;
   state: string;
-  daylyPrice: number;
+  dailyPrice: number | any;
   services: string[];
   accommodation: IAccommodation;
   houseDesc: string;
@@ -32,10 +39,11 @@ export interface IGuest {
 }
 
 export interface IReserve {
+  formData?: any;
   id?: number;
   userId?: number;
   rentPrice: number;
-  rentedDays: string[];
+  rentedDays: Date[];
   guest: IGuest;
   house: Pick<IHouse, 'id' | 'name' | 'photos'>;
 }
@@ -65,12 +73,14 @@ export interface IHousesContext {
   setHousesList: React.Dispatch<React.SetStateAction<IHouse[]>>;
   housesFilterList: IHouse[];
   setHousesFilterList: React.Dispatch<React.SetStateAction<IHouse[]>>;
-  selectedHouse: IHouse | InoDefaultValue | null;
+  selectedHouse: IHouse | InoDefaultValue | IDefaultHouseFormValues | null;
   setSelectedHouse: React.Dispatch<
-    React.SetStateAction<IHouse | InoDefaultValue | null>
+    React.SetStateAction<
+      IHouse | IDefaultHouseFormValues | InoDefaultValue | null
+    >
   >;
-  selectedRent: IHouse | null;
-  setSelectedRent: React.Dispatch<React.SetStateAction<IHouse | null>>;
+  selectedRent: IRent | null;
+  setSelectedRent: React.Dispatch<React.SetStateAction<IRent | null>>;
   searchText: string;
   setSearchText: React.Dispatch<React.SetStateAction<string>>;
   createHouse: (dataHouse: IHouseForm) => Promise<void>;
@@ -83,6 +93,8 @@ export interface IHousesContext {
   loadValues: IDefaultHouseFormValues;
   setLoadValues: React.Dispatch<React.SetStateAction<IDefaultHouseFormValues>>;
   housesRent: IRent[];
+  selectedDate: Date[] | null;
+  setSelectedDate: React.Dispatch<React.SetStateAction<Date[] | null>>;
 }
 
 export interface InoDefaultValue {
@@ -90,7 +102,7 @@ export interface InoDefaultValue {
   photos: null;
   state: null;
   city: null;
-  daylyPrice: undefined;
+  dailyPrice: undefined;
   singleBed: undefined;
   doubleBed: undefined;
   services: null;

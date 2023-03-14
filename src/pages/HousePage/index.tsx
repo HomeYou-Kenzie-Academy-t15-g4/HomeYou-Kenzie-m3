@@ -6,7 +6,7 @@ import CommentsCard from '../../components/Cards/CommentsCard';
 import Header from '../../components/Header';
 import IconsMatch from '../../components/IconsMatch';
 import Modal from '../../components/Modal';
-import SectionSpacer from '../../components/SectionSpacer';
+import SectionSpacer from '../../components/SectionSpacers/VerticalSpacer';
 import { CardSlider } from '../../components/Slider/carrousels/CardCarrousel';
 import { StyledButton } from '../../styles/button';
 import { StyledCaption, StyledTitle } from '../../styles/typograthy';
@@ -14,13 +14,30 @@ import { Container } from '../../styles/global';
 import { StyledHousePage, StyledRatingBox } from './style';
 import Ratinng from '../../components/Rating';
 import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
+import Skeleton from '@mui/material/Skeleton';
+import { UserContext } from '../../providers/UserContext';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import ReservForm from '../../components/Forms/ReservForm';
+import LikeButton from '../../components/LikeButton';
 
-const HousePage = (id: number) => {
-  const { isOpen, setIsOpen } = useContext(ModalsContext);
+const HousePage = () => {
+  const { loading } = useContext(UserContext);
+  const { isOpen, callCreateReserve } = useContext(ModalsContext);
   const { selectedHouse, loadOneHouse } = useContext(HousesContext);
-  const [isLike, setIsLike] = useState(false);
+  const { user } = useContext(UserContext);
 
-  console.log(selectedHouse?.accommodation?.beds);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scroll(0, 0);
+    if (selectedHouse == null) {
+      toast.info('Selecione uma casa antes de acessar essa página');
+      navigate('/');
+    }
+  }, []);
+
   const capacity =
     Number(selectedHouse?.accommodation?.beds) +
     2 * Number(selectedHouse?.accommodation?.doubleBeds);
@@ -31,114 +48,163 @@ const HousePage = (id: number) => {
   return (
     <>
       <Header />
-      <StyledHousePage>
-        {isOpen ? (
-          <Modal title='modal'>
-            <div></div>
-          </Modal>
-        ) : null}
+      {loading || selectedHouse?.name == '' ? (
+        <Container>
+          <Skeleton
+            variant='rounded'
+            animation='wave'
+            width={'100%'}
+            height={48}
+            sx={{ marginTop: '80px', marginBottom: '20px' }}
+          />
+          <Skeleton
+            variant='rounded'
+            animation='wave'
+            width={'100%'}
+            height={400}
+            sx={{ marginBottom: '10px' }}
+          />
+          <Skeleton
+            variant='rounded'
+            animation='wave'
+            width={'100%'}
+            height={80}
+            sx={{ marginBottom: '10px' }}
+          />
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Skeleton
+              variant='rounded'
+              animation='wave'
+              width={'45%'}
+              height={180}
+            />
 
-        <section>
-          <Container>
-            <StyledRatingBox>
-              <div className='mainTitle'>
-                <StyledTitle $fontSize='two' $fontColor='greyBold' tag='h2'>
-                  {selectedHouse?.name}
-                </StyledTitle>
-                <StyledCaption className='guests'>
-                  {capacity} hospedes - {beds} camas
-                </StyledCaption>
-              </div>
-              <div className='btnRating'>
-                <Ratinng />
-                <button onClick={() => setIsLike(!isLike)}>
-                  {isLike ? <FcLikePlaceholder /> : <FcLike />}
-                </button>
-              </div>
-            </StyledRatingBox>
-          </Container>
+            <Skeleton
+              variant='rounded'
+              animation='wave'
+              width={'45%'}
+              height={180}
+            />
+          </div>
+        </Container>
+      ) : (
+        <StyledHousePage>
+          {isOpen ? (
+            <Modal price={selectedHouse?.dailyPrice?.toString() ?? ''} title={''}>
+              <ReservForm />
+            </Modal>
+          ) : null}
 
-          <section className='galerySection'>
+          <section>
             <Container>
-              <StyledTitle
-                $textAlign='center'
-                $fontSize='two'
-                $fontColor='greyBold'
-                tag='h2'
-              >
-                Galeria
-              </StyledTitle>
-              <div
-                style={{
-                  position: 'relative',
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              ></div>
-              <div className='sliderBox'>
-                {selectedHouse?.photos ? <CardSlider></CardSlider> : null}
+              <StyledRatingBox>
+                <div className='mainTitle'>
+                  <StyledTitle $fontSize='two' $fontColor='greyBold' tag='h2'>
+                    {selectedHouse?.name}
+                  </StyledTitle>
+                  <StyledCaption className='guests'>
+                    {capacity} hospedes - {beds} camas
+                  </StyledCaption>
+                </div>
+                <div className='btnRating'>
+                  <Ratinng />
+                  <LikeButton />
+                </div>
+              </StyledRatingBox>
+            </Container>
+
+            <section className='galerySection'>
+              <Container>
+                <StyledTitle
+                  $textAlign='center'
+                  $fontSize='two'
+                  $fontColor='greyBold'
+                  tag='h2'
+                >
+                  Galeria
+                </StyledTitle>
+                <div
+                  style={{
+                    position: 'relative',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                ></div>
+                <div className='sliderBox'>
+                  {selectedHouse?.photos ? <CardSlider></CardSlider> : null}
+                </div>
+              </Container>
+            </section>
+            <Container>
+              <div className='reserveSection'>
+                <StyledTitle
+                  $textAlign='center'
+                  $fontSize='two'
+                  $fontColor='grey'
+                  tag='h2'
+                >
+                  Orçamento
+                </StyledTitle>
+                <StyledCaption>Interessado em alugar essa casa?</StyledCaption>
+                {user ? (
+                  <StyledButton
+                    type='button'
+                    $buttonSize='short'
+                    $buttonStyle='primary'
+                    onClick={() => callCreateReserve()}
+                  >
+                    Reservar
+                  </StyledButton>
+                ) : (
+                  <Link to={'/login'}>
+                    <StyledButton
+                      type='button'
+                      $buttonSize='short'
+                      $buttonStyle='primary'
+                    >
+                      Reservar
+                    </StyledButton>
+                  </Link>
+                )}
               </div>
+              <section className='infoSection' id='infoSection'>
+                <article>
+                  <StyledTitle $fontSize='two' $fontColor='grey' tag='h2'>
+                    Comodidades
+                  </StyledTitle>
+                  <div className='servicesBox'>
+                    <ul>
+                      {selectedHouse?.services?.map((service) => {
+                        return (
+                          <li key={service}>
+                            <span className='iconBox'>
+                              <IconsMatch iconName={service} />
+                            </span>
+                            <StyledCaption className='servicesName'>
+                              {service}
+                            </StyledCaption>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </article>
+                <SectionSpacer />
+                <article>
+                  <StyledTitle $fontSize='two' $fontColor='grey' tag='h2'>
+                    Detalhes do local
+                  </StyledTitle>
+                  <div className='detailsTextBox'>
+                    <StyledCaption>{selectedHouse?.houseDesc}</StyledCaption>
+                    <Ratinng />
+                  </div>
+                </article>
+              </section>
             </Container>
           </section>
-          <Container>
-            <div className='reserveSection'>
-              <StyledTitle
-                $textAlign='center'
-                $fontSize='two'
-                $fontColor='grey'
-                tag='h2'
-              >
-                Orçamento
-              </StyledTitle>
-              <StyledCaption>Interessado em alugar essa casa?</StyledCaption>
-
-              <StyledButton
-                /* onClick={FunçãoModaldeReserva(selectedHouse?.id)} */ type='button'
-                $buttonSize='short'
-                $buttonStyle='primary'
-              >
-                Reservar
-              </StyledButton>
-            </div>
-            <section className='infoSection' id='infoSection'>
-              <article>
-                <StyledTitle $fontSize='two' $fontColor='grey' tag='h2'>
-                  Comodidades
-                </StyledTitle>
-                  <div className='servicesBox'>
-                <ul>
-                    {selectedHouse?.services?.map((service) => {
-                      return (
-                        <li key={service}>
-                          <span className='iconBox'>
-                            <IconsMatch iconName={service} />
-                          </span>
-                          <StyledCaption className='servicesName'>
-                            {service}
-                          </StyledCaption>
-                          {/* <p className='servicesName'>{service}</p> */}
-                        </li>
-                      );
-                    })}
-                </ul>
-                  </div>
-              </article>
-              <SectionSpacer />
-              <article>
-                <StyledTitle $fontSize='two' $fontColor='grey' tag='h2'>
-                  Detalhes do local
-                </StyledTitle>
-                <div className='detailsTextBox'>
-                  <StyledCaption>{selectedHouse?.houseDesc}</StyledCaption>
-                  <Ratinng />
-                </div>
-              </article>
-            </section>
-          </Container>
-        </section>
-
-        <CommentsCard />
-      </StyledHousePage>
+          <CommentsCard />
+        </StyledHousePage>
+      )}
     </>
   );
 };

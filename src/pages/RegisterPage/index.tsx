@@ -4,7 +4,8 @@ import { StyledRegisterPage } from './style';
 import registerImg from '../../assets/register-asside-img.svg';
 import logo from '../../assets/HomeYou.svg';
 import { Link } from 'react-router-dom';
-import { StyledTitle } from '../../styles/typograthy';
+import { StyledParagraph, StyledTitle } from '../../styles/typograthy';
+import { StyledButton } from '../../styles/button';
 
 const RegisterPage = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -19,19 +20,39 @@ const RegisterPage = () => {
 
   return (
     <StyledRegisterPage>
-      <section className='form-section'>
+      <div className='register-box'>
         <img src={logo} alt='' />
-        <div className='text-container'>
-          <Link to={'/login'}>
-            <StyledTitle $fontColor='grey' tag='h3' $fontSize='three'>
-              Voltar pro Login
-            </StyledTitle>
-          </Link>
-        </div>
-        <RegisterForm />
-      </section>
+        <section className='form-section'>
+          <div className='text-container'>
+            <span className='form-title'>
+              <StyledTitle $fontColor='grey' tag='h3' $fontSize='two'>
+                {showSection ? 'Registre uma nova conta' : 'Cadastre-se'}
+              </StyledTitle>
+              {!showSection && (
+                <div>
+                  <StyledParagraph $fontColor='grey'>ou</StyledParagraph>
+                  <Link to={'/'}>
+                    <StyledParagraph
+                      className='form-home-link'
+                      $fontColor='greyBold'
+                    >
+                      Acesse o site
+                    </StyledParagraph>
+                  </Link>
+                </div>
+              )}
+            </span>
+          </div>
+          <RegisterForm />
+        </section>
+      </div>
       {showSection && (
         <section className='image-section'>
+          <Link className='asside-home-link' to={'/'}>
+            <StyledButton $buttonSize='short' $buttonStyle='default'>
+              Ir para o site
+            </StyledButton>
+          </Link>
           <div>
             <img src={registerImg} alt='' />
           </div>

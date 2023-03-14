@@ -30,13 +30,15 @@ export function CardSlider({}) {
 
   return (
     <Slider settings={settings}>
-      {selectedHouse?.photos?.map((photo, index) => {
-        return (
-          <Slide key={index}>
-            <img src={photo} alt='slide_image' />
-          </Slide>
-        );
-      })}
+      {selectedHouse &&
+        Array.isArray(selectedHouse.photos) &&
+        selectedHouse.photos.map((photo, index) => {
+          return (
+            <Slide key={index}>
+              <img src={photo} alt='slide_image' />
+            </Slide>
+          );
+        })}
     </Slider>
   );
 }

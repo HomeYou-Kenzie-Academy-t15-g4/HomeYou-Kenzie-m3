@@ -16,7 +16,7 @@ export const UserSection = styled.section`
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
 
     .bg-user {
-      /* min-width: 280px; */
+      position: relative;
       width: 100%;
       min-height: 130px;
 
@@ -27,9 +27,9 @@ export const UserSection = styled.section`
 
       .box-img {
         position: absolute;
-        top: -270px;
-        left: 0;
-        right: 0;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -10%);
         bottom: 0;
         margin: auto;
 
@@ -58,13 +58,7 @@ export const UserSection = styled.section`
     .user-info-box {
       width: 100%;
       background: ${({ theme }) => theme.colors.grey00};
-      padding-top: 75px;
-      @media (min-width: 1024px) {
-        padding-top: 90px;
-      }
-      @media (min-width: 1200px) {
-        padding-top: 110px;
-      }
+      padding-top: 60px;
       padding-bottom: 20px;
 
       display: flex;

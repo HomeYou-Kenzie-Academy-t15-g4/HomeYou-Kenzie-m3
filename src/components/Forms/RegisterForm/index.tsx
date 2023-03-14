@@ -10,6 +10,7 @@ import { RegisterFormSchema } from './RegisterFormSchema';
 import { UserContext } from '../../../providers/UserContext';
 import { StyledParagraph } from '../../../styles/typograthy';
 import { CgSpinnerTwo } from 'react-icons/cg';
+import { Link } from 'react-router-dom';
 
 export interface IRegisterForm {
   name: string;
@@ -30,7 +31,7 @@ const RegisterForm = () => {
     clearErrors,
     formState: { errors },
   } = useForm<IRegisterForm>({
-    resolver: yupResolver(RegisterFormSchema),
+    resolver: yupResolver(RegisterFormSchema as any),
   });
 
   const ageHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,6 +92,12 @@ const RegisterForm = () => {
           {errors.age?.message}
         </StyledParagraph>
       </fieldset>
+
+      <Link className='linkToLogin' to={'/login'}>
+        <StyledParagraph  $fontColor='grey'>
+          Já tem uma conta? Clique aqui
+        </StyledParagraph>
+      </Link>
 
       <StyledButton type='submit' $buttonSize='large' $buttonStyle='primary'>
         {loading ? <CgSpinnerTwo className='spinner' /> : 'Criar Conta'}
