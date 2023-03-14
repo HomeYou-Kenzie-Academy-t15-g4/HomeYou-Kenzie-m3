@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { HousesContext } from '../../../providers/HousesContext';
-import { StyledDivReturnToLogin, StyledForm } from '../HouseForm/style';
 import Select from 'react-select';
 import SelectCalendar from '../../StyledCalendar';
 import { ModalsContext } from '../../../providers/ModalsContext';
@@ -10,6 +9,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { IReserve } from '../../../providers/HousesContext/types';
 import * as yup from 'yup';
 import { UserContext } from '../../../providers/UserContext';
+import { reactSelectReservStyle, StyledReservForm } from './style';
+import { StyledCaption, StyledParagraph, StyledTitle } from '../../../styles/typograthy';
+import { StyledButton } from '../../../styles/button';
+import HorizontalSpacer from '../../SectionSpacers/HorizontalSpacer';
 
 interface IReserveForm {
   rentedDays: Date[];
@@ -86,7 +89,7 @@ const ReservForm = () => {
     }
   };
 
-  const options = [{ value: '1', label: '1 hospede' }];
+  const options = [{ value: '1', label: '1  hospede' }];
 
   while (optionsNumber < capacity) {
     optionsNumber++;
@@ -96,9 +99,13 @@ const ReservForm = () => {
     });
   }
 
+  const openCalendar = () => {
+    window.scroll(0, 0);
+    setIsOpenCalendar(true)
+  }
+
   return (
-    <StyledForm onSubmit={handleSubmit(submit)}>
-      <StyledDivReturnToLogin></StyledDivReturnToLogin>
+    <StyledReservForm onSubmit={handleSubmit(submit)}>
       {isOpenCalendar ? (
         deleteButton ? (
           <Modal title='Editar reserva'>
@@ -110,122 +117,119 @@ const ReservForm = () => {
           </Modal>
         )
       ) : null}
-      <div onClick={() => setIsOpenCalendar(true)}>
-        {selectedRent?.rentedDays.length !== 0 && selectedDate ? (
-          <div>
-            <div>
-              <h3>Check-in</h3>
-              <p>
-                {selectedDate[0]
-                  ? selectedDate[0].toLocaleString('default', {
-                      day: '2-digit',
-                    })
-                  : selectedRent?.rentedDays[0]}
-                /
-                {selectedDate[0]
-                  ? selectedDate[0].toLocaleString('default', {
-                      month: '2-digit',
-                    })
-                  : selectedRent?.rentedDays[0]}
-                /
-                {selectedDate[0]
-                  ? selectedDate[0].toLocaleString('default', {
-                      year: 'numeric',
-                    })
-                  : selectedRent?.rentedDays[0]}
-              </p>
-            </div>
-            <div>
-              <h3>Check-out</h3>
-              <p>
-                {selectedDate[0]
-                  ? selectedDate[selectedDate.length - 1].toLocaleString(
-                      'default',
-                      {
+      <div className='formArea'>
+        <div onClick={() => openCalendar()}>
+          {selectedRent?.rentedDays.length !== 0 && selectedDate ? (
+            <div className='selectedDates'>
+              <div className='checkIn'>
+                <StyledTitle tag='h3' $fontSize='three' $fontColor='greyBold' $textAlign='center'>Check-in</StyledTitle>
+                <StyledParagraph $fontColor='greyBold' $textAlign='center'>                
+                  {selectedDate[0]
+                    ? selectedDate[0].toLocaleString('default', {
                         day: '2-digit',
-                      }
-                    )
-                  : selectedRent?.rentedDays[
-                      selectedRent?.rentedDays.length - 1
-                    ]}
-                /
-                {selectedDate[0]
-                  ? selectedDate[selectedDate.length - 1].toLocaleString(
-                      'default',
-                      {
+                      })
+                    : selectedRent?.rentedDays[0]}
+                  /
+                  {selectedDate[0]
+                    ? selectedDate[0].toLocaleString('default', {
                         month: '2-digit',
-                      }
-                    )
-                  : selectedRent?.rentedDays[
-                      selectedRent?.rentedDays.length - 1
-                    ]}
-                /
-                {selectedDate[0]
-                  ? selectedDate[selectedDate.length - 1].toLocaleString(
-                      'default',
-                      {
+                      })
+                    : selectedRent?.rentedDays[0]}
+                  /
+                  {selectedDate[0]
+                    ? selectedDate[0].toLocaleString('default', {
                         year: 'numeric',
-                      }
-                    )
-                  : selectedRent?.rentedDays[
-                      selectedRent?.rentedDays.length - 1
-                    ]}
-              </p>
+                      })
+                    : selectedRent?.rentedDays[0]}
+                </StyledParagraph>
+              </div>
+              <div>
+              <StyledTitle tag='h3' $fontSize='three' $fontColor='greyBold' $textAlign='center'>Check-out</StyledTitle>
+                <StyledParagraph $fontColor='greyBold' $textAlign='center'> 
+                  {selectedDate[0]
+                    ? selectedDate[selectedDate.length - 1].toLocaleString(
+                        'default',
+                        {
+                          day: '2-digit',
+                        }
+                      )
+                    : selectedRent?.rentedDays[
+                        selectedRent?.rentedDays.length - 1
+                      ]}
+                  /
+                  {selectedDate[0]
+                    ? selectedDate[selectedDate.length - 1].toLocaleString(
+                        'default',
+                        {
+                          month: '2-digit',
+                        }
+                      )
+                    : selectedRent?.rentedDays[
+                        selectedRent?.rentedDays.length - 1
+                      ]}
+                  /
+                  {selectedDate[0]
+                    ? selectedDate[selectedDate.length - 1].toLocaleString(
+                        'default',
+                        {
+                          year: 'numeric',
+                        }
+                      )
+                    : selectedRent?.rentedDays[
+                        selectedRent?.rentedDays.length - 1
+                      ]}
+                      </StyledParagraph>
+              </div>
             </div>
-          </div>
-        ) : (
-          <h1>Escolher data</h1>
-        )}
-
-        {errors.rentedDays?.message}
+          ) : (
+            <StyledTitle 
+              className='noSelectedDates'
+              tag='h3'
+              $fontColor='greyBold'
+              $textAlign='center'
+              $fontSize='three'
+            >
+              Escolher data
+            </StyledTitle>
+          )}
+        </div>
+        <Select styles={reactSelectReservStyle} placeholder='Quantos hóspedes?' options={options} />
       </div>
-      <Select placeholder='Selecione' options={options} />
-      {deleteButton ? (
-        <div>
-          <button type='submit'>Editar</button>
-          <button
-            onClick={() => {
-              deleteReserve(selectedRent?.id ?? 0);
-              closeModal();
-            }}
-          >
-            Cancelar
-          </button>
-        </div>
-      ) : (
-        <button type='submit'>Reservar</button>
+      {errors.rentedDays?.message}
+      {deleteButton ? null : (
+        <StyledButton className='reservButton' $buttonSize='short' $buttonStyle='primary'>Reservar</StyledButton>
       )}
-      <div>
-        <div>
-          <label>
-            R$ {selectedHouse?.dailyPrice} x {days} noites
-          </label>
-          <label>Taxa de serviço</label>
-          <label>Total:</label>
-        </div>
-        <div>
-          <label>
-            {' '}
-            R$ {selectedHouse?.dailyPrice ? selectedHouse.dailyPrice * days : 0}
-          </label>
-          <label>
-            {' '}
-            R${' '}
+        <HorizontalSpacer/>
+        <span className='daysPrice'>
+          <p className='resumCalc'> R$ {selectedHouse?.dailyPrice} x {days} noites</p>
+          <p className='resumCalc'>R$ {selectedHouse?.dailyPrice ? selectedHouse.dailyPrice * days : 0} </p>
+        </span>
+        <span className='daysPrice'>
+          <p className='resumCalc'> Taxa de serviço</p>
+          <p className='resumCalc'>R${' '}
             {selectedHouse?.dailyPrice
               ? selectedHouse.dailyPrice * days * 0.02
-              : 0}
-          </label>
-          <label>
-            {' '}
-            R${' '}
+              : 0} </p>
+        </span>
+        <HorizontalSpacer/>
+        <span className='totalPrice'>
+          <p className=''> Total</p>
+          <p className=''>R${' '}
             {selectedHouse?.dailyPrice
               ? selectedHouse.dailyPrice * days * 0.02 +
                 selectedHouse.dailyPrice * days
-              : 0}
-          </label>
+              : 0}</p>
+        </span>
+        {deleteButton ? (
+        <div className='editReservButtons'>
+          <StyledButton type='submit' className='editButton' $buttonSize='short' $buttonStyle='primary'>Salvar alterações</StyledButton>
+          <StyledButton type='button' onClick={() => {
+              deleteReserve(selectedRent?.id ?? 0);
+              closeModal();
+            }} className='deleteButton' $buttonSize='short' $buttonStyle='default'>Cancelar reserva</StyledButton>                      
         </div>
-      </div>
-    </StyledForm>
+      ) : null}
+    </StyledReservForm>
   );
 };
 
