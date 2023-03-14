@@ -18,6 +18,9 @@ const StyledSectionHomePage = styled.main`
 
         button {
           width: 50%;
+          a {
+            color: ${({ theme }) => theme.colors.grey00};
+          }
         }
       }
     }
