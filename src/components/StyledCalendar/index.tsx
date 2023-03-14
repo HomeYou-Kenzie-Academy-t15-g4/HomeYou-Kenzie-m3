@@ -1,11 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import { HousesContext } from '../../providers/HousesContext';
+import { ModalsContext } from '../../providers/ModalsContext';
 import { StyledCalendar } from './style';
 
 const SelectCalendar = () => {
-  const { setSelectedDate, housesRent, selectedHouse, selectedRent } =
-    useContext(HousesContext);
+  const {
+    setSelectedDate,
+    selectedDate,
+    housesRent,
+    selectedHouse,
+    selectedRent,
+  } = useContext(HousesContext);
+  const { setIsOpenCalendar } = useContext(ModalsContext);
   const [value, setValue] = useState<Date[]>([]);
   const [reservedDates, setReservedDates] = useState<Date[]>([]);
   const [newReserve, setNewReserve] = useState<Date[]>([]);
@@ -15,20 +22,17 @@ const SelectCalendar = () => {
       let listHouses = housesRent.filter(
         (rent) => rent.house.id == selectedHouse.id
       );
-      let arrayTest: any = [];
+      let supArray: any = [];
       listHouses.forEach((reserv) =>
         reserv.rentedDays.forEach((item) => {
-          arrayTest.push(item);
+          supArray.push(item);
         })
       );
 
       setReservedDates(
-        arrayTest.map(
-          (
-            datea: string | number | Date,
-            index: string | number | Date | any
-          ) => {
-            return (arrayTest[index] = new Date(datea));
+        supArray.map(
+          (datea: string | number | Date, index: string | number) => {
+            return (supArray[index] = new Date(datea));
           }
         )
       );
@@ -52,8 +56,9 @@ const SelectCalendar = () => {
 
     setReservedDates(tempReserve.concat(reservedDates));
 
-    setSelectedDate(tempReserve.concat(reservedDates));
+    setSelectedDate(tempReserve);
     setValue(calendarValue);
+    setIsOpenCalendar(false);
   };
 
   return (

@@ -68,25 +68,27 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
     }
   };
 
-  useEffect(() => {    
+  useEffect(() => {
     loadHouses();
   }, []);
 
+  const loadRent = async () => {
+    const token = localStorage.getItem('@HomeYou:TOKEN');
+    if (token) {
+      try {
+        const res = await api.get('/rents');
+        setHousesRent(res.data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
   useEffect(() => {
     setLoading(true);
-    const loadRent = async () => {
-      const token = localStorage.getItem('@HomeYou:TOKEN');
-      if (token) {
-        try {
-          const res = await api.get('/rents');
-          setHousesRent(res.data);
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setLoading(false);
-        }
-      }
-    };
+
     loadRent();
   }, []);
 
@@ -119,7 +121,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        loadHouses()
+        loadHouses();
         toast.success('Casa cadastrada com sucesso');
       } catch (error) {
         console.error(error);
@@ -186,8 +188,8 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });        
-        loadHouses()
+        });
+        loadHouses();
         toast.success('Casa atualizada com sucesso');
       } catch (error) {
         console.error(error);
@@ -208,8 +210,8 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });        
-        loadHouses()
+        });
+        loadHouses();
         toast.success('Casa deletada com sucesso');
       } catch (error) {
         console.error(error);
@@ -234,6 +236,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
           },
         });
         toast.success('Casa reservada com sucesso');
+        loadRent();
       } catch (error) {
         console.error(error);
         toast.error('Falha ao reservar casa');
@@ -256,6 +259,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         },
       });
       toast.success('Reserva atualizada com sucesso');
+      loadRent();
     } catch (error) {
       console.error(error);
       toast.error('Falha ao atualizar reserva');
@@ -274,6 +278,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         },
       });
       toast.success('Casa deletada com sucesso');
+      loadRent();
     } catch (error) {
       console.error(error);
       toast.error('Falha ao deletar casa');

@@ -23,7 +23,10 @@ const HouseCard = () => {
               className='image-box'
               onClick={() => callHouse(Number(house.id))}
             >
-              <img src={house.photos[0]} alt='Image House' />
+              <img
+                src={Array.isArray(house.photos) ? house.photos[0] : undefined}
+                alt='Image House'
+              />
             </div>
 
             <div className='text-box'>

@@ -90,7 +90,7 @@ const HousePage = () => {
       ) : (
         <StyledHousePage>
           {isOpen ? (
-            <Modal title='modal'>
+            <Modal title={selectedHouse?.dailyPrice?.toString() ?? ''}>
               <ReservForm />
             </Modal>
           ) : null}

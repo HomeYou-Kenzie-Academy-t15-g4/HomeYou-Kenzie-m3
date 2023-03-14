@@ -10,7 +10,11 @@ import { IReserve } from '../../../providers/HousesContext/types';
 import * as yup from 'yup';
 import { UserContext } from '../../../providers/UserContext';
 import { reactSelectReservStyle, StyledReservForm } from './style';
-import { StyledCaption, StyledParagraph, StyledTitle } from '../../../styles/typograthy';
+import {
+  StyledCaption,
+  StyledParagraph,
+  StyledTitle,
+} from '../../../styles/typograthy';
 import { StyledButton } from '../../../styles/button';
 import HorizontalSpacer from '../../SectionSpacers/HorizontalSpacer';
 
@@ -30,6 +34,7 @@ const ReservForm = () => {
     selectedRent,
     selectedHouse,
     selectedDate,
+    setSelectedDate,
   } = useContext(HousesContext);
   const { isOpenCalendar, setIsOpenCalendar, deleteButton, closeModal } =
     useContext(ModalsContext);
@@ -51,13 +56,13 @@ const ReservForm = () => {
     formState: { errors },
     reset,
   } = useForm<IReserveForm>({
-    resolver: yupResolver(ReserveFormSchema as any),
+    resolver: yupResolver(ReserveFormSchema),
   });
 
   useEffect(() => {
     if (selectedDate) {
       setValue('rentedDays', selectedDate);
-      selectedDate?.length ? setDays(selectedDate.length - 1) : setDays(0);
+      selectedDate?.length ? setDays(selectedDate.length - 2) : setDays(0);
       clearErrors('rentedDays');
     }
   }, [selectedDate]);
@@ -77,15 +82,17 @@ const ReservForm = () => {
       house: {
         id: selectedHouse?.id,
         name: selectedHouse?.name ?? '',
-        photos: selectedHouse?.photos ?? [],
+        photos: selectedHouse?.photos,
       },
     };
     if (deleteButton) {
       editReserve(data, selectedRent?.id ?? 0);
       closeModal();
+      setSelectedDate([]);
     } else {
       createReserve(data);
       closeModal();
+      setSelectedDate([]);
     }
   };
 
@@ -101,8 +108,8 @@ const ReservForm = () => {
 
   const openCalendar = () => {
     window.scroll(0, 0);
-    setIsOpenCalendar(true)
-  }
+    setIsOpenCalendar(true);
+  };
 
   return (
     <StyledReservForm onSubmit={handleSubmit(submit)}>
@@ -112,7 +119,7 @@ const ReservForm = () => {
             <SelectCalendar />
           </Modal>
         ) : (
-          <Modal title={selectedHouse?.dailyPrice?.toString() ?? ''}>
+          <Modal title='Escolher Data'>
             <SelectCalendar />
           </Modal>
         )
@@ -122,30 +129,56 @@ const ReservForm = () => {
           {selectedRent?.rentedDays.length !== 0 && selectedDate ? (
             <div className='selectedDates'>
               <div className='checkIn'>
-                <StyledTitle tag='h3' $fontSize='three' $fontColor='greyBold' $textAlign='center'>Check-in</StyledTitle>
-                <StyledParagraph $fontColor='greyBold' $textAlign='center'>                
+                <StyledTitle
+                  tag='h3'
+                  $fontSize='three'
+                  $fontColor='greyBold'
+                  $textAlign='center'
+                >
+                  Check-in
+                </StyledTitle>
+                <StyledParagraph $fontColor='greyBold' $textAlign='center'>
                   {selectedDate[0]
                     ? selectedDate[0].toLocaleString('default', {
                         day: '2-digit',
                       })
-                    : selectedRent?.rentedDays[0]}
+                    : new Date(
+                        selectedRent?.rentedDays[0] ?? ''
+                      ).toLocaleString('default', {
+                        day: '2-digit',
+                      })}
                   /
                   {selectedDate[0]
                     ? selectedDate[0].toLocaleString('default', {
                         month: '2-digit',
                       })
-                    : selectedRent?.rentedDays[0]}
+                    : new Date(
+                        selectedRent?.rentedDays[0] ?? ''
+                      ).toLocaleString('default', {
+                        month: '2-digit',
+                      })}
                   /
                   {selectedDate[0]
                     ? selectedDate[0].toLocaleString('default', {
                         year: 'numeric',
                       })
-                    : selectedRent?.rentedDays[0]}
+                    : new Date(
+                        selectedRent?.rentedDays[0] ?? ''
+                      ).toLocaleString('default', {
+                        year: 'numeric',
+                      })}
                 </StyledParagraph>
               </div>
               <div>
-              <StyledTitle tag='h3' $fontSize='three' $fontColor='greyBold' $textAlign='center'>Check-out</StyledTitle>
-                <StyledParagraph $fontColor='greyBold' $textAlign='center'> 
+                <StyledTitle
+                  tag='h3'
+                  $fontSize='three'
+                  $fontColor='greyBold'
+                  $textAlign='center'
+                >
+                  Check-out
+                </StyledTitle>
+                <StyledParagraph $fontColor='greyBold' $textAlign='center'>
                   {selectedDate[0]
                     ? selectedDate[selectedDate.length - 1].toLocaleString(
                         'default',
@@ -153,9 +186,13 @@ const ReservForm = () => {
                           day: '2-digit',
                         }
                       )
-                    : selectedRent?.rentedDays[
-                        selectedRent?.rentedDays.length - 1
-                      ]}
+                    : new Date(
+                        selectedRent?.rentedDays[
+                          selectedRent?.rentedDays.length - 1
+                        ] ?? ''
+                      ).toLocaleString('default', {
+                        day: '2-digit',
+                      })}
                   /
                   {selectedDate[0]
                     ? selectedDate[selectedDate.length - 1].toLocaleString(
@@ -164,9 +201,13 @@ const ReservForm = () => {
                           month: '2-digit',
                         }
                       )
-                    : selectedRent?.rentedDays[
-                        selectedRent?.rentedDays.length - 1
-                      ]}
+                    : new Date(
+                        selectedRent?.rentedDays[
+                          selectedRent?.rentedDays.length - 1
+                        ] ?? ''
+                      ).toLocaleString('default', {
+                        month: '2-digit',
+                      })}
                   /
                   {selectedDate[0]
                     ? selectedDate[selectedDate.length - 1].toLocaleString(
@@ -175,14 +216,18 @@ const ReservForm = () => {
                           year: 'numeric',
                         }
                       )
-                    : selectedRent?.rentedDays[
-                        selectedRent?.rentedDays.length - 1
-                      ]}
-                      </StyledParagraph>
+                    : new Date(
+                        selectedRent?.rentedDays[
+                          selectedRent?.rentedDays.length - 1
+                        ] ?? ''
+                      ).toLocaleString('default', {
+                        year: 'numeric',
+                      })}
+                </StyledParagraph>
               </div>
             </div>
           ) : (
-            <StyledTitle 
+            <StyledTitle
               className='noSelectedDates'
               tag='h3'
               $fontColor='greyBold'
@@ -193,40 +238,74 @@ const ReservForm = () => {
             </StyledTitle>
           )}
         </div>
-        <Select styles={reactSelectReservStyle} placeholder='Quantos hóspedes?' options={options} />
+        <Select
+          styles={reactSelectReservStyle}
+          placeholder='Quantos hóspedes?'
+          options={options}
+        />
       </div>
       {errors.rentedDays?.message}
       {deleteButton ? null : (
-        <StyledButton className='reservButton' $buttonSize='short' $buttonStyle='primary'>Reservar</StyledButton>
+        <StyledButton
+          className='reservButton'
+          $buttonSize='short'
+          $buttonStyle='primary'
+        >
+          Reservar
+        </StyledButton>
       )}
-        <HorizontalSpacer/>
-        <span className='daysPrice'>
-          <p className='resumCalc'> R$ {selectedHouse?.dailyPrice} x {days} noites</p>
-          <p className='resumCalc'>R$ {selectedHouse?.dailyPrice ? selectedHouse.dailyPrice * days : 0} </p>
-        </span>
-        <span className='daysPrice'>
-          <p className='resumCalc'> Taxa de serviço</p>
-          <p className='resumCalc'>R${' '}
-            {selectedHouse?.dailyPrice
-              ? selectedHouse.dailyPrice * days * 0.02
-              : 0} </p>
-        </span>
-        <HorizontalSpacer/>
-        <span className='totalPrice'>
-          <p className=''> Total</p>
-          <p className=''>R${' '}
-            {selectedHouse?.dailyPrice
-              ? selectedHouse.dailyPrice * days * 0.02 +
-                selectedHouse.dailyPrice * days
-              : 0}</p>
-        </span>
-        {deleteButton ? (
+      <HorizontalSpacer />
+      <span className='daysPrice'>
+        <p className='resumCalc'>
+          {' '}
+          R$ {selectedHouse?.dailyPrice} x {days} noites
+        </p>
+        <p className='resumCalc'>
+          R$ {selectedHouse?.dailyPrice ? selectedHouse.dailyPrice * days : 0}{' '}
+        </p>
+      </span>
+      <span className='daysPrice'>
+        <p className='resumCalc'> Taxa de serviço</p>
+        <p className='resumCalc'>
+          R${' '}
+          {selectedHouse?.dailyPrice
+            ? selectedHouse.dailyPrice * days * 0.02
+            : 0}{' '}
+        </p>
+      </span>
+      <HorizontalSpacer />
+      <span className='totalPrice'>
+        <p className=''> Total</p>
+        <p className=''>
+          R${' '}
+          {selectedHouse?.dailyPrice
+            ? selectedHouse.dailyPrice * days * 0.02 +
+              selectedHouse.dailyPrice * days
+            : 0}
+        </p>
+      </span>
+      {deleteButton ? (
         <div className='editReservButtons'>
-          <StyledButton type='submit' className='editButton' $buttonSize='short' $buttonStyle='primary'>Salvar alterações</StyledButton>
-          <StyledButton type='button' onClick={() => {
+          <StyledButton
+            type='submit'
+            className='editButton'
+            $buttonSize='short'
+            $buttonStyle='primary'
+          >
+            Salvar alterações
+          </StyledButton>
+          <StyledButton
+            type='button'
+            onClick={() => {
               deleteReserve(selectedRent?.id ?? 0);
               closeModal();
-            }} className='deleteButton' $buttonSize='short' $buttonStyle='default'>Cancelar reserva</StyledButton>                      
+            }}
+            className='deleteButton'
+            $buttonSize='short'
+            $buttonStyle='default'
+          >
+            Cancelar reserva
+          </StyledButton>
         </div>
       ) : null}
     </StyledReservForm>

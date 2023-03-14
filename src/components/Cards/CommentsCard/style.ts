@@ -74,7 +74,6 @@ export const StyledPNameComment = styled.p`
   max-width: 100px;
 `;
 export const StyledPDataComment = styled.p`
-
   font-size: small;
   color: ${({ theme }) => theme.colors.grey400};
 `;

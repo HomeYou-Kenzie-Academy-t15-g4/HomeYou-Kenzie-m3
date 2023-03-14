@@ -91,7 +91,17 @@ const UserRentsCards = () => {
                     Checkin
                   </StyledTitle>
                   <StyledParagraph $fontColor='grey' $fontWeight='three'>
-                    {house.rentedDays[0]}
+                    {new Date(house.rentedDays[0]).toLocaleString('default', {
+                      day: '2-digit',
+                    })}
+                    /
+                    {new Date(house.rentedDays[0]).toLocaleString('default', {
+                      month: '2-digit',
+                    })}
+                    /
+                    {new Date(house.rentedDays[0]).toLocaleString('default', {
+                      year: 'numeric',
+                    })}
                   </StyledParagraph>
                 </div>
 
@@ -100,7 +110,23 @@ const UserRentsCards = () => {
                     Checkout
                   </StyledTitle>
                   <StyledParagraph $fontColor='grey' $fontWeight='three'>
-                    {house.rentedDays[1]}
+                    {new Date(
+                      house.rentedDays[house.rentedDays.length - 1]
+                    ).toLocaleString('default', {
+                      day: '2-digit',
+                    })}
+                    /
+                    {new Date(
+                      house.rentedDays[house.rentedDays.length - 1]
+                    ).toLocaleString('default', {
+                      month: '2-digit',
+                    })}
+                    /
+                    {new Date(
+                      house.rentedDays[house.rentedDays.length - 1]
+                    ).toLocaleString('default', {
+                      year: 'numeric',
+                    })}
                   </StyledParagraph>
                 </div>
               </div>
