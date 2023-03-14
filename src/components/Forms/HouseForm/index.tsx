@@ -44,7 +44,7 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
 }
 
 export const houseSchema = yup.object().shape({
-  name: yup.string().required('Campo Obrigatório'),
+  name: yup.string().max(45, `Deve ter no máximo 45 letras`).required('Campo Obrigatório'),
   city: yup.string().required('Campo Obrigatório'),
   state: yup.string().required('Campo Obrigatório'),
   photos: yup

@@ -33,11 +33,9 @@ const DashboardPage = () => {
     callEditUser,
   } = useContext(ModalsContext);
 
-  
-  useEffect(() => {  
+  useEffect(() => {
     window.scroll(0, 0);
-  }, [])
-
+  }, []);
 
   return (
     <StyledContainerPage>
