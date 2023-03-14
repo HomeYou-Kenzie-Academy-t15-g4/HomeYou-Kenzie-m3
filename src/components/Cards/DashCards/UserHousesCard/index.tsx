@@ -31,6 +31,12 @@ const HouseDashCard = () => {
 
   const showSection = screenWidth > 900;
 
+  const houseReserves = (houseId: string) => {
+    return housesRent.filter(
+      (rent) => rent.house.id.toString() == houseId.toString()
+    ).length;
+  };
+
   return (
     <UserHousesSection>
       <div className='title-box'>
@@ -83,7 +89,9 @@ const HouseDashCard = () => {
                 Reservas ativas:
               </StyledParagraph>
               <StyledParagraph $fontColor='grey' $fontWeight='three'>
-                {userRents.length}
+                {houseReserves(
+                  house?.id !== undefined ? house.id.toString() : ''
+                )}
               </StyledParagraph>
             </div>
           </li>

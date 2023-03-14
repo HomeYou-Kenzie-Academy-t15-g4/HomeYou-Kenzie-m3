@@ -19,7 +19,9 @@ const Header = () => {
   return (
     <StyledHeader>
       <div className='logo-box'>
+        <Link to={'/'}>
         <img src={imgLogo} alt='logo' />
+        </Link>
       </div>
       <nav ref={navRef}>
         <Link to={'/'}>

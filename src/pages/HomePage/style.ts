@@ -5,7 +5,7 @@ const StyledSectionHomePage = styled.main`
   height: 100vh;
 
   .home-section {
-    padding-top: 70px;
+    padding-top: 80px;
 
     .bg-box {
       background: ${({ theme }) => theme.colors.grey00};
