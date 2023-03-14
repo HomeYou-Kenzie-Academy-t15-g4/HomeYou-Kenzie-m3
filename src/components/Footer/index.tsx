@@ -34,7 +34,7 @@ const Footer = () => {
           </DevLink>
 
           <DevLink
-            href='https://github.com/PONGSU'
+            href='https://www.linkedin.com/in/gabriel-maciel-5600a6246/'
             target='_blank'
             rel='noopener noreferrer'
           >

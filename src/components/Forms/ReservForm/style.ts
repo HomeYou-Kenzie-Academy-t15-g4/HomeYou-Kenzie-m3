@@ -46,6 +46,12 @@ export const StyledReservForm = styled.form`
       border-radius: 20px;
     }
   }
+  .reservFormErrors{
+    margin-top: -20px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+  }
 
   .reservButton {
     border-radius: 20px;
