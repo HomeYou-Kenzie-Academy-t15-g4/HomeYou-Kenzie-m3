@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { HousesContext } from '../../../providers/HousesContext';
-import Select from 'react-select';
+import Select, { ActionMeta, SingleValue } from 'react-select';
 import SelectCalendar from '../../StyledCalendar';
 import { ModalsContext } from '../../../providers/ModalsContext';
 import Modal from '../../Modal';
@@ -16,10 +16,12 @@ import HorizontalSpacer from '../../SectionSpacers/HorizontalSpacer';
 
 interface IReserveForm {
   rentedDays: Date[];
+  guestNumber: string;
 }
 
 export const ReserveFormSchema = yup.object().shape({
   rentedDays: yup.array().required('Selecione a Data'),
+  guestNumber: yup.string().required('Informe os hospedes'),
 });
 
 const ReservForm = () => {
@@ -42,8 +44,11 @@ const ReservForm = () => {
   } = useContext(ModalsContext);
   const { user } = useContext(UserContext);
   const [days, setDays] = useState(0);
+  const [optionsGuest, setOptionsGuest] =
+    useState<SingleValue<string | { value: string; label: string }>>();
   const userAuxString = localStorage.getItem('@HomeYou:User');
   const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
+  const options = [{ value: '1', label: '1  hospede' }];
   let optionsNumber = 1;
 
   const capacity =
@@ -71,9 +76,10 @@ const ReservForm = () => {
     }
   }, [selectedDate]);
 
-  const submit: SubmitHandler<IReserveForm> = ({ rentedDays }) => {
+  const submit: SubmitHandler<IReserveForm> = ({ rentedDays, guestNumber }) => {
     const data: IReserve = {
       rentedDays,
+      guestNumber,
       userId: userAux.id,
       rentPrice: selectedHouse?.dailyPrice
         ? selectedHouse.dailyPrice * days * 0.02 +
@@ -98,8 +104,6 @@ const ReservForm = () => {
     }
   };
 
-  const options = [{ value: '1', label: '1  hospede' }];
-
   while (optionsNumber < capacity) {
     optionsNumber++;
     options.push({
@@ -108,9 +112,35 @@ const ReservForm = () => {
     });
   }
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const tempOptionsGuest = options.find(
+        (option) => option.value == selectedRent?.guestNumber
+      );
+
+      setOptionsGuest(tempOptionsGuest);
+    }, 1);
+
+    return () => clearTimeout(timeout);
+  }, [selectedRent]);
+
   const openCalendar = () => {
     window.scroll(0, 0);
     setIsOpenCalendar(true);
+  };
+
+  const uptadeGuestNumber = (
+    newValue: SingleValue<string | { value: string; label: string }>,
+    actionMeta: ActionMeta<string | { value: string; label: string }>
+  ) => {
+    if (typeof newValue === 'string') {
+      setValue('guestNumber', newValue);
+    } else {
+      setValue('guestNumber', newValue?.value ?? '');
+    }
+    clearErrors('guestNumber');
+
+    setOptionsGuest(newValue);
   };
 
   return (
@@ -256,6 +286,8 @@ const ReservForm = () => {
           styles={reactSelectReservStyle}
           placeholder='Quantos hóspedes?'
           options={options}
+          onChange={uptadeGuestNumber}
+          value={optionsGuest}
         />
       </div>
       {errors.rentedDays && (

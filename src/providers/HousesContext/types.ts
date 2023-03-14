@@ -42,6 +42,7 @@ export interface IReserve {
   formData?: any;
   id?: number;
   userId?: number;
+  guestNumber: string;
   rentPrice: number;
   rentedDays: Date[];
   guest: IGuest;
@@ -55,6 +56,7 @@ export interface IRent {
   rentedDays: string[];
   rentPrice: number;
   id: number;
+  guestNumber?: string;
 }
 
 export interface IHouseRent {
