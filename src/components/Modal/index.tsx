@@ -4,14 +4,15 @@ import StyledModal from './style';
 import { MdClose } from 'react-icons/md';
 import { useContext } from 'react';
 import { ModalsContext } from '../../providers/ModalsContext';
-import { StyledTitle } from '../../styles/typograthy';
+import { StyledCaption, StyledTitle } from '../../styles/typograthy';
 
 interface IModalProps {
   children: React.ReactNode;
   title: string;
+  price?: string;
 }
 
-const Modal = ({ children, title }: IModalProps) => {
+const Modal = ({ children, title, price }: IModalProps) => {
   const { isOpen, isOpenCalendar, closeModal, closeModalCalendar } =
     useContext(ModalsContext);
 
@@ -27,12 +28,26 @@ const Modal = ({ children, title }: IModalProps) => {
       <StyledModal className='box' role={'dialog'}>
         <div className='inside'>
           <header>
+            {price && (
+              <span className='createReserv'>
+                <StyledTitle
+                  tag='h3'
+                  $fontColor='greyBold'
+                  $fontSize='three'
+                  $textAlign='left'
+                >
+                  R${price}
+                </StyledTitle>
+                <StyledCaption className='modal-sub-title'>noite</StyledCaption>
+              </span>
+            )}
             <StyledTitle
               $fontSize='two'
               children={title}
               tag='h3'
               className='s'
             ></StyledTitle>
+
             <MdClose
               onClick={() =>
                 isOpenCalendar ? closeModalCalendar() : closeModal()

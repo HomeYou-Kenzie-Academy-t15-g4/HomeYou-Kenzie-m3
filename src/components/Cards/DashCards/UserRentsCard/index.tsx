@@ -56,7 +56,7 @@ const UserRentsCards = () => {
             $buttonSize='short'
             $buttonStyle='primary'
             type='button'
-            onClick={() => callManageReserve()}
+            onClick={() => navigate('/')}
           >
             Agendar viagem
           </StyledButton>
@@ -166,7 +166,7 @@ const UserRentsCards = () => {
             $buttonSize='short'
             $buttonStyle='primary'
             type='button'
-            onClick={() => callManageReserve()}
+            onClick={() => navigate('/')}
           >
             Agendar viagem
           </StyledButton>
