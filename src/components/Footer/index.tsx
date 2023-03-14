@@ -54,7 +54,7 @@ const Footer = () => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <StyledCaption>Gustavo Carrão</StyledCaption>
+            <StyledCaption>Gustavo Carraro</StyledCaption>
           </DevLink>
         </Devs>
       </div>
