@@ -51,7 +51,9 @@ export const ModalsProvider = ({ children }: IModalsProviderProps) => {
   };
 
   const closeModal = () => {
-    setSelectedHouse(null);
+    if (window.location.pathname !== '/houses') {
+      setSelectedHouse(null);      
+    }
     setLoadValues(defaultNoValues);
     setIsOpen(false);
     setIsUserModal(false);
