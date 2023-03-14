@@ -56,7 +56,7 @@ export const UserHousesSection = styled.section`
     min-width: 250px;
     max-width: 80%;
     margin-bottom: 20px;
-    min-height: 320px;
+    height: 330px;
     gap: 13px;
     cursor: pointer;
     background-color: ${({ theme }) => theme.colors.grey100};

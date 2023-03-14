@@ -5,7 +5,6 @@ import {
   CommentsSection,
   StyledContainerCardComment,
   StyledInfoUserComment,
-  StyledPNameComment,
 } from './style';
 import {
   StyledCaption,
