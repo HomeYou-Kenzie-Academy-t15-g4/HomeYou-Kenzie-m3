@@ -15,7 +15,7 @@ export interface IHouse {
   photos: string[];
   city: string;
   state: string;
-  daylyPrice: number;
+  dailyPrice: number;
   services: string[];
   accommodation: IAccommodation;
   houseDesc: string;
@@ -93,7 +93,7 @@ export interface InoDefaultValue {
   photos: null;
   state: null;
   city: null;
-  daylyPrice: undefined;
+  dailyPrice: undefined;
   singleBed: undefined;
   doubleBed: undefined;
   services: null;

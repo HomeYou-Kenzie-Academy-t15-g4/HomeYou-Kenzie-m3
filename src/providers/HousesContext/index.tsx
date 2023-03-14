@@ -106,7 +106,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         photos: dataHouse.photos,
         city: dataHouse.city,
         state: dataHouse.state,
-        daylyPrice: dataHouse.daylyPrice,
+        dailyPrice: dataHouse.dailyPrice,
         accommodation: {
           beds: dataHouse.singleBed,
           doubleBeds: dataHouse.doubleBed,
@@ -149,7 +149,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         })),
         state: response.data?.state,
         city: response.data?.city,
-        daylyPrice: response.data?.daylyPrice,
+        dailyPrice: response.data?.dailyPrice,
         singleBed: response.data?.accommodation.beds,
         doubleBed: response.data?.accommodation.doubleBeds,
         services: response.data?.services.map((service: string) => service),
@@ -177,7 +177,7 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
         photos: dataHouse.photos,
         city: dataHouse.city,
         state: dataHouse.state,
-        daylyPrice: dataHouse.daylyPrice,
+        dailyPrice: dataHouse.dailyPrice,
         accommodation: {
           beds: dataHouse.singleBed,
           doubleBeds: dataHouse.doubleBed,
