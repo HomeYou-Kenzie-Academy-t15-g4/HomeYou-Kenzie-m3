@@ -1,6 +1,4 @@
 import { useContext, useState, useEffect } from 'react';
-import { CiEdit } from 'react-icons/ci';
-
 import { HousesContext } from '../../../../providers/HousesContext';
 import { UserContext } from '../../../../providers/UserContext';
 import { ModalsContext } from '../../../../providers/ModalsContext';
@@ -76,7 +74,9 @@ const HouseDashCard = () => {
             </div>
 
             <div className='image-box'>
-              <img src={house.photos[0]} alt={house.name} />
+              {Array.isArray(house.photos) && house.photos.length > 0 && (
+                <img src={house.photos[0]} alt={house.name} />
+              )}
             </div>
 
             <div className='reserve-box'>
