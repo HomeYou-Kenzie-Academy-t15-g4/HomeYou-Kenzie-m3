@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import { HousesContext } from '../../providers/HousesContext';
 import { ModalsContext } from '../../providers/ModalsContext';
-import { UserContext } from '../../providers/UserContext';
 import { StyledCalendar } from './style';
 
 const SelectCalendar = () => {

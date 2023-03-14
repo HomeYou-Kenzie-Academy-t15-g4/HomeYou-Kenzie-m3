@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import HouseCard from '../../components/Cards/HouseCard';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -10,7 +10,6 @@ import homeBg from '../../assets/home-bg.svg';
 
 const HomePage = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const galleryRef = useRef(null);
 
   useEffect(() => {
     window.scroll(0, 0);

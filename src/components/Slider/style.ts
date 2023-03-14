@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Swiper, SwiperProps } from 'swiper/react';
+import { Swiper } from 'swiper/react';
 
 const StyledSlider = styled(Swiper)`
   @media only screen and (max-width: 800px) {

@@ -258,7 +258,11 @@ const ReservForm = () => {
           options={options}
         />
       </div>
-      {errors.rentedDays?.message}
+      {errors.rentedDays && (
+        <StyledParagraph $fontColor='red' $textAlign='left'>
+          {errors.rentedDays.message}
+        </StyledParagraph>
+      )}
       {deleteButton ? null : (
         <StyledButton
           className='reservButton'
