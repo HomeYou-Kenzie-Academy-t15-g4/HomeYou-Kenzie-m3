@@ -122,7 +122,6 @@ const ReservForm = () => {
     ) as Date[];
     setValue('rentedDays', tempDates);
     setValue('guestNumber', tempOptionsGuest?.value ?? '');
-    
   }, [selectedHouse]);
 
   const openCalendar = () => {

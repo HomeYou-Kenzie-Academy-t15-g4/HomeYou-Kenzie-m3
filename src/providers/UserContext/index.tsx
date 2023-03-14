@@ -121,9 +121,10 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       setUser(res.data.user);
       navigate('/dashboard');
     } catch (error: any) {
-      if (error.response.data === 'Incorrect password') {
+      if (error.response.data === 'Incorrect password' || 'Cannot find user') {
         toast.error('Email e/ou senha incorretos');
       } else {
+        console.error(error);
         toast.error('Algo deu errado :(');
       }
     } finally {

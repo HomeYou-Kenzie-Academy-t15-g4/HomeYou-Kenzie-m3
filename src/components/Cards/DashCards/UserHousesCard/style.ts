@@ -29,6 +29,7 @@ export const UserHousesSection = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 40px;
 
     margin-bottom: 30px;
     width: 100%;
