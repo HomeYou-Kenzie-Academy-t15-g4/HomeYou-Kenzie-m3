@@ -81,7 +81,7 @@ export const reactSelectReservStyle = {
     letterSpacing: '0.00938em',
     borderRadius: '0 0 20px 20px',
     minHeight: '60px',
-    maxWidth: '74vw',
+    width: '280px',
     borderColor: 'rgba(0, 0, 0, 0.87)',
     color: 'rgba(0, 0, 0, 0.4)',
     cursor: 'text',
