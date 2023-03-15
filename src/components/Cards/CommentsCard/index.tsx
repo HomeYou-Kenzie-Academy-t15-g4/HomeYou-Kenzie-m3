@@ -27,11 +27,11 @@ const CommentsCard = () => {
                 <StyledInfoUserComment>
                   <img src={comentarios.img} alt='Imagem usuario' />
                   <div className='contentBox'>
-                      <StyledTitle
-                        $fontSize='two'
-                        children={comentarios.name}
-                        tag='h3'
-                      ></StyledTitle>
+                    <StyledTitle
+                      $fontSize='two'
+                      children={comentarios.name}
+                      tag='h3'
+                    ></StyledTitle>
                     <StyledCaption>{comentarios.date}</StyledCaption>
                   </div>
                 </StyledInfoUserComment>
