@@ -119,7 +119,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
       localStorage.setItem('@HomeYou:User', JSON.stringify(res.data.user));
       setUser(res.data.user);
-      navigate('/dashboard');
+      navigate('/');
     } catch (error: any) {
       if (error.response.data === 'Incorrect password' || 'Cannot find user') {
         toast.error('Email e/ou senha incorretos');
