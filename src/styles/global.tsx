@@ -1,10 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-  html{
-    /* overflow-y: hidden; */
-  }
-
   ::-webkit-scrollbar{
     width: 10px;
     background-color: rgba(0, 0, 0, 0.13);
