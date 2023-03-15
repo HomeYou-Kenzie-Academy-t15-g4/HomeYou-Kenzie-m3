@@ -1,5 +1,5 @@
 <h1 align='center'>
-  <img src='./src/assets/logo.svg'>
+  <img src='./src/assets/logo.svg'> <a href='https://home-you-kenzie-m3.vercel.app'>Acesse o site</a>
   
   <p>Bem-vindo à sua casa longe de casa 🏡</p>
 <h1>
