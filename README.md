@@ -6,7 +6,7 @@
 
 ## 🚩 Entenda o Projeto
 
-Resultado do trabalho de conclusão do curso de Front-End da Kenzie Academy Brasil. Uma plataforma intuitiva, ágil e responsiva.
+Resultado do trabalho de conclusão do curso de Front-End da Kenzie Academy Brasil. Uma plataforma intuitiva, ágil e responsiva onde o usuario pode se cadastrar, fazer login, acessar o acervo de casas e datas disponíveis, cadastrar, editar, deletar casas que possui e realizar, editar ou cancelar reservas.
 
 A proposta era criar uma aplicação React e para isso fomos separados pela Kenzie em em um grupo com os 5 devs responsáveis pelo projeto. A tarefa era configurar uma Mock API com o Json-Server usando React, Javascript, Typescript, CSS e HTML para desenvolver a aplicação.
 
