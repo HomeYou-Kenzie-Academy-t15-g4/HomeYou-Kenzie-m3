@@ -17,13 +17,13 @@ export const StyledLoginPage = styled.main`
     align-items: center;
     flex-direction: column;
 
-    button{
+    button {
       border-radius: 49px;
       background-color: ${({ theme }) => theme.colors.grey00};
       color: ${({ theme }) => theme.colors.secondary};
     }
 
-    .asside-home-link{
+    .asside-home-link {
       z-index: 10;
       position: absolute;
       margin-top: -534px;
@@ -63,25 +63,27 @@ export const StyledLoginPage = styled.main`
     justify-content: center;
 
     padding: 40px;
-    width: 430px;
-    max-width: 95%;
+    min-width: 280px;
+    max-width: 280px;
 
-    .form-title{
+    @media (min-width: 400px) {
+      max-width: 96%;
+    }
+    .form-title {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      h3{
+      h3 {
         width: fit-content;
       }
-      div{
+      div {
         display: flex;
         gap: 7px;
       }
-      .form-home-link{
-        
+      .form-home-link {
         cursor: pointer;
         text-decoration: underline;
-        text-underline-offset: 2px
+        text-underline-offset: 2px;
       }
     }
 
