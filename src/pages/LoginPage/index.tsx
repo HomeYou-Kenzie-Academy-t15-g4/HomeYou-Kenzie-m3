@@ -34,6 +34,7 @@ const LoginPage = () => {
       )}
       <div className='login-box'>
         <img src={logo} alt='' />
+
         <section className='form-section'>
           <div className='text-container'>
             <StyledParagraph $fontColor='grey'>Bem vindo</StyledParagraph>
