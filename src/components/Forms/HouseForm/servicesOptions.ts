@@ -1,8 +1,3 @@
-export interface IservicesOptions {
-  value: string;
-  label: string;
-}
-
 export const servicesOptions = [
   { value: 'Wi-Fi', label: 'Wi-Fi' },
   { value: 'Cozinha', label: 'Cozinha' },

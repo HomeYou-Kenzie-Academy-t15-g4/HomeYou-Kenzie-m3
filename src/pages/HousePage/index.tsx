@@ -1,25 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react';
+import Skeleton from '@mui/material/Skeleton';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { HousesContext } from '../../providers/HousesContext';
 import { ModalsContext } from '../../providers/ModalsContext';
+import { UserContext } from '../../providers/UserContext';
+
 import CommentsCard from '../../components/Cards/CommentsCard';
 import Header from '../../components/Header';
 import IconsMatch from '../../components/IconsMatch';
 import Modal from '../../components/Modal';
 import SectionSpacer from '../../components/SectionSpacers/VerticalSpacer';
 import { CardSlider } from '../../components/Slider/carrousels/CardCarrousel';
+import Ratinng from '../../components/Rating';
+import LikeButton from '../../components/LikeButton';
+import ReservForm from '../../components/Forms/ReservForm';
+
 import { StyledButton } from '../../styles/button';
 import { StyledCaption, StyledTitle } from '../../styles/typograthy';
 import { Container } from '../../styles/global';
 import { StyledHousePage, StyledRatingBox } from './style';
-import Ratinng from '../../components/Rating';
-import Skeleton from '@mui/material/Skeleton';
-import { UserContext } from '../../providers/UserContext';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import ReservForm from '../../components/Forms/ReservForm';
-import LikeButton from '../../components/LikeButton';
 
 const HousePage = () => {
   const { loading } = useContext(UserContext);
@@ -158,7 +160,7 @@ const HousePage = () => {
                     Reservar
                   </StyledButton>
                 ) : (
-                  <Link to={'/login'}>
+                  <Link onClick={() => toast.info('Você precisa estar logado para fazer uma reserva')} to={'/login'}>
                     <StyledButton
                       type='button'
                       $buttonSize='short'

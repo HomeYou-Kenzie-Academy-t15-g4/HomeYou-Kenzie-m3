@@ -1,9 +1,10 @@
 import { useContext } from 'react';
+
 import { Slider, Slide, SliderProps } from '../';
 import { HousesContext } from '../../../providers/HousesContext';
 
 export function CardSlider({}) {
-  const { selectedHouse, loadOneHouse } = useContext(HousesContext);
+  const { selectedHouse } = useContext(HousesContext);
   const settings: SliderProps = {
     spaceBetween: 50,
     navigation: true,

@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { CgSpinnerTwo } from 'react-icons/cg';
+
 import { ModalsContext } from '../../../providers/ModalsContext';
 import { UserContext } from '../../../providers/UserContext';
 import { IUser } from '../../../providers/UserContext/type';
@@ -7,7 +9,6 @@ import { StyledButton } from '../../../styles/button';
 import { StyledForm } from '../../../styles/form';
 import Input from '../Input';
 import StyledFormEditUserPic from './style';
-import { CgSpinnerTwo } from 'react-icons/cg';
 
 const EditUser = () => {
   const { editUser, loading } = useContext(UserContext);

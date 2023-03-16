@@ -1,15 +1,11 @@
 import { useContext, useState, useEffect } from 'react';
+
 import { HousesContext } from '../../../../providers/HousesContext';
 import { UserContext } from '../../../../providers/UserContext';
 import { ModalsContext } from '../../../../providers/ModalsContext';
 import buttonAdd from '../../../../assets/buttonAdd.svg';
-
 import { StyledButton } from '../../../../styles/button';
-import {
-  StyledCaption,
-  StyledParagraph,
-  StyledTitle,
-} from '../../../../styles/typograthy';
+import { StyledCaption, StyledParagraph, StyledTitle } from '../../../../styles/typograthy';
 import { UserHousesSection } from './style';
 
 const HouseDashCard = () => {
@@ -19,10 +15,7 @@ const HouseDashCard = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const userHouses = housesList.filter((house) => house.userId == user?.id);
-  const userRents = userHouses.filter((house) =>
-    housesRent.some((rent) => rent.house.id === house.id)
-  );
-
+  
   useEffect(() => {
     const handleReSize = () => setScreenWidth(window.innerWidth);
     window.addEventListener('resize', handleReSize);

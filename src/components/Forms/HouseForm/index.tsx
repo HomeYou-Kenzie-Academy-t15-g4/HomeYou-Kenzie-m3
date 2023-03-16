@@ -3,26 +3,11 @@ import { ActionMeta, MultiValue } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Theme, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import { SelectChangeEvent } from '@mui/material/Select';
-import {
-  Box,
-  Checkbox,
-  Chip,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  Select,
-} from '@mui/material';
+import { Box, Checkbox, Chip, FormControl, InputLabel, MenuItem, OutlinedInput, Select} from '@mui/material';
 
-import {
-  MenuProps,
-  reactSelectStyle,
-  StyledForm,
-  StyleMuiSelector,
-  StyleMuiSelectorMidWidth,
-} from './style';
+import { getStyles, MenuProps, reactSelectStyle, StyledForm, StyleMuiSelector, StyleMuiSelectorMidWidth } from './style';
 import { defaultNoValues, servicesOptions } from './servicesOptions';
 import SelectState from '../../Selects/SelectState';
 import SelectCity from '../../Selects/SelectCity';
@@ -33,15 +18,6 @@ import HouseInput from './HouseInput';
 import { StyledParagraph } from '../../../styles/typograthy';
 import IconsMatch from '../../IconsMatch';
 import { houseSchema } from './validations';
-
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
 
 const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
   const theme = useTheme();
@@ -61,13 +37,7 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
     }
   }, [loadValues]);
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    clearErrors,
-    formState: { errors },
-  } = useForm<IHouseForm>({
+  const { register, handleSubmit, setValue, clearErrors, formState: { errors }, } = useForm<IHouseForm>({
     resolver: yupResolver(houseSchema as any),
   });
 
@@ -117,8 +87,7 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
   }, [selectedCity]);
 
   const handleChangePhotos = (
-    newValue: MultiValue<{ value: string; label: string } | null>,
-    actionMeta: ActionMeta<{ value: string; label: string } | null>
+    newValue: MultiValue<{ value: string; label: string } | null>
   ) => {
     setStopUpdate(true);
     let values: string[] = [];
@@ -145,38 +114,23 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
   };
 
   const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoadValues({
-      ...loadValues,
-      name: e.target.value,
-    });    
+    setLoadValues({ ...loadValues, name: e.target.value, });    
     clearErrors('name');
   };
   const changePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoadValues({
-      ...loadValues,
-      dailyPrice: Number(e.target.value),
-    });
+    setLoadValues({ ...loadValues, dailyPrice: Number(e.target.value), });
     clearErrors('dailyPrice');
   };
   const changeBeds = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoadValues({
-      ...loadValues,
-      singleBed: Number(e.target.value),
-    });
+    setLoadValues({ ...loadValues, singleBed: Number(e.target.value),  });
     clearErrors('singleBed');
   };
   const changeDoubleBeds = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoadValues({
-      ...loadValues,
-      doubleBed: Number(e.target.value),
-    });
+    setLoadValues({ ...loadValues, doubleBed: Number(e.target.value), });
     clearErrors('doubleBed');
   };
   const changeHouseDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setLoadValues({
-      ...loadValues,
-      houseDesc: e.target.value,
-    });
+    setLoadValues({ ...loadValues, houseDesc: e.target.value, });
     clearErrors('houseDesc');
   };
 
@@ -325,7 +279,6 @@ const HouseForm = ({ submitFunction, children }: IHouseFormProps) => {
           </StyledParagraph>
         ) : null}
       </FormControl>
-
       <HouseInput
         value={loadValues.houseDesc}
         onChange={changeHouseDesc}

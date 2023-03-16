@@ -91,6 +91,25 @@ export const StyledHousePage = styled.main`
     gap: 7px;
   }
 
+  @media (min-width: 1400px) {
+    .infoSection,
+    .servicesBox {
+      max-width: 100%;
+      article {
+        max-width: 100%;
+        ul li span {
+          font-size: 16px;
+        }
+      }
+    }
+    .detailsTextBox span {
+      font-size: 16px;
+    }
+    .mainTitle {
+      font-size: 16px;
+    }
+  }
+
   .iconBox {
     width: 20px;
     height: 20px;
@@ -139,7 +158,6 @@ export const StyledHousePage = styled.main`
     .infoSection article {
       width: 288px;
       max-width: 288px;
-      
     }
   }
 
@@ -157,12 +175,12 @@ export const StyledHousePage = styled.main`
         }
       }
     }
-    .servicesBox{
-        width: 100%;
+    .servicesBox {
+      width: 100%;
     }
     .infoSection article {
-        min-width: 80%;
-      
+      min-width: 80%;
+
       div {
         width: 100%;
       }

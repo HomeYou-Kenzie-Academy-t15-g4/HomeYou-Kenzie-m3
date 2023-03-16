@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import HouseCard from '../../components/Cards/HouseCard';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -60,9 +61,11 @@ const HomePage = () => {
             </Container>
           </div>
         </section>
-        <section id='houseGallery'>
-          <Container>
-            <StyledTitle
+        <section >
+          <Container id='houseGallery'>
+            <StyledTitle 
+             
+              className='galeryTitle'
               $textAlign='center'
               $fontSize='two'
               $fontColor='greyBold'

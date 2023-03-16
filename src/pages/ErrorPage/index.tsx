@@ -1,7 +1,8 @@
-import imgLogo from '../../assets/notfound.svg';
-import { Link, useNavigate } from 'react-router-dom';
-import StyledDivNotFound from './style';
 import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+import imgLogo from '../../assets/notfound.svg';
+import StyledDivNotFound from './style';
 import { StyledTitle } from '../../styles/typograthy';
 import { StyledButton } from '../../styles/button';
 

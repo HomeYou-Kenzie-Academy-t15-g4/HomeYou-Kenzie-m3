@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+
 import BaseText from './components/BaseText';
 
 interface IStyledTitleProps {

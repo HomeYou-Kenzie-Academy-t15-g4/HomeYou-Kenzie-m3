@@ -1,25 +1,11 @@
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
 import { createContext, useEffect, useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import {
-  IHouse,
-  IHousesContext,
-  IHousesProviderProps,
-  InoDefaultValue,
-  IRent,
-  IReserve,
-} from './types';
-import {
-  IDefaultHouseFormValues,
-  IHouseForm,
-} from '../../components/Forms/HouseForm/types';
-import {
-  defaultHouseFormValues,
-  defaultNoValues,
-} from '../../components/Forms/HouseForm/servicesOptions';
 import { UserContext } from '../UserContext';
+import { IHouse, IHousesContext, IHousesProviderProps, InoDefaultValue, IRent, IReserve} from './types';
+import { IDefaultHouseFormValues, IHouseForm} from '../../components/Forms/HouseForm/types';
+import { defaultHouseFormValues, defaultNoValues} from '../../components/Forms/HouseForm/servicesOptions';
 
 export const HousesContext = createContext<IHousesContext>(
   {} as IHousesContext
@@ -39,8 +25,6 @@ export const HousesProvider = ({ children }: IHousesProviderProps) => {
   const [searchText, setSearchText] = useState<string>('');
   const [loadValues, setLoadValues] =
     useState<IDefaultHouseFormValues>(defaultNoValues);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const filter = housesList.filter(

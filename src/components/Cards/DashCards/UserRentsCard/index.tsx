@@ -1,16 +1,12 @@
 import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { HousesContext } from '../../../../providers/HousesContext';
 import { ModalsContext } from '../../../../providers/ModalsContext';
 import { UserContext } from '../../../../providers/UserContext';
 import { StyledButton } from '../../../../styles/button';
 import buttonAdd from '../../../../assets/buttonAdd.svg';
-
-import {
-  StyledCaption,
-  StyledParagraph,
-  StyledTitle,
-} from '../../../../styles/typograthy';
+import { StyledCaption, StyledParagraph, StyledTitle } from '../../../../styles/typograthy';
 import { UserRentsSection } from './style';
 
 const UserRentsCards = () => {

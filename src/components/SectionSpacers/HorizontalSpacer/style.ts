@@ -6,8 +6,4 @@ export const StyledHorizontalSpacer = styled.div`
   height: 2px;
   border-radius: 20px;
   background: ${({ theme }) => theme.colors.grey100};
-
-  /* @media (min-width: 720px) {
-    display: block;
-  } */
 `;

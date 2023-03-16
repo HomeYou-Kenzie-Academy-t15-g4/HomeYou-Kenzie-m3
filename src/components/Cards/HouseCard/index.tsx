@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { HousesContext } from '../../../providers/HousesContext';
 import { IHouse } from '../../../providers/HousesContext/types';
 import { StyledParagraph } from '../../../styles/typograthy';

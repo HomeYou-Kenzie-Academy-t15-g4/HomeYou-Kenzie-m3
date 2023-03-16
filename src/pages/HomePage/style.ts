@@ -26,6 +26,10 @@ const StyledSectionHomePage = styled.main`
     }
   }
 
+  .galeryTitle{
+    margin: 10px 0 40px 0;
+  }
+
   @media (min-width: 800px) {
     .home-section {
       .bg-box {
