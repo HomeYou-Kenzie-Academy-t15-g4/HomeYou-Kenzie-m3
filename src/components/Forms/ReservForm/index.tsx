@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { HousesContext } from '../../../providers/HousesContext';
 import Select, { ActionMeta, SingleValue } from 'react-select';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+import { HousesContext } from '../../../providers/HousesContext';
 import SelectCalendar from '../../StyledCalendar';
 import { ModalsContext } from '../../../providers/ModalsContext';
 import Modal from '../../Modal';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { IReserve } from '../../../providers/HousesContext/types';
-import * as yup from 'yup';
 import { UserContext } from '../../../providers/UserContext';
 import { reactSelectReservStyle, StyledReservForm } from './style';
 import { StyledParagraph, StyledTitle } from '../../../styles/typograthy';
@@ -42,26 +43,22 @@ const ReservForm = () => {
     closeModal,
     setCalendarValue,
     isOpen,
-  } = useContext(ModalsContext);
+  } = useContext(ModalsContext);  
   const { user } = useContext(UserContext);
+
   const [days, setDays] = useState(0);
-  const [optionsGuest, setOptionsGuest] =
-    useState<SingleValue<string | { value: string; label: string }>>();
+  const [optionsGuest, setOptionsGuest] = useState<SingleValue<string | { value: string; label: string }>>();
   const userAuxString = localStorage.getItem('@HomeYou:User');
   const userAux = userAuxString !== null ? JSON.parse(userAuxString) : null;
   const options = [{ value: '1', label: '1  hospede' }];
+
   let optionsNumber = 1;
 
   const capacity =
     Number(selectedHouse?.accommodation?.beds) +
     2 * Number(selectedHouse?.accommodation?.doubleBeds);
 
-  const {
-    handleSubmit,
-    setValue,
-    clearErrors,
-    formState: { errors },
-  } = useForm<IReserveForm>({
+  const { handleSubmit, setValue, clearErrors, formState: { errors } } = useForm<IReserveForm>({
     resolver: yupResolver(ReserveFormSchema as any),
   });
 
@@ -142,8 +139,7 @@ const ReservForm = () => {
   };
 
   const uptadeGuestNumber = (
-    newValue: SingleValue<string | { value: string; label: string }>,
-    actionMeta: ActionMeta<string | { value: string; label: string }>
+    newValue: SingleValue<string | { value: string; label: string }>
   ) => {
     if (typeof newValue === 'string') {
       setValue('guestNumber', newValue);

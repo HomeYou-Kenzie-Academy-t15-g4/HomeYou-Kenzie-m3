@@ -41,3 +41,8 @@ export interface IHouseFormProps {
   submitFunction: (dataHouse: IHouseForm) => Promise<void>;
   defaultHouseFormValues?: IDefaultHouseFormValues;
 }
+
+export interface IservicesOptions {
+  value: string;
+  label: string;
+}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Lottie from 'react-lottie';
+
 import { StyledLikeButton } from './style';
 import animationData from './likeAnimation.json';
 

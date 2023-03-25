@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import LoginForm from '../../components/Forms/LoginForm';
-import { StyledParagraph, StyledTitle } from '../../styles/typograthy';
-import { StyledLoginPage } from './style';
 import loginImg from '../../assets/login-asside-img.svg';
 import logo from '../../assets/HomeYou.svg';
-import { Link } from 'react-router-dom';
 import { StyledButton } from '../../styles/button';
+import { StyledParagraph, StyledTitle } from '../../styles/typograthy';
+import { StyledLoginPage } from './style';
 
 const LoginPage = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);

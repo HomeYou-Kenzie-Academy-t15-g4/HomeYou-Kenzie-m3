@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import StyledModal from './style';
-
+import React, { useEffect, useContext } from 'react';
 import { MdClose } from 'react-icons/md';
-import { useContext } from 'react';
+
+import StyledModal from './style';
 import { ModalsContext } from '../../providers/ModalsContext';
 import { StyledCaption, StyledTitle } from '../../styles/typograthy';
 
@@ -58,9 +57,9 @@ const Modal = ({ children, title, price }: IModalProps) => {
         </div>
       </StyledModal>
     );
+  }else {
+    return null;
   }
-
-  return null;
 };
 
 export default Modal;

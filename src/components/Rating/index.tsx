@@ -1,6 +1,7 @@
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
-import React, { useState } from 'react';
+
 import StyledDivRating from './style';
 import { StyledParagraph } from '../../styles/typograthy';
 

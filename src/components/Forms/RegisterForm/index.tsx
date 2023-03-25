@@ -1,16 +1,16 @@
-import Input from '../Input';
-
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useContext, useState } from 'react';
+import { TextField } from '@mui/material';
+import { CgSpinnerTwo } from 'react-icons/cg';
+import { Link } from 'react-router-dom';
+
+import Input from '../Input';
 import { StyledButton } from '../../../styles/button';
 import { StyledForm } from '../../../styles/form';
-import { TextField } from '@mui/material';
 import { RegisterFormSchema } from './RegisterFormSchema';
 import { UserContext } from '../../../providers/UserContext';
 import { StyledParagraph } from '../../../styles/typograthy';
-import { CgSpinnerTwo } from 'react-icons/cg';
-import { Link } from 'react-router-dom';
 
 export interface IRegisterForm {
   name: string;

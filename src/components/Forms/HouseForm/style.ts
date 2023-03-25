@@ -1,3 +1,4 @@
+import { Theme } from '@mui/material/styles';
 import styled from 'styled-components';
 
 export const StyledForm = styled.form`
@@ -105,3 +106,13 @@ export const StyleMuiSelectorMidWidth = {
     },
   },
 };
+
+
+export function getStyles(name: string, personName: readonly string[], theme: Theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}

@@ -42,6 +42,7 @@ const StyledDivNotFound = styled.div`
       margin:  13px;
     }
   }
+  
   .insideBox{
     display: flex;
     width: 100%;

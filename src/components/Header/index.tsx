@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import StyledHeader from './style';
 import imgLogo from '../../assets/logo.svg';
-import { Link } from 'react-router-dom';
 import { UserContext } from '../../providers/UserContext';
 import { StyledButton } from '../../styles/button';
 import { StyledParagraph } from '../../styles/typograthy';

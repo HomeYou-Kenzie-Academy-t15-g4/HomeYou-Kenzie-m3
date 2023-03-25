@@ -11,7 +11,6 @@ import ManageHouseModal from '../../components/Modal/ManageHouseModal';
 import CreateHouseModal from '../../components/Modal/CreateHouseModal';
 import UserRentsCards from '../../components/Cards/DashCards/UserRentsCard';
 import { Container } from '../../styles/global';
-
 import UsserInfocard from '../../components/Cards/UserInfoCard';
 import ReservForm from '../../components/Forms/ReservForm';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { IComments } from './type';
 import face1 from '../../assets/face(1).jpeg';
 import face2 from '../../assets/face(2).jpeg';

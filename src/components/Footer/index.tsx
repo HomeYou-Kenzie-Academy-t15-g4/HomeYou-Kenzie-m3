@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { DevLink, Devs, Icon, StyledFooter } from './style';
 import icon from '../../assets/icon.svg';
 import { StyledCaption, StyledTitle } from '../../styles/typograthy';

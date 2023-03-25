@@ -1,6 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { CgSpinnerTwo } from 'react-icons/cg';
+
 import { UserContext } from '../../../providers/UserContext';
 import { StyledButton, StyledButtonLink } from '../../../styles/button';
 import { StyledForm } from '../../../styles/form';
@@ -8,7 +10,6 @@ import { StyledParagraph } from '../../../styles/typograthy';
 import Input from '../Input';
 import { LoginFormSchema } from './LoginFormSchema';
 import { ILoginFormValue } from './types';
-import { CgSpinnerTwo } from 'react-icons/cg';
 
 const LoginForm = () => {
   const { loginUser, loading } = useContext(UserContext);

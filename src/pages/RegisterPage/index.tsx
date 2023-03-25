@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import RegisterForm from '../../components/Forms/RegisterForm';
-import { StyledRegisterPage } from './style';
 import registerImg from '../../assets/register-asside-img.svg';
 import logo from '../../assets/HomeYou.svg';
-import { Link } from 'react-router-dom';
 import { StyledParagraph, StyledTitle } from '../../styles/typograthy';
+import { StyledRegisterPage } from './style';
 import { StyledButton } from '../../styles/button';
 
 const RegisterPage = () => {

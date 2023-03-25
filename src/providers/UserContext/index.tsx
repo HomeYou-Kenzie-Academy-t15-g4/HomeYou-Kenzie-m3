@@ -1,14 +1,10 @@
 import { createContext, useEffect, useState } from 'react';
-import {
-  ILoginFormValue,
-  IUser,
-  IUserContext,
-  IUserProviderProps,
-} from './type';
-import { api } from '../../services/api';
-import { IRegisterForm } from '../../components/Forms/RegisterForm';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+import { ILoginFormValue, IUser, IUserContext, IUserProviderProps } from './type';
+import { api } from '../../services/api';
+import { IRegisterForm } from '../../components/Forms/RegisterForm';
 
 export const UserContext = createContext({} as IUserContext);
 
@@ -91,6 +87,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
     if (newData.age < 18) {
       toast.error('É preciso ter mais de 18 anos para se cadastrar');
+      setLoading(false);
     } else {
       try {
         const res = await api.post('/users', newData);

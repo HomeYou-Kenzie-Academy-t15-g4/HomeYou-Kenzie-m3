@@ -1,14 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
+
 import DashboardPage from '../pages/Dashboard';
 import ErrorPage from '../pages/ErrorPage';
 import HomePage from '../pages/HomePage';
 import HousePage from '../pages/HousePage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
+import ProtectedRoute from './protectedRoute';
 import { HousesProvider } from '../providers/HousesContext';
 import { ModalsProvider } from '../providers/ModalsContext';
 import { UserProvider } from '../providers/UserContext';
-import ProtectedRoute from './protectedRoute';
 
 const Router = () => {
   return (

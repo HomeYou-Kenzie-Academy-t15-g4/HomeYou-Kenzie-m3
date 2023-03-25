@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import { toast } from 'react-toastify';
+
 import { HousesContext } from '../../providers/HousesContext';
 import { ModalsContext } from '../../providers/ModalsContext';
 import { StyledButton } from '../../styles/button';
-import { StyledCaption, StyledTitle } from '../../styles/typograthy';
+import { StyledTitle } from '../../styles/typograthy';
 import { StyledCalendar } from './style';
 
 const SelectCalendar = () => {
@@ -60,7 +61,6 @@ const SelectCalendar = () => {
         return date.getTime() === reservedDate.getTime();
       });
     });
-    console.log(hasCommonDate, 'hasCommonDate');
 
     if (hasCommonDate) {
       toast.warn('Período indisponível');

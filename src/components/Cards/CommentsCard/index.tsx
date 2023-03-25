@@ -1,16 +1,9 @@
 import React from 'react';
-import DataComments from '../../Comments';
 import _ from 'lodash';
-import {
-  CommentsSection,
-  StyledContainerCardComment,
-  StyledInfoUserComment,
-} from './style';
-import {
-  StyledCaption,
-  StyledParagraph,
-  StyledTitle,
-} from '../../../styles/typograthy';
+
+import DataComments from '../../Comments';
+import { CommentsSection, StyledContainerCardComment, StyledInfoUserComment } from './style';
+import { StyledCaption, StyledParagraph, StyledTitle } from '../../../styles/typograthy';
 import { Container } from '../../../styles/global';
 
 const CommentsCard = () => {
