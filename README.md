@@ -1,22 +1,24 @@
 <h1 align='center'>
-  <img src='./src/assets/logo.svg'>
-  
+  <img src='./src/assets/logo.svg'> 
   <p>Bem-vindo à sua casa longe de casa 🏡</p>
+  <a href='https://home-you-kenzie-m3.vercel.app'>Acesse o site</a>  
 <h1>
 
-## 🚩 Qual a solução que a aplicação traz ?
+## 🚩 Entenda o Projeto
 
-Concluímos com sucesso o projeto final do módulo três: Uma plataforma intuitiva, de fácil uso que traz a agilidade de encontrar propriedades para aluguel de curto prazo com preços bastante acessíveis.
+Resultado do trabalho de conclusão do curso de Front-End da Kenzie Academy Brasil. Uma plataforma intuitiva, ágil e responsiva onde o usuario pode se cadastrar, fazer login, acessar o acervo de casas e datas disponíveis, cadastrar, editar, deletar casas que possui e realizar, editar ou cancelar reservas.
 
-A plataforma oferece uma lista completa e detalhada das mais variadas casas para aluguel, permitindo que o usuário navegue facilmente pelas páginas, visualize as informações e reserve sua estadia com apenas alguns cliques.
+A proposta era criar uma aplicação React e para isso fomos separados pela Kenzie em em um grupo com os 5 devs responsáveis pelo projeto. A tarefa era configurar uma Mock API com o Json-Server usando React, Javascript, Typescript, CSS e HTML para desenvolver a aplicação.
 
-Com toda experiência já adquirida por nós ao longo do curso - em _React, Javascript, Typescript, CSS e HTML_ -, temos orgulho de poder aplicar os conceitos que aprendemos nas aulas para criar uma solução acertada e prática para o dia a dia. O projeto demonstra nossa capacidade de usar as tecnologias de ponta para resolver os mais variados problemas.
+Começamos com a escolha do tema do site, partindo para construção da identidade visual e Figma do projeto, considerando que seria um trabalho de Mínimo Produto Viável com prazo definido para planejamento e execução em aproximadamente uma semana. Seguimos para definir o que o site ofereceria e as rotas da API Json. Usamos o Trello para implementar o Scrum, onde mapeamos as tarefas a serem feitas e os devs selecionavam em quais estavam trabalhando. Definimos também um Tech Leader, Scrum Master e Product Owner. Criamos um consenso de boas práticas de código para deixar o projeto homogêneo e consistente, com padrões de variáveis, commits, etc.
 
-Agradecemos pela oportunidade de trabalharmos juntos, uma equipe de cinco desenvolvedores da **Kenzie Academy**. Adquirimos uma experiência valiosa que nos será útil em nossas futuras e promissoras carreiras.
+Usamos o VSCode para produzir, Slack e Discord para reuniões diárias, outras comunicações e manter um acervo de links, referências do projeto, documentações e ferramentas auxiliares. Para fazer o deploy escolhemos o Vercell e a API Json foi hospedada no Render.
 
-## 📕 Sobre
+Agradecemos pela oportunidade de trabalharmos juntos, em uma equipe de 5 desenvolvedores da **Kenzie Academy Brasil**. Desenvolvemos nossas habilidades técnicas e sociais além de adquirirmos outras novas com essa experiência valiosa que nos será útil em nossas futuras e promissoras carreiras.
 
-"Bem-vindo à **HomeYou**, sua plataforma de hospedagem! Acreditamos que viajar deve ser uma experiência única e pessoal, e é por isso que criamos uma plataforma que conecta viajantes com anfitriões que podem oferecer a eles um lar longe de casa. Nossa plataforma oferece uma ampla gama de opções de acomodação, desde apartamentos e casas até espaços únicos e exclusivos.Com nossa plataforma fácil de usar, os viajantes podem navegar e reservar a estadia perfeita, enquanto os anfitriões podem ganhar uma renda extra compartilhando seu espaço com outras pessoas. Estamos ansiosos para oferecer uma nova forma de viajar e mal podemos esperar para ver que memórias você criará conosco!"
+## 📕 Sobre a Aplicação
+
+Bem-vindo à **HomeYou**, sua plataforma de hospedagem! Acreditamos que viajar deve ser uma experiência única e pessoal, e é por isso que criamos uma plataforma que conecta viajantes com anfitriões que podem oferecer a eles um lar longe de casa. Nossa plataforma oferece uma ampla gama de opções de acomodação, desde apartamentos e casas até espaços únicos e exclusivos que são cadastrados pelos anfitriões. Com nossa plataforma fácil de usar, os viajantes podem navegar e reservar a estadia perfeita, enquanto os anfitriões podem ganhar uma renda extra compartilhando seu espaço com outras pessoas, e uma facilidade para gerenciar suas agendas. Estamos ansiosos para oferecer uma nova forma de viajar e mal podemos esperar para ver que memórias você criará conosco!
 
 ## 🔨 Ferramentas
 
